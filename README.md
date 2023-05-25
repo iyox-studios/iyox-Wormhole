@@ -1,2 +1,3 @@
-# iyox-Wormhole
-Flutter magic-wormhole
+# iyox Wormhole
+
+Mobile Client for the magic-wormhole protocol

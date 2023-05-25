@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wormhole/pages/receivePage.dart';
+import 'package:wormhole/pages/sendPage.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);
@@ -18,17 +20,19 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: pageController,
-        onPageChanged: (index) {
-          setState(() {
-            selectedPageIndex = index;
-          });
-        },
-        children: const [
-          Text('asd'),
-          Text('Test'),
-        ],
+      body: SafeArea(
+        child: PageView(
+          controller: pageController,
+          onPageChanged: (index) {
+            setState(() {
+              selectedPageIndex = index;
+            });
+          },
+          children: const [
+            SendPage(),
+            ReceivePage(),
+          ],
+        ),
       ),
       bottomNavigationBar: NavigationBar(
           selectedIndex: selectedPageIndex,
@@ -42,17 +46,17 @@ class _BasePageState extends State<BasePage> {
           },
           destinations: const [
             NavigationDestination(
-              tooltip: 'Receive',
-              icon: Icon(Icons.school_outlined),
-              label: 'Receive',
-              selectedIcon: Icon(Icons.school_rounded),
+              tooltip: 'Send',
+              icon: Icon(Icons.upload_outlined),
+              label: 'Send',
+              selectedIcon: Icon(Icons.upload_rounded),
             ),
             NavigationDestination(
-              tooltip: 'Send',
-              icon: Icon(Icons.library_books_outlined),
-              label: 'Send',
-              selectedIcon: Icon(Icons.library_books_rounded),
-            )
+              tooltip: 'Receive',
+              icon: Icon(Icons.download_outlined),
+              label: 'Receive',
+              selectedIcon: Icon(Icons.download_rounded),
+            ),
           ]),
     );
   }

@@ -1,6 +1,6 @@
 {
-    "name": "iyox_wormhole",
-    "short_name": "iyox_wormhole",
+    "name": "iyox Wormhole",
+    "short_name": "iyox Wormhole",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

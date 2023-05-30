@@ -8,7 +8,7 @@
 PRODUCT_NAME = iyox_wormhole
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.iyox.wormhole.iyoxWormhole
+PRODUCT_BUNDLE_IDENTIFIER = com.iyox.wormhole
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.iyox.wormhole. All rights reserved.

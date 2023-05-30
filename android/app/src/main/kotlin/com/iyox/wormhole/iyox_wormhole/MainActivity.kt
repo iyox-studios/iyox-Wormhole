@@ -1,4 +1,4 @@
-package com.iyox.wormhole.iyox_wormhole
+package com.iyox.wormhole
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = wormhole
+PRODUCT_NAME = iyox_wormhole
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.iyox.wormhole.wormhole
+PRODUCT_BUNDLE_IDENTIFIER = com.iyox.wormhole.iyoxWormhole
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.iyox.wormhole. All rights reserved.

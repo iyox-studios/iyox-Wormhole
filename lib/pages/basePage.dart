@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wormhole/pages/receivePage.dart';
-import 'package:wormhole/pages/sendPage.dart';
+import 'package:iyox_wormhole/pages/receivePage.dart';
+import 'package:iyox_wormhole/pages/sendPage.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);
@@ -26,6 +26,7 @@ class _BasePageState extends State<BasePage> {
           onPageChanged: (index) {
             setState(() {
               selectedPageIndex = index;
+              FocusManager.instance.primaryFocus?.unfocus();
             });
           },
           children: const [

@@ -1,3 +1,6 @@
-# iyox Wormhole
+# iyox_wormhole
 
-Mobile Client for the magic-wormhole protocol
+A mobile client for the magic-wormhole protocol
+
+## Getting Started
+

@@ -1,11 +1,11 @@
 {
-    "name": "wormhole",
-    "short_name": "wormhole",
+    "name": "iyox_wormhole",
+    "short_name": "iyox_wormhole",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Mobile Client for the magic-wormhole protocol",
+    "description": "A mobile client for the magic-wormhole protocol",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

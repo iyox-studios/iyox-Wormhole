@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.iyox.wormhole" "\0"
-            VALUE "FileDescription", "wormhole" "\0"
+            VALUE "FileDescription", "iyox_wormhole" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "wormhole" "\0"
+            VALUE "InternalName", "iyox_wormhole" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.iyox.wormhole. All rights reserved." "\0"
-            VALUE "OriginalFilename", "wormhole.exe" "\0"
-            VALUE "ProductName", "wormhole" "\0"
+            VALUE "OriginalFilename", "iyox_wormhole.exe" "\0"
+            VALUE "ProductName", "iyox_wormhole" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

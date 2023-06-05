@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
+import 'package:iyox_wormhole/pages/qrCodeScannerPage.dart';
 import 'package:iyox_wormhole/type_helpers.dart';
 import 'package:iyox_wormhole/utils/paths.dart';
 
@@ -42,12 +43,17 @@ class _ReceivePageState extends State<ReceivePage> {
                         label: Text('Code'),
                       ),
                       autocorrect: false,
-                      onChanged: (value) => setState(
-                        () => code = value,
-                      ),
+                      onChanged: (value) =>
+                          setState(
+                                () => code = value,
+                          ),
                     ),
                   ),
-                  IconButton(onPressed: !transferring ? () => {} : null, icon: const Icon(Icons.qr_code)),
+                  IconButton(
+                      onPressed: !transferring
+                          ? _onQrButtonClicked
+                          : null,
+                      icon: const Icon(Icons.qr_code)),
                 ],
               ),
               const SizedBox(
@@ -76,6 +82,17 @@ class _ReceivePageState extends State<ReceivePage> {
         ),
       ),
     );
+  }
+
+  void _onQrButtonClicked() async {
+    final result = await Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QRScannerPage()));
+
+    if (result != null) {
+      setState(() {
+        code = result;
+      });
+    }
+    debugPrint('result: $result');
   }
 
   void _onReceiveButtonClick() async {
@@ -128,8 +145,8 @@ class _ReceivePageState extends State<ReceivePage> {
             transferring = false;
           });
         case Events.ConnectionType:
-          //connectionType = (e.value as Value_ConnectionType).field0;
-          //connectionTypeName = (e.value as Value_ConnectionType).field1;
+        //connectionType = (e.value as Value_ConnectionType).field0;
+        //connectionTypeName = (e.value as Value_ConnectionType).field1;
           break;
         default:
           break;

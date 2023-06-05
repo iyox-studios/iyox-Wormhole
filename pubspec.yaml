@@ -22,6 +22,12 @@ dependencies:
   file_picker: ^5.3.1
   path_provider: ^2.0.15
 
+  #qr
+  flutter_zxing: ^1.2.0
+  barcode_widget: ^2.0.4
+
+  vibration: ^1.7.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

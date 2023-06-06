@@ -22,7 +22,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
           onScan: (result) async {
             final code = await _onQrDetect(result.text!, context);
             if(code == '') return;
-            Navigator.pop(context, code);
+            if(context.mounted) Navigator.pop(context, code);
           },
         ),
       ),
@@ -33,7 +33,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
     debugPrint('Barcode found! $text');
 
     if (text.startsWith('wormhole-transfer:')) {
-      text = text.substring(20);
+      text = text.split(':')[1];
     } else {
       //Toast message
       ScaffoldMessenger.of(context).showSnackBar(

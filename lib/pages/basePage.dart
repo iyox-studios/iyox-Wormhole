@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iyox_wormhole/pages/qrCodeScannerPage.dart';
 import 'package:iyox_wormhole/pages/receivePage.dart';
 import 'package:iyox_wormhole/pages/sendPage.dart';
 

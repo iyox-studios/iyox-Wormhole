@@ -36,6 +36,7 @@ class _ReceivePageState extends State<ReceivePage> {
                 children: [
                   Flexible(
                     child: TextField(
+                      controller: TextEditingController(text: code),
                       enabled: !transferring,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(18))),
@@ -85,14 +86,17 @@ class _ReceivePageState extends State<ReceivePage> {
   }
 
   void _onQrButtonClicked() async {
-    final result = await Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QRScannerPage()));
+    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => const QRScannerPage()));
+
+    if (!mounted) return;
 
     if (result != null) {
       setState(() {
         code = result;
       });
     }
-    debugPrint('result: $result');
+
+    _onReceiveButtonClick();
   }
 
   void _onReceiveButtonClick() async {

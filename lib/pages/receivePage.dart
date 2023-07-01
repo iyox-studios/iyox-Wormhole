@@ -76,7 +76,6 @@ class _ReceivePageState extends State<ReceivePage> {
                     LinearProgressIndicator(
                       value: downloadStarted ? receivedBytes / totalReceiveBytes : null,
                       minHeight: 14,
-                      borderRadius: BorderRadius.circular(18),
                     )
                   ],
                 ),

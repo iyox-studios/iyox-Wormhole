@@ -3,745 +3,751 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-61.0.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-61.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/analyzer-5.13.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/analyzer-5.13.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "ansi_styles",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/ansi_styles-0.3.2+1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/ansi_styles-0.3.2+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "archive",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/archive-3.3.7",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/archive-3.3.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "args",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/args-2.4.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/args-2.4.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "async",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/async-2.11.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/async-2.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "barcode",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/barcode-2.2.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/barcode-2.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "barcode_widget",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/barcode_widget-2.0.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/barcode_widget-2.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "boolean_selector",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "build",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/build-2.4.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/build-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "build_cli_annotations",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/build_cli_annotations-2.1.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/build_cli_annotations-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "build_config",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/build_config-1.1.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/build_config-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "build_daemon",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/build_daemon-4.0.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/build_daemon-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "build_resolvers",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/build_resolvers-2.2.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/build_resolvers-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "build_runner",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/build_runner-2.4.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/build_runner-2.4.4",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "build_runner_core",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/build_runner_core-7.2.9",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/build_runner_core-7.2.9",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "built_collection",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/built_collection-5.1.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/built_collection-5.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "built_value",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/built_value-8.6.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/built_value-8.6.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "camera",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/camera-0.10.5+2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/camera-0.10.5+2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "camera_android",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/camera_android-0.10.8+2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/camera_android-0.10.8+2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "camera_avfoundation",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/camera_avfoundation-0.9.13+2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/camera_avfoundation-0.9.13+2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "camera_platform_interface",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/camera_platform_interface-2.5.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/camera_platform_interface-2.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "camera_web",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/camera_web-0.3.1+4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/camera_web-0.3.1+4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "characters",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/characters-1.3.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/characters-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "charcode",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/charcode-1.3.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/charcode-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "checked_yaml",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/checked_yaml-2.0.3",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/checked_yaml-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "cli_launcher",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/cli_launcher-0.3.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/cli_launcher-0.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "cli_util",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/cli_util-0.4.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/cli_util-0.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "clock",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/clock-1.1.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "code_builder",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/code_builder-4.4.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/code_builder-4.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "collection",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/collection-1.17.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/collection-1.17.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "colorize",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/colorize-3.0.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/colorize-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "conventional_commit",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/conventional_commit-0.6.0+1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/conventional_commit-0.6.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "convert",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/convert-3.1.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/convert-3.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "cross_file",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/cross_file-0.3.3+4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/cross_file-0.3.3+4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "crypto",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/crypto-3.0.3",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/crypto-3.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "dart_style",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/dart_style-2.3.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/dart_style-2.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "dynamic_color",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/dynamic_color-1.6.5",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/dynamic_color-1.6.5",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "fake_async",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/fake_async-1.3.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "ffi",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/ffi-2.0.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/ffi-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "ffigen",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/ffigen-8.0.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/ffigen-8.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "file",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/file-6.1.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/file-6.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "file_picker",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/file_picker-5.3.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/file_picker-5.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "fixnum",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/fixnum-1.1.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/fixnum-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "flutter",
-      "rootUri": "file:///opt/flutter/packages/flutter",
+      "rootUri": "file:///usr/bin/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_launcher_icons",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.9.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.15",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.15",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "flutter_rust_bridge",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/flutter_rust_bridge-1.77.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/flutter_rust_bridge-1.77.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///opt/flutter/packages/flutter_test",
+      "rootUri": "file:///usr/bin/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///opt/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///usr/bin/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "flutter_zxing",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/flutter_zxing-1.2.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/flutter_zxing-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "freezed",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/freezed-2.3.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/freezed-2.3.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "freezed_annotation",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/freezed_annotation-2.2.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/freezed_annotation-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "frontend_server_client",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/frontend_server_client-3.2.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/frontend_server_client-3.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "glob",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/glob-2.1.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/glob-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "graphs",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/graphs-2.3.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/graphs-2.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "http",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/http-0.13.6",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "http_multi_server",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/http_multi_server-3.2.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/http_multi_server-3.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "image",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/image-3.3.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/image-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/image_picker-0.8.7+5",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/image_picker-0.8.7+5",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/image_picker_android-0.8.6+16",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/image_picker_android-0.8.6+16",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "image_picker_for_web",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/image_picker_for_web-2.1.12",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/image_picker_for_web-2.1.12",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "image_picker_ios",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/image_picker_platform_interface-2.6.3",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/image_picker_platform_interface-2.6.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "io",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/io-1.0.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/io-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "js",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/js-0.6.7",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/json_annotation-4.8.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/json_annotation-4.8.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "lints",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/lints-2.1.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/lints-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "logging",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/logging-1.2.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/logging-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "matcher",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/matcher-0.12.15",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/matcher-0.12.15",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/material_color_utilities-0.3.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/material_color_utilities-0.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.13"
     },
     {
       "name": "melos",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/melos-3.1.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/melos-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "meta",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/meta-1.9.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/meta-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "mime",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/mime-1.0.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/mime-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "mustache_template",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/mustache_template-2.0.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/mustache_template-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "package_config",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/package_config-2.1.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/package_config-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/path-1.8.3",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/path-1.8.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/path_provider-2.0.15",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/path_provider-2.0.15",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "path_provider_linux",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "path_provider_platform_interface",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.6",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "petitparser",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/petitparser-5.4.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/petitparser-5.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "platform",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/platform-3.1.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/platform-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "pointycastle",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/pointycastle-3.7.3",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/pointycastle-3.7.3",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "pool",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/pool-1.5.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/pool-1.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "process",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/process-4.2.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "prompts",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/prompts-2.0.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/prompts-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pub_semver",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/pub_semver-2.1.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/pub_semver-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "pub_updater",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/pub_updater-0.2.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/pub_updater-0.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pubspec",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/pubspec-2.3.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/pubspec-2.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pubspec_parse",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/pubspec_parse-1.2.3",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/pubspec_parse-1.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "puppeteer",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/puppeteer-2.24.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/puppeteer-2.24.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "qr",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/qr-3.0.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/qr-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "quiver",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/quiver-3.2.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/quiver-3.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shelf",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/shelf-1.4.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/shelf-1.4.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shelf_static",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/shelf_static-1.1.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/shelf_static-1.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shelf_web_socket",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/shelf_web_socket-1.0.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/shelf_web_socket-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///opt/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///usr/bin/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "source_gen",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/source_gen-1.3.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/source_gen-1.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "source_span",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/source_span-1.10.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/source_span-1.9.1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.14"
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "stream_transform",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/stream_transform-2.1.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/stream_transform-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/string_scanner-1.2.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/string_scanner-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "term_glyph",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "test_api",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/test_api-0.5.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/test_api-0.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "timing",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/timing-1.0.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/timing-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "tuple",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/tuple-2.0.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/tuple-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "uri",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/uri-1.0.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/uri-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "uuid",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/uuid-3.0.7",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/uuid-3.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "vibration",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/vibration-1.7.7",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/vibration-1.7.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "watcher",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/watcher-1.1.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/watcher-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "web_socket_channel",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "win32",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/win32-4.1.4",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/win32-4.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/xdg_directories-1.0.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/xdg_directories-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "xml",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/xml-6.3.0",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/xml-6.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "yaml",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/yaml-3.1.2",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/yaml-3.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "yaml_edit",
-      "rootUri": "file:///home/ewuuwe/.pub-cache/hosted/pub.dev/yaml_edit-2.1.1",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/yaml_edit-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -752,7 +758,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-06-07T16:30:15.287385Z",
+  "generated": "2023-07-01T09:07:14.257365Z",
   "generator": "pub",
-  "generatorVersion": "3.1.0-63.1.beta"
+  "generatorVersion": "3.0.3"
 }

@@ -13,7 +13,7 @@ class WormholeApp extends StatelessWidget {
       title: 'Wormhole',
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: const Color(0xff6750a4),
+        colorSchemeSeed: const Color(0x548F9F),
         brightness: Brightness.dark,
       ),
       home: GestureDetector(

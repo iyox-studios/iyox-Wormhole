@@ -18,48 +18,39 @@ class _BasePageState extends State<BasePage> {
 
   int selectedPageIndex = 0;
 
+  static const List<Widget> pages = <Widget>[
+    SendPage(),
+    ReceivePage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: PageView(
-          controller: pageController,
-          onPageChanged: (index) {
-            setState(() {
-              selectedPageIndex = index;
-              FocusManager.instance.primaryFocus?.unfocus();
-            });
-          },
-          children: const [
-            SendPage(),
-            ReceivePage(),
-          ],
-        ),
+    return SafeArea(
+      child: Scaffold(
+        body: pages[selectedPageIndex],
+        bottomNavigationBar: NavigationBar(
+            selectedIndex: selectedPageIndex,
+            onDestinationSelected: (index) {
+              setState(() {
+                selectedPageIndex = index;
+              });
+              //pageController.animateToPage(index, duration: const Duration(milliseconds: 200), curve: Curves.ease);
+            },
+            destinations: const [
+              NavigationDestination(
+                tooltip: 'Send',
+                icon: Icon(Icons.upload_outlined),
+                label: 'Send',
+                selectedIcon: Icon(Icons.upload_rounded),
+              ),
+              NavigationDestination(
+                tooltip: 'Receive',
+                icon: Icon(Icons.download_outlined),
+                label: 'Receive',
+                selectedIcon: Icon(Icons.download_rounded),
+              ),
+            ]),
       ),
-      bottomNavigationBar: NavigationBar(
-          selectedIndex: selectedPageIndex,
-          onDestinationSelected: (index) {
-            setState(() {
-              selectedPageIndex = index;
-            });
-            pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.ease);
-          },
-          destinations: const [
-            NavigationDestination(
-              tooltip: 'Send',
-              icon: Icon(Icons.upload_outlined),
-              label: 'Send',
-              selectedIcon: Icon(Icons.upload_rounded),
-            ),
-            NavigationDestination(
-              tooltip: 'Receive',
-              icon: Icon(Icons.download_outlined),
-              label: 'Receive',
-              selectedIcon: Icon(Icons.download_rounded),
-            ),
-          ]),
     );
   }
 }

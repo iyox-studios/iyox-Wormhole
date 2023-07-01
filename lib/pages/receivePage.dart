@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
 import 'package:iyox_wormhole/pages/qrCodeScannerPage.dart';
+import 'package:iyox_wormhole/pages/sendPage.dart';
 import 'package:iyox_wormhole/type_helpers.dart';
 import 'package:iyox_wormhole/utils/paths.dart';
 
@@ -60,8 +61,9 @@ class _ReceivePageState extends State<ReceivePage> {
               const SizedBox(
                 height: 25,
               ),
-              FloatingActionButton.extended(
+              FilledButton.icon(
                 onPressed: !transferring ? _onReceiveButtonClick : null,
+                style: largeButtonStyle,
                 label: const Text('Receive'),
                 icon: const Icon(Icons.download_outlined),
               ),

@@ -27,6 +27,7 @@ dependencies:
   barcode_widget: ^2.0.4
 
   vibration: ^1.7.7
+  dynamic_color: ^1.6.5
 
 dev_dependencies:
   flutter_test:

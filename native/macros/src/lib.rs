@@ -8,7 +8,7 @@ use yaml_rust::{YamlLoader};
 
 #[proc_macro]
 pub fn version_str(_item: TokenStream) -> TokenStream {
-    let pubspec= read_to_string("/home/ewuuwe/Coding/Flutter/iyox_wormhole/pubspec.yaml").expect("failed to read yaml file");
+    let pubspec= read_to_string("/home/ewuuwe/Coding/Flutter/iyox-Wormhole/pubspec.yaml").expect("failed to read yaml file");
     let yml = YamlLoader::load_from_str(pubspec.as_str()).expect("Failed to parse yaml");
     let doc = &yml[0];
     let version = doc["version"].as_str().expect("couldnt get version from yaml object");

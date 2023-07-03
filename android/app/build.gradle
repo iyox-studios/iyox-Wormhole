@@ -89,6 +89,7 @@ android {
     buildTypes {
         release {
             // use debug config if secret files not available
+            shrinkResources false
             signingConfig keystorePropertiesFile.exists() ? signingConfigs.release : signingConfigs.debug
         }
     }

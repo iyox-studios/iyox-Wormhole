@@ -8,13 +8,25 @@ void main()
   runApp(const WormholeApp());
 }
 
+class NavigationService {
+  static GlobalKey<NavigatorState> navigatorKey =
+  GlobalKey<NavigatorState>();
+}
+
 class WormholeApp extends StatelessWidget {
   const WormholeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
+      SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
+              statusBarColor: darkColorScheme?.background,
+              systemNavigationBarColor: darkColorScheme.
+            )
+      );
       return MaterialApp(
+        navigatorKey: NavigationService.navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Wormhole',
         theme: ThemeData(

@@ -638,6 +638,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "statusbarz",
+      "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/statusbarz-1.0.12",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "stream_channel",
       "rootUri": "file:///home/basti/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
       "packageUri": "lib/",
@@ -758,7 +764,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-07-01T09:07:14.257365Z",
+  "generated": "2023-07-03T07:51:31.450694Z",
   "generator": "pub",
-  "generatorVersion": "3.0.3"
+  "generatorVersion": "3.0.5"
 }

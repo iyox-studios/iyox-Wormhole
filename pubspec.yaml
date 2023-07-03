@@ -28,6 +28,7 @@ dependencies:
 
   vibration: ^1.7.7
   dynamic_color: ^1.6.5
+  statusbarz: ^1.0.12
 
 dev_dependencies:
   flutter_test:
@@ -47,3 +48,5 @@ flutter:
 flutter_icons:
   image_path: "icon/logo.png"
   android: true
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "icon/logo.png"

@@ -1,23 +1,28 @@
 apk:
-	flutter build apk --target-platform android-arm64
-	flutter build appbundle
+	flutter build apk --split-per-abi --release
+	flutter build appbundle --release
 
 linux:
 	flutter build linux
 
+container-apk:
+	docker run --name=example \
+		--mount type=bind,source=${PWD},target=/root/wormhole/ \
+		docker.io/luki42/flutter-rust \
+		bash -c "cd /root/wormhole && make apk"
+
+container-run: 
+	docker run -it --rm \
+	--mount type=bind,source=${PWD},target=/root/wormhole/ \
+	flutter_rust bash
+
 codegen:
-	CPATH="$(clang -v 2>&1 | grep "Selected GCC installation" | rev | cut -d' ' -f1 | rev)/include" flutter_rust_bridge_codegen \
+	flutter_rust_bridge_codegen \
 	--rust-input native/src/api.rs \
 	--dart-output lib/gen/bridge_generated.dart \
 	--c-output ios/Runner/bridge_generated.h \
 	--dart-decl-output lib/gen/bridge_definitions.dart \
 	--wasm
-
-deploy:
-	fastlane deploy
-
-elevate:
-	fastlane elevate
 
 format:
 	cd native && cargo fmt

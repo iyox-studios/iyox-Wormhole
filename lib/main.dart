@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/pages/basePage.dart';
 import 'package:flutter/services.dart';
 
-void main()
-{
+void main() {
   runApp(const WormholeApp());
 }
 
 class NavigationService {
-  static GlobalKey<NavigatorState> navigatorKey =
-  GlobalKey<NavigatorState>();
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 }
 
 class WormholeApp extends StatelessWidget {
@@ -19,12 +17,9 @@ class WormholeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
-      SystemChrome.setSystemUIOverlayStyle(
-          SystemUiOverlayStyle(
-              statusBarColor: darkColorScheme?.background,
-              systemNavigationBarColor: darkColorScheme.
-            )
-      );
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: darkColorScheme?.background,
+          systemNavigationBarColor: darkColorScheme?.background));
       return MaterialApp(
         navigatorKey: NavigationService.navigatorKey,
         debugShowCheckedModeBanner: false,

@@ -94,20 +94,20 @@ class _$ValueCopyWithImpl<$Res, $Val extends Value>
 }
 
 /// @nodoc
-abstract class _$$Value_IntCopyWith<$Res> {
-  factory _$$Value_IntCopyWith(
-          _$Value_Int value, $Res Function(_$Value_Int) then) =
-      __$$Value_IntCopyWithImpl<$Res>;
+abstract class _$$Value_IntImplCopyWith<$Res> {
+  factory _$$Value_IntImplCopyWith(
+          _$Value_IntImpl value, $Res Function(_$Value_IntImpl) then) =
+      __$$Value_IntImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int field0});
 }
 
 /// @nodoc
-class __$$Value_IntCopyWithImpl<$Res>
-    extends _$ValueCopyWithImpl<$Res, _$Value_Int>
-    implements _$$Value_IntCopyWith<$Res> {
-  __$$Value_IntCopyWithImpl(
-      _$Value_Int _value, $Res Function(_$Value_Int) _then)
+class __$$Value_IntImplCopyWithImpl<$Res>
+    extends _$ValueCopyWithImpl<$Res, _$Value_IntImpl>
+    implements _$$Value_IntImplCopyWith<$Res> {
+  __$$Value_IntImplCopyWithImpl(
+      _$Value_IntImpl _value, $Res Function(_$Value_IntImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$Value_IntCopyWithImpl<$Res>
   $Res call({
     Object? field0 = null,
   }) {
-    return _then(_$Value_Int(
+    return _then(_$Value_IntImpl(
       null == field0
           ? _value.field0
           : field0 // ignore: cast_nullable_to_non_nullable
@@ -126,8 +126,8 @@ class __$$Value_IntCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Value_Int implements Value_Int {
-  const _$Value_Int(this.field0);
+class _$Value_IntImpl implements Value_Int {
+  const _$Value_IntImpl(this.field0);
 
   @override
   final int field0;
@@ -138,10 +138,10 @@ class _$Value_Int implements Value_Int {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Value_Int &&
+            other is _$Value_IntImpl &&
             (identical(other.field0, field0) || other.field0 == field0));
   }
 
@@ -151,8 +151,8 @@ class _$Value_Int implements Value_Int {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$Value_IntCopyWith<_$Value_Int> get copyWith =>
-      __$$Value_IntCopyWithImpl<_$Value_Int>(this, _$identity);
+  _$$Value_IntImplCopyWith<_$Value_IntImpl> get copyWith =>
+      __$$Value_IntImplCopyWithImpl<_$Value_IntImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -237,30 +237,30 @@ class _$Value_Int implements Value_Int {
 }
 
 abstract class Value_Int implements Value {
-  const factory Value_Int(final int field0) = _$Value_Int;
+  const factory Value_Int(final int field0) = _$Value_IntImpl;
 
   @override
   int get field0;
   @JsonKey(ignore: true)
-  _$$Value_IntCopyWith<_$Value_Int> get copyWith =>
+  _$$Value_IntImplCopyWith<_$Value_IntImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$Value_StringCopyWith<$Res> {
-  factory _$$Value_StringCopyWith(
-          _$Value_String value, $Res Function(_$Value_String) then) =
-      __$$Value_StringCopyWithImpl<$Res>;
+abstract class _$$Value_StringImplCopyWith<$Res> {
+  factory _$$Value_StringImplCopyWith(
+          _$Value_StringImpl value, $Res Function(_$Value_StringImpl) then) =
+      __$$Value_StringImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String field0});
 }
 
 /// @nodoc
-class __$$Value_StringCopyWithImpl<$Res>
-    extends _$ValueCopyWithImpl<$Res, _$Value_String>
-    implements _$$Value_StringCopyWith<$Res> {
-  __$$Value_StringCopyWithImpl(
-      _$Value_String _value, $Res Function(_$Value_String) _then)
+class __$$Value_StringImplCopyWithImpl<$Res>
+    extends _$ValueCopyWithImpl<$Res, _$Value_StringImpl>
+    implements _$$Value_StringImplCopyWith<$Res> {
+  __$$Value_StringImplCopyWithImpl(
+      _$Value_StringImpl _value, $Res Function(_$Value_StringImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -268,7 +268,7 @@ class __$$Value_StringCopyWithImpl<$Res>
   $Res call({
     Object? field0 = null,
   }) {
-    return _then(_$Value_String(
+    return _then(_$Value_StringImpl(
       null == field0
           ? _value.field0
           : field0 // ignore: cast_nullable_to_non_nullable
@@ -279,8 +279,8 @@ class __$$Value_StringCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Value_String implements Value_String {
-  const _$Value_String(this.field0);
+class _$Value_StringImpl implements Value_String {
+  const _$Value_StringImpl(this.field0);
 
   @override
   final String field0;
@@ -291,10 +291,10 @@ class _$Value_String implements Value_String {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Value_String &&
+            other is _$Value_StringImpl &&
             (identical(other.field0, field0) || other.field0 == field0));
   }
 
@@ -304,8 +304,8 @@ class _$Value_String implements Value_String {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$Value_StringCopyWith<_$Value_String> get copyWith =>
-      __$$Value_StringCopyWithImpl<_$Value_String>(this, _$identity);
+  _$$Value_StringImplCopyWith<_$Value_StringImpl> get copyWith =>
+      __$$Value_StringImplCopyWithImpl<_$Value_StringImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -390,30 +390,30 @@ class _$Value_String implements Value_String {
 }
 
 abstract class Value_String implements Value {
-  const factory Value_String(final String field0) = _$Value_String;
+  const factory Value_String(final String field0) = _$Value_StringImpl;
 
   @override
   String get field0;
   @JsonKey(ignore: true)
-  _$$Value_StringCopyWith<_$Value_String> get copyWith =>
+  _$$Value_StringImplCopyWith<_$Value_StringImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$Value_ErrorValueCopyWith<$Res> {
-  factory _$$Value_ErrorValueCopyWith(
-          _$Value_ErrorValue value, $Res Function(_$Value_ErrorValue) then) =
-      __$$Value_ErrorValueCopyWithImpl<$Res>;
+abstract class _$$Value_ErrorValueImplCopyWith<$Res> {
+  factory _$$Value_ErrorValueImplCopyWith(_$Value_ErrorValueImpl value,
+          $Res Function(_$Value_ErrorValueImpl) then) =
+      __$$Value_ErrorValueImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ErrorType field0, String field1});
 }
 
 /// @nodoc
-class __$$Value_ErrorValueCopyWithImpl<$Res>
-    extends _$ValueCopyWithImpl<$Res, _$Value_ErrorValue>
-    implements _$$Value_ErrorValueCopyWith<$Res> {
-  __$$Value_ErrorValueCopyWithImpl(
-      _$Value_ErrorValue _value, $Res Function(_$Value_ErrorValue) _then)
+class __$$Value_ErrorValueImplCopyWithImpl<$Res>
+    extends _$ValueCopyWithImpl<$Res, _$Value_ErrorValueImpl>
+    implements _$$Value_ErrorValueImplCopyWith<$Res> {
+  __$$Value_ErrorValueImplCopyWithImpl(_$Value_ErrorValueImpl _value,
+      $Res Function(_$Value_ErrorValueImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -422,7 +422,7 @@ class __$$Value_ErrorValueCopyWithImpl<$Res>
     Object? field0 = null,
     Object? field1 = null,
   }) {
-    return _then(_$Value_ErrorValue(
+    return _then(_$Value_ErrorValueImpl(
       null == field0
           ? _value.field0
           : field0 // ignore: cast_nullable_to_non_nullable
@@ -437,8 +437,8 @@ class __$$Value_ErrorValueCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Value_ErrorValue implements Value_ErrorValue {
-  const _$Value_ErrorValue(this.field0, this.field1);
+class _$Value_ErrorValueImpl implements Value_ErrorValue {
+  const _$Value_ErrorValueImpl(this.field0, this.field1);
 
   @override
   final ErrorType field0;
@@ -451,10 +451,10 @@ class _$Value_ErrorValue implements Value_ErrorValue {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Value_ErrorValue &&
+            other is _$Value_ErrorValueImpl &&
             (identical(other.field0, field0) || other.field0 == field0) &&
             (identical(other.field1, field1) || other.field1 == field1));
   }
@@ -465,8 +465,9 @@ class _$Value_ErrorValue implements Value_ErrorValue {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$Value_ErrorValueCopyWith<_$Value_ErrorValue> get copyWith =>
-      __$$Value_ErrorValueCopyWithImpl<_$Value_ErrorValue>(this, _$identity);
+  _$$Value_ErrorValueImplCopyWith<_$Value_ErrorValueImpl> get copyWith =>
+      __$$Value_ErrorValueImplCopyWithImpl<_$Value_ErrorValueImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -552,31 +553,31 @@ class _$Value_ErrorValue implements Value_ErrorValue {
 
 abstract class Value_ErrorValue implements Value {
   const factory Value_ErrorValue(final ErrorType field0, final String field1) =
-      _$Value_ErrorValue;
+      _$Value_ErrorValueImpl;
 
   @override
   ErrorType get field0;
   String get field1;
   @JsonKey(ignore: true)
-  _$$Value_ErrorValueCopyWith<_$Value_ErrorValue> get copyWith =>
+  _$$Value_ErrorValueImplCopyWith<_$Value_ErrorValueImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$Value_ErrorCopyWith<$Res> {
-  factory _$$Value_ErrorCopyWith(
-          _$Value_Error value, $Res Function(_$Value_Error) then) =
-      __$$Value_ErrorCopyWithImpl<$Res>;
+abstract class _$$Value_ErrorImplCopyWith<$Res> {
+  factory _$$Value_ErrorImplCopyWith(
+          _$Value_ErrorImpl value, $Res Function(_$Value_ErrorImpl) then) =
+      __$$Value_ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ErrorType field0});
 }
 
 /// @nodoc
-class __$$Value_ErrorCopyWithImpl<$Res>
-    extends _$ValueCopyWithImpl<$Res, _$Value_Error>
-    implements _$$Value_ErrorCopyWith<$Res> {
-  __$$Value_ErrorCopyWithImpl(
-      _$Value_Error _value, $Res Function(_$Value_Error) _then)
+class __$$Value_ErrorImplCopyWithImpl<$Res>
+    extends _$ValueCopyWithImpl<$Res, _$Value_ErrorImpl>
+    implements _$$Value_ErrorImplCopyWith<$Res> {
+  __$$Value_ErrorImplCopyWithImpl(
+      _$Value_ErrorImpl _value, $Res Function(_$Value_ErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -584,7 +585,7 @@ class __$$Value_ErrorCopyWithImpl<$Res>
   $Res call({
     Object? field0 = null,
   }) {
-    return _then(_$Value_Error(
+    return _then(_$Value_ErrorImpl(
       null == field0
           ? _value.field0
           : field0 // ignore: cast_nullable_to_non_nullable
@@ -595,8 +596,8 @@ class __$$Value_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Value_Error implements Value_Error {
-  const _$Value_Error(this.field0);
+class _$Value_ErrorImpl implements Value_Error {
+  const _$Value_ErrorImpl(this.field0);
 
   @override
   final ErrorType field0;
@@ -607,10 +608,10 @@ class _$Value_Error implements Value_Error {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Value_Error &&
+            other is _$Value_ErrorImpl &&
             (identical(other.field0, field0) || other.field0 == field0));
   }
 
@@ -620,8 +621,8 @@ class _$Value_Error implements Value_Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$Value_ErrorCopyWith<_$Value_Error> get copyWith =>
-      __$$Value_ErrorCopyWithImpl<_$Value_Error>(this, _$identity);
+  _$$Value_ErrorImplCopyWith<_$Value_ErrorImpl> get copyWith =>
+      __$$Value_ErrorImplCopyWithImpl<_$Value_ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -706,30 +707,30 @@ class _$Value_Error implements Value_Error {
 }
 
 abstract class Value_Error implements Value {
-  const factory Value_Error(final ErrorType field0) = _$Value_Error;
+  const factory Value_Error(final ErrorType field0) = _$Value_ErrorImpl;
 
   @override
   ErrorType get field0;
   @JsonKey(ignore: true)
-  _$$Value_ErrorCopyWith<_$Value_Error> get copyWith =>
+  _$$Value_ErrorImplCopyWith<_$Value_ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$Value_ConnectionTypeCopyWith<$Res> {
-  factory _$$Value_ConnectionTypeCopyWith(_$Value_ConnectionType value,
-          $Res Function(_$Value_ConnectionType) then) =
-      __$$Value_ConnectionTypeCopyWithImpl<$Res>;
+abstract class _$$Value_ConnectionTypeImplCopyWith<$Res> {
+  factory _$$Value_ConnectionTypeImplCopyWith(_$Value_ConnectionTypeImpl value,
+          $Res Function(_$Value_ConnectionTypeImpl) then) =
+      __$$Value_ConnectionTypeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ConnectionType field0, String field1});
 }
 
 /// @nodoc
-class __$$Value_ConnectionTypeCopyWithImpl<$Res>
-    extends _$ValueCopyWithImpl<$Res, _$Value_ConnectionType>
-    implements _$$Value_ConnectionTypeCopyWith<$Res> {
-  __$$Value_ConnectionTypeCopyWithImpl(_$Value_ConnectionType _value,
-      $Res Function(_$Value_ConnectionType) _then)
+class __$$Value_ConnectionTypeImplCopyWithImpl<$Res>
+    extends _$ValueCopyWithImpl<$Res, _$Value_ConnectionTypeImpl>
+    implements _$$Value_ConnectionTypeImplCopyWith<$Res> {
+  __$$Value_ConnectionTypeImplCopyWithImpl(_$Value_ConnectionTypeImpl _value,
+      $Res Function(_$Value_ConnectionTypeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -738,7 +739,7 @@ class __$$Value_ConnectionTypeCopyWithImpl<$Res>
     Object? field0 = null,
     Object? field1 = null,
   }) {
-    return _then(_$Value_ConnectionType(
+    return _then(_$Value_ConnectionTypeImpl(
       null == field0
           ? _value.field0
           : field0 // ignore: cast_nullable_to_non_nullable
@@ -753,8 +754,8 @@ class __$$Value_ConnectionTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Value_ConnectionType implements Value_ConnectionType {
-  const _$Value_ConnectionType(this.field0, this.field1);
+class _$Value_ConnectionTypeImpl implements Value_ConnectionType {
+  const _$Value_ConnectionTypeImpl(this.field0, this.field1);
 
   @override
   final ConnectionType field0;
@@ -767,10 +768,10 @@ class _$Value_ConnectionType implements Value_ConnectionType {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Value_ConnectionType &&
+            other is _$Value_ConnectionTypeImpl &&
             (identical(other.field0, field0) || other.field0 == field0) &&
             (identical(other.field1, field1) || other.field1 == field1));
   }
@@ -781,9 +782,10 @@ class _$Value_ConnectionType implements Value_ConnectionType {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$Value_ConnectionTypeCopyWith<_$Value_ConnectionType> get copyWith =>
-      __$$Value_ConnectionTypeCopyWithImpl<_$Value_ConnectionType>(
-          this, _$identity);
+  _$$Value_ConnectionTypeImplCopyWith<_$Value_ConnectionTypeImpl>
+      get copyWith =>
+          __$$Value_ConnectionTypeImplCopyWithImpl<_$Value_ConnectionTypeImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -870,12 +872,12 @@ class _$Value_ConnectionType implements Value_ConnectionType {
 abstract class Value_ConnectionType implements Value {
   const factory Value_ConnectionType(
           final ConnectionType field0, final String field1) =
-      _$Value_ConnectionType;
+      _$Value_ConnectionTypeImpl;
 
   @override
   ConnectionType get field0;
   String get field1;
   @JsonKey(ignore: true)
-  _$$Value_ConnectionTypeCopyWith<_$Value_ConnectionType> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$Value_ConnectionTypeImplCopyWith<_$Value_ConnectionTypeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

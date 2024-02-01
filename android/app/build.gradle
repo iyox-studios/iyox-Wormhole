@@ -73,7 +73,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
-        versionCode googleVer
+        versionCode 12
         versionName flutterVersionName
     }
 
@@ -118,7 +118,7 @@ dependencies {
     tasks.register("cargoBuild$taskPostfix", Exec) {
         workingDir "../../native"
         environment ANDROID_NDK_HOME: "$ANDROID_NDK"
-        commandLine 'cross', 'ndk',
+        commandLine 'cargo', 'ndk',
                 // the 2 ABIs below are used by real Android devices
                 '-t', 'armeabi-v7a',
                 '-t', 'arm64-v8a',

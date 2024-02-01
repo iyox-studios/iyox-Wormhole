@@ -22,6 +22,7 @@ class _ReceivePageState extends State<ReceivePage> {
   bool downloadStarted = false;
 
   StreamController<TUpdate> controller = StreamController<TUpdate>();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,24 +38,23 @@ class _ReceivePageState extends State<ReceivePage> {
                 children: [
                   Flexible(
                     child: TextField(
-                      controller: TextEditingController(text: code),
+                      controller: _controller,
                       enabled: !transferring,
                       decoration: const InputDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(18))),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(18))),
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                         label: Text('Code'),
                       ),
                       autocorrect: false,
-                      onChanged: (value) =>
-                          setState(
-                                () => code = value,
-                          ),
+                      onChanged: (value) => setState(
+                        () => code = value,
+                      ),
                     ),
                   ),
                   IconButton(
-                      onPressed: !transferring
-                          ? _onQrButtonClicked
-                          : null,
+                      onPressed: !transferring ? _onQrButtonClicked : null,
                       icon: const Icon(Icons.qr_code)),
                 ],
               ),
@@ -74,7 +74,9 @@ class _ReceivePageState extends State<ReceivePage> {
                       height: 12,
                     ),
                     LinearProgressIndicator(
-                      value: downloadStarted ? receivedBytes / totalReceiveBytes : null,
+                      value: downloadStarted
+                          ? receivedBytes / totalReceiveBytes
+                          : null,
                       minHeight: 14,
                     )
                   ],
@@ -87,7 +89,8 @@ class _ReceivePageState extends State<ReceivePage> {
   }
 
   void _onQrButtonClicked() async {
-    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => const QRScannerPage()));
+    final result = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const QRScannerPage()));
 
     if (!mounted) return;
 
@@ -98,6 +101,14 @@ class _ReceivePageState extends State<ReceivePage> {
     }
 
     _onReceiveButtonClick();
+  }
+
+  Future<ServerConfig> _getServerConfig() async {
+    final rendezvousUrl = await api.defaultRendezvousUrl();
+    final transitUrl = await api.defaultTransitUrl();
+    final serverConfig =
+        ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
+    return serverConfig;
   }
 
   void _onReceiveButtonClick() async {
@@ -112,7 +123,10 @@ class _ReceivePageState extends State<ReceivePage> {
     final downloadPath = await getDownloadPath() ?? '';
 
     debugPrint('code: $code');
-    final stream = api.requestFile(passphrase: code, storageFolder: downloadPath);
+    final stream = api.requestFile(
+        passphrase: code,
+        storageFolder: downloadPath,
+        serverConfig: await _getServerConfig());
 
     setState(() {
       transferring = true;
@@ -150,12 +164,18 @@ class _ReceivePageState extends State<ReceivePage> {
             transferring = false;
           });
         case Events.ConnectionType:
-        //connectionType = (e.value as Value_ConnectionType).field0;
-        //connectionTypeName = (e.value as Value_ConnectionType).field1;
+          //connectionType = (e.value as Value_ConnectionType).field0;
+          //connectionTypeName = (e.value as Value_ConnectionType).field1;
           break;
         default:
           break;
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

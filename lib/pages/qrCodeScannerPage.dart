@@ -21,8 +21,8 @@ class _QRScannerPageState extends State<QRScannerPage> {
           tryInverted: true,
           onScan: (result) async {
             final code = await _onQrDetect(result.text!, context);
-            if(code == '') return;
-            if(context.mounted) Navigator.pop(context, code);
+            if (code == '') return;
+            if (context.mounted) Navigator.pop(context, code);
           },
         ),
       ),

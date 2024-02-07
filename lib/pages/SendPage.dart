@@ -37,28 +37,28 @@ class _SendPageState extends State<SendPage> {
   Widget build(BuildContext context) {
     return Center(
         child: Column(
-      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.upload_rounded, size: 130,),
-            const Text("Send File", style: TextStyle(fontSize: 45)),
-            const Gap(40),
-            FilledButton.icon(
-              onPressed: _onSendButtonClick,
-              style: buttonStyle,
-              label: const Text('Send File'),
-              icon: const Icon(Icons.file_open),
-            ),
-            const Gap(16),
-            FilledButton.icon(
-              onPressed: null,
-              style: buttonStyle,
-              label: const Text('Send Folder'),
-              icon: const Icon(Icons.drive_folder_upload),
-            ),
-          ],
+        const Padding(
+          padding: EdgeInsets.fromLTRB(20, 55, 0, 20),
+          child: Text("Send Files", style: TextStyle(fontSize: 41)),
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 170,
+          child: Padding(padding: const EdgeInsets.symmetric(horizontal: 11),
+          child: Card(
+              elevation: 1,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(26)),
+              child: const Padding(
+                padding: EdgeInsets.all(18),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [Text("Recent files", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),)],
+                ),
+              )),
+        ),
         ),
         if (code != '')
           Card(
@@ -83,6 +83,28 @@ class _SendPageState extends State<SendPage> {
               ),
             ),
           ),
+        Expanded(
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FilledButton.icon(
+                      onPressed: _onSendButtonClick,
+                      style: buttonStyle,
+                      label: const Text('Send File'),
+                      icon: const Icon(Icons.file_open),
+                    ),
+                    const Gap(46),
+                    FilledButton.icon(
+                      onPressed: null,
+                      style: buttonStyle,
+                      label: const Text('Send Folder'),
+                      icon: const Icon(Icons.drive_folder_upload),
+                    ),
+                  ],
+                ))),
+        Gap(30)
       ],
     ));
   }
@@ -119,15 +141,6 @@ class _SendPageState extends State<SendPage> {
           default:
         }
       });
-    } else {
-      debugPrint('user canceled picker');
-    }
-  }
-
-  void _onSendFolderButtonClick() async {
-    String? result = await FilePicker.platform.getDirectoryPath();
-
-    if (result != null) {
     } else {
       debugPrint('user canceled picker');
     }

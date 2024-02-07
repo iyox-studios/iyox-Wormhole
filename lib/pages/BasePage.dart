@@ -1,7 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:iyox_wormhole/pages/qrCodeScannerPage.dart';
-import 'package:iyox_wormhole/pages/receivePage.dart';
-import 'package:iyox_wormhole/pages/sendPage.dart';
+import 'package:iyox_wormhole/pages/SettingsPage.dart';
+import 'package:iyox_wormhole/pages/ReceivePage.dart';
+import 'package:iyox_wormhole/pages/SendPage.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);
@@ -21,20 +22,30 @@ class _BasePageState extends State<BasePage> {
   static const List<Widget> pages = <Widget>[
     SendPage(),
     ReceivePage(),
+    SettingsPage()
   ];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: pages[selectedPageIndex],
+        body: PageTransitionSwitcher(
+          transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
+              FadeThroughTransition(
+                  animation: primaryAnimation,
+                  secondaryAnimation: secondaryAnimation,
+                  child: child),
+          child: pages[selectedPageIndex],
+        ),
         bottomNavigationBar: NavigationBar(
             selectedIndex: selectedPageIndex,
             onDestinationSelected: (index) {
               setState(() {
                 selectedPageIndex = index;
               });
-              pageController.animateToPage(index, duration: const Duration(milliseconds: 2000), curve: Curves.ease);
+              pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 2000),
+                  curve: Curves.ease);
             },
             destinations: const [
               NavigationDestination(
@@ -48,6 +59,12 @@ class _BasePageState extends State<BasePage> {
                 icon: Icon(Icons.download_outlined),
                 label: 'Receive',
                 selectedIcon: Icon(Icons.download_rounded),
+              ),
+              NavigationDestination(
+                tooltip: 'Settings',
+                icon: Icon(Icons.settings_outlined),
+                label: 'Settings',
+                selectedIcon: Icon(Icons.settings_rounded),
               ),
             ]),
       ),

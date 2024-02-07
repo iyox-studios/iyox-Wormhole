@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
-import 'package:iyox_wormhole/pages/qrCodeScannerPage.dart';
-import 'package:iyox_wormhole/pages/sendPage.dart';
+import 'package:iyox_wormhole/pages/QrCodeScannerPage.dart';
+import 'package:iyox_wormhole/pages/SendPage.dart';
 import 'package:iyox_wormhole/type_helpers.dart';
 import 'package:iyox_wormhole/utils/paths.dart';
 
@@ -34,6 +35,9 @@ class _ReceivePageState extends State<ReceivePage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              const Icon(Icons.download_rounded, size: 130,),
+              const Text("Receive File", style: TextStyle(fontSize: 45)),
+              const Gap(40),
               Row(
                 children: [
                   Flexible(
@@ -65,7 +69,7 @@ class _ReceivePageState extends State<ReceivePage> {
                 onPressed: !transferring ? _onReceiveButtonClick : null,
                 style: largeButtonStyle,
                 label: const Text('Receive'),
-                icon: const Icon(Icons.download_outlined),
+                icon: const Icon(Icons.file_download_outlined),
               ),
               if (transferring)
                 Column(
@@ -77,7 +81,8 @@ class _ReceivePageState extends State<ReceivePage> {
                       value: downloadStarted
                           ? receivedBytes / totalReceiveBytes
                           : null,
-                      minHeight: 14,
+                      minHeight: 10,
+                      borderRadius: BorderRadius.circular(18),
                     )
                   ],
                 ),

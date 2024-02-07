@@ -1,6 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
-import 'package:iyox_wormhole/pages/basePage.dart';
+import 'package:iyox_wormhole/pages/BasePage.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -26,11 +26,9 @@ class WormholeApp extends StatelessWidget {
         title: 'Wormhole',
         theme: ThemeData(
           colorScheme: lightColorScheme,
-          useMaterial3: true,
         ),
         darkTheme: ThemeData(
           colorScheme: darkColorScheme,
-          useMaterial3: true,
         ),
         themeMode: ThemeMode.dark,
         home: GestureDetector(

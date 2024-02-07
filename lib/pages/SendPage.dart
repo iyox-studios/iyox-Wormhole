@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import 'package:iyox_wormhole/type_helpers.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
 
@@ -38,23 +39,24 @@ class _SendPageState extends State<SendPage> {
         child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
+        Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const Icon(Icons.upload_rounded, size: 130,),
+            const Text("Send File", style: TextStyle(fontSize: 45)),
+            const Gap(40),
             FilledButton.icon(
               onPressed: _onSendButtonClick,
               style: buttonStyle,
-              label: const Text('Send file'),
+              label: const Text('Send File'),
               icon: const Icon(Icons.file_open),
             ),
-            const SizedBox(
-              width: 12,
-            ),
+            const Gap(16),
             FilledButton.icon(
               onPressed: null,
               style: buttonStyle,
-              label: Text('Send folder'),
-              icon: Icon(Icons.folder_open),
+              label: const Text('Send Folder'),
+              icon: const Icon(Icons.drive_folder_upload),
             ),
           ],
         ),

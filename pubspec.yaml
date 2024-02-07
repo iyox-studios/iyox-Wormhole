@@ -23,11 +23,11 @@ dependencies:
   path_provider: ^2.0.15
 
   #qr
-  flutter_zxing: ^1.2.0
+  flutter_zxing: ^1.5.2
   barcode_widget: ^2.0.4
 
   vibration: ^1.7.7
-  dynamic_color: ^1.6.5
+  dynamic_color: ^1.6.9
   statusbarz: ^1.0.12
 
 dev_dependencies:
@@ -40,7 +40,7 @@ dev_dependencies:
   build_runner: ^2.4.4
   freezed: ^2.3.4
 
-  flutter_launcher_icons: ^0.9.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true

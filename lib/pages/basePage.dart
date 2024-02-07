@@ -34,7 +34,7 @@ class _BasePageState extends State<BasePage> {
               setState(() {
                 selectedPageIndex = index;
               });
-              //pageController.animateToPage(index, duration: const Duration(milliseconds: 200), curve: Curves.ease);
+              pageController.animateToPage(index, duration: const Duration(milliseconds: 2000), curve: Curves.ease);
             },
             destinations: const [
               NavigationDestination(

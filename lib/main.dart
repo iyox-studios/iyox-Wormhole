@@ -19,7 +19,7 @@ class WormholeApp extends StatelessWidget {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarColor: darkColorScheme?.background,
-          systemNavigationBarColor: darkColorScheme?.background));
+          systemNavigationBarColor: darkColorScheme?.surface));
       return MaterialApp(
         navigatorKey: NavigationService.navigatorKey,
         debugShowCheckedModeBanner: false,

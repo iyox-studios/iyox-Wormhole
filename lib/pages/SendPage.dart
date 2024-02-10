@@ -158,12 +158,12 @@ class _SendPageState extends State<SendPage>
                     ),
                   ],
                 ))),
-        Gap(30)
+        const Gap(30)
       ],
     ));
   }
 
-  Future<ServerConfig> _getServerConfig() async {
+  Future<ServerConfig> getServerConfig() async {
     final rendezvousUrl = await api.defaultRendezvousUrl();
     final transitUrl = await api.defaultTransitUrl();
     final serverConfig =
@@ -186,32 +186,6 @@ class _SendPageState extends State<SendPage>
           ),
         );
       }
-    }
-
-    return;
-
-    if (result != null) {
-      final files =
-          result.files.where((element) => element.path != null).toList();
-
-      final stream = api.sendFiles(
-          name: files.first.name,
-          filePaths: files.map((e) => e.path!).toList(),
-          codeLength: 3,
-          serverConfig: await _getServerConfig());
-
-      stream.listen((e) {
-        switch (e.event) {
-          case Events.Code:
-            setState(() {
-              code = e.getValue().toString();
-            });
-            break;
-          default:
-        }
-      });
-    } else {
-      debugPrint('user canceled picker');
     }
   }
 

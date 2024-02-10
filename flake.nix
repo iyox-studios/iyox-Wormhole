@@ -28,6 +28,7 @@
       };
 
       rustToolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./native/rust-toolchain.toml;
+
       ndkVersion = "23.1.7779620";
       buildToolsVersion = "27.0.3";
       androidComposition = pkgs.androidenv.composeAndroidPackages {
@@ -44,21 +45,11 @@
         name = "myAndroidStudio";
         paths = with pkgs; [
           android-studio
+          rustToolchain
           flutter
-          # dart
           gnumake
-          check
-          pkg-config
-          glibc
           android-tools
           jdk
-          git
-          musl
-          libcxx
-          glibc
-          glibc_multi
-          pkg-config
-          libclang
         ];
 
         nativeBuildInputs = [pkgs.makeWrapper];
@@ -69,7 +60,7 @@
           wrapProgram $out/bin/android-studio \
             --prefix FLUTTER_SDK=${pkgs.flutter} \
             --prefix ANDROID_JAVA_HOME=${pkgs.jdk.home} \
-            --prefix ANDROID_NDK=${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}
+            --prefix ANDROID_SDK_ROOT=~/Android/Sdk
         '';
       };
     in {

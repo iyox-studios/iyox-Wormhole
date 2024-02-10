@@ -2,7 +2,7 @@ name: iyox_wormhole
 description: Mobile Client for the magic-wormhole protocol
 publish_to: 'none'
 
-version: 0.0.2+14
+version: 0.0.5+17
 
 environment:
   sdk: '>=3.0.2 <4.0.0'
@@ -24,7 +24,7 @@ dependencies:
 
   #qr
   flutter_zxing: ^1.5.2
-  barcode_widget: ^2.0.4
+  qr_flutter: ^4.1.0
 
   vibration: ^1.7.7
   dynamic_color: ^1.6.9

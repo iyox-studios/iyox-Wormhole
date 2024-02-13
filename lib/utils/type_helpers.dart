@@ -1,4 +1,4 @@
-import '../gen/bridge_definitions.dart';
+import '../../gen/bridge_definitions.dart';
 
 extension GetValue<T> on TUpdate {
   T getValue() {

@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:iyox_wormhole/type_helpers.dart';
+import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../gen/ffi.dart';
@@ -77,7 +77,6 @@ class _SendingPageState extends State<SendingPage> {
           appBar: AppBar(),
           body: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-            debugPrint(constraints.maxWidth.toString());
             if (constraints.maxWidth > 600) {
               return _buildWideContainer();
             } else {

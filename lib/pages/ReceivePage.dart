@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
 import 'package:iyox_wormhole/pages/QrCodeScannerPage.dart';
 import 'package:iyox_wormhole/pages/SendPage.dart';
-import 'package:iyox_wormhole/type_helpers.dart';
+import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:iyox_wormhole/utils/paths.dart';
 
 class ReceivePage extends StatefulWidget {

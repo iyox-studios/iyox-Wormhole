@@ -74,23 +74,24 @@
             rustToolchain
             flutter
             androidSdk
-            gnumake
-            jdk11
-            libstdcxx5
-            libzra
-            libzip
-            zlib
-            libllvm
-            libclang
-            llvm
-            musl
-            libcxx
-            glibc
-            glibc_multi
-            pkg-config
-            libclang
+            gnome.zenity
           ];
-          #GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/${buildToolsVersion}/aapt2";
         };
+
+      formatter = pkgs.alejandra;
+
+      packages = {
+        default = pkgs.flutter.buildFlutterApplication {
+          pname = "firmware-updater";
+          version = "0-unstable-2023-04-30";
+
+          # To build for the Web, use the targetFlutterPlatform argument.
+          targetFlutterPlatform = "linux";
+
+          src = ./.;
+
+          pubspecLock = pkgs.lib.importJSON ./pubspec.lock.json;
+        };
+      };
     });
 }

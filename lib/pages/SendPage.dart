@@ -3,7 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:iyox_wormhole/type_helpers.dart';
+import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
 
 import 'SendingPage.dart';

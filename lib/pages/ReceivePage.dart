@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
 import 'package:iyox_wormhole/pages/QrCodeScannerPage.dart';
-import 'package:iyox_wormhole/pages/SendPage.dart';
 import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:iyox_wormhole/utils/paths.dart';
 
@@ -28,16 +26,20 @@ class _ReceivePageState extends State<ReceivePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 2000),
-        child: Padding(
-          padding: const EdgeInsets.all(11.0),
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Padding(
+          padding: EdgeInsets.fromLTRB(20, 55, 0, 20),
+          child: Text("Receive Files", style: TextStyle(fontSize: 40)),
+        ),
+        Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.download_rounded, size: 130,),
-              const Text("Receive File", style: TextStyle(fontSize: 45)),
-              const Gap(40),
               Row(
                 children: [
                   Flexible(
@@ -62,36 +64,46 @@ class _ReceivePageState extends State<ReceivePage> {
                       icon: const Icon(Icons.qr_code)),
                 ],
               ),
-              const SizedBox(
-                height: 25,
-              ),
-              FilledButton.icon(
-                onPressed: !transferring ? _onReceiveButtonClick : null,
-                style: largeButtonStyle,
-                label: const Text('Receive'),
-                icon: const Icon(Icons.file_download_outlined),
-              ),
-              if (transferring)
-                Column(
-                  children: [
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    LinearProgressIndicator(
-                      value: downloadStarted
-                          ? receivedBytes / totalReceiveBytes
-                          : null,
-                      minHeight: 10,
-                      borderRadius: BorderRadius.circular(18),
-                    )
-                  ],
-                ),
             ],
           ),
         ),
-      ),
-    );
+        Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 30),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 100),
+            transitionBuilder: (child, animation) => ScaleTransition(
+              scale: animation,
+              child: child,
+            ),
+            child: !transferring
+                ? FilledButton.icon(
+                    onPressed: _onReceiveButtonClick,
+                    style: buttonStyle,
+                    label: const Text('Receive File'),
+                    icon: const Icon(Icons.sim_card_download_outlined),
+                  )
+                : LinearProgressIndicator(
+                    value: downloadStarted
+                        ? receivedBytes / totalReceiveBytes
+                        : null,
+                    minHeight: 13,
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+          ),
+        ),
+      ],
+    ));
   }
+
+  static final ButtonStyle buttonStyle = ButtonStyle(
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(200),
+      ),
+    ),
+    fixedSize: MaterialStateProperty.all<Size>(const Size(180, 60)),
+  );
 
   void _onQrButtonClicked() async {
     final result = await Navigator.push(context,

@@ -3,7 +3,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
 
 import 'SendingPage.dart';
@@ -64,7 +63,7 @@ class _SendPageState extends State<SendPage>
       children: [
         const Padding(
           padding: EdgeInsets.fromLTRB(20, 55, 0, 20),
-          child: Text("Send Files", style: TextStyle(fontSize: 41)),
+          child: Text("Send Files", style: TextStyle(fontSize: 40)),
         ),
         AnimatedContainer(
           width: double.infinity,

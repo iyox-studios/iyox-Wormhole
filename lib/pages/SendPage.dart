@@ -63,7 +63,7 @@ class _SendPageState extends State<SendPage>
       children: [
         const Padding(
           padding: EdgeInsets.fromLTRB(20, 55, 0, 20),
-          child: Text("Send Files", style: TextStyle(fontSize: 40)),
+          child: Text("Send Files", style: TextStyle(fontSize: 37)),
         ),
         AnimatedContainer(
           width: double.infinity,

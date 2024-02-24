@@ -82,11 +82,19 @@
 
       packages = {
         default = pkgs.flutter.buildFlutterApplication {
-          pname = "firmware-updater";
-          version = "0-unstable-2023-04-30";
+          pname = "iyox-wormhole";
+          version = "0.0.7";
 
           # To build for the Web, use the targetFlutterPlatform argument.
-          targetFlutterPlatform = "linux";
+          # targetFlutterPlatform = "linux";
+
+          nativeBuildInputs = with pkgs; [
+            corrosion
+            rustPlatform.cargoSetupHook
+                cargo
+                rustc
+                copyDesktopItems
+          ];
 
           src = ./.;
 

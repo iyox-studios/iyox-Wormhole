@@ -20,7 +20,6 @@ class _ReceivePageState extends State<ReceivePage> {
   bool transferring = false;
   bool downloadStarted = false;
 
-  StreamController<TUpdate> controller = StreamController<TUpdate>();
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -32,7 +31,7 @@ class _ReceivePageState extends State<ReceivePage> {
       children: [
         const Padding(
           padding: EdgeInsets.fromLTRB(20, 55, 0, 20),
-          child: Text("Receive Files", style: TextStyle(fontSize: 40)),
+          child: Text("Receive Files", style: TextStyle(fontSize: 37)),
         ),
         Container(
           alignment: Alignment.center,

@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:iyox_wormhole/utils/settings.dart';
 import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -37,7 +38,7 @@ class _SendingPageState extends State<SendingPage> {
     final stream = api.sendFiles(
         name: files.first.name,
         filePaths: files.map((e) => e.path!).toList(),
-        codeLength: 3,
+        codeLength: await Settings.getWordLength(),
         serverConfig: await _getServerConfig());
 
     stream.listen((e) {
@@ -235,8 +236,8 @@ class _SendingPageState extends State<SendingPage> {
   }
 
   Future<ServerConfig> _getServerConfig() async {
-    final rendezvousUrl = await api.defaultRendezvousUrl();
-    final transitUrl = await api.defaultTransitUrl();
+    final rendezvousUrl = await Settings.getRendezvousUrl();
+    final transitUrl = await Settings.getTransitUrl();
     final serverConfig =
         ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
     return serverConfig;

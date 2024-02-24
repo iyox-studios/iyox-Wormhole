@@ -2,7 +2,7 @@ name: iyox_wormhole
 description: Mobile Client for the magic-wormhole protocol
 publish_to: 'none'
 
-version: 0.0.7+19
+version: 0.1.0+22
 
 environment:
   sdk: '>=3.0.2 <4.0.0'
@@ -33,6 +33,7 @@ dependencies:
   gap: ^3.0.1
   flutter_displaymode: ^0.6.0
   logger: ^2.0.2+1
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

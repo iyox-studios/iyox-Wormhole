@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
+import 'package:iyox_wormhole/widgets/RecentFiles.dart';
 
 import 'SendingPage.dart';
 
@@ -23,28 +24,8 @@ final ButtonStyle largeButtonStyle = ButtonStyle(
   fixedSize: MaterialStateProperty.all<Size>(const Size(150, 60)),
 );
 
-class _SendPageState extends State<SendPage>
-    with SingleTickerProviderStateMixin {
+class _SendPageState extends State<SendPage> {
   String code = '';
-  bool recentCollapsed = false;
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 150),
-      upperBound: 0.5,
-      vsync: this,
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
 
   static final ButtonStyle buttonStyle = ButtonStyle(
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -65,54 +46,7 @@ class _SendPageState extends State<SendPage>
           padding: EdgeInsets.fromLTRB(20, 55, 0, 20),
           child: Text("Send Files", style: TextStyle(fontSize: 37)),
         ),
-        AnimatedContainer(
-          width: double.infinity,
-          curve: Curves.easeInOutCirc,
-          height: recentCollapsed ? 80 : 210,
-          duration: const Duration(milliseconds: 150),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 11),
-            child: Card(
-                elevation: 1,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(26)),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(children: [
-                          const Text(
-                            "Recent files",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
-                          const Spacer(),
-                          RotationTransition(
-                              turns: Tween(begin: 0.0, end: 1.0)
-                                  .animate(_controller),
-                              child: IconButton.filledTonal(
-                                  iconSize: 23,
-                                  padding: const EdgeInsets.all(0),
-                                  constraints: BoxConstraints.tight(
-                                      const Size.square(25)),
-                                  onPressed: () => {
-                                        setState(() {
-                                          if (recentCollapsed) {
-                                            _controller.reverse(from: 0.5);
-                                          } else {
-                                            _controller.forward(from: 0.0);
-                                          }
-                                          recentCollapsed = !recentCollapsed;
-                                        })
-                                      },
-                                  icon: const Icon(Icons.keyboard_arrow_down)))
-                        ])
-                      ]),
-                )),
-          ),
-        ),
+        const RecentFiles(),
         if (code != '')
           Card(
             shape: RoundedRectangleBorder(

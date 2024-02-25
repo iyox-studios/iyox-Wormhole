@@ -9,9 +9,10 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../gen/ffi.dart';
 
 class SendingPage extends StatefulWidget {
-  const SendingPage({Key? key, required this.files}) : super(key: key);
+  const SendingPage({Key? key, this.files, this.path}) : super(key: key);
 
-  final FilePickerResult files;
+  final FilePickerResult? files;
+  final String? path;
 
   @override
   State<SendingPage> createState() => _SendingPageState();
@@ -32,14 +33,27 @@ class _SendingPageState extends State<SendingPage> {
   }
 
   Future<void> _startSending() async {
-    final files =
-        widget.files.files.where((element) => element.path != null).toList();
+    Stream<TUpdate> stream;
+    if (widget.files != null) {
+      final files =
+          widget.files!.files.where((element) => element.path != null).toList();
 
-    final stream = api.sendFiles(
-        name: files.first.name,
-        filePaths: files.map((e) => e.path!).toList(),
-        codeLength: await Settings.getWordLength(),
-        serverConfig: await _getServerConfig());
+      stream = api.sendFiles(
+          name: files.first.name,
+          filePaths: files.map((e) => e.path!).toList(),
+          codeLength: await Settings.getWordLength(),
+          serverConfig: await _getServerConfig());
+
+        for (var file in files) {
+          await Settings.addRecentFile(file.path!);
+        }
+    } else {
+      stream = api.sendFiles(
+          name: widget.path!.split('/').last,
+          filePaths: [widget.path!],
+          codeLength: await Settings.getWordLength(),
+          serverConfig: await _getServerConfig());
+    }
 
     stream.listen((e) {
       setState(() {

@@ -54,8 +54,7 @@ class _RecentFilesState extends State<RecentFiles>
             child: Wrap(children: [
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.fromLTRB(18, 12, 18, 0),
+                  padding: const EdgeInsets.fromLTRB(18, 12, 18, 0),
                   child: Row(children: [
                     const Text(
                       "Recent files",
@@ -98,7 +97,8 @@ class _RecentFilesState extends State<RecentFiles>
                                 backgroundColor: MaterialStateProperty.all(
                                     Theme.of(context).colorScheme.surface),
                                 elevation: MaterialStateProperty.all(1),
-                                shadowColor:  MaterialStateProperty.all(Colors.transparent),
+                                shadowColor: MaterialStateProperty.all(
+                                    Colors.transparent),
                                 surfaceTintColor: MaterialStateProperty.all(
                                     Theme.of(context).colorScheme.surfaceTint),
                                 textStyle: MaterialStateProperty.all(
@@ -108,7 +108,9 @@ class _RecentFilesState extends State<RecentFiles>
                                           .primary),
                                 ),
                               ),
-                              onPressed: () => { Navigator.push(context, _createSendingRoute(i))},
+                              onPressed: () => {
+                                Navigator.push(context, _createSendingRoute(i))
+                              },
                               child: SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   child: Padding(
@@ -141,7 +143,7 @@ class _RecentFilesState extends State<RecentFiles>
   Route _createSendingRoute(String path) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => SendingPage(
-          path: path,
+        files: [path],
       ),
       transitionDuration: const Duration(milliseconds: 0),
       reverseTransitionDuration: const Duration(milliseconds: 380),
@@ -152,5 +154,4 @@ class _RecentFilesState extends State<RecentFiles>
               child: child),
     );
   }
-
 }

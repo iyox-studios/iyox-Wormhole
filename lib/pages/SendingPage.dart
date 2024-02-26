@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,10 +13,9 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../gen/ffi.dart';
 
 class SendingPage extends StatefulWidget {
-  const SendingPage({Key? key, this.files, this.path}) : super(key: key);
+  const SendingPage({Key? key, required this.files}) : super(key: key);
 
-  final FilePickerResult? files;
-  final String? path;
+  final List<String> files;
 
   @override
   State<SendingPage> createState() => _SendingPageState();
@@ -23,58 +26,63 @@ class _SendingPageState extends State<SendingPage> {
   double? shareProgress;
   int totalShareSize = 0;
 
+  late StreamController<TUpdate> controller =
+      StreamController<TUpdate>.broadcast();
+
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _startSending();
-    });
+    _startSending();
   }
 
   Future<void> _startSending() async {
-    Stream<TUpdate> stream;
-    if (widget.files != null) {
-      final files =
-          widget.files!.files.where((element) => element.path != null).toList();
-
-      stream = api.sendFiles(
-          name: files.first.name,
-          filePaths: files.map((e) => e.path!).toList(),
-          codeLength: await Settings.getWordLength(),
-          serverConfig: await _getServerConfig());
-
-        for (var file in files) {
-          await Settings.addRecentFile(file.path!);
-        }
-    } else {
-      stream = api.sendFiles(
-          name: widget.path!.split('/').last,
-          filePaths: [widget.path!],
-          codeLength: await Settings.getWordLength(),
-          serverConfig: await _getServerConfig());
+    if (widget.files.isEmpty) {
+      Navigator.of(context).pop();
+      return;
     }
 
-    stream.listen((e) {
-      setState(() {
-        switch (e.event) {
-          case Events.Code:
+    final stream = api.sendFiles(
+        name: widget.files.first.split('/').last,
+        filePaths: widget.files,
+        codeLength: await Settings.getWordLength(),
+        serverConfig: await _getServerConfig());
+
+    for (var file in widget.files) {
+      await Settings.addRecentFile(file);
+    }
+
+    await controller.addStream(stream);
+
+    controller.stream.listen((e) {
+      debugPrint(e.event.toString());
+      switch (e.event) {
+        case Events.Code:
+          setState(() {
             codeText = e.getValue().toString();
-            break;
-          case Events.Total:
+          });
+          break;
+        case Events.Total:
+          setState(() {
             totalShareSize = e.getValue();
-            break;
-          case Events.StartTransfer:
+          });
+          break;
+        case Events.StartTransfer:
+          setState(() {
             codeText = '';
             shareProgress = 0;
-          case Events.Sent:
+          });
+        case Events.Sent:
+          setState(() {
             shareProgress = e.getValue() / totalShareSize.toDouble();
-          case Events.Finished:
+          });
+        case Events.Finished:
+          if (context.mounted) {
             Navigator.of(context).pop();
-          default:
-            debugPrint(e.event.toString());
-        }
-      });
+          }
+        default:
+          debugPrint(e.event.toString());
+      }
     });
   }
 

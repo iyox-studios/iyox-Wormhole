@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animations/animations.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
 import 'package:iyox_wormhole/widgets/RecentFiles.dart';
+import 'package:share_handler/share_handler.dart';
 
 import 'SendingPage.dart';
 
@@ -26,6 +29,13 @@ final ButtonStyle largeButtonStyle = ButtonStyle(
 
 class _SendPageState extends State<SendPage> {
   String code = '';
+
+  _SendPageState() {
+    // Intent shares only on android and ios
+    if (Platform.isAndroid || Platform.isIOS) {
+      registerIntentShareHandler();
+    }
+  }
 
   static final ButtonStyle buttonStyle = ButtonStyle(
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -106,11 +116,15 @@ class _SendPageState extends State<SendPage> {
 
   void _onSendButtonClick() async {
     FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: false);
+        await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (context.mounted) {
       if (result != null) {
-        Navigator.push(context, _createSendingRoute(result));
+        final files = result.files
+            .where((element) => element.path != null)
+            .map((e) => e.path!)
+            .toList();
+        Navigator.push(context, _createSendingRoute(files));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -122,7 +136,7 @@ class _SendPageState extends State<SendPage> {
     }
   }
 
-  Route _createSendingRoute(FilePickerResult files) {
+  Route _createSendingRoute(List<String> files) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => SendingPage(
         files: files,
@@ -135,5 +149,32 @@ class _SendPageState extends State<SendPage> {
               animation: animation,
               child: child),
     );
+  }
+
+  void registerIntentShareHandler() {
+    final handler = ShareHandlerPlatform.instance;
+    handler.getInitialSharedMedia().then((media) {
+      if (media?.attachments != null) {
+        _sendIntentFile(media!.attachments!);
+      }
+    });
+
+    handler.sharedMediaStream.listen((SharedMedia media) {
+      if (media.attachments != null) {
+        _sendIntentFile(media.attachments!);
+      }
+    });
+  }
+
+  void _sendIntentFile(List<SharedAttachment?> attachments) {
+    final paths = attachments
+        .where((e) => e != null)
+        .map((e) => e!.path)
+        .toList(growable: false);
+    if (paths.isEmpty) {
+      return;
+    }
+
+    Navigator.push(context, _createSendingRoute(paths));
   }
 }

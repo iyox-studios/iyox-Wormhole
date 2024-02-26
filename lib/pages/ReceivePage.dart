@@ -21,6 +21,11 @@ class _ReceivePageState extends State<ReceivePage> {
   bool downloadStarted = false;
 
   final TextEditingController _controller = TextEditingController();
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,9 +194,4 @@ class _ReceivePageState extends State<ReceivePage> {
     });
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 }

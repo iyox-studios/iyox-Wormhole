@@ -20,20 +20,15 @@ It is a fork of [this](https://gitlab.com/lukas-heiligenbrunner/wormhole) projec
 * [ffi](https://pub.dev/packages/ffi)(BSD-3-Clause) - call native .so lib code from dart
 * [file_picker](https://pub.dev/packages/file_picker)(MIT) - OS Native Filepicker Impl.
 * [path_provider](https://pub.dev/packages/path_provider)(BSD-3-Clause) - Get Platforms common paths
-* [share_plus](https://pub.dev/packages/share_plus)(BSD-3-Clause) - Open Platforms share dialog
-* [open_filex](https://pub.dev/packages/open_filex)(BSD-3-Clause) - Open Platforms file-open dialog
-* [barcode_widget](https://pub.dev/packages/barcode_widget)(Apache-2.0) - QR/Aztec code generation
 * [flutter_zxing](https://pub.dev/packages/flutter_zxing)(MIT) - QR/Aztec code scanner
-* [provider](https://pub.dev/packages/provider)(MIT) - Consumer/Provider patterns
+* [qr_flutter](https://pub.dev/packages/qr_flutter)(BSD-3-Clause) - QR code generator
 * [shared_preferences](https://pub.dev/packages/shared_preferences)(BSD-3-Clause) - Platform wrapper for key-value pairs
 * [share_handler](https://pub.dev/packages/share_handler)(MIT) - receive of platform share intents
 * [vibration](https://pub.dev/packages/vibration)(BSD-2-Clause) - control haptic feedbacks
-* [intl](https://pub.dev/packages/intl)(BSD-3-Clause) - handle localisation
-* [fluttertoast](https://pub.dev/packages/fluttertoast)(MIT) - pretty toast popups
-* [toggle_switch](https://pub.dev/packages/toggle_switch)(MIT) - pretty toggle switches
-* [permission_handler](https://pub.dev/packages/permission_handler) (MIT) - handle platform permissions
-* [url_launcher](https://pub.dev/packages/url_launcher) (BSD-3-Clause) - open urls in platform default browser
-* [flutter_close_app](https://gitlab.com/lukas-heiligenbrunner/fluttercloseapp.git)(MIT) - proper close of app
+* [dynamic_color](https://pub.dev/packages/dynamic_color)(Apache-2.0) - generate Material color schemes
+* [animations](https://pub.dev/packages/animations)(BSD-3-Clause ) - pre-built animations
+* [gap](https://pub.dev/packages/gap)(MIT) - add gaps in flex widgets
+* [flutter_displaymode](https://pub.dev/packages/flutter_displaymode)(MIT) - set display mode on android
 
 ### Rust
 

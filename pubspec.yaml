@@ -2,7 +2,7 @@ name: iyox_wormhole
 description: Mobile Client for the magic-wormhole protocol
 publish_to: 'none'
 
-version: 0.1.1+23
+version: 0.1.2+24
 
 environment:
   sdk: '>=3.0.2 <4.0.0'
@@ -34,6 +34,7 @@ dependencies:
   logger: ^2.0.2+1
   shared_preferences: ^2.2.2
   share_handler: ^0.0.17
+  icons_launcher: ^2.1.7
 
 dev_dependencies:
   flutter_test:
@@ -45,13 +46,6 @@ dev_dependencies:
   build_runner: ^2.4.4
   freezed: ^2.3.4
 
-  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
-
-flutter_icons:
-  image_path: "icon/logo.png"
-  android: true
-  adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "icon/logo.png"

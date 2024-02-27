@@ -42,7 +42,7 @@ class _RecentFilesState extends State<RecentFiles>
         width: double.infinity,
         curve: Curves.easeInOutCirc,
         height: recentCollapsed ? 80 : null,
-        constraints: const BoxConstraints(minHeight: 80, maxHeight: 400),
+        constraints: const BoxConstraints(minHeight: 80, maxHeight: 340),
         duration: const Duration(milliseconds: 150),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 11),
@@ -86,54 +86,27 @@ class _RecentFilesState extends State<RecentFiles>
                     future: Settings.getRecentFiles(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        return Column(children: [
-                          for (var i in snapshot.data!)
-                            FilledButton.tonal(
-                              style: ButtonStyle(
-                                padding:
-                                    MaterialStateProperty.all(EdgeInsets.zero),
-                                shape: MaterialStateProperty.all(
-                                    LinearBorder.none),
-                                backgroundColor: MaterialStateProperty.all(
-                                    Theme.of(context).colorScheme.surface),
-                                elevation: MaterialStateProperty.all(1),
-                                shadowColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                                surfaceTintColor: MaterialStateProperty.all(
-                                    Theme.of(context).colorScheme.surfaceTint),
-                                textStyle: MaterialStateProperty.all(
-                                  TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary),
-                                ),
-                              ),
-                              onPressed: () => {
-                                Navigator.push(context, _createSendingRoute(i))
-                              },
-                              child: SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 12, horizontal: 20),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              i.split('/').last,
-                                              style:
-                                                  const TextStyle(fontSize: 16),
-                                            )
-                                          ]))),
-                            )
-                        ]);
+                        return SizedBox(
+                          height: 222,
+                          child: ListView.builder(
+                            itemCount: snapshot.data?.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final file = snapshot.data![snapshot.data!.length - index - 1];
+                              return ListTile(
+                                  onTap: () => {
+                                        Navigator.push(
+                                            context, _createSendingRoute(file))
+                                      },
+                                  title: Text(
+                                    file.split('/').last,
+                                    style: const TextStyle(fontSize: 16),
+                                  ));
+                            },
+                          ),
+                        );
                       }
                       return const Placeholder();
                     }),
-                const Gap(8)
               ]),
             ]),
           ),

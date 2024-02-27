@@ -33,9 +33,15 @@ class Settings {
   static addRecentFile(String value) async {
     var recentFiles = await getRecentFiles();
     recentFiles.add(value);
-    if(recentFiles.length>5){
-      recentFiles = recentFiles.getRange(recentFiles.length-6, recentFiles.length-1).toList();
+
+    if(recentFiles.contains(value)){
+      recentFiles.removeWhere((item) => item == value);
+      recentFiles.add(value);
     }
+    if(recentFiles.length>10){
+      recentFiles = recentFiles.getRange(recentFiles.length-11, recentFiles.length-1).toList();
+    }
+    debugPrint(recentFiles.length.toString());
 
     await _setField(recentFiles, _recentFiles);
   }

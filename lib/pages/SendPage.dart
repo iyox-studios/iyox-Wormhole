@@ -153,10 +153,10 @@ class _SendPageState extends State<SendPage> {
     }
   }
 
-  Route _createSendingRoute(List<String> files, {bool folder = false}) {
+  Route _createSendingRoute(List<String> files, {bool folder = false, bool causedByIntent = false}) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          SendingPage(files: files, folder: folder),
+          SendingPage(files: files, folder: folder, causedByIntent: causedByIntent),
       transitionDuration: const Duration(milliseconds: 0),
       reverseTransitionDuration: const Duration(milliseconds: 380),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
@@ -191,6 +191,6 @@ class _SendPageState extends State<SendPage> {
       return;
     }
 
-    Navigator.push(context, _createSendingRoute(paths));
+    Navigator.push(context, _createSendingRoute(paths, causedByIntent: true));
   }
 }

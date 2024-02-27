@@ -13,10 +13,16 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../gen/ffi.dart';
 
 class SendingPage extends StatefulWidget {
-  const SendingPage({Key? key, required this.files, this.folder=false}) : super(key: key);
+  const SendingPage(
+      {Key? key,
+      required this.files,
+      this.folder = false,
+      this.causedByIntent = false})
+      : super(key: key);
 
   final List<String> files;
   final bool folder;
+  final bool causedByIntent;
 
   @override
   State<SendingPage> createState() => _SendingPageState();
@@ -81,6 +87,10 @@ class _SendingPageState extends State<SendingPage> {
             shareProgress = e.getValue() / totalShareSize.toDouble();
           });
         case Events.Finished:
+          if (widget.causedByIntent) {
+            SystemNavigator.pop();
+            return;
+          }
           if (context.mounted) {
             Navigator.of(context).pop();
           }
@@ -251,6 +261,10 @@ class _SendingPageState extends State<SendingPage> {
               ),
               child: const Text('Leave'),
               onPressed: () {
+                if (widget.causedByIntent) {
+                  SystemNavigator.pop();
+                  return;
+                }
                 Navigator.pop(context);
                 Navigator.pop(context);
               },

@@ -1,3 +1,4 @@
+import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +33,10 @@ class Settings {
   static addRecentFile(String value) async {
     var recentFiles = await getRecentFiles();
     recentFiles.add(value);
+    if(recentFiles.length>5){
+      recentFiles = recentFiles.getRange(recentFiles.length-6, recentFiles.length-1).toList();
+    }
+
     await _setField(recentFiles, _recentFiles);
   }
 

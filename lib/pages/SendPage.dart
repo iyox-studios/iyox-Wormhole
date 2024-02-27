@@ -136,11 +136,27 @@ class _SendPageState extends State<SendPage> {
     }
   }
 
-  Route _createSendingRoute(List<String> files) {
+  void _onSendFolderButtonClick() async {
+    final path = (await FilePicker.platform.getDirectoryPath());
+
+    if (context.mounted) {
+      if (path != null) {
+        Navigator.push(context, _createSendingRoute([path], folder:true));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('No folder selected'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    }
+  }
+
+  Route _createSendingRoute(List<String> files, {bool folder = false}) {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => SendingPage(
-        files: files,
-      ),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          SendingPage(files: files, folder: folder),
       transitionDuration: const Duration(milliseconds: 0),
       reverseTransitionDuration: const Duration(milliseconds: 380),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>

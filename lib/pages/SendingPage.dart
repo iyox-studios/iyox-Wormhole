@@ -13,9 +13,10 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../gen/ffi.dart';
 
 class SendingPage extends StatefulWidget {
-  const SendingPage({Key? key, required this.files}) : super(key: key);
+  const SendingPage({Key? key, required this.files, this.folder=false}) : super(key: key);
 
   final List<String> files;
+  final bool folder;
 
   @override
   State<SendingPage> createState() => _SendingPageState();
@@ -25,9 +26,6 @@ class _SendingPageState extends State<SendingPage> {
   String codeText = "";
   double? shareProgress;
   int totalShareSize = 0;
-
-  late StreamController<TUpdate> controller =
-      StreamController<TUpdate>.broadcast();
 
   @override
   void initState() {
@@ -42,20 +40,26 @@ class _SendingPageState extends State<SendingPage> {
       return;
     }
 
-    final stream = api.sendFiles(
-        name: widget.files.first.split('/').last,
-        filePaths: widget.files,
-        codeLength: await Settings.getWordLength(),
-        serverConfig: await _getServerConfig());
+    Stream<TUpdate> stream;
+    if (!widget.folder) {
+      stream = api.sendFiles(
+          name: widget.files.first.split('/').last,
+          filePaths: widget.files,
+          codeLength: await Settings.getWordLength(),
+          serverConfig: await _getServerConfig());
+    } else {
+      stream = api.sendFolder(
+          folderPath: widget.files.first,
+          name: widget.files.first.split('/').last,
+          codeLength: await Settings.getWordLength(),
+          serverConfig: await _getServerConfig());
+    }
 
     for (var file in widget.files) {
       await Settings.addRecentFile(file);
     }
 
-    await controller.addStream(stream);
-
-    controller.stream.listen((e) {
-      debugPrint(e.event.toString());
+    stream.listen((e) {
       switch (e.event) {
         case Events.Code:
           setState(() {

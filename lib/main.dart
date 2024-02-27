@@ -8,6 +8,9 @@ import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:iyox_wormhole/pages/Router.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'gen/ffi.dart';
 
 void main() async {
   await initApp();
@@ -71,7 +74,13 @@ class WormholeAppState extends State<WormholeApp> {
   @override
   initState() {
     super.initState();
+    initBackend();
     initApp().then((_) => debugPrint("App Init Completed"));
+  }
+
+  void initBackend() async {
+    final tempDir = (await getTemporaryDirectory()).path;
+    api.init(tempFilePath: tempDir);
   }
 
   @override

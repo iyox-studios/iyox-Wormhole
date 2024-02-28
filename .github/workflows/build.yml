@@ -51,7 +51,7 @@ jobs:
       - name: Build Linux
         run: |
           make get-dep
-          RUST_COMPILE=/root/.cargo/bin/rustc make linux
+          RUST_COMPILER=/root/.cargo/bin/rustc make linux
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:

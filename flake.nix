@@ -71,6 +71,7 @@
             ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
             ANDROID_NDK = "${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}";
             buildInputs = [
+              act
               myAndroidStudio
               rustToolchain
               flutter

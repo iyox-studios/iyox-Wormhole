@@ -1,10 +1,7 @@
 import 'package:animations/animations.dart';
-import 'package:dynamic_color/dynamic_color.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
-import '../pages/SendingPage.dart';
+import '../pages/sending_page.dart';
 import '../utils/settings.dart';
 
 class RecentFiles extends StatefulWidget {

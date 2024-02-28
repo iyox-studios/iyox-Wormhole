@@ -1,0 +1,46 @@
+name: Build
+on:
+  push:
+    branches: [main]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/iyox-studios/flutter_rust
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Lint
+        run: |
+          make lint
+  build_android:
+    name: Build Android
+    needs: lint
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/iyox-studios/flutter_rust
+    steps:
+      - name: Build Android
+        run: |
+          make get-dep
+          make apk
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android
+
+  build_linux:
+    name: Build Linux
+    needs: lint
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/iyox-studios/flutter_rust
+    steps:
+      - name: Build Linux
+        run: |
+          make get-dep
+          make linux
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux

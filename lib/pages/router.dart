@@ -1,8 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:iyox_wormhole/pages/SettingsPage.dart';
-import 'package:iyox_wormhole/pages/ReceivePage.dart';
-import 'package:iyox_wormhole/pages/SendPage.dart';
+import 'package:iyox_wormhole/pages/settings_page.dart';
+import 'package:iyox_wormhole/pages/receive_page.dart';
+import 'package:iyox_wormhole/pages/send_page.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);

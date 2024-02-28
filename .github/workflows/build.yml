@@ -50,6 +50,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Build Linux
         run: |
+          mkdir -p /github
+          ln -s /root $HOME
           whoami
           echo $HOME
           ls ~/.cargo/bin

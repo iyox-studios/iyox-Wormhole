@@ -50,8 +50,12 @@ jobs:
         uses: actions/checkout@v2
       - name: Build Linux
         run: |
+          whoami
+          echo $HOME
+          ls ~/.cargo/bin
+          echo $PATH
           make get-dep
-          bash -c "make linux"
+          make linux
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:

@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/iyox-studios/flutter_rust
+      volumes:
+        - ${{ GITHUB.WORKSPACE }}:/root/wormhole
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -23,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/iyox-studios/flutter_rust
+      volumes:
+        - ${{ GITHUB.WORKSPACE }}:/root/wormhole
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -35,7 +39,7 @@ jobs:
         with:
           name: android
           path: |
-            build/linux/x64/release/bundle
+            /root/wormhole/build/linux/x64/release/bundle
 
   build_linux:
     name: Build Linux
@@ -43,6 +47,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/iyox-studios/flutter_rust
+      volumes:
+        - ${{ GITHUB.WORKSPACE }}:/root/wormhole
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -55,5 +61,5 @@ jobs:
         with:
           name: linux
           path: |
-            build/app/outputs/apk
-            build/app/outputs/bundle
+            /root/wormhole/build/app/outputs/apk
+            /root/wormhole/build/app/outputs/bundle

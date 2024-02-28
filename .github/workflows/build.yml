@@ -21,12 +21,10 @@ jobs:
           make lint
   build_android:
     name: Build Android
-    needs: lint
+    needs: build_linux
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/iyox-studios/flutter_rust
-      volumes:
-        - ${{ GITHUB.WORKSPACE }}:/root/wormhole
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,7 +37,7 @@ jobs:
         with:
           name: android
           path: |
-            /root/wormhole/build/linux/x64/release/bundle
+            build/linux/x64/release/bundle/
 
   build_linux:
     name: Build Linux
@@ -47,8 +45,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/iyox-studios/flutter_rust
-      volumes:
-        - ${{ GITHUB.WORKSPACE }}:/root/wormhole
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -61,5 +57,5 @@ jobs:
         with:
           name: linux
           path: |
-            /root/wormhole/build/app/outputs/apk
-            /root/wormhole/build/app/outputs/bundle
+            build/app/outputs/apk/*.apk
+            build/app/outputs/bundle/*.aab

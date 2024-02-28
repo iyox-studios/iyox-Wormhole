@@ -30,9 +30,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Build Android
         run: |
-          whoami
-          echo $HOME
-          ls ~/.cargo/bin
           make get-dep
           make apk
       - name: Upload artifacts
@@ -53,12 +50,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Build Linux
         run: |
-          mkdir -p /github
-          ln -s /root $HOME
-          whoami
-          echo $HOME
-          ls ~/.cargo/bin
-          echo $PATH
+          ls /root/.cargo/bin
+          export PATH=$PATH:/root/.cargo/bin
           make get-dep
           make linux
       - name: Upload artifacts

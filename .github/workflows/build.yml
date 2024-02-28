@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Build Linux
         run: |
-          export CARGO_HOME=/root/.cargo
+          export HOME=/root/
           make get-dep
           make linux
       - name: Upload artifacts

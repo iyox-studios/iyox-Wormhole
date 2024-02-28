@@ -34,6 +34,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: android
+          path: |
+            build/linux/x64/release/bundle
 
   build_linux:
     name: Build Linux
@@ -52,3 +54,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: linux
+          path: |
+            build/app/outputs/apk
+            build/app/outputs/bundle

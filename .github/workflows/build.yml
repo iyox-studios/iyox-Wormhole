@@ -24,6 +24,8 @@ jobs:
     container:
       image: ghcr.io/iyox-studios/flutter_rust
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Build Android
         run: |
           make get-dep
@@ -40,6 +42,8 @@ jobs:
     container:
       image: ghcr.io/iyox-studios/flutter_rust
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Build Linux
         run: |
           make get-dep

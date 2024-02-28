@@ -21,7 +21,7 @@ jobs:
           make lint
   build_android:
     name: Build Android
-    needs: build_linux
+    needs: lint
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/iyox-studios/flutter_rust
@@ -51,7 +51,7 @@ jobs:
       - name: Build Linux
         run: |
           make get-dep
-          make linux
+          RUST_COMPILE=/root/.cargo/bin/rustc make linux
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:

@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:dynamic_color/dynamic_color.dart';
@@ -41,7 +40,8 @@ Future<void> initApp() async {
   };
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    log.f('PlatformDispatcher - Catch all error: $error', error: error, stackTrace: stack);
+    log.f('PlatformDispatcher - Catch all error: $error',
+        error: error, stackTrace: stack);
     debugPrint("PlatformDispatcher - Catch all error: $error $stack");
     return true;
   };
@@ -58,7 +58,8 @@ class WormholeApp extends StatefulWidget {
   WormholeAppState createState() => WormholeAppState();
 }
 
-class WormholeAppState extends State<WormholeApp> {
+class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
+  ThemeMode themeMode = ThemeMode.dark;
 
   Future<void> initApp() async {
     // Draw the app from edge to edge
@@ -74,8 +75,36 @@ class WormholeAppState extends State<WormholeApp> {
   @override
   initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     initBackend();
     initApp().then((_) => debugPrint("App Init Completed"));
+
+    var brightness =  WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    setState(() {
+      themeMode =
+          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+
+    _setTheme();
+  }
+
+  void _setTheme() {
+    var brightness = View.of(context).platformDispatcher.platformBrightness;
+    setState(() {
+      themeMode =
+          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+    });
   }
 
   void initBackend() async {
@@ -87,8 +116,8 @@ class WormholeAppState extends State<WormholeApp> {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: darkColorScheme?.background,
-          systemNavigationBarColor: darkColorScheme?.surface));
+          statusBarColor: themeMode == ThemeMode.dark ? darkColorScheme?.background: lightColorScheme?.background,
+          systemNavigationBarColor: themeMode == ThemeMode.dark ? darkColorScheme?.surface: lightColorScheme?.surface));
       return MaterialApp(
         navigatorKey: NavigationService.navigatorKey,
         debugShowCheckedModeBanner: false,
@@ -99,7 +128,7 @@ class WormholeAppState extends State<WormholeApp> {
         darkTheme: ThemeData(
           colorScheme: darkColorScheme,
         ),
-        themeMode: ThemeMode.dark,
+        themeMode: themeMode,
         home: const BasePage(),
       );
     });

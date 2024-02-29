@@ -5,7 +5,6 @@ It is a fork of [this](https://gitlab.com/lukas-heiligenbrunner/wormhole) projec
 
 
 [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play Store" height="75">](https://play.google.com/store/apps/details?id=com.iyox.wormhole)[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="75">](https://apt.izzysoft.de/packages/com.iyox.wormhole)
-[<img src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/com.iyox.wormhole">]
 
 ## Development
 

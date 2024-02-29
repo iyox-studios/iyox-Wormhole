@@ -37,7 +37,8 @@ jobs:
         with:
           name: android
           path: |
-            build/linux/x64/release/bundle/
+            build/app/outputs/apk/*.apk
+            build/app/outputs/bundle/*.aab
 
   build_linux:
     name: Build Linux
@@ -58,5 +59,4 @@ jobs:
         with:
           name: linux
           path: |
-            build/app/outputs/apk/*.apk
-            build/app/outputs/bundle/*.aab
+            build/linux/x64/release/bundle/

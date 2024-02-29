@@ -25,13 +25,9 @@ jobs:
         run: git push origin HEAD:main
 
 
-  build_linux:
+  build:
       needs: bump_version
-      uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@build_linux
-
-  build_android:
-    needs: bump_version
-    uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@build_android
+      uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml
 
   build_and_release:
     runs-on: ubuntu-latest

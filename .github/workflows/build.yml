@@ -1,9 +1,9 @@
 name: Build
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
   workflow_call:
 
@@ -22,14 +22,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: native/target
-          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
+          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-build-cache-rust-
       - name: Cache flutter build
         id: cache-flutter
         uses: actions/cache@v3
         with:
           path: build
-          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('build/**') }}
+          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('pubspec.lock') }}
           restore-keys: ${{ runner.os }}-build-cache-flutter-
       - name: Lint
         run: |
@@ -48,14 +48,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: native/target
-          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
+          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-build-cache-rust-
       - name: Cache flutter build
         id: cache-flutter
         uses: actions/cache@v3
         with:
           path: build
-          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('build/**') }}
+          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('pubspec.lock') }}
           restore-keys: ${{ runner.os }}-build-cache-flutter-
       - name: Build Android
         run: |
@@ -83,14 +83,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: native/target
-          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
+          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-build-cache-rust-
       - name: Cache flutter build
         id: cache-flutter
         uses: actions/cache@v3
         with:
           path: build
-          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('build/**') }}
+          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('pubspec.lock') }}
           restore-keys: ${{ runner.os }}-build-cache-flutter-
       - name: Build Linux
         run: |

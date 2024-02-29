@@ -61,7 +61,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: android-app-bundle.aab
-          asset_path: ${{ steps.build.build_android.outputs[0] }}
+          asset_path: ${{ github.workspace }}/build/app/outputs/bundle/release/app-release.aab
 
       - name: Attach artifacts to release
         uses: actions/upload-release-asset@v1
@@ -71,4 +71,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: linux.zip
-          asset_path: ${{ steps.build.build_linux.outputs[0] }}
+          asset_path: ${{ github.workspace }}/build/linux/x64/release/bundle/

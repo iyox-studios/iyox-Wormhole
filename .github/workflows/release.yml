@@ -15,6 +15,7 @@ jobs:
 
       - name: Update version in pubspec.yaml
         run: |
+          git log
           sed -i "s/version: .*/version: ${{ github.event.inputs.version }}/" pubspec.yaml
           git config user.name "GitHub Actions"
           git config user.email "oswald.xaver@outlook.de"

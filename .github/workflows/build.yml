@@ -17,6 +17,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Cache rust build
+        id: cache-rust
+        uses: actions/cache@v3
+        with:
+          path: native/target
+          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
+          restore-keys: ${{ runner.os }}-build-cache-rust-
+      - name: Cache flutter build
+        id: cache-rust
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('build/**') }}
+          restore-keys: ${{ runner.os }}-build-cache-flutter-
       - name: Lint
         run: |
           make lint
@@ -29,6 +43,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Cache rust build
+        id: cache-rust
+        uses: actions/cache@v3
+        with:
+          path: native/target
+          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
+          restore-keys: ${{ runner.os }}-build-cache-rust-
+      - name: Cache flutter build
+        id: cache-rust
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('build/**') }}
+          restore-keys: ${{ runner.os }}-build-cache-flutter-
       - name: Build Android
         run: |
           make get-dep
@@ -50,6 +78,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Cache rust build
+        id: cache-rust
+        uses: actions/cache@v3
+        with:
+          path: native/target
+          key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
+          restore-keys: ${{ runner.os }}-build-cache-rust-
+      - name: Cache flutter build
+        id: cache-rust
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('build/**') }}
+          restore-keys: ${{ runner.os }}-build-cache-flutter-
       - name: Build Linux
         run: |
           export HOME=/root/

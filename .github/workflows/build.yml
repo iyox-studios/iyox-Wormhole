@@ -27,7 +27,7 @@ jobs:
       image: ghcr.io/iyox-studios/flutter_rust
     steps:
       - name: Checkout
-        uses: actions/checkout@
+        uses: actions/checkout@v4
       - name: Build Android
         run: |
           make get-dep

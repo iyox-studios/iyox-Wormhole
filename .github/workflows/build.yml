@@ -15,7 +15,7 @@ jobs:
         - ${{ GITHUB.WORKSPACE }}:/root/wormhole
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Lint
         run: |
           make lint
@@ -27,7 +27,7 @@ jobs:
       image: ghcr.io/iyox-studios/flutter_rust
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@
       - name: Build Android
         run: |
           make get-dep
@@ -48,7 +48,7 @@ jobs:
       image: ghcr.io/iyox-studios/flutter_rust
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Build Linux
         run: |
           export HOME=/root/

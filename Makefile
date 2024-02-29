@@ -5,6 +5,9 @@ apk:
 linux:
 	flutter build linux
 
+windows:
+	flutter build windows
+
 container-apk:
 	docker run --name=example \
 		--mount type=bind,source=${PWD},target=/root/wormhole/ \
@@ -36,8 +39,9 @@ clean:
 	flutter clean
 	cd native && cargo clean
 
-.PHONY: all apk linux get-dep codegen lint clean
-
-# Proto generation (calls terminal proto commands)
 get-dep:
 	flutter packages get
+
+.PHONY: all apk linux windows get-dep codegen lint clean
+
+

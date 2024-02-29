@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iyox_wormhole/utils/settings.dart';
-import 'package:iyox_wormhole/widgets/SettingField.dart';
-import 'package:iyox_wormhole/widgets/SettingsHeader.dart';
+import 'package:iyox_wormhole/widgets/settings_field.dart';
+import 'package:iyox_wormhole/widgets/settings_header.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);

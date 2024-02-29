@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
-import 'package:iyox_wormhole/pages/QrCodeScannerPage.dart';
+import 'package:iyox_wormhole/pages/qr_code_scanner_page.dart';
 import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:iyox_wormhole/utils/paths.dart';
 

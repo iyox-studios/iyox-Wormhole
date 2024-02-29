@@ -1,15 +1,20 @@
 FROM ghcr.io/cirruslabs/flutter:latest
 
-ENV ANDROID_NDK_VERSION 24.0.8215888
+ENV ANDROID_NDK_VERSION 23.1.7779620
 ENV PATH="/root/.cargo/bin:$PATH"
 
 
 RUN yes | sdkmanager "ndk;$ANDROID_NDK_VERSION"
+RUN yes | sdkmanager "cmake;3.18.1"
+RUN yes | sdkmanager "build-tools;30.0.3"
+RUN yes | sdkmanager "platforms;android-33"
+RUN yes | sdkmanager "platforms;android-32"
+RUN yes | sdkmanager "platforms;android-31"
 
-RUN echo "INPUT(-lunwind)" > /opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.1/lib/linux/aarch64/libgcc.a
-RUN echo "INPUT(-lunwind)" > /opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.1/lib/linux/arm/libgcc.a
-RUN echo "INPUT(-lunwind)" > /opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.1/lib/linux/i386/libgcc.a
-RUN echo "INPUT(-lunwind)" > /opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.1/lib/linux/x86_64/libgcc.a
+RUN echo "INPUT(-lunwind)" > /opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/aarch64/libgcc.a
+RUN echo "INPUT(-lunwind)" > /opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/arm/libgcc.a
+RUN echo "INPUT(-lunwind)" > /opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/i386/libgcc.a
+RUN echo "INPUT(-lunwind)" > /opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/x86_64/libgcc.a
 
 RUN apt update && apt install -y \
     build-essential \

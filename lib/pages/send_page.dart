@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
-import 'package:iyox_wormhole/widgets/RecentFiles.dart';
+import 'package:iyox_wormhole/widgets/recent_files.dart';
 import 'package:share_handler/share_handler.dart';
 
-import 'SendingPage.dart';
+import 'sending_page.dart';
 
 class SendPage extends StatefulWidget {
   const SendPage({Key? key}) : super(key: key);
@@ -118,7 +118,7 @@ class _SendPageState extends State<SendPage> {
     FilePickerResult? result =
         await FilePicker.platform.pickFiles(allowMultiple: true);
 
-    if (context.mounted) {
+    if (mounted) {
       if (result != null) {
         final files = result.files
             .where((element) => element.path != null)
@@ -136,12 +136,13 @@ class _SendPageState extends State<SendPage> {
     }
   }
 
+  /*
   void _onSendFolderButtonClick() async {
     final path = (await FilePicker.platform.getDirectoryPath());
 
-    if (context.mounted) {
+    if (mounted) {
       if (path != null) {
-        Navigator.push(context, _createSendingRoute([path], folder:true));
+        Navigator.push(context, _createSendingRoute([path], folder: true));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -152,11 +153,13 @@ class _SendPageState extends State<SendPage> {
       }
     }
   }
+  */
 
-  Route _createSendingRoute(List<String> files, {bool folder = false, bool causedByIntent = false}) {
+  Route _createSendingRoute(List<String> files,
+      {bool folder = false, bool causedByIntent = false}) {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          SendingPage(files: files, folder: folder, causedByIntent: causedByIntent),
+      pageBuilder: (context, animation, secondaryAnimation) => SendingPage(
+          files: files, folder: folder, causedByIntent: causedByIntent),
       transitionDuration: const Duration(milliseconds: 0),
       reverseTransitionDuration: const Duration(milliseconds: 380),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>

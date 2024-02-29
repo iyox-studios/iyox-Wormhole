@@ -27,11 +27,11 @@ jobs:
 
   build_linux:
       needs: bump_version
-      uses:  iyox-studios/iyox-wormhole/.github/workflows/build.yml@build_linux
+      uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@build_linux
 
   build_android:
     needs: bump_version
-    uses:  iyox-studios/iyox-wormhole/.github/workflows/build.yml@build_android
+    uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@build_android
 
   build_and_release:
     runs-on: ubuntu-latest

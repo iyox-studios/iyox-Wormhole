@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Update version in pubspec.yaml
         run: |
@@ -39,7 +39,7 @@ jobs:
     needs: [build]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Create a release
         uses: actions/create-release@v1
@@ -60,14 +60,14 @@ jobs:
           upload_url: ${{ github.event.release.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: android-app-bundle.aab
-          asset_path: ${{ steps.build_android.outputs[0] }}
+          asset_path: ${{ steps.build.build_android.outputs[0] }}
 
       - name: Attach artifacts to release
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: linux.zip
-          asset_path: ${{ steps.build_linux.outputs[0] }}
+          files: ${{ steps.build.build_linux.outputs[0] }}

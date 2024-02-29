@@ -25,7 +25,7 @@ jobs:
           key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
           restore-keys: ${{ runner.os }}-build-cache-rust-
       - name: Cache flutter build
-        id: cache-rust
+        id: cache-flutter
         uses: actions/cache@v3
         with:
           path: build
@@ -51,7 +51,7 @@ jobs:
           key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
           restore-keys: ${{ runner.os }}-build-cache-rust-
       - name: Cache flutter build
-        id: cache-rust
+        id: cache-flutter
         uses: actions/cache@v3
         with:
           path: build
@@ -86,7 +86,7 @@ jobs:
           key: ${{ runner.os }}-build-cache-rust-${{ hashFiles('native/**') }}
           restore-keys: ${{ runner.os }}-build-cache-rust-
       - name: Cache flutter build
-        id: cache-rust
+        id: cache-flutter
         uses: actions/cache@v3
         with:
           path: build

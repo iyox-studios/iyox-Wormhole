@@ -43,6 +43,7 @@ jobs:
 
       - name: Create a release
         uses: actions/create-release@v1
+        id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -57,17 +58,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: android-app-bundle.aab
           asset_path: ${{ steps.build.build_android.outputs[0] }}
 
       - name: Attach artifacts to release
-        uses: softprops/action-gh-release@v1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: linux.zip
-          files: ${{ steps.build.build_linux.outputs[0] }}
+          asset_path: ${{ steps.build.build_linux.outputs[0] }}

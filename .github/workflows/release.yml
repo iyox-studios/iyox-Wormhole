@@ -16,6 +16,8 @@ jobs:
       - name: Update version in pubspec.yaml
         run: |
           sed -i "s/version: .*/version: ${{ github.event.inputs.version }}/" pubspec.yaml
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add pubspec.yaml
           git commit -m "Update version to ${{ github.event.inputs.version }}"
 
@@ -23,8 +25,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: actions-improvements
-
+          branch: main
 
 
   build:

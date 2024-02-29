@@ -37,7 +37,7 @@ jobs:
         with:
           name: android
           path: |
-            build/app/outputs/apk/*.apk
+            build/app/outputs/flutter-apk/*.apk
             build/app/outputs/bundle/*.aab
 
   build_linux:

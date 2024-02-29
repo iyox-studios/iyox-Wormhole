@@ -1,0 +1,72 @@
+name: Flutter App Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        description: 'Version number to be released (e.g., 1.0.0)'
+
+jobs:
+  bump_verions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Update version in pubspec.yaml
+        run: |
+          sed -i "s/version: .*/version: ${{ github.event.inputs.version }}/" pubspec.yaml
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pubspec.yaml
+          git commit -m "Update version to ${{ github.event.inputs.version }}"
+
+      - name: Push changes
+        run: git push origin HEAD:main
+
+
+  build_linux:
+      needs: bump_version
+      uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@build_linux
+
+  build_android:
+    needs: bump_version
+    uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@build_android
+
+  build_and_release:
+    runs-on: ubuntu-latest
+    needs: [build_linux, build_android]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create a release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: "v${{ github.event.inputs.version }}"
+          body: "Release notes for v${{ github.event.inputs.version }}"
+          draft: true
+          prerelease: false
+
+      - name: Attach artifacts to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          content_type: application/octet-stream
+          asset_name: android-app-bundle.aab
+          file: ${{ steps.build_android.outputs[0] }}
+
+      - name: Attach artifacts to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          content_type: application/octet-stream
+          asset_name: linux.zip
+          file: ${{ steps.build_linux.outputs[0] }}

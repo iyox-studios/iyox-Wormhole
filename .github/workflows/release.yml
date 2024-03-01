@@ -63,7 +63,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: android-app-bundle.aab
-          asset_path: ${{ github.workspace }}/app-armeabi-v7a-release.apk
+          asset_path: ${{ github.workspace }}/app-armeabi-v7a-release.apk/*
 
       - name: Attach artifacts to release
         uses: actions/upload-release-asset@v1
@@ -73,4 +73,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: linux.zip
-          asset_path: ${{ github.workspace }}/linux.zip
+          asset_path: ${{ github.workspace }}/linux.zip/*

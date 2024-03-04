@@ -47,18 +47,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create a release
-        uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.version }}
-          release_name: "v${{ github.event.inputs.version }}"
-          body: "Release notes for v${{ github.event.inputs.version }}"
-          draft: true
-          prerelease: false
-
       - uses: actions/download-artifact@v4
         with:
           path: artifacts/
@@ -74,53 +62,17 @@ jobs:
         run: |
           zip -r ${{ github.workspace }}/artifacts/linux-x86_64.zip ${{ github.workspace }}/artifacts/linux-x86_64
 
-      - name: Attach artifacts to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a release
+        uses: softprops/action-gh-release@v1
         with:
+          draft: true
+          generate_release_notes: false
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_content_type: application/octet-stream
-          asset_name: app-armeabi-v7a-release.apk
-          asset_path: ${{ github.workspace }}/artifacts/app-arm64-v8a-release.apk
-
-      - name: Attach artifacts to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_content_type: application/octet-stream
-          asset_name: app-armeabi-v7a-release.apk
-          asset_path: ${{ github.workspace }}/artifacts/app-armeabi-v7a-release.apk
-
-      - name: Attach artifacts to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_content_type: application/octet-stream
-          asset_name: app-armeabi-v7a-release.apk
-          asset_path: ${{ github.workspace }}/artifacts/app-x86_64-release.apk
-
-      - name: Attach artifacts to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_content_type: application/octet-stream
-          asset_name: app-armeabi-v7a-release.apk
-          asset_path: ${{ github.workspace }}/artifacts/app-release.aab
-
-
-      - name: Attach artifacts to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_content_type: application/octet-stream
-          asset_name: linux-x86_64.zip
-          asset_path: ${{ github.workspace }}/artifacts/linux-x86_64.zip
+          name: "v${{ github.event.inputs.version }}"
+          tag_name: ${{ github.event.inputs.version }}
+          files: |
+            ${{ github.workspace }}/artifacts/app-arm64-v8a-release.apk
+            ${{ github.workspace }}/artifacts/app-armeabi-v7a-release.apk
+            ${{ github.workspace }}/artifacts/app-x86_64-release.apk
+            ${{ github.workspace }}/artifacts/app-release.aab
+            ${{ github.workspace }}/artifacts/linux-x86_64.zip

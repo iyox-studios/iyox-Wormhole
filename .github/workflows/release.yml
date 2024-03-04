@@ -62,7 +62,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: artifacts
-          merge-multiple: true
 
       - name: Attach artifacts to release
         uses: actions/upload-release-asset@v1
@@ -75,7 +74,9 @@ jobs:
           asset_path: ${{ github.workspace }}/artifacts/app-armeabi-v7a-release.apk
 
       - name: List artifacts
-        run: ls ${{ github.workspace }}/artifacts/
+        run: |
+          ls ${{ github.workspace }}/artifacts/
+          cd ${{ github.workspace }}/artifacts/ && ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 
       - name: Attach artifacts to release
         uses: actions/upload-release-asset@v1

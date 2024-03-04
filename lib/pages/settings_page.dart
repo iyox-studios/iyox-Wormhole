@@ -16,7 +16,7 @@ class _SettingsPageState extends State<SettingsPage> {
   int _wordCount = 0;
 
   static const int minWordCount = 1;
-  static const int maxWordCount = 5;
+  static const int maxWordCount = 8;
 
   @override
   Widget build(BuildContext context) {
@@ -61,37 +61,39 @@ class _SettingsPageState extends State<SettingsPage> {
                                           .colorScheme
                                           .onBackground),
                                 ),
-                                Row(
-                                  children: [
-
-                                Text(
-                                  _wordCount.toString(),
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                                ),
-                                Expanded(
-                                  child: Slider(
-                                    value: _wordCountSlider.clamp(1, 5),
-                                    min: minWordCount.toDouble(),
-                                    max: maxWordCount.toDouble(),
-                                    divisions: maxWordCount - minWordCount,
-                                    label: _wordCount.toString(),
-                                    onChanged: (double value) {
-                                      setState(() {
-                                        _wordCountSlider = value;
-                                        if (_wordCountSlider.round() !=
-                                            _wordCount) {
-                                          _wordCount = _wordCountSlider.round();
-                                          Settings.setWordLength(
-                                              _wordCount.round());
-                                        }
-                                      });
-                                    },
+                                Row(children: [
+                                  Text(
+                                    _wordCount.toString(),
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground),
                                   ),
-                                )])
+                                  Expanded(
+                                    child: Slider(
+                                      value: _wordCountSlider.clamp(
+                                          minWordCount.toDouble(),
+                                          maxWordCount.toDouble()),
+                                      min: minWordCount.toDouble(),
+                                      max: maxWordCount.toDouble(),
+                                      divisions: maxWordCount - minWordCount,
+                                      label: _wordCount.toString(),
+                                      onChanged: (double value) {
+                                        setState(() {
+                                          _wordCountSlider = value;
+                                          if (_wordCountSlider.round() !=
+                                              _wordCount) {
+                                            _wordCount =
+                                                _wordCountSlider.round();
+                                            Settings.setWordLength(
+                                                _wordCount.round());
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  )
+                                ])
                               ]))),
                 );
               }

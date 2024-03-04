@@ -113,7 +113,7 @@ class _SendingPageState extends State<SendingPage> {
             if (constraints.maxWidth > 600) {
               return _buildWideContainer();
             } else {
-              return _buildNormaContainer();
+              return _buildNormalContainer();
             }
           })),
     );
@@ -177,7 +177,7 @@ class _SendingPageState extends State<SendingPage> {
     );
   }
 
-  Widget _buildNormaContainer() {
+  Widget _buildNormalContainer() {
     return Center(
       child: codeText == ''
           ? Padding(
@@ -201,31 +201,42 @@ class _SendingPageState extends State<SendingPage> {
                               backgroundColor: Colors.white),
                         ))),
                 const Gap(10),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(codeText,
-                            style: Theme.of(context).textTheme.titleMedium),
-                        IconButton(
-                          onPressed: () {
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(20),
+                          onTap: () {
                             Clipboard.setData(ClipboardData(text: codeText));
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content: Text("Copied code to clipboard"),
                             ));
                           },
-                          icon: const Icon(Icons.copy),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                            child: Text(
+                              codeText,
+                              style: TextStyle(
+                                  height: 1.6,
+                                  fontSize: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .fontSize! +
+                                      1.5,
+                                  fontWeight: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.fontWeight),
+                            )
+                                                ),
                         ),
-                      ],
                     ),
-                  ),
+                  ]),
                 ),
               ],
             ),

@@ -33,12 +33,12 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: actions-improvements
+          branch: main
 
 
   build:
     needs: bump_version
-    uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@actions-improvements
+    uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@main
 
   build_and_release:
     runs-on: ubuntu-latest

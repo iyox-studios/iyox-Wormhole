@@ -72,9 +72,9 @@ jobs:
 
       - name: List artifacts
         run: |
+          zip -r linux-x86_64.zip ${{ github.workspace }}/artifacts/linux-x86_64
           ls ${{ github.workspace }}/artifacts/
           cd ${{ github.workspace }}/artifacts/ && ls   -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-
 
       - name: Attach artifacts to release
         uses: actions/upload-release-asset@v1
@@ -94,4 +94,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
           asset_name: linux-x86_64.zip
-          asset_path: ${{ github.workspace }}/artifacts/linux-x86_64/
+          asset_path: ${{ github.workspace }}/artifacts/linux-x86_64.zip

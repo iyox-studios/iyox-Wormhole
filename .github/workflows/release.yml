@@ -68,6 +68,9 @@ jobs:
           asset_name: android-app-bundle.aab
           asset_path: ${{ github.workspace }}/artifacts/app-armeabi-v7a-release.apk
 
+      - name: List artifacts
+        run: ls ${{ github.workspace }}/artifacts/
+
       - name: Attach artifacts to release
         uses: actions/upload-release-asset@v1
         env:

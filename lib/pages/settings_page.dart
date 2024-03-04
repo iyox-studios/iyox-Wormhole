@@ -12,6 +12,12 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  double _wordCountSlider = 0;
+  int _wordCount = 0;
+
+  static const int MIN_WORD_COUNT = 1;
+  static const int MAX_WORD_COUNT = 5;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,12 +32,67 @@ class _SettingsPageState extends State<SettingsPage> {
             future: Settings.getWordLength(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return SettingField(
-                  title: "Word count",
-                  initialValue: snapshot.data.toString(),
-                  onSubmit: (value) => setState(() {
-                    Settings.setWordLength(int.tryParse(value));
-                  }),
+                _wordCountSlider = snapshot.data!.toDouble();
+                _wordCount = snapshot.data!;
+                return FilledButton.tonal(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    shape: MaterialStateProperty.all(LinearBorder.none),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.background),
+                    textStyle: MaterialStateProperty.all(
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                    ),
+                  ),
+                  onPressed: () => {},
+                  child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 17, 20, 5),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Word Count",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                                ),
+                                Row(
+                                  children: [
+
+                                Text(
+                                  _wordCount.toString(),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                                ),
+                                Expanded(
+                                  child: Slider(
+                                    value: _wordCountSlider.clamp(1, 5),
+                                    min: MIN_WORD_COUNT.toDouble(),
+                                    max: MAX_WORD_COUNT.toDouble(),
+                                    divisions: MAX_WORD_COUNT - MIN_WORD_COUNT,
+                                    label: _wordCount.toString(),
+                                    onChanged: (double value) {
+                                      setState(() {
+                                        _wordCountSlider = value;
+                                        if (_wordCountSlider.round() !=
+                                            _wordCount) {
+                                          _wordCount = _wordCountSlider.round();
+                                          Settings.setWordLength(
+                                              _wordCount.round());
+                                        }
+                                      });
+                                    },
+                                  ),
+                                )])
+                              ]))),
                 );
               }
               return const SizedBox(

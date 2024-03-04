@@ -42,6 +42,9 @@ clean:
 get-dep:
 	flutter packages get
 
-.PHONY: all apk linux windows get-dep codegen lint clean
+icon-gen:
+	dart run icons_launcher:create
+
+.PHONY: all apk linux windows get-dep codegen lint clean icon-gen
 
 

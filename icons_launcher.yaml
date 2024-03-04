@@ -1,14 +1,10 @@
-# flutter pub run icons_launcher
-
 icons_launcher:
-  image_path: "icon/logo.png"
+  image_path: "icon/Icon.png"
   platforms:
     android:
       enable: true
-      adaptive_background_color: '#ffffff'
-      adaptive_foreground_image: "icon/foreground.png"
-      adaptive_monochrome_image: "icon/monochrome.png"
+      adaptive_background_color: "#f5f5f5"
+      adaptive_foreground_image: "icon/Foreground.png"
+      adaptive_monochrome_image: "icon/Foreground-Monochrome.png"
     windows:
       enable: true
-    linux:
-      enable: false

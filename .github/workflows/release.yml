@@ -73,8 +73,16 @@ jobs:
       - name: List artifacts
         run: |
           zip -r ${{ github.workspace }}/artifacts/linux-x86_64.zip ${{ github.workspace }}/artifacts/linux-x86_64
-          ls ${{ github.workspace }}/artifacts/
-          cd ${{ github.workspace }}/artifacts/ && ls   -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+
+      - name: Attach artifacts to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_content_type: application/octet-stream
+          asset_name: app-armeabi-v7a-release.apk
+          asset_path: ${{ github.workspace }}/artifacts/app-arm64-v8a-release.apk
 
       - name: Attach artifacts to release
         uses: actions/upload-release-asset@v1
@@ -85,6 +93,27 @@ jobs:
           asset_content_type: application/octet-stream
           asset_name: app-armeabi-v7a-release.apk
           asset_path: ${{ github.workspace }}/artifacts/app-armeabi-v7a-release.apk
+
+      - name: Attach artifacts to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_content_type: application/octet-stream
+          asset_name: app-armeabi-v7a-release.apk
+          asset_path: ${{ github.workspace }}/artifacts/app-x86_64-release.apk
+
+      - name: Attach artifacts to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_content_type: application/octet-stream
+          asset_name: app-armeabi-v7a-release.apk
+          asset_path: ${{ github.workspace }}/artifacts/app-release.aab
+
 
       - name: Attach artifacts to release
         uses: actions/upload-release-asset@v1

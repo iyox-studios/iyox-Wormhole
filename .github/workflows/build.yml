@@ -65,21 +65,25 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-armeabi-v7a-release.apk
+          retention-days: 5
           path: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: app-arm64-v8a-release.apk
+          retention-days: 5
           path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: app-x86_64-release.apk
+          retention-days: 5
           path: build/app/outputs/flutter-apk/app-x86_64-release.apk
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: app-release.aab
+          retention-days: 5
           path: build/app/outputs/bundle/release/app-release.aab
 
 
@@ -111,9 +115,11 @@ jobs:
           export HOME=/root/
           make get-dep
           make linux
+          cp -r build/linux/x64/release/bundle/ linux-x86_64
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: linux.zip
+          name: linux_x64.zip
+          retention-days: 5
           path: |
-            build/linux/x64/release/bundle/
+            linux-x86_64

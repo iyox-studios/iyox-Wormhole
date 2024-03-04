@@ -17,7 +17,13 @@ jobs:
 
       - name: Update version in pubspec.yaml
         run: |
-          sed -i "s/version: .*/version: ${{ github.event.inputs.version }}/" pubspec.yaml
+          export CURRENT_VERSION=$(grep "version:" pubspec.yaml | awk '{print $2}')
+          export VERSION_CODE=$(awk -F '+' '{print $2}' <<< $CURRENT_VERSION)
+          ((VERSION_CODE++))
+          
+          export NEW_VERSION="${{ github.event.inputs.version }}+VERSION_CODE"        
+          sed -i "s/version: [0-9.]*+[0-9]*/version: $NEW_VERSION/" pubspec.yml
+
           git config --local user.name "GitHub Actions"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add pubspec.yaml
@@ -65,7 +71,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
-          asset_name: android-app-bundle.aab
+          asset_name: app-armeabi-v7a-release.apk
           asset_path: ${{ github.workspace }}/artifacts/app-armeabi-v7a-release.apk
 
       - name: List artifacts
@@ -78,5 +84,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_content_type: application/octet-stream
-          asset_name: linux.zip
-          asset_path: ${{ github.workspace }}/artifacts/linux.zip
+          asset_name: linux-x86_64.zip
+          asset_path: ${{ github.workspace }}/artifacts/linux-x86_64/

@@ -15,8 +15,8 @@ class _SettingsPageState extends State<SettingsPage> {
   double _wordCountSlider = 0;
   int _wordCount = 0;
 
-  static const int MIN_WORD_COUNT = 1;
-  static const int MAX_WORD_COUNT = 5;
+  static const int minWordCount = 1;
+  static const int maxWordCount = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +75,9 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Expanded(
                                   child: Slider(
                                     value: _wordCountSlider.clamp(1, 5),
-                                    min: MIN_WORD_COUNT.toDouble(),
-                                    max: MAX_WORD_COUNT.toDouble(),
-                                    divisions: MAX_WORD_COUNT - MIN_WORD_COUNT,
+                                    min: minWordCount.toDouble(),
+                                    max: maxWordCount.toDouble(),
+                                    divisions: maxWordCount - minWordCount,
                                     label: _wordCount.toString(),
                                     onChanged: (double value) {
                                       setState(() {

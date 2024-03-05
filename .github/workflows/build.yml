@@ -65,7 +65,8 @@ jobs:
           echo keyPassword=\${{ secrets.KEY_STORE_PASSWORD }} > ${{env.KEY_PROPERTIES_PATH}}
           echo storePassword=\${{ secrets.KEY_PASSWORD }} >> ${{env.KEY_PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.KEY_PROPERTIES_PATH}}
-          echo "${{ secrets.KEYSTORE2 }}" | base64 --decode > android/keystore.jks
+          echo storeFile=\"./keystore.jks" >> ${{env.KEY_PROPERTIES_PATH}}
+          echo "${{ secrets.KEY_STORE }}" | base64 --decode > android/keystore.jks
       - name: Build Android
         run: |
           make get-dep

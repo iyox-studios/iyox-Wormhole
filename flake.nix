@@ -77,6 +77,7 @@
               flutter
               androidSdk
               gnome.zenity
+              fastlane
             ];
           };
 

@@ -7,6 +7,9 @@ on:
   workflow_dispatch:
   workflow_call:
 
+env:
+  KEY_PROPERTIES_PATH: "android/key.properties"
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -57,6 +60,14 @@ jobs:
           path: build
           key: ${{ runner.os }}-build-cache-flutter-${{ hashFiles('pubspec.lock') }}
           restore-keys: ${{ runner.os }}-build-cache-flutter-
+      - name: Create Keystore
+        run: |
+          echo keyPassword="${{ secrets.KEY_STORE_PASSWORD }}" > ${{  env.KEY_PROPERTIES_PATH}}
+          echo storePassword="${{ secrets.KEY_PASSWORD }}" >> ${{env.KEY_PROPERTIES_PATH}}
+          echo keyAlias="${{ secrets.KEY_ALIAS }}" >> ${{env.KEY_PROPERTIES_PATH}}
+          echo storeFile="./keystore.jks" >> ${{env.KEY_PROPERTIES_PATH}}
+          echo "${{ secrets.KEY_STORE }}" | base64 --decode > android/keystore.jks
+          echo "${{ secrets.KEY_STORE }}" | base64 --decode > android/app/keystore.jks
       - name: Build Android
         run: |
           make get-dep

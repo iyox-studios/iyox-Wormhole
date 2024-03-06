@@ -1,12 +1,14 @@
+flutter?=.flutter/bin/flutter
+
 apk:
-	flutter build apk --split-per-abi --release
-	flutter build appbundle --release
+	$(flutter) build apk --split-per-abi --release
+	$(flutter) build appbundle --release
 
 linux:
-	flutter build linux
+	$(flutter) build linux
 
 windows:
-	flutter build windows
+	$(flutter) build windows
 
 container-apk:
 	docker run --name=example \
@@ -33,14 +35,14 @@ format:
 
 lint:
 	cd native && cargo clippy
-	flutter analyze .
+	$(flutter) analyze .
 
 clean:
-	flutter clean
+	$(flutter) clean
 	cd native && cargo clean
 
 get-dep:
-	flutter packages get
+	$(flutter) packages get
 
 icon-gen:
 	dart run icons_launcher:create

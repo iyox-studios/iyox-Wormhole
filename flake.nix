@@ -41,29 +41,6 @@
           cmakeVersions = ["3.18.1" "3.22.1"];
         };
         androidSdk = androidComposition.androidsdk;
-
-        myAndroidStudio = pkgs.symlinkJoin {
-          name = "myAndroidStudio";
-          paths = with pkgs; [
-            android-studio
-            rustToolchain
-            flutter
-            gnumake
-            android-tools
-            jdk
-          ];
-
-          nativeBuildInputs = [pkgs.makeWrapper];
-          postBuild = ''
-            wrapProgram $out/bin/flutter \
-              --prefix ANDROID_JAVA_HOME=${pkgs.jdk.home}
-
-            wrapProgram $out/bin/android-studio \
-              --prefix FLUTTER_SDK=${pkgs.flutter} \
-              --prefix ANDROID_JAVA_HOME=${pkgs.jdk.home} \
-              --prefix ANDROID_SDK_ROOT=~/Android/Sdk
-          '';
-        };
       in {
         devShell = with pkgs;
           mkShell rec {
@@ -72,7 +49,6 @@
             ANDROID_NDK = "${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}";
             buildInputs = [
               act
-              myAndroidStudio
               rustToolchain
               flutter
               androidSdk
@@ -84,6 +60,9 @@
         formatter = pkgs.alejandra;
 
         packages = with pkgs; {
+           updateLocks = callPackage ./nix/update-locks.nix {
+                inherit (haskellPackages) xml-to-json-fast;
+            };
           default = flutter.buildFlutterApplication rec {
             pname = "iyox-wormhole";
             version = "0.0.7";
@@ -93,13 +72,16 @@
 
             cargoRoot = "native";
 
+            ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
+            JAVA_HOME = "${jdk.home}";
+
             cargoDeps = rustPlatform.fetchCargoTarball {
-               name = "${pname}-${version}-cargo-deps"; 
-               #src = ./native;
-               inherit src;
-               sourceRoot = "src/native";
-               hash = "sha256-z2vmWwolBOaEP4DKMU2zw80gp9KH4F+TxpeqAJpjXxM=";
-             };
+              name = "${pname}-${version}-cargo-deps";
+              src = ./native;
+              #inherit src;
+              #sourceRoot = "src/native";
+              hash = "sha256-z2vmWwolBOaEP4DKMU2zw80gp9KH4F+TxpeqAJpjXxM=";
+            };
 
             patches = [
               ./corrosion.patch
@@ -113,6 +95,7 @@
               corrosion
               #rustPlatform.cargoSetupHook
               #cargo
+              gradle
               rustToolchain
               copyDesktopItems
             ];
@@ -120,6 +103,41 @@
             buildInputs = [
               udev
             ];
+
+            configurePhase = ''
+              echo "sdk.dir=${androidSdk}/libexec/android-sdk" >> android/local.properties
+              echo "flutter.sdk=${flutter}" >> android/local.properties
+              cat android/local.properties
+            '';
+
+            buildPhase = ''
+              runHook preBuild
+              cd android
+              gradle app:assembleRelease \
+              --offline --no-daemon --no-build-cache --info --full-stacktrace \
+              --warning-mode=all --parallel --console=plain \
+              -Dorg.gradle.project.android.aapt2FromMavenOverride=$ANDROID_HOME/build-tools/30.0.3/aapt2
+              runHook postBuild
+            '';
+
+            installPhase = ''
+              runHook preInstall
+              mkdir -p $out
+              cp -r app/build/outputs/* $out
+              runHook postInstall
+            '';
+
+            buildMavenRepo = callPackage ./nix/maven-repo.nix { };
+            mavenRepo = buildMavenRepo {
+                name = "nix-maven-repo";
+                repos = [
+                  "https://dl.google.com/dl/android/maven2"
+                  "https://repo1.maven.org/maven2"
+                  "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
+                  "https://plugins.gradle.org/m2"
+                ];
+                deps = builtins.fromJSON (builtins.readFile ./deps.json);
+              };
 
             extraWrapProgramArgs = "--chdir $out/app";
           };

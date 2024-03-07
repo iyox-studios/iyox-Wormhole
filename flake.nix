@@ -93,15 +93,27 @@
 
             cargoRoot = "native";
 
+            cargoDeps = rustPlatform.fetchCargoTarball {
+               name = "${pname}-${version}-cargo-deps"; 
+               #src = ./native;
+               inherit src;
+               sourceRoot = "src/native";
+               hash = "sha256-z2vmWwolBOaEP4DKMU2zw80gp9KH4F+TxpeqAJpjXxM=";
+             };
+
+            patches = [
+              ./corrosion.patch
+            ];
+
             preConfigure = ''
               export CMAKE_PREFIX_PATH="${corrosion}:$CMAKE_PREFIX_PATH"
             '';
 
             nativeBuildInputs = [
               corrosion
-              rustPlatform.cargoSetupHook
-              cargo
-              rustc
+              #rustPlatform.cargoSetupHook
+              #cargo
+              rustToolchain
               copyDesktopItems
             ];
 

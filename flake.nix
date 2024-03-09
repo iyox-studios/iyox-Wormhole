@@ -41,7 +41,7 @@
           cmakeVersions = ["3.18.1" "3.22.1"];
         };
         androidSdk = androidComposition.androidsdk;
-      in {
+      in rec {
         devShell = with pkgs;
           mkShell rec {
             ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
@@ -59,10 +59,20 @@
 
         formatter = pkgs.alejandra;
 
+        buildMavenRepo = pkgs.callPackage ./nix/maven-repo.nix { };
+                    mavenRepo = buildMavenRepo {
+                        name = "nix-maven-repo";
+                        repos = [
+                          "https://dl.google.com/dl/android/maven2"
+                          "https://repo1.maven.org/maven2"
+                          "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
+                          "https://plugins.gradle.org/m2"
+                        ];
+                        deps = builtins.fromJSON (builtins.readFile ./nix/deps.json);
+                      };
+
         packages = with pkgs; {
-           updateLocks = callPackage ./nix/update-locks.nix {
-                inherit (haskellPackages) xml-to-json-fast;
-            };
+           updateLocks = callPackage ./nix/update-locks.nix { };
           default = flutter.buildFlutterApplication rec {
             pname = "iyox-wormhole";
             version = "0.0.7";
@@ -95,7 +105,7 @@
               corrosion
               #rustPlatform.cargoSetupHook
               #cargo
-              gradle
+              gradle_7
               rustToolchain
               copyDesktopItems
             ];
@@ -116,6 +126,7 @@
               gradle app:assembleRelease \
               --offline --no-daemon --no-build-cache --info --full-stacktrace \
               --warning-mode=all --parallel --console=plain \
+              -PnixMavenRepo=${mavenRepo} \
               -Dorg.gradle.project.android.aapt2FromMavenOverride=$ANDROID_HOME/build-tools/30.0.3/aapt2
               runHook postBuild
             '';
@@ -126,18 +137,6 @@
               cp -r app/build/outputs/* $out
               runHook postInstall
             '';
-
-            buildMavenRepo = callPackage ./nix/maven-repo.nix { };
-            mavenRepo = buildMavenRepo {
-                name = "nix-maven-repo";
-                repos = [
-                  "https://dl.google.com/dl/android/maven2"
-                  "https://repo1.maven.org/maven2"
-                  "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
-                  "https://plugins.gradle.org/m2"
-                ];
-                deps = builtins.fromJSON (builtins.readFile ./deps.json);
-              };
 
             extraWrapProgramArgs = "--chdir $out/app";
           };

@@ -5372,16 +5372,16 @@
   {
     "group": "io.flutter",
     "name": "arm64_v8a_debug",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
-      "arm64_v8a_debug-1.0.0.jar": "d8e7a7b3e6ec55eb62fe84e8142295110432a59c84c0c1bc7052811848fb1e32",
+      "arm64_v8a_debug-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "d8e7a7b3e6ec55eb62fe84e8142295110432a59c84c0c1bc7052811848fb1e32",
       "arm64_v8a_debug-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "93ba238fdf216eea3bb2e4b908d4bc919038ffc0b2144934c34186614952e54b"
     }
   },
   {
     "group": "io.flutter",
     "name": "arm64_v8a_profile",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "arm64_v8a_profile-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "c7a905f463e49b972f2f760f1c90c40cef3968defa8a1b183d003e260c5bbb50",
       "arm64_v8a_profile-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "e8038053a07aeebc469ccbc6f250da0db75252ab157aaab45ef4cda6a0049e23"
@@ -5390,7 +5390,7 @@
   {
     "group": "io.flutter",
     "name": "arm64_v8a_release",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "arm64_v8a_release-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "ed414ccbcc16da17af77590e062972d46cc8b8cee6078225c64268bc45920811",
       "arm64_v8a_release-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "4974d721492356d7ee34d6700cb2354c8ee5c9d2b0c61575a5db10a764e6afd9"
@@ -5417,7 +5417,7 @@
   {
     "group": "io.flutter",
     "name": "armeabi_v7a_release",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "armeabi_v7a_release-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "d988048c8ab8e6e7e3db823721cebadd834cdb686aa66d7b15ab1f2a2e13688d",
       "armeabi_v7a_release-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "237512b1313629b1a08a07bae93fe2fd02dcd1b181c6026cfe07f76b08856b78"
@@ -5426,7 +5426,7 @@
   {
     "group": "io.flutter",
     "name": "flutter_embedding_debug",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "flutter_embedding_debug-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "5f836c6be42371a0aa37d75844c342c8c9bac83c23c99c28800d857a258431b8",
       "flutter_embedding_debug-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "3a5706c7d4e0bf7b3bcac57c9c79f04ff1e5af83669d4297e59cf6b3b04f83e1"
@@ -5444,7 +5444,7 @@
   {
     "group": "io.flutter",
     "name": "flutter_embedding_release",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "flutter_embedding_release-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "8a3dacd97e71010fc89aaa5a978ab77bf712edaa97332219af39bb71e9359276",
       "flutter_embedding_release-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "e696ac575cecc07886c8301e8a1e1f9e0d4acdc23cb98229a97483a3a8f2641d"
@@ -5453,7 +5453,7 @@
   {
     "group": "io.flutter",
     "name": "x86_64_debug",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "x86_64_debug-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "670ed9c0106c8e5975adec13d4342f427da6ea671d11c5f4db066421031f3140",
       "x86_64_debug-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "abc8b20d22473d2275a56be06f2e4340e3b1c8dc4acef447df8183e69af26096"
@@ -5462,7 +5462,7 @@
   {
     "group": "io.flutter",
     "name": "x86_64_profile",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "x86_64_profile-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "92ccaf13e89f1eaee35cac8f2786f8c308e41bfec941abbdb10ad382e70f72a7",
       "x86_64_profile-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "c6e6e60cf025eee686e48485789b07f794cb795a3864e729760d1689450859fb"
@@ -5471,7 +5471,7 @@
   {
     "group": "io.flutter",
     "name": "x86_64_release",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "x86_64_release-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "7665f7f15101404595353b262ed3f88aa2241b2f5656ba726627eb3dd7959435",
       "x86_64_release-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "28c2a9ec2cf78b9fe5c8d8906eb4cf3d15a0e5f3a0d5a1e6e15a0b86ef346e8d"
@@ -5480,7 +5480,7 @@
   {
     "group": "io.flutter",
     "name": "x86_debug",
-    "version": "1.0.0",
+    "version": "1.0.0-04817c99c9fd4956f27505204f7e344335810aed",
     "artifacts": {
       "x86_debug-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.jar": "43c587c220de73cd515453bc9cb854ffec1ebfcbeed07cdc62550474f5350274",
       "x86_debug-1.0.0-04817c99c9fd4956f27505204f7e344335810aed.pom": "b4a8e67eeef93198e6bcbeca47e4a2aef7070842f14a382d56115d4f7be4c0bc"
@@ -8209,7 +8209,7 @@
     "version": "20160824",
     "artifacts": {
       "trove4j-20160824.jar": "1917871c8deb468307a584680c87a44572f5a8b0b98c6d397fc0f5f86596dbe7",
-      "trove4j-20160824.pom": "5c415a9d8585200de4be1947e15291cc79f599b06249375f5c9ea22d4b2d090f"
+      "trove4j-20160824.pom": "c94b0b73790c70c709bcd445a01247908888211e38cc59e946ff6fe900785ae9"
     }
   },
   {
@@ -8652,7 +8652,7 @@
     "version": "0.1.0-rc1",
     "artifacts": {
       "tensorflow-lite-metadata-0.1.0-rc1.jar": "481dbf5bb38f02eef52d7ff966f55f99a980a7d58771d4852785f51bb82ce5a0",
-      "tensorflow-lite-metadata-0.1.0-rc1.pom": "a71ce1e67b7008dd1324442691497e569a2466904dc9708d227a07fb33731c6f"
+      "tensorflow-lite-metadata-0.1.0-rc1.pom": "db755ae19be0f7d44ab09f6ec58103faaee42733a8c75d2fb4e3c32bab5f49c2"
     }
   },
   {

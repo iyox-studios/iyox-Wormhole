@@ -1,10 +1,10 @@
-{ lib
-, writeShellScriptBin
-, gradle_7
-, jq
-, yq
+{
+  lib,
+  writeShellScriptBin,
+  gradle_7,
+  jq,
+  yq,
 }:
-
 writeShellScriptBin "update-locks" ''
   set -eu -o pipefail
   cd android
@@ -15,5 +15,6 @@ writeShellScriptBin "update-locks" ''
         .[] |  { group, name, version,
                   artifacts: [([.artifact] | flatten | .[] | {(.name): .sha256.value})] | add
                 }
-      ]' > deps.json
+      ]' > ../nix/deps.json
+  rm gradle/verification-metadata.xml
 ''

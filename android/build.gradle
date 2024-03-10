@@ -1,8 +1,14 @@
 buildscript {
     ext.kotlin_version = '1.8.21'
-    repositories {
-        google()
-        mavenCentral()
+    if(project.hasProperty("nixMavenRepo")) {
+        repositories {
+            maven { url = nixMavenRepo }
+        }
+    } else {
+        repositories {
+            google()
+            mavenCentral()
+        }
     }
 
     dependencies {
@@ -12,9 +18,20 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
+    if(project.hasProperty("nixMavenRepo")) {
+        repositories {
+            maven { url = nixMavenRepo }
+        }
+        buildscript {
+            repositories {
+                maven { url = nixMavenRepo }
+            }
+        }
+    } else {
+        repositories {
+            google()
+            mavenCentral()
+        }
     }
 }
 

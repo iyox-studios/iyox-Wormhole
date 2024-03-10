@@ -19,9 +19,27 @@
   }:
     flake-utils.lib.eachDefaultSystem (
       system: let
-        overlays = [(import rust-overlay)];
         pkgs = import nixpkgs {
-          inherit system overlays;
+          inherit system;
+          overlays = [
+            (import rust-overlay)
+            /*(final: prev: {
+                flutter = prev.flutter.overrideAttrs (o: {
+                  patches = (o.patches or [ ]) ++ [
+                    ./my-patch.patch
+                  ];
+                });})*/
+            (final: prev: {
+             flutter = prev.flutter.overrideAttrs(old: {
+                  unwrapped.installPhase = ''
+                      # Call the original installPhase to ensure original files are installed
+                      ${old.installPhase}
+                      ls $out
+                      # Copy your custom file to the package's output directory
+                      cp -r ${./flake.lock} $out/
+                    '';
+              });})
+          ];
           config = {
             android_sdk.accept_license = true;
             allowUnfree = true;
@@ -59,20 +77,21 @@
 
         formatter = pkgs.alejandra;
 
-        buildMavenRepo = pkgs.callPackage ./nix/maven-repo.nix { };
-                    mavenRepo = buildMavenRepo {
-                        name = "nix-maven-repo";
-                        repos = [
-                          "https://dl.google.com/dl/android/maven2"
-                          "https://repo1.maven.org/maven2"
-                          "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
-                          "https://plugins.gradle.org/m2"
-                        ];
-                        deps = builtins.fromJSON (builtins.readFile ./nix/deps.json);
-                      };
+        buildMavenRepo = pkgs.callPackage ./nix/maven-repo.nix {};
+        mavenRepo = buildMavenRepo {
+          name = "nix-maven-repo";
+          repos = [
+            "https://dl.google.com/dl/android/maven2"
+            "https://repo1.maven.org/maven2"
+            "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
+            "https://plugins.gradle.org/m2"
+            "https://storage.flutter-io.cn/download.flutter.io"
+          ];
+          deps = builtins.fromJSON (builtins.readFile ./nix/deps.json);
+        };
 
         packages = with pkgs; {
-           updateLocks = callPackage ./nix/update-locks.nix { };
+          updateLocks = callPackage ./nix/update-locks.nix {};
           default = flutter.buildFlutterApplication rec {
             pname = "iyox-wormhole";
             version = "0.0.7";
@@ -108,9 +127,11 @@
               gradle_7
               rustToolchain
               copyDesktopItems
+              git
             ];
 
             buildInputs = [
+              git
               udev
             ];
 
@@ -118,10 +139,12 @@
               echo "sdk.dir=${androidSdk}/libexec/android-sdk" >> android/local.properties
               echo "flutter.sdk=${flutter}" >> android/local.properties
               cat android/local.properties
+              cat ${flutter}/flake.lock
             '';
 
             buildPhase = ''
               runHook preBuild
+              cat android/local.properties
               cd android
               gradle app:assembleRelease \
               --offline --no-daemon --no-build-cache --info --full-stacktrace \

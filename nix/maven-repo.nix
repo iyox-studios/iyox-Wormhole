@@ -1,28 +1,25 @@
-{ lib
-, stdenv
-, buildEnv
-, fetchurl
-, writeTextDir
+{
+  lib,
+  stdenv,
+  buildEnv,
+  fetchurl,
+  writeTextDir,
+}: {
+  name ? "maven-deps",
+  repos ? [],
+  deps ? [],
+  extraPaths ? [],
 }:
-
-{ name ? "maven-deps"
-, repos ? [ ]
-, deps ? [ ]
-, extraPaths ? [ ]
-}:
-
-with lib;
-
-let
+with lib; let
   mavenize = sep: replaceStrings ["."] [sep];
 
-  fetch =
-    { group
-    , name
-    , version
-    , file
-    , sha256
-    }:
+  fetch = {
+    group,
+    name,
+    version,
+    file,
+    sha256,
+  }:
     fetchurl {
       name = file;
       urls = map (repo: "${repo}/${mavenize "/" group}/${name}/${version}/${file}") repos;
@@ -30,50 +27,59 @@ let
       meta.platforms = platforms.all;
     };
 
-  fetchDependency =
-    { group
-    , name
-    , version
-    , artifacts
-    }:
-    let
-      fetchArtifact = file: sha256:
-        fetch { inherit group name version file sha256; };
+  fetchDependency = {
+    group,
+    name,
+    version,
+    artifacts,
+  }: let
+    fetchArtifact = file: sha256:
+      fetch {inherit group name version file sha256;};
 
-      # Each artifact uses the filename in the Gradle cache, which doesn't
-      # correspond to the filename in the Maven repo. The mapping of name to URL
-      # is provided by Gradle module metadata, so we fetch that first. See
-      # https://github.com/gradle/gradle/blob/master/subprojects/docs/src/docs/design/gradle-module-metadata-latest-specification.md
-      # for the file format.
-      isModule = hasSuffix ".module";
-      moduleArtifacts = filterAttrs (file: _: isModule file) artifacts;
-      otherArtifacts = filterAttrs (file: _:  !isModule file) artifacts;
+    # Each artifact uses the filename in the Gradle cache, which doesn't
+    # correspond to the filename in the Maven repo. The mapping of name to URL
+    # is provided by Gradle module metadata, so we fetch that first. See
+    # https://github.com/gradle/gradle/blob/master/subprojects/docs/src/docs/design/gradle-module-metadata-latest-specification.md
+    # for the file format.
+    isModule = hasSuffix ".module";
+    moduleArtifacts = filterAttrs (file: _: isModule file) artifacts;
+    otherArtifacts = filterAttrs (file: _: !isModule file) artifacts;
 
-      modules = mapAttrsToList fetchArtifact moduleArtifacts;
+    modules = mapAttrsToList fetchArtifact moduleArtifacts;
 
-      replacements = listToAttrs (flatten (map (module:
-        let
+    replacements = listToAttrs (flatten (map (
+        module: let
           json = builtins.fromJSON (builtins.readFile module);
-          variants = json.variants or [ ];
-          files = flatten (map (v: v.files or [ ]) variants);
+          variants = json.variants or [];
+          files = flatten (map (v: v.files or []) variants);
         in
-        map ({ name, url, ... }: nameValuePair name url) files
-      ) modules));
+          map ({
+            name,
+            url,
+            ...
+          }:
+            nameValuePair name url)
+          files
+      )
+      modules));
 
-      replaced = mapAttrs' (file: sha256:
-        nameValuePair (replacements.${file} or file) sha256
-      ) otherArtifacts;
-    in
-      if moduleArtifacts == { }
-      then mapAttrsToList fetchArtifact artifacts
-      else modules ++ (mapAttrsToList fetchArtifact replaced);
+    replaced =
+      mapAttrs' (
+        file: sha256:
+          nameValuePair (replacements.${file} or file) sha256
+      )
+      otherArtifacts;
+  in
+    if moduleArtifacts == {}
+    then mapAttrsToList fetchArtifact artifacts
+    else modules ++ (mapAttrsToList fetchArtifact replaced);
 
-  mkDep =
-    { group
-    , name
-    , version
-    , artifacts
-    }@dep:
+  mkDep = {
+    group,
+    name,
+    version,
+    artifacts,
+  } @ dep:
     stdenv.mkDerivation {
       pname = "${mavenize "-" group}-${name}";
       inherit version;
@@ -96,31 +102,52 @@ let
       '';
     };
 
-  mkMetadata = deps:
-    let
-      modules = groupBy'
-        (meta: { group, name, version, ... }:
-          let
-            isNewer = versionOlder meta.latest version;
-            isNewerRelease = versionOlder meta.release version;
-          in {
-            groupId = group;
-            artifactId = name;
-            latest = if isNewer then version else meta.latest;
-            release = if isNewerRelease then version else meta.release;
-            versions = meta.versions ++ [ version ];
-          }
-        )
-        {
-          latest = "";
-          release = "";
-          versions = [ ];
+  mkMetadata = deps: let
+    modules =
+      groupBy'
+      (
+        meta: {
+          group,
+          name,
+          version,
+          ...
+        }: let
+          isNewer = versionOlder meta.latest version;
+          isNewerRelease = versionOlder meta.release version;
+        in {
+          groupId = group;
+          artifactId = name;
+          latest =
+            if isNewer
+            then version
+            else meta.latest;
+          release =
+            if isNewerRelease
+            then version
+            else meta.release;
+          versions = meta.versions ++ [version];
         }
-        ({ group, name, ... }: "${mavenize "/" group}/${name}/maven-metadata.xml")
-        deps;
-    in
-      attrValues (mapAttrs (path: { groupId, artifactId, latest, release, versions }:
-        let
+      )
+      {
+        latest = "";
+        release = "";
+        versions = [];
+      }
+      ({
+        group,
+        name,
+        ...
+      }: "${mavenize "/" group}/${name}/maven-metadata.xml")
+      deps;
+  in
+    attrValues (mapAttrs (
+        path: {
+          groupId,
+          artifactId,
+          latest,
+          release,
+          versions,
+        }: let
           versions' = sort versionOlder (unique versions);
         in
           writeTextDir path ''
@@ -137,16 +164,25 @@ let
               </versioning>
             </metadata>
           ''
-      ) modules);
+      )
+      modules);
 
-  mkGradleRedirectionPoms = deps:
-    let
-      depsMissingPoms = filter ({ artifacts, ... }@dep:
-        any (f: hasSuffix ".module" f) (attrNames artifacts) &&
-        !(any (f: hasSuffix ".pom" f) (attrNames artifacts))
-      ) deps;
-    in
-      map ({ group, name, version, ... }:
+  mkGradleRedirectionPoms = deps: let
+    depsMissingPoms =
+      filter (
+        {artifacts, ...} @ dep:
+          any (f: hasSuffix ".module" f) (attrNames artifacts)
+          && !(any (f: hasSuffix ".pom" f) (attrNames artifacts))
+      )
+      deps;
+  in
+    map (
+      {
+        group,
+        name,
+        version,
+        ...
+      }:
         writeTextDir "${mavenize "/" group}/${name}/${version}/${name}-${version}.pom" ''
           <project xmlns="http://maven.apache.org/POM/4.0.0"
                    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -163,10 +199,10 @@ let
             <version>${version}</version>
           </project>
         ''
-      ) depsMissingPoms;
-
+    )
+    depsMissingPoms;
 in
-buildEnv {
-  inherit name;
-  paths = map mkDep deps ++ mkMetadata deps ++ mkGradleRedirectionPoms deps ++ extraPaths;
-}
+  buildEnv {
+    inherit name;
+    paths = map mkDep deps ++ mkMetadata deps ++ mkGradleRedirectionPoms deps ++ extraPaths;
+  }

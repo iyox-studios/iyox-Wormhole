@@ -73,7 +73,6 @@ class Settings {
   static Future<ThemeMode> getThemeMode() async {
     final prefs = await SharedPreferences.getInstance();
     final themeModeString = prefs.getString(_themeMode) ?? 'ThemeMode.system';
-    debugPrint(themeModeString);
     return ThemeMode.values.firstWhere((e) => e.toString() == themeModeString);
   }
 

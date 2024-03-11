@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:iyox_wormhole/pages/router.dart';
 import 'package:flutter/services.dart';
+import 'package:iyox_wormhole/utils/settings.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -79,10 +80,17 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
     initBackend();
     initApp().then((_) => debugPrint("App Init Completed"));
 
-    var brightness =  WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    setState(() {
-      themeMode =
-          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+    var brightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    getCurrentAppTheme().then((value) {
+      setState(() {
+        if (value == ThemeMode.system) {
+          themeMode =
+              brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+        } else {
+          themeMode = value;
+        }
+      });
     });
   }
 
@@ -96,14 +104,26 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
 
-    _setTheme();
+    setTheme();
   }
 
-  void _setTheme() {
+  Future<ThemeMode> getCurrentAppTheme() async {
+    return await Settings.getThemeMode();
+  }
+
+  void setTheme() {
     var brightness = View.of(context).platformDispatcher.platformBrightness;
-    setState(() {
-      themeMode =
+    getCurrentAppTheme().then((value) {
+      debugPrint(value.toString());
+
+      setState(() {
+        if (value == ThemeMode.system) {
+          themeMode =
           brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+        } else {
+          themeMode = value;
+        }
+      });
     });
   }
 
@@ -116,8 +136,12 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: themeMode == ThemeMode.dark ? darkColorScheme?.background: lightColorScheme?.background,
-          systemNavigationBarColor: themeMode == ThemeMode.dark ? darkColorScheme?.surface: lightColorScheme?.surface));
+          statusBarColor: themeMode == ThemeMode.dark
+              ? darkColorScheme?.background
+              : lightColorScheme?.background,
+          systemNavigationBarColor: themeMode == ThemeMode.dark
+              ? darkColorScheme?.surface
+              : lightColorScheme?.surface));
       return MaterialApp(
         navigatorKey: NavigationService.navigatorKey,
         debugShowCheckedModeBanner: false,

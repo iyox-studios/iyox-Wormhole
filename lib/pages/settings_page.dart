@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:icons_launcher/cli_commands.dart';
 import 'package:iyox_wormhole/utils/settings.dart';
 import 'package:iyox_wormhole/widgets/settings_field.dart';
 import 'package:iyox_wormhole/widgets/settings_header.dart';
@@ -14,6 +15,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   double _wordCountSlider = 0;
   int _wordCount = 0;
+  ThemeMode? theme;
 
   static const int minWordCount = 1;
   static const int maxWordCount = 8;
@@ -95,6 +97,40 @@ class _SettingsPageState extends State<SettingsPage> {
                                   )
                                 ])
                               ]))),
+                );
+              }
+              return const SizedBox(
+                width: 0.0,
+                height: 0.0,
+              );
+            }),
+        const SettingsHeader("Appearance"),
+        FutureBuilder(
+              future: Settings.getThemeMode(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                theme = snapshot.data;
+                return SettingField(
+                  title: "Theme Mode",
+                  initialValue: theme.toString().split('.').last.capitalize(),
+                  editWidget: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (var value in ThemeMode.values)
+                        RadioListTile(
+                            title: Text(value.toString().split('.').last.capitalize()),
+                            value: value,
+                            groupValue: theme,
+                            onChanged: (value) => {
+                                  setState(() {
+                                    theme = value;
+                                  })
+                                }),
+                    ],
+                  ),
+                  onSubmit: (value) => { setState(() {
+                    Settings.setThemeMode(theme!);
+                  })},
                 );
               }
               return const SizedBox(

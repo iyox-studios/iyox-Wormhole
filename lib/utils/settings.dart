@@ -12,6 +12,7 @@ class Settings {
   static const _rendezvousUrl = 'RENDEZVOUS_URL';
   static const _transitUrl = 'TRANSIT_URL';
   static const _recentFiles = 'RECENT_FILES';
+  static const _themeMode = 'THEME_MODE';
 
   static setWordLength(int? value) async {
     await _setField(value, _wordLength);
@@ -45,6 +46,10 @@ class Settings {
     await _setField(recentFiles, _recentFiles);
   }
 
+  static setThemeMode(ThemeMode value) async {
+    await _setField(value.toString(), _themeMode);
+  }
+
   static Future<int> getWordLength() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(_wordLength) ?? 3;
@@ -63,6 +68,13 @@ class Settings {
   static Future<List<String>> getRecentFiles() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getStringList(_recentFiles) ?? [];
+  }
+
+  static Future<ThemeMode> getThemeMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    final themeModeString = prefs.getString(_themeMode) ?? 'ThemeMode.system';
+    debugPrint(themeModeString);
+    return ThemeMode.values.firstWhere((e) => e.toString() == themeModeString);
   }
 
   static _setField<T>(T? value, String field) async {

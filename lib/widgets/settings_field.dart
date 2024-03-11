@@ -5,11 +5,12 @@ class SettingField extends StatefulWidget {
       {super.key,
       required this.title,
       required this.initialValue,
-      required this.onSubmit});
+      required this.onSubmit, this.editWidget});
 
   final String title;
   final String initialValue;
   final void Function(String) onSubmit;
+  final Widget? editWidget;
 
   @override
   State<SettingField> createState() => _SettingFieldState();
@@ -67,7 +68,7 @@ class _SettingFieldState extends State<SettingField> {
       context: context,
       builder: (context) => AlertDialog(
           title: Text(widget.title),
-          content: TextField(
+          content:  widget.editWidget ?? TextField(
             controller: _textController,
             onSubmitted: widget.onSubmit,
           ),

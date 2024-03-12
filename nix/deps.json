@@ -2396,6 +2396,16 @@
   {
     "group": "com.android.tools.build",
     "name": "aapt2-proto",
+    "version": "7.0.0-beta04-7396180",
+    "artifacts": {
+      "aapt2-proto-7.0.0-beta04-7396180.module": "22b5d69296c06b99261c2b5485994af1e6e7e02beb6a8d213ce88dae76660755",
+      "aapt2-proto-7.0.0-beta04-7396180.jar": "1ca4f1b0f550c6c25f63c1916da84f6e7a92c66b7ad38ab1d5d49a20552a5984",
+      "aapt2-proto-7.0.0-beta04-7396180.pom": "613920d8598ea14d43c5e4c7d4bb7d8a86a8cb38db86ff9a023f94b7ee6e92f9"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "aapt2-proto",
     "version": "7.2.1-7984345",
     "artifacts": {
       "aapt2-proto-7.2.1-7984345.jar": "f4b80cb8d59ea7c3d6d9922952b644156fc5a6e223d0825ffc5a8f7ec7ff8dd6",
@@ -3528,6 +3538,33 @@
     }
   },
   {
+    "group": "com.android.tools.external.com-intellij",
+    "name": "intellij-core",
+    "version": "30.3.1",
+    "artifacts": {
+      "intellij-core-30.3.1.jar": "8bb2aecfb8dd2208fe341a731ac44a9ec83f989c12449b82dff1eab493de0408",
+      "intellij-core-30.3.1.pom": "6f7f1a6754d32802931568d2d9f72cbd29e15ae4954174460d2d1a95634a3a52"
+    }
+  },
+  {
+    "group": "com.android.tools.external.com-intellij",
+    "name": "kotlin-compiler",
+    "version": "30.3.1",
+    "artifacts": {
+      "kotlin-compiler-30.3.1.jar": "ccdc9e1abfafdec71f4f93a3a2ad6230a1384925b06fc277d4ed921de5bb6fd8",
+      "kotlin-compiler-30.3.1.pom": "8b19303de985a52a77d68d48c33aaaf3aae5435dc2910a85d8b7df4c660ca7ad"
+    }
+  },
+  {
+    "group": "com.android.tools.external.org-jetbrains",
+    "name": "uast",
+    "version": "30.3.1",
+    "artifacts": {
+      "uast-30.3.1.jar": "47bf3fc2a6a9aa09f728788e869033341abd9d8cdb9fc61087dfb7cd576076d8",
+      "uast-30.3.1.pom": "4cd888bbd4ca5be4b000e6de2de2456c38e7a027786a2544a710357b84b4aff4"
+    }
+  },
+  {
     "group": "com.android.tools.layoutlib",
     "name": "layoutlib-api",
     "version": "27.1.3",
@@ -3615,6 +3652,42 @@
     "artifacts": {
       "layoutlib-api-31.2.0.jar": "2b136521ad932f1a9c700a251a9ff5b6ebd4640423da68ce43ba4c7f7602c225",
       "layoutlib-api-31.2.0.pom": "5eea07c622e230470552d7519defe2ff40e0ca1fa2df129430972b35986a9da7"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
+    "name": "lint",
+    "version": "30.3.1",
+    "artifacts": {
+      "lint-30.3.1.jar": "685080782f6368cc68ac74db065b4c5c59d9c82599dc34be2ec39e425251b864",
+      "lint-30.3.1.pom": "017ff11498c2dfa9285cbd6a148062821bdc54f930c5024d64aea2d708b72205"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
+    "name": "lint-api",
+    "version": "30.3.1",
+    "artifacts": {
+      "lint-api-30.3.1.jar": "cc6ebd7a146226363aa38bbb4a10d3e329079ac3201dbfeb562605be691d482c",
+      "lint-api-30.3.1.pom": "74a933b756cec5b826446f850b7c539482128bcbed4f6202afb9c59695ca2b11"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
+    "name": "lint-checks",
+    "version": "30.3.1",
+    "artifacts": {
+      "lint-checks-30.3.1.jar": "a6a728be66b4e1cb61333f77f519f8213450989be0fbe125ff77e6241d07be8e",
+      "lint-checks-30.3.1.pom": "5dfe62fc2a12d8ad0b968b6545d86ffd1d973bf2c6dfcebe860cba4462a633fd"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
+    "name": "lint-gradle",
+    "version": "30.3.1",
+    "artifacts": {
+      "lint-gradle-30.3.1.jar": "331c4ac1769c26bf90657db219dcc639ca63fe2fbae9db1ff674dd0a62c74676",
+      "lint-gradle-30.3.1.pom": "6e3f870baf662f03731526cc547f00b59e018ac925be857bedd218fdd84ee5c2"
     }
   },
   {
@@ -6643,6 +6716,15 @@
     "artifacts": {
       "checker-qual-3.5.0.jar": "729990b3f18a95606fc2573836b6958bcdb44cb52bfbd1b7aa9c339cff35a5a4",
       "checker-qual-3.5.0.pom": "2836b3b8a78edb31a1803592e60fc767b21f2d190764631ba6efa0837bb35721"
+    }
+  },
+  {
+    "group": "org.codehaus.groovy",
+    "name": "groovy",
+    "version": "3.0.9",
+    "artifacts": {
+      "groovy-3.0.9.jar": "77bf86897f295f8cae2e1f46b1eca109f487ba81b66ef24a2b6dcba1eb7d6ce7",
+      "groovy-3.0.9.pom": "3e26864c233e00441d0eadfd82fb95abbcbec516b8e9512bc5c5e94be846dcff"
     }
   },
   {

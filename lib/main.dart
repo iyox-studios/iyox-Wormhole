@@ -135,22 +135,24 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
+      var lightScheme = lightColorScheme ?? ColorScheme.fromSeed(seedColor:Colors.indigo, brightness: Brightness.light);
+      var darkScheme = darkColorScheme ?? ColorScheme.fromSeed(seedColor:Colors.indigo, brightness: Brightness.dark);
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarColor: themeMode == ThemeMode.dark
-              ? darkColorScheme?.background
-              : lightColorScheme?.background,
+              ? darkScheme.background
+              : lightScheme.background,
           systemNavigationBarColor: themeMode == ThemeMode.dark
-              ? darkColorScheme?.surface
-              : lightColorScheme?.surface));
+              ? darkScheme.surface
+              : lightScheme.surface));
       return MaterialApp(
         navigatorKey: NavigationService.navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Wormhole',
         theme: ThemeData(
-          colorScheme: lightColorScheme,
+          colorScheme: lightScheme,
         ),
         darkTheme: ThemeData(
-          colorScheme: darkColorScheme,
+          colorScheme: darkScheme,
         ),
         themeMode: themeMode,
         home: const BasePage(),

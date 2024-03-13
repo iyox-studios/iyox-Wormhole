@@ -156,6 +156,7 @@
             pubspecLock = lib.importJSON ./pubspec.lock.json;
 
             cargoRoot = "native";
+            targetFlutterPlatform = "web";
 
             ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
             ANDROID_NDK_ROOT = "${androidSdk}/libexec/android-sdk/ndk-bundle";
@@ -203,7 +204,15 @@
               --offline --no-daemon --no-build-cache --info --full-stacktrace \
               --warning-mode=all --parallel --console=plain \
               -PnixMavenRepo=${mavenRepo} \
-              -Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2
+              -Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2 \
+              -Ptarget-platform=android-arm,android-arm64,android-x64 \
+              -Ptarget=lib/main.dart \
+              -Pbase-application-name=android.app.Application \
+              -Pdart-obfuscation=false \
+              -Ptrack-widget-creation=true \
+              -Ptree-shake-icons=true \
+              -Psplit-per-abi=true \
+              assembleRelease
               cd ..
               runHook postBuild
             '';
@@ -217,6 +226,7 @@
 
             dontFixup = true;
             dontStrip = true;
+            dontWrapGApps = true;
           };
         };
       }

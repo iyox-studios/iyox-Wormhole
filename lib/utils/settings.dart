@@ -14,23 +14,23 @@ class Settings {
   static const _recentFiles = 'RECENT_FILES';
   static const _themeMode = 'THEME_MODE';
 
-  static setWordLength(int? value) async {
+  static Future<void> setWordLength(int? value) async {
     await _setField(value, _wordLength);
   }
 
-  static setRendezvousUrl(String? value) async {
+  static Future<void> setRendezvousUrl(String? value) async {
     await _setField(value, _rendezvousUrl);
   }
 
-  static setTransitUrl(String? value) async {
+  static Future<void> setTransitUrl(String? value) async {
     await _setField(value, _transitUrl);
   }
 
-  static setRecentFiles(List<String>? value) async {
+  static Future<void> setRecentFiles(List<String>? value) async {
     await _setField(value, _recentFiles);
   }
 
-  static addRecentFile(String value) async {
+  static Future<void> addRecentFile(String value) async {
     var recentFiles = await getRecentFiles();
     recentFiles.add(value);
 
@@ -46,7 +46,7 @@ class Settings {
     await _setField(recentFiles, _recentFiles);
   }
 
-  static setThemeMode(ThemeMode value) async {
+  static Future<void> setThemeMode(ThemeMode value) async {
     await _setField(value.toString(), _themeMode);
   }
 

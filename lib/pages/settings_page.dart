@@ -22,7 +22,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SingleChildScrollView(
+        child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
@@ -167,8 +168,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     child: const Text('Save'),
                                     onPressed: () {
                                       this.setState(() {
-                                        Settings.setThemeMode(theme);
-                                        Restart.restartApp();
+                                        Settings.setThemeMode(theme).then((_) => Restart.restartApp());
                                       });
                                       Navigator.of(context).pop();
                                     },
@@ -249,6 +249,6 @@ class _SettingsPageState extends State<SettingsPage> {
               );
             }),
       ],
-    );
+    ));
   }
 }

@@ -35,6 +35,7 @@ jobs:
   build:
     needs: bump_version
     uses: iyox-studios/iyox-wormhole/.github/workflows/build.yml@main
+    secrets: inherit
 
   build_and_release:
     runs-on: ubuntu-latest

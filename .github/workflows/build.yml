@@ -13,6 +13,7 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    if: "github.actor != 'github-actions[bot]'"
     container:
       image: ghcr.io/iyox-studios/flutter_rust
       volumes:

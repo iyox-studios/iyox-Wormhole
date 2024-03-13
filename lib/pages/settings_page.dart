@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:icons_launcher/cli_commands.dart';
 import 'package:iyox_wormhole/utils/settings.dart';
 import 'package:iyox_wormhole/widgets/settings_field.dart';
 import 'package:iyox_wormhole/widgets/settings_header.dart';
+import 'package:restart_app/restart_app.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -94,6 +96,115 @@ class _SettingsPageState extends State<SettingsPage> {
                                     ),
                                   )
                                 ])
+                              ]))),
+                );
+              }
+              return const SizedBox(
+                width: 0.0,
+                height: 0.0,
+              );
+            }),
+        const SettingsHeader("Appearance"),
+        FutureBuilder(
+            future: Settings.getThemeMode(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return FilledButton.tonal(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    shape: MaterialStateProperty.all(LinearBorder.none),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.background),
+                    textStyle: MaterialStateProperty.all(
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                    ),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          ThemeMode theme = snapshot.data!;
+                          return StatefulBuilder(builder: (context, setState) {
+                            return AlertDialog(
+                                title: const Text("Theme"),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    for (var value in ThemeMode.values)
+                                      RadioListTile(
+                                          title: Text(value
+                                              .toString()
+                                              .split('.')
+                                              .last
+                                              .capitalize()),
+                                          value: value,
+                                          groupValue: theme,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              theme = value!;
+                                            });
+                                          }),
+                                  ],
+                                ),
+                                actions: [
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    child: const Text('Cancel'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    child: const Text('Save'),
+                                    onPressed: () {
+                                      this.setState(() {
+                                        Settings.setThemeMode(theme);
+                                        Restart.restartApp();
+                                      });
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ]);
+                          });
+                        });
+                  },
+                  child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 17, 20, 5),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Theme",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                                ),
+                                Text(
+                                  snapshot.data!
+                                      .toString()
+                                      .split('.')
+                                      .last
+                                      .capitalize(),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                                )
                               ]))),
                 );
               }

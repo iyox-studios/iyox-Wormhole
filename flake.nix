@@ -17,16 +17,6 @@
     flake-utils,
     rust-overlay,
   }: let
-    android = {
-      versions = {
-        tools = "26.1.1";
-        platformTools = "34.0.5";
-        buildTools = ["34.0.0" "30.0.3"];
-        ndk = "23.1.7779620";
-        cmake = ["3.18.1" "3.22.1"];
-      };
-      platforms = ["34" "30" "28"];
-    };
     pname = "iyox-wormhole";
   in
     flake-utils.lib.eachDefaultSystem (
@@ -47,7 +37,6 @@
 
         rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./native/rust-toolchain.toml;
 
-        buildToolsVersion = "27.0.3";
         ndkVersion = "23.1.7779620";
         androidComposition = pkgs.androidenv.composeAndroidPackages {
           buildToolsVersions = ["34.0.0" "30.0.3"];
@@ -58,9 +47,6 @@
           toolsVersion = "26.1.1";
           platformToolsVersion = "34.0.5";
 
-          includeSources = false;
-          includeSystemImages = false;
-
           cmakeVersions = ["3.18.1" "3.22.1"];
         };
         androidSdk = androidComposition.androidsdk;
@@ -70,9 +56,10 @@
           src = ./native;
           #inherit src;
           #sourceRoot = "src/native";
-          hash = "sha256-c3I5lMuEeXCGZJ3ZVK1POI+PBvoPKGtQjqHQ2VEZEs4=";
+          hash = "sha256-Vx/5KqHWgO9Vm1PAFXhA+MH7UJg0bzC3OG08iMBnp5w=";
         };
 
+        pubspecLock = pkgs.lib.importJSON ./pubspec.lock.json;
         PWD = builtins.getEnv "PWD";
       in rec {
         devShell = with pkgs;
@@ -112,11 +99,11 @@
         };
 
         packages = with pkgs; {
+          default = linux;
           updateLocks = callPackage ./nix/update-locks.nix {};
           linux = flutter.buildFlutterApplication rec {
             src = ./.;
-
-            pubspecLock = lib.importJSON ./pubspec.lock.json;
+            inherit cargoDeps pname version pubspecLock;
 
             cargoRoot = "native";
 
@@ -124,8 +111,6 @@
             LD_LIBRARY_PATH = "./build/linux/x64/debug/bundle/lib/:./build/linux/x64/release/bundle/lib/:${PWD}/apps/onyx/build/linux/x64/profile/bundle/lib/";
 
             ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
-
-            inherit cargoDeps pname version;
 
             patches = [
               ./corrosion.patch
@@ -152,11 +137,11 @@
           };
           android = flutter.buildFlutterApplication rec {
             src = ./.;
-
-            pubspecLock = lib.importJSON ./pubspec.lock.json;
+            inherit cargoDeps pname version pubspecLock;
 
             cargoRoot = "native";
-            targetFlutterPlatform = "web";
+
+            targetFlutterPlatform = "web"; # to skip linux fixups
 
             ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
             ANDROID_NDK_ROOT = "${androidSdk}/libexec/android-sdk/ndk-bundle";
@@ -166,15 +151,11 @@
 
             ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
 
-            inherit cargoDeps pname version;
-
             nativeBuildInputs = [
               corrosion
               rustPlatform.cargoSetupHook
-              #cargo
               gradle_7
               rustToolchain
-              copyDesktopItems
               cargo-ndk
             ];
 
@@ -200,7 +181,7 @@
               mkdir -p .dart_tool && cp --no-preserve=all "$packageConfig" .dart_tool/package_config.json
 
               cd android
-              gradle build \
+              gradle \
               --offline --no-daemon --no-build-cache --info --full-stacktrace \
               --warning-mode=all --parallel --console=plain \
               -PnixMavenRepo=${mavenRepo} \
@@ -214,13 +195,14 @@
               -Psplit-per-abi=true \
               assembleRelease
               cd ..
+
               runHook postBuild
             '';
 
             installPhase = ''
               runHook preInstall
               mkdir -p $out
-              cp -r ./build/app/outputs/ $out
+              cp -r ./build/app/outputs/*apk/ $out
               runHook postInstall
             '';
 

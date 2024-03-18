@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
@@ -95,9 +96,12 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
   }
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     super.dispose();
     WidgetsBinding.instance.removeObserver(this);
+    await FilePicker.platform.clearTemporaryFiles();
+    await Settings.setRecentFiles([]);
+    debugPrint("closing app");
   }
 
   @override

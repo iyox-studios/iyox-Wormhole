@@ -22,8 +22,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
+    return ListView(
+        children:[ Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
@@ -249,6 +249,6 @@ class _SettingsPageState extends State<SettingsPage> {
               );
             }),
       ],
-    ));
+    )]);
   }
 }

@@ -58,7 +58,9 @@ class _SendingPageState extends State<SendingPage> {
     }
 
     for (var file in widget.files) {
-      await Settings.addRecentFile(file);
+      setState(() {
+        Settings.addRecentFile(file);
+      });
     }
 
     stream.listen((e) {
@@ -181,65 +183,63 @@ class _SendingPageState extends State<SendingPage> {
     return Center(
       child: codeText == ''
           ? Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(14),
               child: LinearProgressIndicator(
                 value: shareProgress,
                 minHeight: 10,
                 borderRadius: BorderRadius.circular(18),
               ))
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Card(
-                    margin: const EdgeInsets.all(20),
-                    child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: QrImageView(
-                              data: "wormhole-transfer:$codeText",
-                              backgroundColor: Colors.white),
-                        ))),
-                const Gap(10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(20),
-                          onTap: () {
-                            Clipboard.setData(ClipboardData(text: codeText));
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("Copied code to clipboard"),
-                            ));
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
-                            child: Text(
-                              codeText,
-                              style: TextStyle(
-                                  height: 1.6,
-                                  fontSize: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .fontSize! +
-                                      1.5,
-                                  fontWeight: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.fontWeight),
-                            )
-                                                ),
-                        ),
+          : Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                      child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: QrImageView(
+                                data: "wormhole-transfer:$codeText",
+                                backgroundColor: Colors.white),
+                          ))),
+                  const Gap(10),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(26),
                     ),
-                  ]),
-                ),
-              ],
-            ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(26),
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: codeText));
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Copied code to clipboard"),
+                        ));
+                      },
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 13, vertical: 9),
+                          child: Text(
+                            codeText,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                height: 1.6,
+                                fontSize: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .fontSize! +
+                                    1.5,
+                                fontWeight: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.fontWeight),
+                          )),
+                    ),
+                  ),
+                ],
+              ),
+          ),
     );
   }
 

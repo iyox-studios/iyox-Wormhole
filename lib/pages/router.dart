@@ -13,9 +13,6 @@ class BasePage extends StatefulWidget {
 
 class _BasePageState extends State<BasePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final pageController = PageController(
-    initialPage: 0,
-  );
 
   int selectedPageIndex = 0;
 
@@ -43,9 +40,6 @@ class _BasePageState extends State<BasePage> {
               setState(() {
                 selectedPageIndex = index;
               });
-              pageController.animateToPage(index,
-                  duration: const Duration(milliseconds: 2000),
-                  curve: Curves.ease);
             },
             destinations: const [
               NavigationDestination(

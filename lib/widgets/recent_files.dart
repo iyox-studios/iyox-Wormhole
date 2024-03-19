@@ -13,7 +13,7 @@ class RecentFiles extends StatefulWidget {
 
 class _RecentFilesState extends State<RecentFiles>
     with SingleTickerProviderStateMixin {
-  bool recentCollapsed = false;
+  bool recentCollapsed = true;
   late final AnimationController _controller;
 
   @override
@@ -60,7 +60,7 @@ class _RecentFilesState extends State<RecentFiles>
                     ),
                     const Spacer(),
                     RotationTransition(
-                        turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+                        turns: Tween(begin: 1.0, end: 0.0).animate(_controller),
                         child: IconButton.filledTonal(
                             iconSize: 23,
                             padding: const EdgeInsets.all(0),
@@ -69,9 +69,9 @@ class _RecentFilesState extends State<RecentFiles>
                             onPressed: () => {
                                   setState(() {
                                     if (recentCollapsed) {
-                                      _controller.reverse(from: 0.5);
-                                    } else {
                                       _controller.forward(from: 0.0);
+                                    } else {
+                                      _controller.reverse(from: 0.5);
                                     }
                                     recentCollapsed = !recentCollapsed;
                                   })

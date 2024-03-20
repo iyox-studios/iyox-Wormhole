@@ -2,7 +2,7 @@ name: iyox_wormhole
 description: Mobile Client for the magic-wormhole protocol
 publish_to: 'none'
 
-version: 0.1.8+33
+version: 0.1.9+34
 
 environment:
   sdk: '>=3.0.2 <4.0.0'

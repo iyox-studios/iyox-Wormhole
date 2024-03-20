@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
@@ -71,6 +72,10 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
       systemNavigationBarColor: Colors.transparent,
     );
     SystemChrome.setSystemUIOverlayStyle(overlayStyle);
+
+    // Clear Cache
+    await FilePicker.platform.clearTemporaryFiles();
+    await Settings.setRecentFiles([]);
   }
 
   @override
@@ -95,9 +100,9 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
   }
 
   @override
-  void dispose() {
-    super.dispose();
+  Future<void> dispose() async {
     WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -119,7 +124,7 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
       setState(() {
         if (value == ThemeMode.system) {
           themeMode =
-          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+              brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
         } else {
           themeMode = value;
         }
@@ -135,8 +140,12 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
-      var lightScheme = lightColorScheme ?? ColorScheme.fromSeed(seedColor:Colors.indigo, brightness: Brightness.light);
-      var darkScheme = darkColorScheme ?? ColorScheme.fromSeed(seedColor:Colors.indigo, brightness: Brightness.dark);
+      var lightScheme = lightColorScheme ??
+          ColorScheme.fromSeed(
+              seedColor: Colors.indigo, brightness: Brightness.light);
+      var darkScheme = darkColorScheme ??
+          ColorScheme.fromSeed(
+              seedColor: Colors.indigo, brightness: Brightness.dark);
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarColor: themeMode == ThemeMode.dark
               ? darkScheme.background

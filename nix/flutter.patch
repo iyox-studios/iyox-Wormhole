@@ -1,0 +1,22 @@
+diff --git a/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy b/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
+--- a/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
++++ b/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
+@@ -76,9 +76,15 @@
+ // have not migrated to declaratively apply the Flutter Gradle Plugin;
+ // for those that have, FGP's `build.gradle.kts`  takes care of this.
+ buildscript {
+-    repositories {
+-        google()
+-        mavenCentral()
++    if(project.hasProperty("nixMavenRepo")) {
++        repositories {
++            maven { url = nixMavenRepo }
++        }
++    } else {
++        repositories {
++            google()
++            mavenCentral()
++        }
+     }
+     dependencies {
+         // When bumping, also update:

@@ -1,0 +1,2 @@
+json_key_file("fastlane/google-play-secret.json")
+package_name("com.iyox.wormhole") # e.g. com.krausefx.app

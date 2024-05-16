@@ -16,82 +16,105 @@
     nixpkgs,
     flake-utils,
     rust-overlay,
-  }:
+  }: let
+    pname = "iyox-wormhole";
+  in
     flake-utils.lib.eachDefaultSystem (
       system: let
-        overlays = [(import rust-overlay)];
         pkgs = import nixpkgs {
-          inherit system overlays;
+          inherit system;
+          overlays = [
+            (import rust-overlay)
+          ];
           config = {
             android_sdk.accept_license = true;
             allowUnfree = true;
           };
         };
 
-        rustToolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./native/rust-toolchain.toml;
+        version = (import ./nix/get-version.nix {inherit pkgs;}).version;
+        flutter-patched = pkgs.callPackage ./nix/flutter-patch.nix {};
+
+        rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./native/rust-toolchain.toml;
 
         ndkVersion = "23.1.7779620";
-        buildToolsVersion = "27.0.3";
         androidComposition = pkgs.androidenv.composeAndroidPackages {
-          buildToolsVersions = [buildToolsVersion "30.0.3"];
-          platformVersions = ["34" "33" "32" "31" "28"];
-          abiVersions = ["armeabi-v7a" "arm64-v8a"];
+          buildToolsVersions = ["34.0.0" "30.0.3"];
+          platformVersions = ["34" "33" "32" "31" "30" "28"];
+          abiVersions = ["armeabi-v7a" "arm64-v8a" "x86" "x86_64"];
           includeNDK = true;
           ndkVersions = [ndkVersion];
+          toolsVersion = "26.1.1";
+          platformToolsVersion = "34.0.5";
+
           cmakeVersions = ["3.18.1" "3.22.1"];
         };
         androidSdk = androidComposition.androidsdk;
 
-        myAndroidStudio = pkgs.symlinkJoin {
-          name = "myAndroidStudio";
-          paths = with pkgs; [
-            android-studio
-            rustToolchain
-            flutter
-            gnumake
-            android-tools
-            jdk
-          ];
-
-          nativeBuildInputs = [pkgs.makeWrapper];
-          postBuild = ''
-            wrapProgram $out/bin/flutter \
-              --prefix ANDROID_JAVA_HOME=${pkgs.jdk.home}
-
-            wrapProgram $out/bin/android-studio \
-              --prefix FLUTTER_SDK=${pkgs.flutter} \
-              --prefix ANDROID_JAVA_HOME=${pkgs.jdk.home} \
-              --prefix ANDROID_SDK_ROOT=~/Android/Sdk
-          '';
+        cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
+          name = "${pname}-${version}-cargo-deps";
+          src = ./native;
+          #inherit src;
+          #sourceRoot = "src/native";
+          hash = "sha256-Vx/5KqHWgO9Vm1PAFXhA+MH7UJg0bzC3OG08iMBnp5w=";
         };
-      in {
+
+        pubspecLock = pkgs.lib.importJSON ./pubspec.lock.json;
+        PWD = builtins.getEnv "PWD";
+      in rec {
         devShell = with pkgs;
           mkShell rec {
             ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
+            ANDROID_NDK_ROOT = "${androidSdk}/libexec/android-sdk/ndk-bundle";
+            ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
+            FLUTTER_SDK = "${pkgs.flutter}";
+            GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2";
+            LD_LIBRARY_PATH = "${PWD}/build/linux/x64/debug/bundle/lib/:${PWD}/build/linux/x64/release/bundle/lib/:${PWD}/apps/onyx/build/linux/x64/profile/bundle/lib/";
             ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
-            ANDROID_NDK = "${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}";
+            #ANDROID_NDK = "${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}";
             buildInputs = [
               act
-              myAndroidStudio
               rustToolchain
               flutter
               androidSdk
               gnome.zenity
               fastlane
+              cargo-ndk
             ];
           };
 
         formatter = pkgs.alejandra;
 
-        packages = with pkgs; {
-          default = flutter.buildFlutterApplication rec {
-            pname = "iyox-wormhole";
-            version = "0.0.7";
-            src = ./.;
+        buildMavenRepo = pkgs.callPackage ./nix/maven-repo.nix {};
+        mavenRepo = buildMavenRepo {
+          name = "nix-maven-repo";
+          repos = [
+            "https://dl.google.com/dl/android/maven2"
+            "https://repo1.maven.org/maven2"
+            "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
+            "https://plugins.gradle.org/m2"
+            "https://storage.flutter-io.cn/download.flutter.io"
+          ];
+          deps = builtins.fromJSON (builtins.readFile ./nix/deps.json);
+        };
 
-            pubspecLock = lib.importJSON ./pubspec.lock.json;
+        packages = with pkgs; {
+          default = linux;
+          updateLocks = callPackage ./nix/update-locks.nix {};
+          linux = flutter.buildFlutterApplication rec {
+            src = ./.;
+            inherit cargoDeps pname version pubspecLock;
 
             cargoRoot = "native";
+
+            FLUTTER_SDK = "${pkgs.flutter}";
+            LD_LIBRARY_PATH = "./build/linux/x64/debug/bundle/lib/:./build/linux/x64/release/bundle/lib/:${PWD}/apps/onyx/build/linux/x64/profile/bundle/lib/";
+
+            ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
+
+            patches = [
+              ./corrosion.patch
+            ];
 
             preConfigure = ''
               export CMAKE_PREFIX_PATH="${corrosion}:$CMAKE_PREFIX_PATH"
@@ -100,16 +123,92 @@
             nativeBuildInputs = [
               corrosion
               rustPlatform.cargoSetupHook
-              cargo
-              rustc
+              #cargo
+              gradle_7
+              rustToolchain
               copyDesktopItems
+              cargo-ndk
             ];
 
             buildInputs = [
+              git
+              udev
+            ];
+          };
+          android = flutter.buildFlutterApplication rec {
+            src = ./.;
+            inherit cargoDeps pname version pubspecLock;
+
+            cargoRoot = "native";
+
+            targetFlutterPlatform = "web"; # to skip linux fixups
+
+            ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
+            ANDROID_NDK_ROOT = "${androidSdk}/libexec/android-sdk/ndk-bundle";
+            ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
+            FLUTTER_SDK = "${pkgs.flutter}";
+            GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2";
+
+            ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
+
+            nativeBuildInputs = [
+              corrosion
+              rustPlatform.cargoSetupHook
+              gradle_7
+              rustToolchain
+              cargo-ndk
+            ];
+
+            buildInputs = [
+              git
               udev
             ];
 
-            extraWrapProgramArgs = "--chdir $out/app";
+            configurePhase = ''
+              echo "sdk.dir=${androidSdk}/libexec/android-sdk" >> android/local.properties
+              echo "flutter.sdk=${flutter-patched}" >> android/local.properties
+
+              export HOME="$NIX_BUILD_TOP"
+              flutter config --no-analytics &>/dev/null # mute first-run
+              flutter config --enable-linux-desktop >/dev/null
+            '';
+
+            buildPhase = ''
+              runHook preBuild
+
+              mkdir -p build/flutter_assets/fonts
+              cp --no-preserve=all "$pubspecLockFilePath" pubspec.lock
+              mkdir -p .dart_tool && cp --no-preserve=all "$packageConfig" .dart_tool/package_config.json
+
+              cd android
+              gradle \
+              --offline --no-daemon --no-build-cache --info --full-stacktrace \
+              --warning-mode=all --parallel --console=plain \
+              -PnixMavenRepo=${mavenRepo} \
+              -Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2 \
+              -Ptarget-platform=android-arm,android-arm64,android-x64 \
+              -Ptarget=lib/main.dart \
+              -Pbase-application-name=android.app.Application \
+              -Pdart-obfuscation=false \
+              -Ptrack-widget-creation=true \
+              -Ptree-shake-icons=true \
+              -Psplit-per-abi=true \
+              assembleRelease
+              cd ..
+
+              runHook postBuild
+            '';
+
+            installPhase = ''
+              runHook preInstall
+              mkdir -p $out
+              cp -r ./build/app/outputs/*apk/ $out
+              runHook postInstall
+            '';
+
+            dontFixup = true;
+            dontStrip = true;
+            dontWrapGApps = true;
           };
         };
       }

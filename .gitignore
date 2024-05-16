@@ -46,3 +46,8 @@ app.*.map.json
 /android/app/release
 native/target
 jniLibs
+
+
+fastlane/google-play-secret.json
+fastlane/report.xml
+result

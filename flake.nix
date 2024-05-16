@@ -54,9 +54,7 @@
         cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
           name = "${pname}-${version}-cargo-deps";
           src = ./native;
-          #inherit src;
-          #sourceRoot = "src/native";
-          hash = "sha256-Vx/5KqHWgO9Vm1PAFXhA+MH7UJg0bzC3OG08iMBnp5w=";
+          hash = "sha256-3Cfb4IwePENnRkDUNYe/r3cJc1F3yy5yyCejY3XrlY8=";
         };
 
         pubspecLock = pkgs.lib.importJSON ./pubspec.lock.json;

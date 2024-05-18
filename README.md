@@ -8,7 +8,7 @@
 iyox Wormhole is a file-sharing application presented in [Material You](https://m3.material.io/) style.
 It is a fork of [this](https://gitlab.com/lukas-heiligenbrunner/wormhole) project.
 
-
+[![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fiyox-studios%2Fiyox-Wormhole%3Fbranch%3Dmain)](https://garnix.io)
 [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play Store" height="75">](https://play.google.com/store/apps/details?id=com.iyox.wormhole)[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="75">](https://apt.izzysoft.de/packages/com.iyox.wormhole)
 
 

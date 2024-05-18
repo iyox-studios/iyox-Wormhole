@@ -1,4 +1,4 @@
-apk:
+apk: ## Build apk
 	flutter build apk --split-per-abi --release
 	flutter build appbundle --release
 

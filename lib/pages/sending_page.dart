@@ -174,6 +174,9 @@ class _SendingPageState extends State<SendingPage> {
                     ),
                   ),
                 ),
+                IconButton(
+                    onPressed: () => {_refreshCode()},
+                    icon: const Icon(Icons.refresh))
               ],
             ),
     );
@@ -190,8 +193,8 @@ class _SendingPageState extends State<SendingPage> {
                 borderRadius: BorderRadius.circular(18),
               ))
           : Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
+              padding: const EdgeInsets.all(20),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Card(
@@ -237,9 +240,13 @@ class _SendingPageState extends State<SendingPage> {
                           )),
                     ),
                   ),
+                  const Gap(10),
+                  IconButton(
+                      onPressed: () => {_refreshCode()},
+                      icon: const Icon(Icons.refresh))
                 ],
               ),
-          ),
+            ),
     );
   }
 
@@ -288,5 +295,12 @@ class _SendingPageState extends State<SendingPage> {
     final serverConfig =
         ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
     return serverConfig;
+  }
+
+  void _refreshCode() {
+    setState(() {
+      codeText = '';
+    });
+    _startSending();
   }
 }

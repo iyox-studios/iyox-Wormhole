@@ -54,7 +54,7 @@
         cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
           name = "${pname}-${version}-cargo-deps";
           src = ./native;
-          hash = "sha256-3Cfb4IwePENnRkDUNYe/r3cJc1F3yy5yyCejY3XrlY8=";
+          hash = "sha256-GC8WPIC1a+bT3BlDNMFEzV/4LoLoFFnygNnxDLcrIFc=";
         };
 
         pubspecLock = pkgs.lib.importJSON ./pubspec.lock.json;
@@ -97,9 +97,8 @@
         };
 
         packages = with pkgs; {
-          default = linux;
           updateLocks = callPackage ./nix/update-locks.nix {};
-          linux = flutter.buildFlutterApplication rec {
+          linux = flutter.buildFlutterApplication {
             src = ./.;
             inherit cargoDeps pname version pubspecLock;
 

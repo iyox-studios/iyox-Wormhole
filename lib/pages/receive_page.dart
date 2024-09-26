@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/gen/ffi.dart';
 import 'package:iyox_wormhole/pages/qr_code_scanner_page.dart';
-import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:iyox_wormhole/utils/paths.dart';
+import 'package:iyox_wormhole/utils/type_helpers.dart';
 
 class ReceivePage extends StatefulWidget {
   const ReceivePage({Key? key}) : super(key: key);
@@ -51,9 +51,8 @@ class _ReceivePageState extends State<ReceivePage> {
                       controller: _controller,
                       enabled: !transferring,
                       decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(18))),
+                        border:
+                            OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(18))),
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                         label: Text('Code'),
                       ),
@@ -88,9 +87,7 @@ class _ReceivePageState extends State<ReceivePage> {
                     icon: const Icon(Icons.sim_card_download_outlined),
                   )
                 : LinearProgressIndicator(
-                    value: downloadStarted
-                        ? receivedBytes / totalReceiveBytes
-                        : null,
+                    value: downloadStarted ? receivedBytes / totalReceiveBytes : null,
                     minHeight: 13,
                     borderRadius: BorderRadius.circular(18),
                   ),
@@ -101,17 +98,17 @@ class _ReceivePageState extends State<ReceivePage> {
   }
 
   static final ButtonStyle buttonStyle = ButtonStyle(
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(200),
       ),
     ),
-    fixedSize: MaterialStateProperty.all<Size>(const Size(180, 60)),
+    fixedSize: WidgetStateProperty.all<Size>(const Size(180, 60)),
   );
 
   void _onQrButtonClicked() async {
-    final result = await Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const QRScannerPage()));
+    final result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const QRScannerPage()));
 
     if (!mounted) return;
 
@@ -127,8 +124,7 @@ class _ReceivePageState extends State<ReceivePage> {
   Future<ServerConfig> _getServerConfig() async {
     final rendezvousUrl = await api.defaultRendezvousUrl();
     final transitUrl = await api.defaultTransitUrl();
-    final serverConfig =
-        ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
+    final serverConfig = ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
     return serverConfig;
   }
 
@@ -145,9 +141,7 @@ class _ReceivePageState extends State<ReceivePage> {
 
     debugPrint('code: $code');
     final stream = api.requestFile(
-        passphrase: code,
-        storageFolder: downloadPath,
-        serverConfig: await _getServerConfig());
+        passphrase: code, storageFolder: downloadPath, serverConfig: await _getServerConfig());
 
     setState(() {
       transferring = true;
@@ -193,5 +187,4 @@ class _ReceivePageState extends State<ReceivePage> {
       }
     });
   }
-
 }

@@ -19,12 +19,12 @@ class SendPage extends StatefulWidget {
 }
 
 final ButtonStyle largeButtonStyle = ButtonStyle(
-  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
     RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(200),
     ),
   ),
-  fixedSize: MaterialStateProperty.all<Size>(const Size(150, 60)),
+  fixedSize: WidgetStateProperty.all<Size>(const Size(150, 60)),
 );
 
 class _SendPageState extends State<SendPage> {
@@ -38,12 +38,12 @@ class _SendPageState extends State<SendPage> {
   }
 
   static final ButtonStyle buttonStyle = ButtonStyle(
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(200),
       ),
     ),
-    fixedSize: MaterialStateProperty.all<Size>(const Size(150, 60)),
+    fixedSize: WidgetStateProperty.all<Size>(const Size(150, 60)),
   );
 
   @override
@@ -109,21 +109,17 @@ class _SendPageState extends State<SendPage> {
   Future<ServerConfig> getServerConfig() async {
     final rendezvousUrl = await api.defaultRendezvousUrl();
     final transitUrl = await api.defaultTransitUrl();
-    final serverConfig =
-        ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
+    final serverConfig = ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
     return serverConfig;
   }
 
   void _onSendButtonClick() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: true);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (mounted) {
       if (result != null) {
-        final files = result.files
-            .where((element) => element.path != null)
-            .map((e) => e.path!)
-            .toList();
+        final files =
+            result.files.where((element) => element.path != null).map((e) => e.path!).toList();
         Navigator.push(context, _createSendingRoute(files));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -158,15 +154,12 @@ class _SendPageState extends State<SendPage> {
   Route _createSendingRoute(List<String> files,
       {bool folder = false, bool causedByIntent = false}) {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => SendingPage(
-          files: files, folder: folder, causedByIntent: causedByIntent),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          SendingPage(files: files, folder: folder, causedByIntent: causedByIntent),
       transitionDuration: const Duration(milliseconds: 0),
       reverseTransitionDuration: const Duration(milliseconds: 380),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-          FadeThroughTransition(
-              secondaryAnimation: secondaryAnimation,
-              animation: animation,
-              child: child),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeThroughTransition(
+          secondaryAnimation: secondaryAnimation, animation: animation, child: child),
     );
   }
 
@@ -186,10 +179,7 @@ class _SendPageState extends State<SendPage> {
   }
 
   void _sendIntentFile(List<SharedAttachment?> attachments) {
-    final paths = attachments
-        .where((e) => e != null)
-        .map((e) => e!.path)
-        .toList(growable: false);
+    final paths = attachments.where((e) => e != null).map((e) => e!.path).toList(growable: false);
     if (paths.isEmpty) {
       return;
     }

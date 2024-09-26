@@ -5,7 +5,8 @@ class SettingField extends StatefulWidget {
       {super.key,
       required this.title,
       required this.initialValue,
-      required this.onSubmit, this.editWidget});
+      required this.onSubmit,
+      this.editWidget});
 
   final String title;
   final String initialValue;
@@ -30,11 +31,10 @@ class _SettingFieldState extends State<SettingField> {
   Widget build(BuildContext context) {
     return FilledButton.tonal(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        shape: MaterialStateProperty.all(LinearBorder.none),
-        backgroundColor:
-            MaterialStateProperty.all(Theme.of(context).colorScheme.background),
-        textStyle: MaterialStateProperty.all(
+        padding: WidgetStateProperty.all(EdgeInsets.zero),
+        shape: WidgetStateProperty.all(LinearBorder.none),
+        backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.surface),
+        textStyle: WidgetStateProperty.all(
           TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
       ),
@@ -49,15 +49,13 @@ class _SettingFieldState extends State<SettingField> {
                   children: [
                     Text(
                       widget.title,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Theme.of(context).colorScheme.onBackground),
+                      style:
+                          TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onSurface),
                     ),
                     Text(
                       widget.initialValue,
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Theme.of(context).colorScheme.onBackground),
+                      style:
+                          TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onSurface),
                     )
                   ]))),
     );
@@ -68,10 +66,11 @@ class _SettingFieldState extends State<SettingField> {
       context: context,
       builder: (context) => AlertDialog(
           title: Text(widget.title),
-          content:  widget.editWidget ?? TextField(
-            controller: _textController,
-            onSubmitted: widget.onSubmit,
-          ),
+          content: widget.editWidget ??
+              TextField(
+                controller: _textController,
+                onSubmitted: widget.onSubmit,
+              ),
           actions: [
             TextButton(
               style: TextButton.styleFrom(

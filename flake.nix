@@ -7,7 +7,6 @@
       url = "github:oxalica/rust-overlay";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
       };
     };
   };
@@ -75,7 +74,7 @@
               rustToolchain
               flutter
               androidSdk
-              gnome.zenity
+                zenity
               fastlane
               cargo-ndk
             ];

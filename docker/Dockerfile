@@ -1,4 +1,4 @@
-FROM ghcr.io/cirruslabs/flutter:latest
+FROM ghcr.io/cirruslabs/flutter:3.22.2
 
 ENV ANDROID_NDK_VERSION 23.1.7779620
 ENV PATH="/root/.cargo/bin:$PATH"

@@ -1,17 +1,16 @@
 import 'dart:io';
 
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:iyox_wormhole/pages/router.dart';
-import 'package:flutter/services.dart';
 import 'package:iyox_wormhole/utils/settings.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'gen/ffi.dart';
+import 'themed_app.dart';
 
 void main() async {
   await initApp();
@@ -42,8 +41,7 @@ Future<void> initApp() async {
   };
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    log.f('PlatformDispatcher - Catch all error: $error',
-        error: error, stackTrace: stack);
+    log.f('PlatformDispatcher - Catch all error: $error', error: error, stackTrace: stack);
     debugPrint("PlatformDispatcher - Catch all error: $error $stack");
     return true;
   };
@@ -60,19 +58,8 @@ class WormholeApp extends StatefulWidget {
   WormholeAppState createState() => WormholeAppState();
 }
 
-class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
-  ThemeMode themeMode = ThemeMode.dark;
-
+class WormholeAppState extends State<WormholeApp> {
   Future<void> initApp() async {
-    // Draw the app from edge to edge
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
-    // Sets the navigation bar color
-    SystemUiOverlayStyle overlayStyle = const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent,
-    );
-    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
-
     // Clear Cache
     await FilePicker.platform.clearTemporaryFiles();
     await Settings.setRecentFiles([]);
@@ -81,55 +68,13 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
   @override
   initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     initBackend();
     initApp().then((_) => debugPrint("App Init Completed"));
-
-    var brightness =
-        WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    getCurrentAppTheme().then((value) {
-      setState(() {
-        if (value == ThemeMode.system) {
-          themeMode =
-              brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
-        } else {
-          themeMode = value;
-        }
-      });
-    });
   }
 
   @override
   Future<void> dispose() async {
-    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    super.didChangePlatformBrightness();
-
-    setTheme();
-  }
-
-  Future<ThemeMode> getCurrentAppTheme() async {
-    return await Settings.getThemeMode();
-  }
-
-  void setTheme() {
-    var brightness = View.of(context).platformDispatcher.platformBrightness;
-    getCurrentAppTheme().then((value) {
-      debugPrint(value.toString());
-
-      setState(() {
-        if (value == ThemeMode.system) {
-          themeMode =
-              brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
-        } else {
-          themeMode = value;
-        }
-      });
-    });
   }
 
   void initBackend() async {
@@ -139,33 +84,14 @@ class WormholeAppState extends State<WormholeApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
-      var lightScheme = lightColorScheme ??
-          ColorScheme.fromSeed(
-              seedColor: Colors.indigo, brightness: Brightness.light);
-      var darkScheme = darkColorScheme ??
-          ColorScheme.fromSeed(
-              seedColor: Colors.indigo, brightness: Brightness.dark);
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: themeMode == ThemeMode.dark
-              ? darkScheme.background
-              : lightScheme.background,
-          systemNavigationBarColor: themeMode == ThemeMode.dark
-              ? darkScheme.surface
-              : lightScheme.surface));
-      return MaterialApp(
-        navigatorKey: NavigationService.navigatorKey,
+    return ThemedApp(
+      builder: (lightScheme, darkScheme, isDarkMode) => MaterialApp(
+        theme: ThemeData(colorScheme: lightScheme, useMaterial3: true),
+        darkTheme: ThemeData(colorScheme: darkScheme, useMaterial3: true),
         debugShowCheckedModeBanner: false,
         title: 'Wormhole',
-        theme: ThemeData(
-          colorScheme: lightScheme,
-        ),
-        darkTheme: ThemeData(
-          colorScheme: darkScheme,
-        ),
-        themeMode: themeMode,
         home: const BasePage(),
-      );
-    });
+      ),
+    );
   }
 }

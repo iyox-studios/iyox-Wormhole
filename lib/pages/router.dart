@@ -24,8 +24,7 @@ class _BasePageState extends State<BasePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         body: PageTransitionSwitcher(
           transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
               FadeThroughTransition(
@@ -61,7 +60,6 @@ class _BasePageState extends State<BasePage> {
                 selectedIcon: Icon(Icons.settings_rounded),
               ),
             ]),
-      ),
     );
   }
 }

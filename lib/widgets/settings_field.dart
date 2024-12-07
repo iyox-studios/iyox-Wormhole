@@ -54,7 +54,7 @@ class _SettingFieldState extends State<SettingField> {
                       style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onSurface),
                     ),
                     Text(
-                      widget.initialValue,
+                      widget.initialValue == '' ? widget.defaultValue : widget.initialValue,
                       style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onSurface),
                     )
                   ]))),

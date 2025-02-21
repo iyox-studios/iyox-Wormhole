@@ -33,8 +33,8 @@ RUN apt update && apt install -y \
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && . "$HOME/.cargo/env" \
     && rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android \
-    && rustup install 1.81.0 \
-    && rustup default 1.81.0 \
+    && rustup install 1.75.0 \
+    #&& rustup default 1.78.0 \
     && echo "export ANDROID_NDK_HOME=/opt/android-sdk-linux/ndk/$ANDROID_NDK_VERSION" >> $HOME/.bashrc \
     && cargo install cargo-ndk
 

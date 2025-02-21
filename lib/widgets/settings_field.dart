@@ -86,6 +86,7 @@ class _SettingFieldState extends State<SettingField> {
               child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
+                _textController.text = widget.initialValue;
               },
             ),
             TextButton(

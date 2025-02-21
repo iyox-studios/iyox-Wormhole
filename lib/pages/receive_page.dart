@@ -35,7 +35,7 @@ class _ReceivePageState extends State<ReceivePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Padding(
-          padding: EdgeInsets.fromLTRB(20, 55, 0, 20),
+          padding: EdgeInsets.fromLTRB(20, 120, 0, 20),
           child: Text("Receive Files", style: TextStyle(fontSize: 37)),
         ),
         Container(

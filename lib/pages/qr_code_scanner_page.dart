@@ -46,8 +46,8 @@ class _QRScannerPageState extends State<QRScannerPage> {
     }
 
     //vibrate
-    if (await Vibration.hasVibrator() ?? false) {
-      if (await Vibration.hasAmplitudeControl() ?? false) {
+    if (await Vibration.hasVibrator()) {
+      if (await Vibration.hasAmplitudeControl()) {
         Vibration.vibrate(duration: 140, amplitude: 2);
       } else {
         Vibration.vibrate(duration: 1000);

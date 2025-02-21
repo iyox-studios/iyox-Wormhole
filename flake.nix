@@ -1,7 +1,7 @@
 {
   description = "Flutter 3.10.0";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -36,10 +36,10 @@
 
         rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./native/rust-toolchain.toml;
 
-        ndkVersion = "23.1.7779620";
+        ndkVersion = "25.1.8937393";
         androidComposition = pkgs.androidenv.composeAndroidPackages {
-          buildToolsVersions = ["34.0.0" "30.0.3"];
-          platformVersions = ["34" "33" "32" "31" "30" "28"];
+          buildToolsVersions = ["34.0.0" "30.0.3" "33.0.1"];
+          platformVersions = ["35" "34" "33" "32" "31" "30" "28"];
           abiVersions = ["armeabi-v7a" "arm64-v8a" "x86" "x86_64"];
           includeNDK = true;
           ndkVersions = [ndkVersion];
@@ -67,14 +67,14 @@
             FLUTTER_SDK = "${pkgs.flutter}";
             GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2";
             LD_LIBRARY_PATH = "${PWD}/build/linux/x64/debug/bundle/lib/:${PWD}/build/linux/x64/release/bundle/lib/:${PWD}/apps/onyx/build/linux/x64/profile/bundle/lib/";
-            ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
+            ANDROID_JAVA_HOME = "${pkgs.jdk17.home}";
             #ANDROID_NDK = "${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}";
             buildInputs = [
               act
               rustToolchain
               flutter
               androidSdk
-                zenity
+              zenity
               fastlane
               cargo-ndk
             ];
@@ -106,7 +106,7 @@
             FLUTTER_SDK = "${pkgs.flutter}";
             LD_LIBRARY_PATH = "./build/linux/x64/debug/bundle/lib/:./build/linux/x64/release/bundle/lib/:${PWD}/apps/onyx/build/linux/x64/profile/bundle/lib/";
 
-            ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
+            ANDROID_JAVA_HOME = "${pkgs.jdk17.home}";
 
             patches = [
               ./corrosion.patch
@@ -119,8 +119,7 @@
             nativeBuildInputs = [
               corrosion
               rustPlatform.cargoSetupHook
-              #cargo
-              gradle_7
+              gradle-unwrapped
               rustToolchain
               copyDesktopItems
               cargo-ndk
@@ -145,12 +144,12 @@
             FLUTTER_SDK = "${pkgs.flutter}";
             GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2";
 
-            ANDROID_JAVA_HOME = "${pkgs.jdk.home}";
+            ANDROID_JAVA_HOME = "${pkgs.jdk17.home}";
 
             nativeBuildInputs = [
               corrosion
               rustPlatform.cargoSetupHook
-              gradle_7
+              gradle-unwrapped
               rustToolchain
               cargo-ndk
             ];

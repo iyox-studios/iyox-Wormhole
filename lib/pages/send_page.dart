@@ -12,7 +12,7 @@ import 'package:share_handler/share_handler.dart';
 import 'sending_page.dart';
 
 class SendPage extends StatefulWidget {
-  const SendPage({Key? key}) : super(key: key);
+  const SendPage({super.key});
 
   @override
   State<SendPage> createState() => _SendPageState();

@@ -10,11 +10,10 @@ import '../gen/ffi.dart';
 
 class SendingPage extends StatefulWidget {
   const SendingPage(
-      {Key? key,
+      {super.key,
       required this.files,
       this.folder = false,
-      this.causedByIntent = false})
-      : super(key: key);
+      this.causedByIntent = false});
 
   final List<String> files;
   final bool folder;

@@ -3,7 +3,7 @@ import 'package:flutter_zxing/flutter_zxing.dart';
 import 'package:vibration/vibration.dart';
 
 class QRScannerPage extends StatefulWidget {
-  const QRScannerPage({Key? key}) : super(key: key);
+  const QRScannerPage({super.key});
 
   @override
   State<QRScannerPage> createState() => _QRScannerPageState();

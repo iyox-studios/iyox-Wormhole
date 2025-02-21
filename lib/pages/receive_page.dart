@@ -7,7 +7,7 @@ import 'package:iyox_wormhole/utils/paths.dart';
 import 'package:iyox_wormhole/utils/type_helpers.dart';
 
 class ReceivePage extends StatefulWidget {
-  const ReceivePage({Key? key}) : super(key: key);
+  const ReceivePage({super.key});
 
   @override
   State<ReceivePage> createState() => _ReceivePageState();

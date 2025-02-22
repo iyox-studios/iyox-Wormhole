@@ -9,12 +9,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../gen/ffi.dart';
 
 class SendingPage extends StatefulWidget {
-  const SendingPage(
-      {Key? key,
-      required this.files,
-      this.folder = false,
-      this.causedByIntent = false})
-      : super(key: key);
+  const SendingPage({super.key, required this.files, this.folder = false, this.causedByIntent = false});
 
   final List<String> files;
   final bool folder;
@@ -89,7 +84,7 @@ class _SendingPageState extends State<SendingPage> {
             SystemNavigator.pop();
             return;
           }
-          if (context.mounted) {
+          if (mounted) {
             Navigator.of(context).pop();
           }
         default:
@@ -102,7 +97,7 @@ class _SendingPageState extends State<SendingPage> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (bool didPop) {
+      onPopInvokedWithResult: (bool didPop, dynamic result) {
         if (didPop) {
           return;
         }
@@ -110,8 +105,7 @@ class _SendingPageState extends State<SendingPage> {
       },
       child: Scaffold(
           appBar: AppBar(),
-          body: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
+          body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
             if (constraints.maxWidth > 600) {
               return _buildWideContainer();
             } else {
@@ -158,13 +152,11 @@ class _SendingPageState extends State<SendingPage> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(codeText,
-                            style: Theme.of(context).textTheme.titleMedium),
+                        Text(codeText, style: Theme.of(context).textTheme.titleMedium),
                         IconButton(
                           onPressed: () {
                             Clipboard.setData(ClipboardData(text: codeText));
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text("Copied code to clipboard"),
                             ));
                           },
@@ -174,9 +166,7 @@ class _SendingPageState extends State<SendingPage> {
                     ),
                   ),
                 ),
-                IconButton(
-                    onPressed: () => {_refreshCode()},
-                    icon: const Icon(Icons.refresh))
+                IconButton(onPressed: () => {_refreshCode()}, icon: const Icon(Icons.refresh))
               ],
             ),
     );
@@ -202,9 +192,7 @@ class _SendingPageState extends State<SendingPage> {
                           padding: const EdgeInsets.all(15),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: QrImageView(
-                                data: "wormhole-transfer:$codeText",
-                                backgroundColor: Colors.white),
+                            child: QrImageView(data: "wormhole-transfer:$codeText", backgroundColor: Colors.white),
                           ))),
                   const Gap(10),
                   Card(
@@ -215,35 +203,24 @@ class _SendingPageState extends State<SendingPage> {
                       borderRadius: BorderRadius.circular(26),
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: codeText));
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text("Copied code to clipboard"),
                         ));
                       },
                       child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 13, vertical: 9),
+                          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
                           child: Text(
                             codeText,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 height: 1.6,
-                                fontSize: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!
-                                        .fontSize! +
-                                    1.5,
-                                fontWeight: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.fontWeight),
+                                fontSize: Theme.of(context).textTheme.titleMedium!.fontSize! + 1.5,
+                                fontWeight: Theme.of(context).textTheme.titleMedium?.fontWeight),
                           )),
                     ),
                   ),
                   const Gap(10),
-                  IconButton(
-                      onPressed: () => {_refreshCode()},
-                      icon: const Icon(Icons.refresh))
+                  IconButton(onPressed: () => {_refreshCode()}, icon: const Icon(Icons.refresh))
                 ],
               ),
             ),
@@ -292,8 +269,7 @@ class _SendingPageState extends State<SendingPage> {
   Future<ServerConfig> _getServerConfig() async {
     final rendezvousUrl = await Settings.getRendezvousUrl();
     final transitUrl = await Settings.getTransitUrl();
-    final serverConfig =
-        ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
+    final serverConfig = ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
     return serverConfig;
   }
 

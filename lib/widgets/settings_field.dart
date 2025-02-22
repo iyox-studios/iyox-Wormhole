@@ -6,10 +6,12 @@ class SettingField extends StatefulWidget {
       required this.title,
       required this.initialValue,
       required this.onSubmit,
+      this.defaultValue = '',
       this.editWidget});
 
   final String title;
   final String initialValue;
+  final String defaultValue;
   final void Function(String) onSubmit;
   final Widget? editWidget;
 
@@ -49,13 +51,11 @@ class _SettingFieldState extends State<SettingField> {
                   children: [
                     Text(
                       widget.title,
-                      style:
-                          TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onSurface),
+                      style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onSurface),
                     ),
                     Text(
-                      widget.initialValue,
-                      style:
-                          TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onSurface),
+                      widget.initialValue == '' ? widget.defaultValue : widget.initialValue,
+                      style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onSurface),
                     )
                   ]))),
     );
@@ -70,6 +70,13 @@ class _SettingFieldState extends State<SettingField> {
               TextField(
                 controller: _textController,
                 onSubmitted: widget.onSubmit,
+                decoration: InputDecoration(
+                  hintText: widget.defaultValue,
+                  suffixIcon: IconButton(
+                    onPressed: _textController.clear,
+                    icon: const Icon(Icons.clear),
+                  ),
+                ),
               ),
           actions: [
             TextButton(
@@ -79,6 +86,7 @@ class _SettingFieldState extends State<SettingField> {
               child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
+                _textController.text = widget.initialValue;
               },
             ),
             TextButton(

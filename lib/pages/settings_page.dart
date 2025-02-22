@@ -6,8 +6,10 @@ import 'package:iyox_wormhole/widgets/settings_field.dart';
 import 'package:iyox_wormhole/widgets/settings_header.dart';
 import 'package:restart_app/restart_app.dart';
 
+import '../gen/ffi.dart';
+
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -27,8 +29,9 @@ class _SettingsPageState extends State<SettingsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-              padding: EdgeInsets.fromLTRB(20, 55, 0, 0),
-              child: Text("Settings", style: TextStyle(fontSize: 37))),
+            padding: EdgeInsets.fromLTRB(20, 55, 0, 0),
+            child: Text("Settings", style: TextStyle(fontSize: 37)),
+          ),
           const Gap(5),
           const SettingsHeader("Security"),
           FutureBuilder(
@@ -193,14 +196,17 @@ class _SettingsPageState extends State<SettingsPage> {
               }),
           const SettingsHeader("Connection"),
           FutureBuilder(
-              future: Settings.getRendezvousUrl(),
+              future: Future.wait([Settings.getRendezvousUrl(), api.defaultRendezvousUrl()]),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return SettingField(
                     title: "Rendezvous URL",
-                    initialValue: snapshot.data.toString(),
+                    defaultValue: snapshot.data![1].toString(),
+                    initialValue: snapshot.data![0].toString() == snapshot.data![1].toString()
+                        ? ''
+                        : snapshot.data![0].toString(),
                     onSubmit: (value) => setState(() {
-                      Settings.setRendezvousUrl(value);
+                      Settings.setRendezvousUrl(value == '' ? snapshot.data![1].toString() : value);
                     }),
                   );
                 }
@@ -210,14 +216,17 @@ class _SettingsPageState extends State<SettingsPage> {
                 );
               }),
           FutureBuilder(
-              future: Settings.getTransitUrl(),
+              future: Future.wait([Settings.getTransitUrl(), api.defaultTransitUrl()]),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return SettingField(
                     title: "Transit URL",
-                    initialValue: snapshot.data.toString(),
+                    defaultValue: snapshot.data![1].toString(),
+                    initialValue: snapshot.data![0].toString() == snapshot.data![1].toString()
+                        ? ''
+                        : snapshot.data![0].toString(),
                     onSubmit: (value) => setState(() {
-                      Settings.setTransitUrl(value);
+                      Settings.setTransitUrl(value == '' ? snapshot.data![1].toString() : value);
                     }),
                   );
                 }

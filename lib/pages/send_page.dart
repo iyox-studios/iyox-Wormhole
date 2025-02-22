@@ -12,7 +12,7 @@ import 'package:share_handler/share_handler.dart';
 import 'sending_page.dart';
 
 class SendPage extends StatefulWidget {
-  const SendPage({Key? key}) : super(key: key);
+  const SendPage({super.key});
 
   @override
   State<SendPage> createState() => _SendPageState();
@@ -48,12 +48,11 @@ class _SendPageState extends State<SendPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.fromLTRB(20, 55, 0, 20),
+          padding: EdgeInsets.fromLTRB(20, 120, 0, 20),
           child: Text("Send Files", style: TextStyle(fontSize: 37)),
         ),
         const RecentFiles(),
@@ -103,7 +102,7 @@ class _SendPageState extends State<SendPage> {
                 ))),
         const Gap(30)
       ],
-    ));
+    );
   }
 
   Future<ServerConfig> getServerConfig() async {

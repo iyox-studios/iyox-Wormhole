@@ -1,0 +1,25 @@
+--- a/packages/flutter_tools/gradle/resolve_dependencies.gradle
++++ b/packages/flutter_tools/gradle/resolve_dependencies.gradle
+@@ -23,10 +23,19 @@
+ }
+
+ repositories {
+-    google()
+-    mavenCentral()
+-    maven {
+-        url "$storageUrl/${engineRealm}download.flutter.io"
++
++    if(project.hasProperty("nixMavenRepo")) {
++        repositories {
++            maven { url = nixMavenRepo }
++        }
++    } else {
++        repositories {
++            google()
++            mavenCentral()
++            maven {
++                url "$storageUrl/${engineRealm}download.flutter.io"
++            }
++        }
+     }
+ }

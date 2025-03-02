@@ -68,10 +68,6 @@
             ANDROID_NDK_ROOT = "${androidSdk}/libexec/android-sdk/ndk-bundle";
             FLUTTER_SDK = "${pkgs.flutter}";
             JAVA_HOME = "${pkgs.jdk.home}";
-            #ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
-            #GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/34.0.0/aapt2";
-            #LD_LIBRARY_PATH = "${PWD}/build/linux/x64/debug/bundle/lib/:${PWD}/build/linux/x64/release/bundle/lib/:${PWD}/apps/onyx/build/linux/x64/profile/bundle/lib/";
-            #ANDROID_NDK = "${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}";
             buildInputs = [
               flutter
               androidSdk

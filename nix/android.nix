@@ -57,7 +57,6 @@ in
       runHook preBuild
 
       mkdir -p build/flutter_assets/fonts
-      #cp --no-preserve=all "$pubspecLockFilePath" pubspec.lock
       mkdir -p .dart_tool && cp --no-preserve=all "$packageConfig" .dart_tool/package_config.json
 
       cd android

@@ -14,7 +14,7 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+      systems = [ "x86_64-linux" ];
       perSystem = {
         system,
         pkgs,
@@ -80,7 +80,7 @@
         packages = {
           android = pkgs.callPackage ./nix/android.nix {
             inherit androidSdk pubspecLock gradle;
-            pname = "test";
+            pname = "iyox-wormhole";
             version = "1.0";
           };
           update-locks = pkgs.callPackage ./nix/update-locks.nix {

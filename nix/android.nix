@@ -82,7 +82,7 @@ in
     installPhase = ''
       runHook preInstall
       mkdir -p $out
-      cp -r ./build/app/outputs/*apk/ $out
+      cp -r ./build/app/outputs/flutter-apk/* $out/
       runHook postInstall
     '';
 

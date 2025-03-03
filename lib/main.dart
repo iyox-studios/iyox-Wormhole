@@ -1,17 +1,58 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:iyox_wormhole/i18n/strings.g.dart';
+import 'package:iyox_wormhole/utils/logger.dart';
+import 'package:iyox_wormhole/utils/shared_prefs.dart';
+import 'package:logger/logger.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Settings
+  await SharedPrefs().init();
+
+  // Display Mode
+  if (kReleaseMode && Platform.isAndroid) {
+    await FlutterDisplayMode.setHighRefreshRate();
+  }
+
+  // Logging
+  final logger = getLogger();
+  if (kDebugMode) {
+    Logger.level = Level.debug;
+  } else {
+    Logger.level = Level.warning;
+  }
+
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+
+    logger.f(
+      'Uncaught Error: ${details.toString()} - ${details.exception}',
+      error: details,
+      stackTrace: details.stack,
+    );
+  };
+
+  LocaleSettings.useDeviceLocale();
+  runApp(TranslationProvider(child: const Wormhole()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Wormhole extends StatelessWidget {
+  const Wormhole({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      locale: TranslationProvider.of(context).flutterLocale,
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -105,8 +146,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              t.common.test,
             ),
             Text(
               '$_counter',
@@ -119,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

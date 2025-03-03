@@ -24,7 +24,7 @@
       }: let
         androidComposition = pkgs.androidenv.composeAndroidPackages {
           buildToolsVersions = ["34.0.0"];
-          platformVersions = ["35" "34"];
+          platformVersions = ["35" "34" "33"];
           abiVersions = ["armeabi-v7a" "arm64-v8a" "x86" "x86_64"];
           includeNDK = true;
           ndkVersions = ["26.1.10909125"];
@@ -50,7 +50,7 @@
           };
           overlays = [
             (final: prev: {
-              flutter = prev.flutter.wrapFlutter (prev.flutter324.unwrapped.override {
+              flutter = prev.flutter.wrapFlutter (prev.flutter.unwrapped.override {
                 patches =
                   prev.flutter.unwrapped.patches
                   ++ [

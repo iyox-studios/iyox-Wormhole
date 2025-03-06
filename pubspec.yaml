@@ -10,12 +10,14 @@ environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
-  dynamic_color: ^0.0.1
+  device_info_plus: ^11.3.0
+  dynamic_color: ^1.7.0
   flutter:
     sdk: flutter
   flutter_displaymode: ^0.6.0
   flutter_localizations:
     sdk: flutter
+  go_router: ^14.8.1
   icons_launcher: ^3.0.1
   logger: ^2.5.0
   shared_preferences: ^2.5.2

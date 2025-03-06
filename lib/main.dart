@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
+import 'package:iyox_wormhole/themed_app.dart';
 import 'package:iyox_wormhole/utils/logger.dart';
 import 'package:iyox_wormhole/utils/shared_prefs.dart';
 import 'package:logger/logger.dart';
@@ -39,41 +40,73 @@ Future<void> main() async {
   };
 
   LocaleSettings.useDeviceLocale();
-  runApp(TranslationProvider(child: const Wormhole()));
+  runApp(TranslationProvider(child: const App()));
 }
 
-class Wormhole extends StatelessWidget {
-  const Wormhole({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
-  // This widget is the root of your application.
+  static final GoRouter _router = GoRouter(
+    initialLocation: '/home',
+    routes: <GoRoute>[
+      GoRoute(
+        path: '/',
+        //redirect: (context, state) => initialLocation,
+      ),
+      GoRoute(
+        path: '/home',
+        builder: (context, state) => MyHomePage(
+          title: 'Test',
+        ),
+      ),
+    ],
+  );
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  //StreamSubscription? _intentDataStreamSubscription;
+
+  @override
+  void initState() {
+    //setupSharingIntent();
+    super.initState();
+  }
+
+  /*
+  void setupSharingIntent() {
+    if (Platform.isAndroid || Platform.isIOS) {
+      // for files opened while the app is closed
+      ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> files) {
+        for (final file in files) {
+          App.openFile(file);
+        }
+      });
+
+      // for files opened while the app is open
+      final stream = ReceiveSharingIntent.instance.getMediaStream();
+      _intentDataStreamSubscription = stream.listen((List<SharedMediaFile> files) {
+        for (final file in files) {
+          App.openFile(file);
+        }
+      });
+    }
+  }*/
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      locale: TranslationProvider.of(context).flutterLocale,
-      supportedLocales: AppLocaleUtils.supportedLocales,
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return ThemedApp(
+      title: 'Saber',
+      router: App._router,
     );
+  }
+
+  @override
+  void dispose() {
+    //_intentDataStreamSubscription?.cancel();
+    super.dispose();
   }
 }
 

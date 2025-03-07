@@ -2,6 +2,7 @@
   pname,
   flutter,
   version,
+  versionCode,
   pubspecLock,
   androidSdk,
   jdk,
@@ -48,6 +49,9 @@ in
       echo "sdk.dir=${androidSdk}/libexec/android-sdk" >> android/local.properties
       echo "flutter.sdk=${flutter}" >> android/local.properties
 
+      echo "flutter.versionName=${version}" >> android/local.properties
+      echo "flutter.versionCode=${versionCode}" >> android/local.properties
+
       export HOME="$NIX_BUILD_TOP"
       flutter config --no-analytics &>/dev/null # mute first-run
       flutter config --enable-linux-desktop >/dev/null
@@ -60,7 +64,7 @@ in
       mkdir -p .dart_tool && cp --no-preserve=all "$packageConfig" .dart_tool/package_config.json
 
       cd android
-      echo "${mavenRepo}"
+
       gradle --project-cache-dir gradle/tmp \
         --offline --no-daemon --no-build-cache --info --full-stacktrace \
         --console=plain \

@@ -24,7 +24,7 @@
       }: let
         androidComposition = pkgs.androidenv.composeAndroidPackages {
           buildToolsVersions = ["34.0.0"];
-          platformVersions = ["35" "34" "33"];
+          platformVersions = ["35" "34" "33" "31"];
           abiVersions = ["armeabi-v7a" "arm64-v8a" "x86" "x86_64"];
           includeNDK = true;
           ndkVersions = ["26.1.10909125"];
@@ -35,6 +35,7 @@
         };
         androidSdk = androidComposition.androidsdk;
         pubspecLock = pkgs.lib.importJSON ./pubspec.lock.json;
+        version = (import ./nix/get-version.nix {inherit pkgs;});
 
         gradle = pkgs.callPackage (pkgs.gradleGen {
           version = "8.8";
@@ -81,7 +82,8 @@
           android = pkgs.callPackage ./nix/android.nix {
             inherit androidSdk pubspecLock gradle;
             pname = "iyox-wormhole";
-            version = "1.0";
+            version = version.versionName;
+            versionCode = version.versionCode;
           };
           update-locks = pkgs.callPackage ./nix/update-locks.nix {
             inherit gradle;

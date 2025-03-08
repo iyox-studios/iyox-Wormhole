@@ -1,2 +1,5 @@
 common:
-  test: "Test en"
+  page_titles:
+    settings: 'Settings'
+    send: 'Send File'
+    receive: 'Receive File'

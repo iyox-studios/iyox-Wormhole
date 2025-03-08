@@ -2,6 +2,11 @@
 ///
 /// Original: lib/i18n
 /// To regenerate, run: `dart run slang`
+///
+/// Locales: 1
+/// Strings: 3
+///
+/// Built on 2025-03-08 at 10:43 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -41,6 +46,7 @@ enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 ///
 /// Usage:
 /// String a = t.someKey.anotherKey;
+/// String b = t['someKey.anotherKey']; // Only for edge cases!
 Translations get t => LocaleSettings.instance.currentTranslations;
 
 /// Method B: Advanced
@@ -57,6 +63,7 @@ Translations get t => LocaleSettings.instance.currentTranslations;
 /// Step 2:
 /// final t = Translations.of(context); // Get t variable.
 /// String a = t.someKey.anotherKey; // Use t variable.
+/// String b = t['someKey.anotherKey']; // Only for edge cases!
 class TranslationProvider extends BaseTranslationProvider<AppLocale, Translations> {
 	TranslationProvider({required super.child}) : super(settings: LocaleSettings.instance);
 
@@ -127,10 +134,15 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  );
+		  ) {
+		$meta.setFlatMapFunction(_flatMapFunction);
+	}
 
 	/// Metadata for the translations of <en>.
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
+
+	/// Access flat map
+	dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final Translations _root = this; // ignore: unused_field
 
@@ -145,5 +157,31 @@ class _StringsCommonEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get test => 'Test de';
+	late final _StringsCommonPageTitlesEn page_titles = _StringsCommonPageTitlesEn._(_root);
+}
+
+// Path: common.page_titles
+class _StringsCommonPageTitlesEn {
+	_StringsCommonPageTitlesEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get settings => 'Einstellungen';
+	String get send => 'Datei Senden';
+	String get receive => 'Datei Empfangen';
+}
+
+/// Flat map(s) containing all translations.
+/// Only for edge cases! For simple maps, use the map function of this library.
+
+extension on Translations {
+	dynamic _flatMapFunction(String path) {
+		switch (path) {
+			case 'common.page_titles.settings': return 'Einstellungen';
+			case 'common.page_titles.send': return 'Datei Senden';
+			case 'common.page_titles.receive': return 'Datei Empfangen';
+			default: return null;
+		}
+	}
 }

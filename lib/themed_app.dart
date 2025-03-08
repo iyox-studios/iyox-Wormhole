@@ -1,10 +1,10 @@
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
+import 'package:iyox_wormhole/utils/device_info.dart';
 import 'package:iyox_wormhole/utils/logger.dart';
 
 class ThemedApp extends StatefulWidget {
@@ -43,7 +43,7 @@ class ThemedApp extends StatefulWidget {
 }
 
 class _ThemedAppState extends State<ThemedApp> {
-  late AndroidDeviceInfo androidDeviceInfo;
+  final DeviceInfo deviceInfo = DeviceInfo();
 
   static const _pageTransitionsTheme = PageTransitionsTheme(
     builders: {
@@ -54,7 +54,6 @@ class _ThemedAppState extends State<ThemedApp> {
   @override
   void initState() {
     super.initState();
-    _initAndroidInfo();
     //Prefs.appTheme.addListener(onChanged);
     //Prefs.platform.addListener(onChanged);
     //Prefs.accentColor.addListener(onChanged);
@@ -64,11 +63,6 @@ class _ThemedAppState extends State<ThemedApp> {
     SystemChrome.setSystemUIChangeCallback(_onFullscreenChange);
 
     super.initState();
-  }
-
-  Future<void> _initAndroidInfo() async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    androidDeviceInfo = await deviceInfo.androidInfo;
   }
 
   void onChanged() {
@@ -88,11 +82,10 @@ class _ThemedAppState extends State<ThemedApp> {
         final customAccent = widget.defaultSwatch; // settings
 
         // final Color seedColor;
-        final ColorScheme lightScheme;
-        final ColorScheme darkScheme;
+        ColorScheme lightScheme;
+        ColorScheme darkScheme;
 
-        // Dynamic Colors are supported for SDK Versions 31+
-        if (useSystemColors && androidDeviceInfo.version.sdkInt >= 31) {
+        if (useSystemColors && deviceInfo.supportsDynamicColor) {
           lightScheme = lightDynamic ??
               ColorScheme.fromSeed(seedColor: customAccent, brightness: Brightness.light);
           darkScheme = darkDynamic ??
@@ -109,6 +102,9 @@ class _ThemedAppState extends State<ThemedApp> {
           isDarkMode = themeMode == ThemeMode.dark;
         }
 
+        lightScheme = _fixSurfaceContainers(lightScheme);
+        darkScheme = _fixSurfaceContainers(darkScheme);
+
         return MaterialApp.router(
           title: widget.title,
           color: isDarkMode ? darkScheme.surface : lightScheme.surface,
@@ -120,14 +116,14 @@ class _ThemedAppState extends State<ThemedApp> {
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: lightScheme,
-            scaffoldBackgroundColor: lightScheme.surface,
+            //scaffoldBackgroundColor: lightScheme.surface,
             platform: TargetPlatform.android,
             pageTransitionsTheme: _pageTransitionsTheme,
           ),
           darkTheme: ThemeData(
             useMaterial3: true,
             colorScheme: darkScheme,
-            scaffoldBackgroundColor: darkScheme.surface,
+            //scaffoldBackgroundColor: darkScheme.surface,
             platform: TargetPlatform.android,
             pageTransitionsTheme: _pageTransitionsTheme,
           ),
@@ -146,5 +142,51 @@ class _ThemedAppState extends State<ThemedApp> {
     SystemChrome.setSystemUIChangeCallback(null);
 
     super.dispose();
+  }
+
+  ColorScheme _fixSurfaceContainers(ColorScheme scheme) {
+    final surface = scheme.surface;
+    final tint = scheme.surfaceTint;
+
+    var surfaceContainerLowest = scheme.surfaceContainerLowest;
+    var surfaceContainerLow = scheme.surfaceContainerLow;
+    var surfaceContainer = scheme.surfaceContainer;
+    var surfaceContainerHigh = scheme.surfaceContainerHigh;
+    var surfaceContainerHighest = scheme.surfaceContainerHighest;
+
+    if (surfaceContainerLowest == surface) {
+      surfaceContainerLowest = switch (scheme.brightness) {
+        Brightness.light => Colors.white,
+        Brightness.dark => Color.alphaBlend(
+            Colors.black45,
+            scheme.surfaceDim,
+          ),
+      };
+    }
+    if (surfaceContainerLow == surface) {
+      surfaceContainerLow = ElevationOverlay.applySurfaceTint(surface, tint, 1);
+    }
+    if (surfaceContainer == surface) {
+      surfaceContainer = ElevationOverlay.applySurfaceTint(surface, tint, 2);
+    }
+    if (surfaceContainerHigh == surface) {
+      surfaceContainerHigh = ElevationOverlay.applySurfaceTint(
+        surface,
+        tint,
+        3,
+      );
+    }
+    if (surfaceContainerHighest == surface) {
+      // ignore: deprecated_member_use
+      surfaceContainerHighest = scheme.surfaceVariant;
+    }
+
+    return scheme.copyWith(
+      surfaceContainerLowest: surfaceContainerLowest,
+      surfaceContainerLow: surfaceContainerLow,
+      surfaceContainer: surfaceContainer,
+      surfaceContainerHigh: surfaceContainerHigh,
+      surfaceContainerHighest: surfaceContainerHighest,
+    );
   }
 }

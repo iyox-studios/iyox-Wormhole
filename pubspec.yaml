@@ -10,6 +10,7 @@ environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
+  animations: ^2.0.11
   device_info_plus: ^11.3.0
   dynamic_color: ^1.7.0
   flutter:

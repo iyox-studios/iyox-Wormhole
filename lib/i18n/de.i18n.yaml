@@ -3,3 +3,12 @@ common:
     settings: 'Einstellungen'
     send: 'Datei Senden'
     receive: 'Datei Empfangen'
+  navbar:
+    send: 'Senden'
+    receive: 'Empfangen'
+    settings: 'Einstellungen'
+
+pages:
+  send:
+    send_file: 'Datei Senden'
+    send_folder: 'Ordner Senden'

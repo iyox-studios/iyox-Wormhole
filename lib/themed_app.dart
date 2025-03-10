@@ -25,9 +25,10 @@ class ThemedApp extends StatefulWidget {
   static void setFullscreen(bool value, {required bool updateSystem}) {
     _isFullscreen.value = value;
     if (!updateSystem) return;
-    getLogger().f("TODO Fullscreen");
+    getLogger().f('TODO Fullscreen');
 
-    SystemChrome.setEnabledSystemUIMode(value ? SystemUiMode.immersive : SystemUiMode.edgeToEdge);
+    SystemChrome.setEnabledSystemUIMode(
+        value ? SystemUiMode.immersive : SystemUiMode.edgeToEdge);
   }
 
   static void addFullscreenListener(void Function() listener) {
@@ -87,17 +88,22 @@ class _ThemedAppState extends State<ThemedApp> {
 
         if (useSystemColors && deviceInfo.supportsDynamicColor) {
           lightScheme = lightDynamic ??
-              ColorScheme.fromSeed(seedColor: customAccent, brightness: Brightness.light);
+              ColorScheme.fromSeed(
+                  seedColor: customAccent, brightness: Brightness.light);
           darkScheme = darkDynamic ??
-              ColorScheme.fromSeed(seedColor: customAccent, brightness: Brightness.dark);
+              ColorScheme.fromSeed(
+                  seedColor: customAccent, brightness: Brightness.dark);
         } else {
-          lightScheme = ColorScheme.fromSeed(seedColor: customAccent, brightness: Brightness.light);
-          darkScheme = ColorScheme.fromSeed(seedColor: customAccent, brightness: Brightness.dark);
+          lightScheme = ColorScheme.fromSeed(
+              seedColor: customAccent, brightness: Brightness.light);
+          darkScheme = ColorScheme.fromSeed(
+              seedColor: customAccent, brightness: Brightness.dark);
         }
 
         final bool isDarkMode;
         if (themeMode == ThemeMode.system) {
-          isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+          isDarkMode =
+              MediaQuery.of(context).platformBrightness == Brightness.dark;
         } else {
           isDarkMode = themeMode == ThemeMode.dark;
         }

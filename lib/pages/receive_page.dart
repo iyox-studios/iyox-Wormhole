@@ -10,7 +10,6 @@ class ReceivePage extends StatefulWidget {
 }
 
 class _ReceivePageState extends State<ReceivePage> {
-
   @override
   Widget build(BuildContext context) {
     final t = Translations.of(context);
@@ -22,9 +21,7 @@ class _ReceivePageState extends State<ReceivePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
-          ],
+          children: <Widget>[],
         ),
       ),
     );

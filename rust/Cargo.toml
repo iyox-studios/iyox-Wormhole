@@ -1,0 +1,29 @@
+[package]
+name = "native"
+version = "1.1.5"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+anyhow = "1.0.97"
+flutter_rust_bridge = "=2.8.0"
+magic-wormhole = "0.7.5"
+futures = "0.3.31"
+async-std = "1.13.0"
+url = { version = "2.5.4", features = ["serde"] }
+zip = { version = "2.2.3", default-features = false, features = ["deflate"] }
+macros = { path = "macros", version = "1" }
+fastrand = "2.3.0"
+tracing = "0.1.41"
+
+[profile.release]
+opt-level = 'z'     # Optimize for size.
+lto = true          # Enable Link Time Optimization
+codegen-units = 1   # Reduce number of codegen units to increase optimizations.
+panic = 'abort'     # Abort on panic
+strip = true        # Strip symbols from binary*
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }

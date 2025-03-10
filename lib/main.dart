@@ -1,19 +1,23 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:iyox_wormhole/components/app_bar.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 import 'package:iyox_wormhole/routing/router.dart';
+import 'package:iyox_wormhole/rust/api.dart';
+import 'package:iyox_wormhole/rust/frb_generated.dart';
 import 'package:iyox_wormhole/themed_app.dart';
 import 'package:iyox_wormhole/utils/device_info.dart';
 import 'package:iyox_wormhole/utils/logger.dart';
 import 'package:iyox_wormhole/utils/shared_prefs.dart';
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await RustLib.init();
+  final tempDir = (await getTemporaryDirectory()).path;
+  initBackend(tempFilePath: tempDir);
 
   // Settings
   await SharedPrefs().init();
@@ -44,7 +48,7 @@ Future<void> main() async {
   // Device Info
   await DeviceInfo().init();
 
-  LocaleSettings.useDeviceLocale();
+  await LocaleSettings.useDeviceLocale();
   runApp(TranslationProvider(child: const App()));
 }
 

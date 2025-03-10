@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iyox_wormhole/main.dart';
 import 'package:iyox_wormhole/pages/receive_page.dart';
 import 'package:iyox_wormhole/pages/send_page.dart';
+import 'package:iyox_wormhole/pages/sending_page.dart';
 import 'package:iyox_wormhole/pages/settings_page.dart';
 import 'package:iyox_wormhole/routing/shell.dart';
+import 'package:iyox_wormhole/utils/logger.dart';
 
-final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> _rootNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellSendNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'send');
 final GlobalKey<NavigatorState> _shellReceiveNavigatorKey =
@@ -29,7 +31,21 @@ final goRouter = GoRouter(
             GoRoute(
               path: '/send',
               builder: (context, state) => SendPage(),
-            )
+              routes: [
+                GoRoute(
+                  path: '/sending',
+                  builder: (context, state) {
+                    final extra = state.extra as Map<String, dynamic>;
+                    List<String> files = extra['files'] as List<String>;
+                    bool isFolder = extra['isFolder'] as bool;
+                    return SendingPage(
+                      files: files,
+                      isFolder: isFolder,
+                    );
+                  },
+                ),
+              ],
+            ),
           ],
         ),
         StatefulShellBranch(

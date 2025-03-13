@@ -8,8 +8,17 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    naersk = {
+      url = "github:nix-community/naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = inputs @ {flake-parts, rust-overlay, ...}:
+  outputs = inputs @ {
+    flake-parts,
+    rust-overlay,
+    naersk,
+    ...
+  }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       perSystem = {
@@ -19,12 +28,13 @@
         lib,
         ...
       }: let
+        ndkVersion = "26.1.10909125";
         androidComposition = pkgs.androidenv.composeAndroidPackages {
           buildToolsVersions = ["34.0.0"];
           platformVersions = ["35" "34" "33" "31"];
           abiVersions = ["armeabi-v7a" "arm64-v8a" "x86" "x86_64"];
           includeNDK = true;
-          ndkVersions = ["26.1.10909125"];
+          ndkVersions = [ndkVersion];
           toolsVersion = "26.1.1";
           platformToolsVersion = "34.0.5";
 
@@ -40,10 +50,10 @@
           defaultJava = pkgs.jdk;
         }) {};
 
-         rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust/rust-toolchain.toml;
-         rustLib = rustToolchain.override {
-            extensions = ["rust-src"];
-         };
+        rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust/rust-toolchain.toml;
+        rustLib = rustToolchain.override {
+          extensions = ["rust-src"];
+        };
       in rec {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
@@ -78,6 +88,7 @@
               androidSdk
               jdk
               yq
+              just
               gradle
 
               # Rust
@@ -89,10 +100,11 @@
 
         packages = {
           android = pkgs.callPackage ./nix/android.nix {
-            inherit androidSdk pubspecLock gradle;
+            inherit androidSdk pubspecLock gradle rustToolchain ndkVersion naersk;
             pname = "iyox-wormhole";
             version = version.versionName;
             versionCode = version.versionCode;
+            nixpkgs = inputs.nixpkgs;
           };
           update-locks = pkgs.callPackage ./nix/update-locks.nix {
             inherit gradle;

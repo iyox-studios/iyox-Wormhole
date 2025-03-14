@@ -36,7 +36,7 @@ class _SendPageState extends State<SendPage> {
       body: Stack(
         children: [
           // Your main content
-          Center(child: Text("Your main content goes here")),
+          Center(child: Text("Test")),
           // Align buttons at the bottom center
           Align(
             alignment: Alignment.bottomCenter,
@@ -72,15 +72,11 @@ class _SendPageState extends State<SendPage> {
   }
 
   void _onSendButtonClick() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: true);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (mounted) {
       if (result != null) {
-        final files = result.files
-            .where((element) => element.path != null)
-            .map((e) => e.path!)
-            .toList();
+        final files = result.files.where((element) => element.path != null).map((e) => e.path!).toList();
 
         context.go('/send/sending', extra: {'files': files, 'isFolder': false});
         //Navigator.push(context, _createSendingRoute(files));
@@ -96,17 +92,15 @@ class _SendPageState extends State<SendPage> {
   }
 
   void _onSendFolderButtonClick() async {
-      try {
-        await Permission.manageExternalStorage.request();
-      } catch (e) {
-        log.w('Failed to request manageExternalStorage permission', error: e);
-      }
-
+    try {
+      await Permission.manageExternalStorage.request();
+    } catch (e) {
+      log.w('Failed to request manageExternalStorage permission', error: e);
+    }
 
     String? path = await FilePicker.platform.getDirectoryPath();
 
     if (path != null) {
-
       if (mounted) {
         context.go('/send/sending', extra: {
           'files': [path],

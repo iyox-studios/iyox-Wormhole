@@ -73,7 +73,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.8.0';
 
   @override
-  int get rustContentHash => -555812687;
+  int get rustContentHash => -1701693782;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -91,6 +91,11 @@ abstract class RustLibApi extends BaseApi {
   Future<void> crateApiInit();
 
   void crateApiInitBackend({required String tempFilePath});
+
+  Stream<TUpdate> crateApiRequestFile(
+      {required String code,
+      required String storageFolder,
+      required ServerConfig serverConfig});
 
   Stream<TUpdate> crateApiSendFiles(
       {required List<String> filePaths,
@@ -205,6 +210,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Stream<TUpdate> crateApiRequestFile(
+      {required String code,
+      required String storageFolder,
+      required ServerConfig serverConfig}) {
+    final actions = RustStreamSink<TUpdate>();
+    unawaited(handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_String(code, serializer);
+        sse_encode_String(storageFolder, serializer);
+        sse_encode_box_autoadd_server_config(serverConfig, serializer);
+        sse_encode_StreamSink_t_update_Sse(actions, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 5, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiRequestFileConstMeta,
+      argValues: [code, storageFolder, serverConfig, actions],
+      apiImpl: this,
+    )));
+    return actions.stream;
+  }
+
+  TaskConstMeta get kCrateApiRequestFileConstMeta => const TaskConstMeta(
+        debugName: 'request_file',
+        argNames: ['code', 'storageFolder', 'serverConfig', 'actions'],
+      );
+
+  @override
   Stream<TUpdate> crateApiSendFiles(
       {required List<String> filePaths,
       required String name,
@@ -220,7 +257,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_box_autoadd_server_config(serverConfig, serializer);
         sse_encode_StreamSink_t_update_Sse(actions, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 5, port: port_);
+            funcId: 6, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_unit,
@@ -260,7 +297,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_box_autoadd_server_config(serverConfig, serializer);
         sse_encode_StreamSink_t_update_Sse(actions, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 6, port: port_);
+            funcId: 7, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_unit,

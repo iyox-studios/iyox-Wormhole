@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iyox_wormhole/components/app_bar.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
+import 'package:iyox_wormhole/widgets/app_bar.dart';
+import 'package:iyox_wormhole/widgets/illustration.dart';
 
 class ReceivePage extends StatefulWidget {
   const ReceivePage({super.key});
@@ -21,7 +23,15 @@ class _ReceivePageState extends State<ReceivePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+          children: <Widget>[
+            Center(
+              child: Illustration(
+                assetPath: 'assets/illustrations/undraw_file-manager_yics.svg',
+                label: 'Download illustration',
+                width: 270,
+              ),
+            ),
+          ],
         ),
       ),
     );

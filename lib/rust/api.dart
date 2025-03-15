@@ -35,6 +35,13 @@ Stream<TUpdate> sendFolder(
         codeLength: codeLength,
         serverConfig: serverConfig);
 
+Stream<TUpdate> requestFile(
+        {required String code,
+        required String storageFolder,
+        required ServerConfig serverConfig}) =>
+    RustLib.instance.api.crateApiRequestFile(
+        code: code, storageFolder: storageFolder, serverConfig: serverConfig);
+
 String defaultRendezvousUrl() =>
     RustLib.instance.api.crateApiDefaultRendezvousUrl();
 

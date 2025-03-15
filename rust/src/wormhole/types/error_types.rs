@@ -16,4 +16,6 @@ pub enum ErrorType {
     TransferConnectionError,
     /// error creating zip temp file
     ZipFileError,
+    /// error parsing code
+    ParseCodeError,
 }

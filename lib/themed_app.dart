@@ -20,6 +20,7 @@ class ThemedApp extends StatefulWidget {
   final GoRouter router;
 
   static final ValueNotifier<bool> _isFullscreen = ValueNotifier(false);
+
   static bool get isFullscreen => _isFullscreen.value;
 
   static void setFullscreen(bool value, {required bool updateSystem}) {
@@ -125,6 +126,13 @@ class _ThemedAppState extends State<ThemedApp> {
             //scaffoldBackgroundColor: lightScheme.surface,
             platform: TargetPlatform.android,
             pageTransitionsTheme: _pageTransitionsTheme,
+            snackBarTheme: SnackBarThemeData(
+              backgroundColor: lightScheme.inverseSurface,
+              actionTextColor: lightScheme.inversePrimary,
+              behavior: SnackBarBehavior.floating,
+              elevation: 1,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+            ),
           ),
           darkTheme: ThemeData(
             useMaterial3: true,
@@ -132,12 +140,19 @@ class _ThemedAppState extends State<ThemedApp> {
             //scaffoldBackgroundColor: darkScheme.surface,
             platform: TargetPlatform.android,
             pageTransitionsTheme: _pageTransitionsTheme,
+            splashFactory: InkSparkle.splashFactory,
+            snackBarTheme: SnackBarThemeData(
+              backgroundColor: darkScheme.inverseSurface,
+              actionTextColor: darkScheme.inversePrimary,
+              behavior: SnackBarBehavior.floating,
+              elevation: 1,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+            ),
           ),
         );
       },
     );
   }
-
   @override
   void dispose() {
     //Prefs.appTheme.removeListener(onChanged);

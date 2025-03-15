@@ -7,8 +7,15 @@ common:
     send: 'Senden'
     receive: 'Empfangen'
     settings: 'Einstellungen'
+  generic_error: 'Etwas ist schiefgelaufen'
+  generic_acknowledge: 'Ok'
 
 pages:
   send:
     send_file: 'Datei Senden'
     send_folder: 'Ordner Senden'
+    permission_denied: 'Berechtigung benötigt, um Ordner zu senden'
+    abort_transfer_title: 'Dateiübertragung abbrechen?'
+    abort_transfer_message: 'Möchten Sie die laufende Dateiübertragung abbrechen?'
+    abort_transfer_yes: 'Abbrechen'
+    abort_transfer_no: 'Weiter'

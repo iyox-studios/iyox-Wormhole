@@ -2,8 +2,7 @@ use std::{collections::HashMap, rc::Rc};
 
 use async_std::fs::remove_file;
 use magic_wormhole::{
-    transfer::{self, TransferError},
-    transit, MailboxConnection, Wormhole,
+    transfer::{self, TransferError}, transit, uri::WormholeTransferUri, MailboxConnection, Wormhole
 };
 
 use crate::{api::{ErrorType, Events, ServerConfig, TUpdate, Value}, frb_generated::StreamSink};
@@ -64,7 +63,7 @@ pub async fn send_file(
     };
     let appconfig = gen_app_config(&server_config);
 
-    let mailbox_connection = match MailboxConnection::create(appconfig, code_length as usize).await
+    let mailbox_connection = match MailboxConnection::create(appconfig.clone(), code_length as usize).await
     {
         Ok(v) => v,
         Err(e) => {

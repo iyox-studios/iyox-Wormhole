@@ -48,6 +48,8 @@ class _TranslationsCommonDe extends TranslationsCommonEn {
 	// Translations
 	@override late final _TranslationsCommonPageTitlesDe page_titles = _TranslationsCommonPageTitlesDe._(_root);
 	@override late final _TranslationsCommonNavbarDe navbar = _TranslationsCommonNavbarDe._(_root);
+	@override String get generic_error => 'Etwas ist schiefgelaufen';
+	@override String get generic_acknowledge => 'Ok';
 }
 
 // Path: pages
@@ -93,6 +95,11 @@ class _TranslationsPagesSendDe extends TranslationsPagesSendEn {
 	// Translations
 	@override String get send_file => 'Datei Senden';
 	@override String get send_folder => 'Ordner Senden';
+	@override String get permission_denied => 'Berechtigung benötigt, um Ordner zu senden';
+	@override String get abort_transfer_title => 'Dateiübertragung abbrechen?';
+	@override String get abort_transfer_message => 'Möchten Sie die laufende Dateiübertragung abbrechen?';
+	@override String get abort_transfer_yes => 'Abbrechen';
+	@override String get abort_transfer_no => 'Weiter';
 }
 
 /// Flat map(s) containing all translations.
@@ -106,8 +113,15 @@ extension on TranslationsDe {
 			case 'common.navbar.send': return 'Senden';
 			case 'common.navbar.receive': return 'Empfangen';
 			case 'common.navbar.settings': return 'Einstellungen';
+			case 'common.generic_error': return 'Etwas ist schiefgelaufen';
+			case 'common.generic_acknowledge': return 'Ok';
 			case 'pages.send.send_file': return 'Datei Senden';
 			case 'pages.send.send_folder': return 'Ordner Senden';
+			case 'pages.send.permission_denied': return 'Berechtigung benötigt, um Ordner zu senden';
+			case 'pages.send.abort_transfer_title': return 'Dateiübertragung abbrechen?';
+			case 'pages.send.abort_transfer_message': return 'Möchten Sie die laufende Dateiübertragung abbrechen?';
+			case 'pages.send.abort_transfer_yes': return 'Abbrechen';
+			case 'pages.send.abort_transfer_no': return 'Weiter';
 			default: return null;
 		}
 	}

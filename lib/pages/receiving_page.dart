@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
-import 'package:iyox_wormhole/widgets/app_bar.dart';
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+class ReceivingPage extends StatefulWidget {
+  const ReceivingPage({super.key});
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
+  State<ReceivingPage> createState() => _ReceivingPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _ReceivingPageState extends State<ReceivingPage> {
   @override
   Widget build(BuildContext context) {
     final t = Translations.of(context);
 
     return Scaffold(
-      appBar: CustomAppBar(
-        title: t.common.page_titles.settings,
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

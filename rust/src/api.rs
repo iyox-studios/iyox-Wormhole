@@ -9,7 +9,7 @@ use magic_wormhole::rendezvous::DEFAULT_RENDEZVOUS_SERVER;
 use magic_wormhole::transit;
 
 use crate::frb_generated::StreamSink;
-use crate::wormhole::send;
+use crate::wormhole::{receive, send};
 pub use crate::wormhole::types::error_types::ErrorType;
 pub use crate::wormhole::types::events::Events;
 pub use crate::wormhole::types::t_update::TUpdate;
@@ -35,7 +35,6 @@ pub fn init_backend(temp_file_path: String) {
     *TEMP_FILE_PATH.lock().unwrap() = Some(temp_file_path);
 }
 
-#[flutter_rust_bridge::frb(dart_async)]
 pub fn send_files(
     file_paths: Vec<String>,
     name: String,
@@ -127,6 +126,17 @@ pub fn send_folder(
             Rc::new(actions),
         )
         .await;
+    });
+}
+
+pub fn request_file(
+    code: String,
+    storage_folder: String,
+    server_config: ServerConfig,
+    actions: StreamSink<TUpdate>,
+) {
+    block_on(async {
+        receive::request_file(code, storage_folder, server_config, actions).await;
     });
 }
 

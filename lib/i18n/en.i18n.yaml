@@ -7,8 +7,15 @@ common:
     send: 'Send'
     receive: 'Receive'
     settings: 'Settings'
+  generic_error: 'Something went wrong'
+  generic_acknowledge: 'Ok'
 
 pages:
   send:
     send_file: 'Send file'
     send_folder: 'Send folder'
+    permission_denied: 'Permission required to send folders'
+    abort_transfer_title: 'Abort file transfer?'
+    abort_transfer_message: 'Do you want to abort the current file transfer?'
+    abort_transfer_yes: 'Abort'
+    abort_transfer_no: 'Continue'

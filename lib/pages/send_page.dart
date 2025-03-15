@@ -1,9 +1,12 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iyox_wormhole/components/app_bar.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 import 'package:iyox_wormhole/utils/logger.dart';
+import 'package:iyox_wormhole/widgets/app_bar.dart';
+import 'package:iyox_wormhole/widgets/illustration.dart';
+import 'package:iyox_wormhole/widgets/large_icon_button.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SendPage extends StatefulWidget {
@@ -16,15 +19,6 @@ class SendPage extends StatefulWidget {
 class _SendPageState extends State<SendPage> {
   final log = getLogger();
 
-  static final ButtonStyle buttonStyle = ButtonStyle(
-    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(200),
-      ),
-    ),
-    fixedSize: WidgetStateProperty.all<Size>(Size.fromHeight(65)),
-  );
-
   @override
   Widget build(BuildContext context) {
     final t = Translations.of(context);
@@ -35,9 +29,12 @@ class _SendPageState extends State<SendPage> {
       ),
       body: Stack(
         children: [
-          // Your main content
-          Center(child: Text("Test")),
-          // Align buttons at the bottom center
+          Center(
+            child: Illustration(
+                label: 'Upload illustration',
+                assetPath: 'assets/illustrations/undraw_upload_cucu.svg',
+                width: 270),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -46,20 +43,18 @@ class _SendPageState extends State<SendPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Expanded(
-                    child: FilledButton.icon(
+                    child: LargeIconButton(
                       onPressed: _onSendButtonClick,
-                      style: buttonStyle,
                       label: Text(t.pages.send.send_file),
-                      icon: const Icon(Icons.file_open),
+                      icon: Icons.file_open,
                     ),
                   ),
                   SizedBox(width: 22.0),
                   Expanded(
-                    child: FilledButton.icon(
+                    child: LargeIconButton(
                       onPressed: _onSendFolderButtonClick,
-                      style: buttonStyle,
                       label: Text(t.pages.send.send_folder),
-                      icon: const Icon(Icons.drive_folder_upload),
+                      icon: Icons.drive_folder_upload,
                     ),
                   ),
                 ],
@@ -72,28 +67,36 @@ class _SendPageState extends State<SendPage> {
   }
 
   void _onSendButtonClick() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (mounted) {
       if (result != null) {
-        final files = result.files.where((element) => element.path != null).map((e) => e.path!).toList();
+        final files = result.files
+            .where((element) => element.path != null)
+            .map((e) => e.path!)
+            .toList();
 
         context.go('/send/sending', extra: {'files': files, 'isFolder': false});
-        //Navigator.push(context, _createSendingRoute(files));
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('No files selected'),
-            duration: Duration(seconds: 2),
-          ),
-        );
       }
     }
   }
 
   void _onSendFolderButtonClick() async {
     try {
-      await Permission.manageExternalStorage.request();
+      final permissionStatus = await Permission.manageExternalStorage.request();
+      if (!permissionStatus.isGranted) {
+        if (mounted) {
+          final t = Translations.of(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(t.pages.send.permission_denied),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+        return;
+      }
     } catch (e) {
       log.w('Failed to request manageExternalStorage permission', error: e);
     }
@@ -106,15 +109,6 @@ class _SendPageState extends State<SendPage> {
           'files': [path],
           'isFolder': true
         });
-      }
-    } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('No folder selected'),
-            duration: Duration(seconds: 2),
-          ),
-        );
       }
     }
   }

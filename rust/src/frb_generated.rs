@@ -37,7 +37,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.8.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -555812687;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1701693782;
 
 // Section: executor
 
@@ -166,6 +166,52 @@ fn wire__crate__api__init_backend_impl(
                 })?;
                 Ok(output_ok)
             })())
+        },
+    )
+}
+fn wire__crate__api__request_file_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "request_file",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_code = <String>::sse_decode(&mut deserializer);
+            let api_storage_folder = <String>::sse_decode(&mut deserializer);
+            let api_server_config = <crate::api::ServerConfig>::sse_decode(&mut deserializer);
+            let api_actions = <StreamSink<
+                crate::wormhole::types::t_update::TUpdate,
+                flutter_rust_bridge::for_generated::SseCodec,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok({
+                        crate::api::request_file(
+                            api_code,
+                            api_storage_folder,
+                            api_server_config,
+                            api_actions,
+                        );
+                    })?;
+                    Ok(output_ok)
+                })())
+            }
         },
     )
 }
@@ -322,6 +368,7 @@ impl SseDecode for crate::wormhole::types::error_types::ErrorType {
             5 => crate::wormhole::types::error_types::ErrorType::TransferError,
             6 => crate::wormhole::types::error_types::ErrorType::TransferConnectionError,
             7 => crate::wormhole::types::error_types::ErrorType::ZipFileError,
+            8 => crate::wormhole::types::error_types::ErrorType::ParseCodeError,
             _ => unreachable!("Invalid variant for ErrorType: {}", inner),
         };
     }
@@ -470,8 +517,9 @@ fn pde_ffi_dispatcher_primary_impl(
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
         3 => wire__crate__api__init_impl(port, ptr, rust_vec_len, data_len),
-        5 => wire__crate__api__send_files_impl(port, ptr, rust_vec_len, data_len),
-        6 => wire__crate__api__send_folder_impl(port, ptr, rust_vec_len, data_len),
+        5 => wire__crate__api__request_file_impl(port, ptr, rust_vec_len, data_len),
+        6 => wire__crate__api__send_files_impl(port, ptr, rust_vec_len, data_len),
+        7 => wire__crate__api__send_folder_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -526,6 +574,7 @@ impl flutter_rust_bridge::IntoDart for crate::wormhole::types::error_types::Erro
             Self::TransferError => 5.into_dart(),
             Self::TransferConnectionError => 6.into_dart(),
             Self::ZipFileError => 7.into_dart(),
+            Self::ParseCodeError => 8.into_dart(),
             _ => unreachable!(),
         }
     }
@@ -705,6 +754,7 @@ impl SseEncode for crate::wormhole::types::error_types::ErrorType {
                 crate::wormhole::types::error_types::ErrorType::TransferError => 5,
                 crate::wormhole::types::error_types::ErrorType::TransferConnectionError => 6,
                 crate::wormhole::types::error_types::ErrorType::ZipFileError => 7,
+                crate::wormhole::types::error_types::ErrorType::ParseCodeError => 8,
                 _ => {
                     unimplemented!("");
                 }

@@ -1,8 +1,13 @@
+import 'dart:io';
+import 'dart:math';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 import 'package:iyox_wormhole/utils/wordlist.dart';
 import 'package:iyox_wormhole/widgets/app_bar.dart';
 import 'package:iyox_wormhole/widgets/large_icon_button.dart';
+import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
 class ReceivePage extends StatefulWidget {
   const ReceivePage({super.key});
@@ -14,6 +19,8 @@ class ReceivePage extends StatefulWidget {
 class _ReceivePageState extends State<ReceivePage> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController? _qrController;
 
   String _suggestion = '';
 
@@ -31,6 +38,18 @@ class _ReceivePageState extends State<ReceivePage> {
     super.dispose();
   }
 
+  // In order to get hot reload to work we need to pause the camera if the platform
+  // is android, or resume the camera if the platform is iOS.
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      _qrController!.pauseCamera();
+    } else if (Platform.isIOS) {
+      _qrController!.resumeCamera();
+    }
+  }
+
   void _updateSuggestion() {
     final input = _controller.text;
     if (input.isEmpty) {
@@ -39,7 +58,7 @@ class _ReceivePageState extends State<ReceivePage> {
     }
     // Find the first matching word from the list (case insensitive)
     final match = wordlist.firstWhere(
-          (word) => word.toLowerCase().startsWith(input.toLowerCase()),
+      (word) => word.toLowerCase().startsWith(input.toLowerCase()),
       orElse: () => '',
     );
     setState(() {
@@ -71,64 +90,97 @@ class _ReceivePageState extends State<ReceivePage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           //alignment: Alignment.centerLeft,
           children: [
             // Underlay for suggestion text.
             /*GestureDetector(
-              onTap: _acceptSuggestion,
-              child: RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodySmall!,
-                  children: [
-                    // Display the user-typed part.
-                    TextSpan(text: _controller.text),
-                    // If there is a suggestion that continues the input, display it.
-                    if (_suggestion.isNotEmpty &&
-                        _suggestion.toLowerCase().startsWith(
-                            _controller.text.toLowerCase()) &&
-                        _controller.text.isNotEmpty)
-                      TextSpan(
-                        text: _suggestion.substring(_controller.text.length),
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.grey),
-                      ),
-                  ],
+                onTap: _acceptSuggestion,
+                child: RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodySmall!,
+                    children: [
+                      // Display the user-typed part.
+                      TextSpan(text: _controller.text),
+                      // If there is a suggestion that continues the input, display it.
+                      if (_suggestion.isNotEmpty &&
+                          _suggestion.toLowerCase().startsWith(
+                              _controller.text.toLowerCase()) &&
+                          _controller.text.isNotEmpty)
+                        TextSpan(
+                          text: _suggestion.substring(_controller.text.length),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.grey),
+                        ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            // The actual text field.
-            TextField(
-              controller: _controller,
-              focusNode: _focusNode,
-              //style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Colors.transparent),
-              decoration: InputDecoration(
-                hintText: 'Type a fruit...',
-                // Suffix icon appears when a suggestion is available.
-                suffixIcon: _suggestion.isNotEmpty &&
-                    _suggestion.toLowerCase().startsWith(
-                        _controller.text.toLowerCase())
-                    ? IconButton(
-                  icon: Icon(Icons.arrow_forward),
-                  onPressed: _acceptSuggestion,
-                )
-                    : null,
-              ),
-            ),
-            */
-            TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: lightenOrDarken(Theme.of(context).colorScheme.surfaceContainerHigh, 0.03),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(240),
+              // The actual text field.
+              TextField(
+                controller: _controller,
+                focusNode: _focusNode,
+                //style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Colors.transparent),
+                decoration: InputDecoration(
+                  hintText: 'Type a fruit...',
+                  // Suffix icon appears when a suggestion is available.
+                  suffixIcon: _suggestion.isNotEmpty &&
+                      _suggestion.toLowerCase().startsWith(
+                          _controller.text.toLowerCase())
+                      ? IconButton(
+                    icon: Icon(Icons.arrow_forward),
+                    onPressed: _acceptSuggestion,
+                  )
+                      : null,
                 ),
-                hintText: 'Enter Code',
-                prefixIcon: Icon(Icons.password)
+              ),
+              */
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.all(25),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double size = constraints.maxWidth; // Get max height
+                  return Container(
+                    width: size,
+                    height: size,
+                    clipBehavior: Clip.hardEdge,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                    child: QRView(
+                      //overlay: QrScannerOverlayShape(borderRadius: 10, ),
+                      key: qrKey,
+                      onQRViewCreated: _onQRViewCreated,
+                    ),
+                  );
+                },
               ),
             ),
-            SizedBox.fromSize(size: Size.fromHeight(20)),
-            LargeIconButton(onPressed: ()=>{}, label: Text('Receive File'), icon: Icons.sim_card_download_outlined)
+            Spacer(flex: 2),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: lightenOrDarken(
+                            Theme.of(context).colorScheme.surfaceContainerHigh,
+                            0.03),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(240),
+                        ),
+                        hintText: 'Enter Code',
+                        prefixIcon: Icon(Icons.password)),
+                  ),
+                  SizedBox.fromSize(size: Size.fromHeight(20)),
+                  LargeIconButton(
+                      onPressed: () => {},
+                      label: Text('Receive File'),
+                      icon: Icons.sim_card_download_outlined),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -139,9 +191,21 @@ class _ReceivePageState extends State<ReceivePage> {
     assert(amount >= 0 && amount <= 1);
     final hsl = HSLColor.fromColor(color);
 
-    final lightness = Theme.of(context).brightness == Brightness.dark ? hsl.lightness + amount : hsl.lightness - amount;
+    final lightness = Theme.of(context).brightness == Brightness.dark
+        ? hsl.lightness + amount
+        : hsl.lightness - amount;
     final hslTinted = hsl.withLightness((lightness).clamp(0.0, 1.0));
 
     return hslTinted.toColor();
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    _qrController = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        debugPrint(scanData.code);
+        //result = scanData;
+      });
+    });
   }
 }

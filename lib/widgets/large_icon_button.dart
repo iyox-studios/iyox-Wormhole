@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LargeIconButton extends StatelessWidget {
-  const LargeIconButton({super.key, required this.onPressed, required this.label, required this.icon});
+  const LargeIconButton(
+      {super.key,
+      required this.onPressed,
+      required this.label,
+      required this.icon});
 
   final VoidCallback? onPressed;
   final Widget label;

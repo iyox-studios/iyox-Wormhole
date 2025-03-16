@@ -22,9 +22,8 @@ class Illustration extends StatelessWidget {
             //baseColor: Theme.of(context).colorScheme.brightness == Brightness.dark ? Color(0xff181a1b) : Colors.white,
             baseColor: Theme.of(context).colorScheme.surfaceBright,
             secondaryColor: Theme.of(context).colorScheme.surfaceContainerHigh,
-            accentColor:  Theme.of(context).colorScheme.tertiary,
-          tertiaryColor:  Theme.of(context).colorScheme.onSurface
-        ),
+            accentColor: Theme.of(context).colorScheme.tertiary,
+            tertiaryColor: Theme.of(context).colorScheme.onSurface),
       ),
       semanticsLabel: label,
       width: width,

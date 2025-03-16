@@ -28,8 +28,8 @@ class ThemedApp extends StatefulWidget {
     if (!updateSystem) return;
     getLogger().f('TODO Fullscreen');
 
-    SystemChrome.setEnabledSystemUIMode(
-        value ? SystemUiMode.immersive : SystemUiMode.edgeToEdge);
+    /*SystemChrome.setEnabledSystemUIMode(
+        value ? SystemUiMode.immersive : SystemUiMode.edgeToEdge);*/
   }
 
   static void addFullscreenListener(void Function() listener) {
@@ -131,7 +131,8 @@ class _ThemedAppState extends State<ThemedApp> {
               actionTextColor: lightScheme.inversePrimary,
               behavior: SnackBarBehavior.floating,
               elevation: 1,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(9)),
             ),
           ),
           darkTheme: ThemeData(
@@ -146,13 +147,15 @@ class _ThemedAppState extends State<ThemedApp> {
               actionTextColor: darkScheme.inversePrimary,
               behavior: SnackBarBehavior.floating,
               elevation: 1,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(9)),
             ),
           ),
         );
       },
     );
   }
+
   @override
   void dispose() {
     //Prefs.appTheme.removeListener(onChanged);

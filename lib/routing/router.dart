@@ -5,7 +5,6 @@ import 'package:iyox_wormhole/pages/send_page.dart';
 import 'package:iyox_wormhole/pages/sending_page.dart';
 import 'package:iyox_wormhole/pages/settings_page.dart';
 import 'package:iyox_wormhole/routing/shell.dart';
-import 'package:iyox_wormhole/utils/logger.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -30,7 +29,7 @@ final goRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/send',
-              builder: (context, state) => SendPage(),
+              pageBuilder: (context, state) => MaterialPage(child: SendPage()),
               routes: [
                 GoRoute(
                   path: '/sending',
@@ -53,7 +52,8 @@ final goRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/receive',
-              builder: (context, state) => ReceivePage(),
+              pageBuilder: (context, state) =>
+                  MaterialPage(child: ReceivePage()),
             )
           ],
         ),
@@ -62,7 +62,8 @@ final goRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/settings',
-              builder: (context, state) => SettingsPage(),
+              pageBuilder: (context, state) =>
+                  MaterialPage(child: SettingsPage()),
             )
           ],
         ),

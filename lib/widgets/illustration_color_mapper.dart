@@ -34,10 +34,12 @@ class IllustrationColorMapper implements ColorMapper {
     if (accentColor != null && color == originalAccentColor) return accentColor;
 
     final secondaryColor = this.secondaryColor;
-    if (secondaryColor != null && color == originalSecondaryColor) return secondaryColor;
+    if (secondaryColor != null && color == originalSecondaryColor)
+      return secondaryColor;
 
     final tertiaryColor = this.tertiaryColor;
-    if (tertiaryColor != null && color == originalTertiaryColor) return tertiaryColor;
+    if (tertiaryColor != null && color == originalTertiaryColor)
+      return tertiaryColor;
 
     return color;
   }

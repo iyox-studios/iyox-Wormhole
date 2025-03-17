@@ -88,100 +88,68 @@ class _ReceivePageState extends State<ReceivePage> {
         title: t.common.page_titles.receive,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //alignment: Alignment.centerLeft,
-          children: [
-            // Underlay for suggestion text.
-            /*GestureDetector(
-                onTap: _acceptSuggestion,
-                child: RichText(
-                  text: TextSpan(
-                    style: Theme.of(context).textTheme.bodySmall!,
-                    children: [
-                      // Display the user-typed part.
-                      TextSpan(text: _controller.text),
-                      // If there is a suggestion that continues the input, display it.
-                      if (_suggestion.isNotEmpty &&
-                          _suggestion.toLowerCase().startsWith(
-                              _controller.text.toLowerCase()) &&
-                          _controller.text.isNotEmpty)
-                        TextSpan(
-                          text: _suggestion.substring(_controller.text.length),
-                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.grey),
+        padding: const EdgeInsets.all(20.0),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            const bottomSectionHeight =
+                150.0; // Total height of your bottom widgets
+            final availableHeight = constraints.maxHeight - bottomSectionHeight;
+            final squareSize = availableHeight < constraints.maxWidth
+                ? availableHeight
+                : constraints.maxWidth;
+
+            return Column(
+              children: [
+                SizedBox(
+                  height: availableHeight,
+                  child: Center(
+                      child: SizedBox(
+                        width: squareSize,
+                        height: squareSize,
+                        child:Padding(
+                          padding: EdgeInsets.all(20),
+                          child:  Container(
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(35)),
+                          child: QRView(
+                              //overlay: QrScannerOverlayShape(borderRadius: 10, ),
+                              key: qrKey,
+                              onQRViewCreated: _onQRViewCreated,
+                            ),
+                          ),
                         ),
-                    ],
-                  ),
-                ),
-              ),
-              // The actual text field.
-              TextField(
-                controller: _controller,
-                focusNode: _focusNode,
-                //style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Colors.transparent),
-                decoration: InputDecoration(
-                  hintText: 'Type a fruit...',
-                  // Suffix icon appears when a suggestion is available.
-                  suffixIcon: _suggestion.isNotEmpty &&
-                      _suggestion.toLowerCase().startsWith(
-                          _controller.text.toLowerCase())
-                      ? IconButton(
-                    icon: Icon(Icons.arrow_forward),
-                    onPressed: _acceptSuggestion,
-                  )
-                      : null,
-                ),
-              ),
-              */
-            Spacer(),
-            Padding(
-              padding: EdgeInsets.all(25),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double size = constraints.maxWidth; // Get max height
-                  return Container(
-                    width: size,
-                    height: size,
-                    clipBehavior: Clip.hardEdge,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                    child: QRView(
-                      //overlay: QrScannerOverlayShape(borderRadius: 10, ),
-                      key: qrKey,
-                      onQRViewCreated: _onQRViewCreated,
                     ),
-                  );
-                },
-              ),
-            ),
-            Spacer(flex: 2),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: lightenOrDarken(
-                            Theme.of(context).colorScheme.surfaceContainerHigh,
-                            0.03),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(240),
-                        ),
-                        hintText: 'Enter Code',
-                        prefixIcon: Icon(Icons.password)),
                   ),
-                  SizedBox.fromSize(size: Size.fromHeight(20)),
-                  LargeIconButton(
-                      onPressed: () => {},
-                      label: Text('Receive File'),
-                      icon: Icons.sim_card_download_outlined),
-                ],
-              ),
-            ),
-          ],
+                ),
+                SizedBox.fromSize(size: Size.fromHeight(10)),
+                Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: lightenOrDarken(
+                              Theme.of(context)
+                                  .colorScheme
+                                  .surfaceContainerHigh,
+                              0.03,),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(240),
+                          ),
+                          hintText: 'Enter Code',
+                          prefixIcon: Icon(Icons.password),),
+                    ),
+                    SizedBox.fromSize(size: Size.fromHeight(20)),
+                    LargeIconButton(
+                        onPressed: () => {},
+                        label: Text('Receive File'),
+                        icon: Icons.sim_card_download_outlined,),
+                  ],
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

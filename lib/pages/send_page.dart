@@ -26,41 +26,44 @@ class _SendPageState extends State<SendPage> {
       appBar: CustomAppBar(
         title: t.common.page_titles.send,
       ),
-      body: Stack(
-        children: [
-          Center(
-            child: Illustration(
-                label: 'Upload illustration',
-                assetPath: 'assets/illustrations/undraw_upload_cucu.svg',
-                width: 270),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(22.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: LargeIconButton(
-                      onPressed: _onSendButtonClick,
-                      label: Text(t.pages.send.send_file),
-                      icon: Icons.file_open,
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Stack(
+          children: [
+            Center(
+              child: Illustration(
+                  label: 'Upload illustration',
+                  assetPath: 'assets/illustrations/undraw_upload_cucu.svg',
+                  width: 270),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 450),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: LargeIconButton(
+                        onPressed: _onSendButtonClick,
+                        label: Text(t.pages.send.send_file),
+                        icon: Icons.file_open,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 22.0),
-                  Expanded(
-                    child: LargeIconButton(
-                      onPressed: _onSendFolderButtonClick,
-                      label: Text(t.pages.send.send_folder),
-                      icon: Icons.drive_folder_upload,
+                    SizedBox(width: 22.0),
+                    Expanded(
+                      child: LargeIconButton(
+                        onPressed: _onSendFolderButtonClick,
+                        label: Text(t.pages.send.send_folder),
+                        icon: Icons.drive_folder_upload,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

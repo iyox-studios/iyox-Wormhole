@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 import 'package:iyox_wormhole/utils/wordlist.dart';
 import 'package:iyox_wormhole/widgets/app_bar.dart';
@@ -103,22 +104,32 @@ class _ReceivePageState extends State<ReceivePage> {
                 SizedBox(
                   height: availableHeight,
                   child: Center(
-                      child: SizedBox(
-                        width: squareSize,
-                        height: squareSize,
-                        child:Padding(
-                          padding: EdgeInsets.all(20),
-                          child:  Container(
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(35)),
-                          child: QRView(
-                              //overlay: QrScannerOverlayShape(borderRadius: 10, ),
+                    child: SizedBox(
+                      width: squareSize,
+                      height: squareSize,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) => Container(
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(35),
+                            ),
+                            child: QRView(
+                              overlay: QrScannerOverlayShape(
+                                borderRadius: 35,
+                                borderWidth: 10,
+                                cutOutSize: constraints.maxWidth,
+                                overlayColor:
+                                    Theme.of(context).colorScheme.surface,
+                                borderColor: Theme.of(context).colorScheme.onTertiaryContainer
+                              ),
                               key: qrKey,
                               onQRViewCreated: _onQRViewCreated,
                             ),
                           ),
                         ),
+                      ),
                     ),
                   ),
                 ),
@@ -127,24 +138,25 @@ class _ReceivePageState extends State<ReceivePage> {
                   children: [
                     TextField(
                       decoration: InputDecoration(
-                          filled: true,
-                          fillColor: lightenOrDarken(
-                              Theme.of(context)
-                                  .colorScheme
-                                  .surfaceContainerHigh,
-                              0.03,),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(240),
-                          ),
-                          hintText: 'Enter Code',
-                          prefixIcon: Icon(Icons.password),),
+                        filled: true,
+                        fillColor: lightenOrDarken(
+                          Theme.of(context).colorScheme.surfaceContainerHigh,
+                          0.03,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(240),
+                        ),
+                        hintText: 'Enter Code',
+                        prefixIcon: Icon(Icons.password),
+                      ),
                     ),
                     SizedBox.fromSize(size: Size.fromHeight(20)),
                     LargeIconButton(
-                        onPressed: () => {},
-                        label: Text('Receive File'),
-                        icon: Icons.sim_card_download_outlined,),
+                      onPressed: () => {},
+                      label: Text('Receive File'),
+                      icon: Icons.sim_card_download_outlined,
+                    ),
                   ],
                 ),
               ],

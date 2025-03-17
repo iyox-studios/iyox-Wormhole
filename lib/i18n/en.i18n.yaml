@@ -19,3 +19,6 @@ pages:
     abort_transfer_message: 'Do you want to abort the current file transfer?'
     abort_transfer_yes: 'Abort'
     abort_transfer_no: 'Continue'
+  receive:
+    code_input_hint: 'Enter Code'
+    receive_button: 'Receive File'

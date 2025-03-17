@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iyox_wormhole/pages/receive_page.dart';
+import 'package:iyox_wormhole/pages/receiving_page.dart';
 import 'package:iyox_wormhole/pages/send_page.dart';
 import 'package:iyox_wormhole/pages/sending_page.dart';
 import 'package:iyox_wormhole/pages/settings_page.dart';
@@ -54,6 +55,18 @@ final goRouter = GoRouter(
               path: '/receive',
               pageBuilder: (context, state) =>
                   MaterialPage(child: ReceivePage()),
+              routes: [
+                GoRoute(
+                  path: '/receiving',
+                  builder: (context, state) {
+                    final extra = state.extra as Map<String, dynamic>;
+                    String code = extra['code'] as String;
+                    return ReceivingPage(
+                      code: code,
+                    );
+                  },
+                ),
+              ],
             )
           ],
         ),

@@ -1,97 +1,104 @@
 import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:iyox_wormhole/pages/router.dart';
-import 'package:iyox_wormhole/utils/settings.dart';
+import 'package:iyox_wormhole/i18n/strings.g.dart';
+import 'package:iyox_wormhole/routing/router.dart';
+import 'package:iyox_wormhole/rust/api.dart';
+import 'package:iyox_wormhole/rust/frb_generated.dart';
+import 'package:iyox_wormhole/themed_app.dart';
+import 'package:iyox_wormhole/utils/device_info.dart';
+import 'package:iyox_wormhole/utils/logger.dart';
+import 'package:iyox_wormhole/utils/shared_prefs.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'gen/ffi.dart';
-import 'themed_app.dart';
-
-void main() async {
-  await initApp();
-  runApp(const WormholeApp());
-}
-
-Future<void> initApp() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await RustLib.init();
+  final tempDir = (await getTemporaryDirectory()).path;
+  initBackend(tempFilePath: tempDir);
 
+  // Settings
+  await SharedPrefs().init();
+
+  // Display Mode
   if (kReleaseMode && Platform.isAndroid) {
-    try {
-      await FlutterDisplayMode.setHighRefreshRate();
-      debugPrint("Enabled high refresh mode");
-    } catch (e) {
-      debugPrint("Error setting high refresh rate: $e");
-    }
+    await FlutterDisplayMode.setHighRefreshRate();
   }
 
-  var log = Logger();
+  // Logging
+  final logger = getLogger();
+  if (kDebugMode) {
+    Logger.level = Level.debug;
+  } else {
+    Logger.level = Level.warning;
+  }
 
   FlutterError.onError = (details) {
     FlutterError.presentError(details);
-    log.f(
-      'FlutterError - Catch all error: ${details.toString()} - ${details.exception} - ${details.library} - ${details.context} - ${details.stack}',
+
+    logger.f(
+      'Uncaught Error: ${details.toString()} - ${details.exception}',
       error: details,
       stackTrace: details.stack,
     );
   };
 
-  PlatformDispatcher.instance.onError = (error, stack) {
-    log.f('PlatformDispatcher - Catch all error: $error', error: error, stackTrace: stack);
-    debugPrint("PlatformDispatcher - Catch all error: $error $stack");
-    return true;
-  };
+  // Device Info
+  await DeviceInfo().init();
+
+  await LocaleSettings.useDeviceLocale();
+  runApp(TranslationProvider(child: const App()));
 }
 
-class NavigationService {
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-}
-
-class WormholeApp extends StatefulWidget {
-  const WormholeApp({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
-  WormholeAppState createState() => WormholeAppState();
+  State<App> createState() => _AppState();
 }
 
-class WormholeAppState extends State<WormholeApp> {
-  Future<void> initApp() async {
-    // Clear Cache
-    await FilePicker.platform.clearTemporaryFiles();
-    await Settings.setRecentFiles([]);
-  }
+class _AppState extends State<App> {
+  //StreamSubscription? _intentDataStreamSubscription;
 
   @override
-  initState() {
+  void initState() {
+    //setupSharingIntent();
     super.initState();
-    initBackend();
-    initApp().then((_) => debugPrint("App Init Completed"));
   }
 
-  @override
-  Future<void> dispose() async {
-    super.dispose();
-  }
+  /*
+  void setupSharingIntent() {
+    if (Platform.isAndroid || Platform.isIOS) {
+      // for files opened while the app is closed
+      ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> files) {
+        for (final file in files) {
+          App.openFile(file);
+        }
+      });
 
-  void initBackend() async {
-    final tempDir = (await getTemporaryDirectory()).path;
-    api.init(tempFilePath: tempDir);
-  }
+      // for files opened while the app is open
+      final stream = ReceiveSharingIntent.instance.getMediaStream();
+      _intentDataStreamSubscription = stream.listen((List<SharedMediaFile> files) {
+        for (final file in files) {
+          App.openFile(file);
+        }
+      });
+    }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return ThemedApp(
-      builder: (lightScheme, darkScheme, isDarkMode) => MaterialApp(
-        theme: ThemeData(colorScheme: lightScheme, useMaterial3: true),
-        darkTheme: ThemeData(colorScheme: darkScheme, useMaterial3: true),
-        debugShowCheckedModeBanner: false,
-        title: 'Wormhole',
-        home: const BasePage(),
-      ),
+      title: 'iyox Wormhole',
+      router: goRouter,
     );
+  }
+
+  @override
+  void dispose() {
+    //_intentDataStreamSubscription?.cancel();
+    super.dispose();
   }
 }

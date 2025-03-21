@@ -1,0 +1,28 @@
+--- a/lib/src/builder.dart	2025-03-12 20:07:05.140305028 +0100
++++ b/lib/src/builder.dart	2025-03-13 19:53:09.061423584 +0100
+@@ -138,25 +138,6 @@
+ 
+   /// Returns the path of directory containing build artifacts.
+   Future<String> build() async {
+-    final extraArgs = _buildOptions?.flags ?? [];
+-    final manifestPath = path.join(environment.manifestDir, 'Cargo.toml');
+-    runCommand(
+-      'cargo',
+-      [
+-        'build',
+-        ...extraArgs,
+-        '--manifest-path',
+-        manifestPath,
+-        '-p',
+-        environment.crateInfo.packageName,
+-        if (!environment.configuration.isDebug) '--release',
+-        '--target',
+-        target.rust,
+-        '--target-dir',
+-        environment.targetTempDir,
+-      ],
+-      environment: await _buildEnvironment(),
+-    );
+     return path.join(
+       environment.targetTempDir,
+       target.rust,

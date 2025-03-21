@@ -1,10 +1,8 @@
 icons_launcher:
-  image_path: "icon/Icon.png"
+  image_path: "icon/icon.png"
   platforms:
     android:
       enable: true
       adaptive_background_color: "#f5f5f5"
-      adaptive_foreground_image: "icon/Foreground.png"
-      adaptive_monochrome_image: "icon/Foreground-Monochrome.png"
-    windows:
-      enable: true
+      adaptive_foreground_image: "assets/icon/foreground.png"
+      adaptive_monochrome_image: "assets/icon/monochrome.png"

@@ -1,7 +1,16 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  exclude:
-    - lib/gen/**
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
 linter:
   rules:
+    - prefer_single_quotes
+    - sort_pub_dependencies
+    - always_use_package_imports
+    - directives_ordering
+    - unawaited_futures
+    - discarded_futures

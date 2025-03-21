@@ -1,0 +1,17 @@
+--- a/packages/flutter_tools/gradle/settings.gradle.kts
++++ b/packages/flutter_tools/gradle/settings.gradle.kts
+@@ -1,7 +1,12 @@
+ dependencyResolutionManagement {
+     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+     repositories {
+-        google()
+-        mavenCentral()
++        val nixMavenRepo: String? by settings
++        if (nixMavenRepo != null) {
++            maven { url = uri(nixMavenRepo!!) }
++        } else {
++            google()
++            mavenCentral()
++        }
+     }
+ }

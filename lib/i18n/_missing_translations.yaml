@@ -1,0 +1,3 @@
+"@@info":
+  - "Here are translations that exist in <en> but not in secondary locales."
+  - "After editing this file, you can run 'dart run slang apply' to quickly apply the newly added translations."

@@ -10,7 +10,6 @@ import 'package:iyox_wormhole/widgets/qr_reader.dart';
 import 'package:iyox_wormhole/widgets/shake_widget.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 import 'package:vibration/vibration.dart';
-import 'package:vibration/vibration_presets.dart';
 
 class ReceivePage extends StatefulWidget {
   const ReceivePage({super.key});
@@ -94,8 +93,7 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
           builder: (context, constraints) {
             const bottomSectionHeight = 150.0;
             final availableHeight = constraints.maxHeight - bottomSectionHeight;
-            final squareSize =
-                availableHeight < constraints.maxWidth ? availableHeight : constraints.maxWidth;
+            final squareSize = availableHeight < constraints.maxWidth ? availableHeight : constraints.maxWidth;
 
             return Column(
               children: [
@@ -177,7 +175,7 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
           await Vibration.vibrate(pattern: [0, 10, 10, 10], amplitude: 40);
         } else {
           await Vibration.vibrate(duration: 10, amplitude: 40);
-          await Future.delayed(Duration(milliseconds: 10));
+          await Future<void>.delayed(const Duration(milliseconds: 10));
           await Vibration.vibrate(duration: 10, amplitude: 40);
         }
       }
@@ -186,8 +184,7 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
 
       if (code.startsWith('wormhole-transfer:')) {
         if (mounted) {
-          context.go('/receive/receiving',
-              extra: {'code': code.substring('wormhole-transfer:'.length)});
+          context.go('/receive/receiving', extra: {'code': code.substring('wormhole-transfer:'.length)});
         }
         await Vibration.vibrate(duration: 10, amplitude: 30);
       }

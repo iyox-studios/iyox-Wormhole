@@ -45,7 +45,7 @@ class _SendingPageState extends State<SendingPage> {
         name: widget.files.first.split('/').last,
         filePaths: widget.files,
         codeLength: 3, //await Settings.getWordLength(),
-        serverConfig: new ServerConfig(
+        serverConfig: ServerConfig(
           rendezvousUrl: defaultRendezvousUrl(),
           transitUrl: defaultTransitUrl(),
         ),
@@ -118,8 +118,7 @@ class _SendingPageState extends State<SendingPage> {
                     content: Text(errMessage.field1),
                     actions: [
                       TextButton(
-                          onPressed: () =>
-                              Navigator.of(ctx, rootNavigator: true).pop(),
+                          onPressed: () => Navigator.of(ctx, rootNavigator: true).pop(),
                           child: Text(t.common.generic_acknowledge))
                     ],
                   );
@@ -142,16 +141,14 @@ class _SendingPageState extends State<SendingPage> {
           content: Text(t.pages.send.abort_transfer_message),
           actions: <Widget>[
             TextButton(
-              style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge),
+              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
               child: Text(t.pages.send.abort_transfer_no),
               onPressed: () {
                 Navigator.pop(context, false);
               },
             ),
             TextButton(
-              style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge),
+              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
               child: Text(t.pages.send.abort_transfer_yes),
               onPressed: () {
                 Navigator.pop(context, true);
@@ -196,9 +193,7 @@ class _SendingPageState extends State<SendingPage> {
                               padding: const EdgeInsets.all(15),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: QrImageView(
-                                    data: 'wormhole-transfer:$codeText',
-                                    backgroundColor: Colors.white),
+                                child: QrImageView(data: 'wormhole-transfer:$codeText', backgroundColor: Colors.white),
                               ))),
                       SizedBox.fromSize(
                         size: Size.fromHeight(10),
@@ -211,28 +206,19 @@ class _SendingPageState extends State<SendingPage> {
                           borderRadius: BorderRadius.circular(26),
                           onTap: () {
                             Clipboard.setData(ClipboardData(text: codeText));
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text('Copied code to clipboard'),
                             ));
                           },
                           child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 13, vertical: 9),
+                              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
                               child: Text(
                                 codeText,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     height: 1.6,
-                                    fontSize: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium!
-                                            .fontSize! +
-                                        1.5,
-                                    fontWeight: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium
-                                        ?.fontWeight),
+                                    fontSize: Theme.of(context).textTheme.titleMedium!.fontSize! + 1.5,
+                                    fontWeight: Theme.of(context).textTheme.titleMedium?.fontWeight),
                               )),
                         ),
                       ),

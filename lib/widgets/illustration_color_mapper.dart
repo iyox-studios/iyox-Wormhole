@@ -26,20 +26,21 @@ class IllustrationColorMapper implements ColorMapper {
   final Color? accentColor;
 
   @override
-  Color substitute(
-      String? id, String elementName, String attributeName, Color color) {
+  Color substitute(String? id, String elementName, String attributeName, Color color) {
     if (color == originalBaseColor) return baseColor;
 
     final accentColor = this.accentColor;
     if (accentColor != null && color == originalAccentColor) return accentColor;
 
     final secondaryColor = this.secondaryColor;
-    if (secondaryColor != null && color == originalSecondaryColor)
+    if (secondaryColor != null && color == originalSecondaryColor) {
       return secondaryColor;
+    }
 
     final tertiaryColor = this.tertiaryColor;
-    if (tertiaryColor != null && color == originalTertiaryColor)
+    if (tertiaryColor != null && color == originalTertiaryColor) {
       return tertiaryColor;
+    }
 
     return color;
   }

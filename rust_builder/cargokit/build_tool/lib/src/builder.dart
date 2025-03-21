@@ -83,8 +83,7 @@ class BuildEnvironment {
   static BuildEnvironment fromEnvironment({
     required bool isAndroid,
   }) {
-    final buildConfiguration =
-        parseBuildConfiguration(Environment.configuration);
+    final buildConfiguration = parseBuildConfiguration(Environment.configuration);
     final manifestDir = Environment.manifestDir;
     final crateOptions = CargokitCrateOptions.load(
       manifestDir: manifestDir,
@@ -99,8 +98,7 @@ class BuildEnvironment {
       isAndroid: isAndroid,
       androidSdkPath: isAndroid ? Environment.sdkPath : null,
       androidNdkVersion: isAndroid ? Environment.ndkVersion : null,
-      androidMinSdkVersion:
-          isAndroid ? int.parse(Environment.minSdkVersion) : null,
+      androidMinSdkVersion: isAndroid ? int.parse(Environment.minSdkVersion) : null,
       javaHome: isAndroid ? Environment.javaHome : null,
     );
   }
@@ -119,7 +117,7 @@ class RustBuilder {
     Rustup rustup,
   ) {
     return;
-    final toolchain = _toolchain;
+    /*final toolchain = _toolchain;
     if (rustup.installedTargets(toolchain) == null) {
       rustup.installToolchain(toolchain);
     }
@@ -128,13 +126,12 @@ class RustBuilder {
     }
     if (!rustup.installedTargets(toolchain)!.contains(target.rust)) {
       rustup.installTarget(target.rust, toolchain: toolchain);
-    }
+    }*/
   }
 
-  CargoBuildOptions? get _buildOptions =>
-      environment.crateOptions.cargo[environment.configuration];
+  CargoBuildOptions? get _buildOptions => environment.crateOptions.cargo[environment.configuration];
 
-  String get _toolchain => _buildOptions?.toolchain.name ?? 'stable';
+  //String get _toolchain => _buildOptions?.toolchain.name ?? 'stable';
 
   /// Returns the path of directory containing build artifacts.
   Future<String> build() async {

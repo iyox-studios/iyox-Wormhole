@@ -37,12 +37,12 @@
 
   # TODO use rust from rustToolchain
   rustBuilder = target: let
-
   in
     (naersk.lib.x86_64-linux.override {
-         cargo = rustToolchain;
-         rustc = rustToolchain;
-    }).buildPackage {
+      cargo = rustToolchain;
+      rustc = rustToolchain;
+    })
+    .buildPackage {
       pname = "rust_iyox_wormhole_${target}";
       inherit version;
       src = ../rust;
@@ -57,9 +57,12 @@
       #CARGO_ENCODED_RUSTFLAGS = "-L../build/rust_lib_iyox_wormhole/build/cargokit/libgcc_workaround/26";
       #_CARGOKIT_NDK_LINK_TARGET = "--target=${target}21";
       #_CARGOKIT_NDK_LINK_CLANG = "${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}/toolchains/llvm/prebuilt/linux-x86_64/bin/clang";
-      "CARGO_TARGET_${lib.stringAsChars (x: if x == "-" then "_" else x) (lib.toUpper target)}_LINKER"= writeShellScript "test"  ''
-          ${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=${target}21 "$@"
-        '';
+      "CARGO_TARGET_${lib.stringAsChars (x:
+        if x == "-"
+        then "_"
+        else x) (lib.toUpper target)}_LINKER" = writeShellScript "test" ''
+        ${androidSdk}/libexec/android-sdk/ndk/${ndkVersion}/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=${target}21 "$@"
+      '';
       postPatch = ''
         cp ${../pubspec.yaml} ../pubspec.yaml
       '';
@@ -154,6 +157,21 @@ in
       echo "flutter.versionName=${version}" >> android/local.properties
       echo "flutter.versionCode=${versionCode}" >> android/local.properties
       echo "flutter.buildMode=release" >> android/local.properties
+
+      # Check if secrets directory exists
+      if [ -d "/run/secrets/iyox-wormhole" ]; then
+        # Create key.properties with secrets
+      cat > android/key.properties << EOF
+      storePassword=$(cat /run/secrets/iyox-wormhole/keystore-password)
+      keyPassword=$(cat /run/secrets/iyox-wormhole/keystore-password)
+      keyAlias=upload
+      storeFile=../../keystore.jks
+      EOF
+
+      whoami
+      cp /run/secrets/iyox-wormhole/keystore.jks .
+
+      fi
 
       flutter config --no-analytics &>/dev/null # mute first-run
     '';

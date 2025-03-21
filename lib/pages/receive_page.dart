@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -60,13 +61,22 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
 
   void _toggleQRView() async {
     if (!_qrActive) {
-      setState(() => _qrActive = true);
-      await _animationController.forward();
+      await _activateQRView();
     } else {
-      await _animationController.reverse();
-      setState(() => _qrActive = false);
-      _qrController = null;
+      await _deactivateQRView();
     }
+  }
+
+  Future<void> _activateQRView() async {
+    WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+    setState(() => _qrActive = true);
+    await _animationController.forward();
+  }
+
+  Future<void> _deactivateQRView () async {
+    await _animationController.reverse();
+    setState(() => _qrActive = false);
+    _qrController = null;
   }
 
   @override
@@ -93,7 +103,8 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
           builder: (context, constraints) {
             const bottomSectionHeight = 150.0;
             final availableHeight = constraints.maxHeight - bottomSectionHeight;
-            final squareSize = availableHeight < constraints.maxWidth ? availableHeight : constraints.maxWidth;
+            final squareSize =
+                availableHeight < constraints.maxWidth ? availableHeight : constraints.maxWidth;
 
             return Column(
               children: [
@@ -114,28 +125,29 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
                               ),
                             Center(
                               child: AnimatedScale(
-                                  scale: _qrActive ? 0 : 1,
-                                  duration: const Duration(milliseconds: 70),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
+                                scale: _qrActive ? 0 : 1,
+                                duration: const Duration(milliseconds: 70),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  elevation: 0,
+                                  child: InkWell(
+                                    customBorder: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25),
                                     ),
-                                    elevation: 0,
-                                    child: InkWell(
-                                      customBorder: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      onTap: _toggleQRView,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(65.0),
-                                        child: Icon(
-                                          Icons.qr_code_scanner,
-                                          color: Theme.of(context).colorScheme.onPrimaryContainer,
-                                          size: 37,
-                                        ),
+                                    onTap: _toggleQRView,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(min(squareSize/4, 65.0)),
+                                      child: Icon(
+                                        Icons.qr_code_scanner,
+                                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                        size: 37,
                                       ),
                                     ),
-                                  )),
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -146,7 +158,9 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
                 SizedBox.fromSize(size: Size.fromHeight(10)),
                 Column(
                   children: [
-                    CodeInput(),
+                    CodeInput(
+                      onTap: () async =>{_deactivateQRView()},
+                    ),
                     SizedBox.fromSize(size: Size.fromHeight(20)),
                     LargeIconButton(
                       onPressed: () => {},
@@ -184,7 +198,8 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
 
       if (code.startsWith('wormhole-transfer:')) {
         if (mounted) {
-          context.go('/receive/receiving', extra: {'code': code.substring('wormhole-transfer:'.length)});
+          context.go('/receive/receiving',
+              extra: {'code': code.substring('wormhole-transfer:'.length)});
         }
         await Vibration.vibrate(duration: 10, amplitude: 30);
       }

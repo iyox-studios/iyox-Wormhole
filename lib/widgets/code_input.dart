@@ -4,7 +4,9 @@ import 'package:iyox_wormhole/utils/color.dart';
 import 'package:iyox_wormhole/utils/wordlist.dart';
 
 class CodeInput extends StatefulWidget {
-  const CodeInput({super.key});
+  const CodeInput({super.key, required this.onTap});
+
+  final Function onTap;
 
   @override
   State<CodeInput> createState() => _CodeInputState();
@@ -102,6 +104,7 @@ class _CodeInputState extends State<CodeInput> {
           ),
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => _acceptSuggestion(),
+          onTap: ()=>widget.onTap(),
         ),
         if (_suggestion.isNotEmpty)
           Positioned(

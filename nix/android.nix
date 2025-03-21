@@ -168,7 +168,6 @@ in
       storeFile=../../keystore.jks
       EOF
 
-      whoami
       cp /run/secrets/iyox-wormhole/keystore.jks .
 
       fi

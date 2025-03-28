@@ -25,9 +25,11 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;
   QRViewController? _qrController;
+  final TextEditingController _textController = TextEditingController();
 
   bool _qrActive = false;
   String _lastScannedCode = '';
+  String _textInput = '';
 
   @override
   void initState() {
@@ -41,11 +43,16 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
       parent: _animationController,
       curve: Curves.easeInOut,
     );
+
+    _textController.addListener(()=>setState(() {
+      _textInput = _textController.text;
+    }));
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
@@ -159,11 +166,12 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
                 Column(
                   children: [
                     CodeInput(
+                      controller: _textController,
                       onTap: () async =>{_deactivateQRView()},
                     ),
                     SizedBox.fromSize(size: Size.fromHeight(20)),
                     LargeIconButton(
-                      onPressed: () => {},
+                      onPressed:  _textInput.isNotEmpty ? requestFile : null,
                       label: Text(t.pages.receive.receive_button),
                       icon: Icons.sim_card_download_outlined,
                     ),
@@ -204,6 +212,16 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
         await Vibration.vibrate(duration: 10, amplitude: 30);
       }
     });
+  }
+
+  void requestFile() {
+    if (mounted) {
+      context.go('/receive/receiving', extra: {
+        'code': _textInput
+      });
+
+      _textController.clear();
+    }
   }
 
   Widget _buildQRView() {

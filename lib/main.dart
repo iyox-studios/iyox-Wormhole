@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 import 'package:iyox_wormhole/routing/router.dart';
 import 'package:iyox_wormhole/rust/api.dart';
@@ -12,6 +14,7 @@ import 'package:iyox_wormhole/utils/logger.dart';
 import 'package:iyox_wormhole/utils/shared_prefs.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,33 +63,40 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  //StreamSubscription? _intentDataStreamSubscription;
+  StreamSubscription<List<SharedMediaFile>>? _intentDataStreamSubscription;
 
   @override
   void initState() {
-    //setupSharingIntent();
+    setupSharingIntent();
     super.initState();
   }
 
-  /*
   void setupSharingIntent() {
     if (Platform.isAndroid || Platform.isIOS) {
       // for files opened while the app is closed
-      ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> files) {
-        for (final file in files) {
-          App.openFile(file);
+      unawaited(ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> files) {
+        if(files.isNotEmpty) {
+          if (mounted) {
+            goRouter.go('/send/sending',
+                extra: {'files': files.map((file) => file.path).toList(), 'isFolder': false});
+          }
         }
-      });
+
+        ReceiveSharingIntent.instance.reset();
+      }));
 
       // for files opened while the app is open
       final stream = ReceiveSharingIntent.instance.getMediaStream();
       _intentDataStreamSubscription = stream.listen((List<SharedMediaFile> files) {
-        for (final file in files) {
-          App.openFile(file);
+        if(files.isNotEmpty) {
+          if (mounted) {
+            goRouter.go('/send/sending',
+                extra: {'files': files.map((file) => file.path).toList(), 'isFolder': false});
+          }
         }
       });
     }
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +108,7 @@ class _AppState extends State<App> {
 
   @override
   void dispose() {
-    //_intentDataStreamSubscription?.cancel();
+    _intentDataStreamSubscription?.cancel();
     super.dispose();
   }
 }

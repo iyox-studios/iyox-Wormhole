@@ -7,17 +7,13 @@
   pubspecLock,
   androidSdk,
   jdk,
-  fetchzip,
   gradle,
   callPackage,
-  rustPlatform,
   lib,
   stdenv,
   replaceVars,
   buildDartApplication,
   rustToolchain,
-  nixpkgs,
-  pkgsCross,
   ndkVersion,
   writeShellScript,
 }: let
@@ -36,8 +32,7 @@
   };
 
   # TODO use rust from rustToolchain
-  rustBuilder = target: let
-  in
+  rustBuilder = target:
     (naersk.lib.x86_64-linux.override {
       cargo = rustToolchain;
       rustc = rustToolchain;
@@ -124,6 +119,11 @@ in
             runHook postInstall
           '';
         };
+    };
+
+    gitHashes = {
+      "receive_sharing_intent" = "sha256-8D5ZENARPZ7FGrdIErxOoV3Ao35/XoQ2tleegI42ZUY=";
+      "pick_or_save" = "sha256-3djdkmegXGoW/PWqAFbp9t/LajzTMILbOam9LoYRRBs=";
     };
 
     targetFlutterPlatform = "web"; # to skip linux fixups

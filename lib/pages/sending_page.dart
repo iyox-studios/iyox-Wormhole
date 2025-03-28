@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
@@ -5,8 +7,11 @@ import 'package:iyox_wormhole/rust/api.dart';
 import 'package:iyox_wormhole/rust/wormhole/types/events.dart';
 import 'package:iyox_wormhole/rust/wormhole/types/t_update.dart';
 import 'package:iyox_wormhole/rust/wormhole/types/value.dart';
+import 'package:iyox_wormhole/utils/error_dialog.dart';
 import 'package:iyox_wormhole/utils/logger.dart';
 import 'package:iyox_wormhole/utils/type_helpers.dart';
+import 'package:iyox_wormhole/utils/zip.dart';
+import 'package:pick_or_save/pick_or_save.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class SendingPage extends StatefulWidget {
@@ -33,46 +38,59 @@ class _SendingPageState extends State<SendingPage> {
     _startSending();
   }
 
-  void _startSending() {
+  void _startSending() async {
     if (widget.files.isEmpty) {
       Navigator.of(context).pop();
       return;
     }
 
-    Stream<TUpdate> stream;
-    if (!widget.isFolder) {
-      stream = sendFiles(
-        name: widget.files.first.split('/').last,
-        filePaths: widget.files,
-        codeLength: 3, //await Settings.getWordLength(),
-        serverConfig: ServerConfig(
-          rendezvousUrl: defaultRendezvousUrl(),
-          transitUrl: defaultTransitUrl(),
+    if (widget.isFolder) {
+      final folderPath = widget.files.last;
+      List<DocumentFile>? documentFiles = await PickOrSave().directoryDocumentsPicker(
+        params: DirectoryDocumentsPickerParams(
+          directoryUri: folderPath,
+          recurseDirectories: true,
         ),
       );
-      //await _getServerConfig());
+
+      if (documentFiles == null) {
+        if (mounted) {
+          Navigator.of(context).pop();
+          await showErrorDialog(context: context);
+        }
+        return;
+      }
+
+      try {
+        final zipStream = zipFolder(folderPath, documentFiles);
+
+        zipStream.listen((e) async {
+          if (e.zipFilePath != null) {
+            startTransfer([e.zipFilePath!]);
+          }
+        });
+      } catch (e) {
+        if (mounted) {
+          Navigator.of(context).pop();
+          await showErrorDialog(context: context, errorMessage: t.pages.send.zip_failed);
+        }
+      }
     } else {
-      String folderPath = widget.files.first;
-      String folderName = folderPath.split('/').last;
-
-      stream = sendFolder(
-        name: folderName,
-        folderPath: folderPath,
-        codeLength: 3, //await Settings.getWordLength(),
-        serverConfig: new ServerConfig(
-          rendezvousUrl: defaultRendezvousUrl(),
-          transitUrl: defaultTransitUrl(),
-        ),
-      );
+      startTransfer(widget.files);
     }
+  }
 
-    /*
-    for (var file in widget.files) {
-      setState(() {
-        Settings.addRecentFile(file);
-      });
-    }
-    */
+  void startTransfer(List<String> files) {
+    Stream<TUpdate> stream = sendFiles(
+      name: files.first.split('/').last,
+      filePaths: files,
+      codeLength: 3, //await Settings.getWordLength(),
+      serverConfig: ServerConfig(
+        rendezvousUrl: defaultRendezvousUrl(),
+        transitUrl: defaultTransitUrl(),
+      ),
+    );
+    //await _getServerConfig());
 
     stream.listen((e) async {
       switch (e.event) {
@@ -95,6 +113,7 @@ class _SendingPageState extends State<SendingPage> {
           setState(() {
             shareProgress = (e.getValue() as int) / totalShareSize!.toDouble();
           });
+          break;
         case Events.finished:
           /*if (widget.causedByIntent) {
             SystemNavigator.pop();
@@ -103,30 +122,27 @@ class _SendingPageState extends State<SendingPage> {
           if (mounted) {
             Navigator.of(context).pop();
           }
+          break;
         case Events.error:
-          final errMessage = e.value as Value_ErrorValue;
-          log.e('Native Error: ${errMessage.field0}, ${errMessage.field1}');
+          final String errorMessage;
+          if (e.value is Value_Error) {
+            final err = e.value as Value_Error;
+            log.e('Native Error: ${err.field0}');
+            errorMessage = err.field0.toString();
+          } else if (e.value is Value_ErrorValue) {
+            final err = e.value as Value_ErrorValue;
+            log.e('Native Error: ${err.field0}, ${err.field1}');
+            errorMessage = err.field1;
+          } else {
+            errorMessage = 'Unexpected Error';
+          }
+
           if (mounted) {
             Navigator.of(context).pop();
-            await showDialog<void>(
-                context: context,
-                builder: (ctx) {
-                  final t = Translations.of(ctx);
-
-                  return AlertDialog(
-                    title: Text(t.common.generic_error),
-                    content: Text(errMessage.field1),
-                    actions: [
-                      TextButton(
-                          onPressed: () => Navigator.of(ctx, rootNavigator: true).pop(),
-                          child: Text(t.common.generic_acknowledge))
-                    ],
-                  );
-                },
-                barrierDismissible: true);
+            await showErrorDialog(context: context, errorMessage: errorMessage);
           }
         default:
-          log.e(e.event.toString());
+          log.w('Unknown event: ${e.event.toString()}');
       }
     });
   }
@@ -158,6 +174,18 @@ class _SendingPageState extends State<SendingPage> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    if (widget.isFolder) {
+      for (final file in widget.files) {
+        log.i('Deleting file $file');
+        File(file).delete();
+      }
+    }
   }
 
   @override
@@ -193,7 +221,9 @@ class _SendingPageState extends State<SendingPage> {
                               padding: const EdgeInsets.all(15),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: QrImageView(data: 'wormhole-transfer:$codeText', backgroundColor: Colors.white),
+                                child: QrImageView(
+                                    data: 'wormhole-transfer:$codeText',
+                                    backgroundColor: Colors.white),
                               ))),
                       SizedBox.fromSize(
                         size: Size.fromHeight(10),
@@ -217,8 +247,10 @@ class _SendingPageState extends State<SendingPage> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     height: 1.6,
-                                    fontSize: Theme.of(context).textTheme.titleMedium!.fontSize! + 1.5,
-                                    fontWeight: Theme.of(context).textTheme.titleMedium?.fontWeight),
+                                    fontSize:
+                                        Theme.of(context).textTheme.titleMedium!.fontSize! + 1.5,
+                                    fontWeight:
+                                        Theme.of(context).textTheme.titleMedium?.fontWeight),
                               )),
                         ),
                       ),

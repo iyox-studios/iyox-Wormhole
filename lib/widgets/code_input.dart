@@ -4,16 +4,16 @@ import 'package:iyox_wormhole/utils/color.dart';
 import 'package:iyox_wormhole/utils/wordlist.dart';
 
 class CodeInput extends StatefulWidget {
-  const CodeInput({super.key, required this.onTap});
+  const CodeInput({super.key, required this.onTap, required this.controller});
 
   final Function onTap;
+  final TextEditingController controller;
 
   @override
   State<CodeInput> createState() => _CodeInputState();
 }
 
 class _CodeInputState extends State<CodeInput> {
-  final TextEditingController _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
   String _suggestion = '';
@@ -22,18 +22,17 @@ class _CodeInputState extends State<CodeInput> {
   @override
   void initState() {
     super.initState();
-    _textController.addListener(_updateSuggestion);
+    widget.controller.addListener(_updateSuggestion);
   }
 
   @override
   void dispose() {
-    _textController.dispose();
     _focusNode.dispose();
     super.dispose();
   }
 
   void _updateSuggestion() {
-    final text = _textController.text;
+    final text = widget.controller.text;
 
     if (text.split('-').last == '') {
       setState(() {
@@ -67,8 +66,8 @@ class _CodeInputState extends State<CodeInput> {
   void _acceptSuggestion() {
     if (_suggestion.isNotEmpty) {
       final length = _suggestion.length;
-      _textController.text = _suggestion;
-      _textController.selection = TextSelection.collapsed(offset: length);
+      widget.controller.text = _suggestion;
+      widget.controller.selection = TextSelection.collapsed(offset: length);
       setState(() => _suggestion = '');
     }
   }
@@ -80,7 +79,7 @@ class _CodeInputState extends State<CodeInput> {
     return Stack(
       children: [
         TextField(
-          controller: _textController,
+          controller: widget.controller,
           focusNode: _focusNode,
           decoration: InputDecoration(
             filled: true,
@@ -113,7 +112,7 @@ class _CodeInputState extends State<CodeInput> {
             child: GestureDetector(
               onTap: _acceptSuggestion,
               child: Text(
-                _suggestion.substring(_textController.text.length),
+                _suggestion.substring(widget.controller.text.length),
                 style: textStyle.copyWith(
                     //color: Colors.grey.withOpacity(0.7),
                     color: Colors.grey.shade400),

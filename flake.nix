@@ -95,6 +95,8 @@
               rustToolchain
               flutter_rust_bridge_codegen
               cargo-expand
+
+              fastlane
             ];
           };
 
@@ -104,7 +106,6 @@
             pname = "iyox-wormhole";
             version = version.versionName;
             versionCode = version.versionCode;
-            nixpkgs = inputs.nixpkgs;
           };
           update-locks = pkgs.callPackage ./nix/update-locks.nix {
             inherit gradle;

@@ -103,6 +103,7 @@ class TranslationsPagesSendEn {
 	String get abort_transfer_message => 'Do you want to abort the current file transfer?';
 	String get abort_transfer_yes => 'Abort';
 	String get abort_transfer_no => 'Continue';
+	String get zip_failed => 'An error occurred while creating the ZIP archive';
 }
 
 // Path: pages.receive
@@ -136,6 +137,7 @@ extension on Translations {
 			case 'pages.send.abort_transfer_message': return 'Do you want to abort the current file transfer?';
 			case 'pages.send.abort_transfer_yes': return 'Abort';
 			case 'pages.send.abort_transfer_no': return 'Continue';
+			case 'pages.send.zip_failed': return 'An error occurred while creating the ZIP archive';
 			case 'pages.receive.code_input_hint': return 'Enter Code';
 			case 'pages.receive.receive_button': return 'Receive File';
 			default: return null;

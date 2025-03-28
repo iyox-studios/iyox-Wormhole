@@ -6,7 +6,7 @@ import 'package:iyox_wormhole/utils/logger.dart';
 import 'package:iyox_wormhole/widgets/app_bar.dart';
 import 'package:iyox_wormhole/widgets/illustration.dart';
 import 'package:iyox_wormhole/widgets/large_icon_button.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:pick_or_save/pick_or_save.dart';
 
 class SendPage extends StatefulWidget {
   const SendPage({super.key});
@@ -69,15 +69,12 @@ class _SendPageState extends State<SendPage> {
   }
 
   void _onSendButtonClick() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: true);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
-    if (mounted) {
-      if (result != null) {
-        final files = result.files
-            .where((element) => element.path != null)
-            .map((e) => e.path!)
-            .toList();
+    if (result != null) {
+      if (mounted) {
+        final files =
+            result.files.where((element) => element.path != null).map((e) => e.path!).toList();
 
         context.go('/send/sending', extra: {'files': files, 'isFolder': false});
       }
@@ -85,25 +82,7 @@ class _SendPageState extends State<SendPage> {
   }
 
   void _onSendFolderButtonClick() async {
-    try {
-      final permissionStatus = await Permission.manageExternalStorage.request();
-      if (!permissionStatus.isGranted) {
-        if (mounted) {
-          final t = Translations.of(context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(t.pages.send.permission_denied),
-              duration: Duration(seconds: 2),
-            ),
-          );
-        }
-        return;
-      }
-    } catch (e) {
-      log.w('Failed to request manageExternalStorage permission', error: e);
-    }
-
-    String? path = await FilePicker.platform.getDirectoryPath();
+    String? path = await PickOrSave().directoryPicker();
 
     if (path != null) {
       if (mounted) {

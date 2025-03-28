@@ -29,6 +29,15 @@
   {
     "group": "androidx.activity",
     "name": "activity",
+    "version": "1.6.1",
+    "artifacts": {
+      "activity-1.6.1.aar": "46d9c0e7547ac7276853366a590f891db2a86863387c0738cf1f11731dc8fd7e",
+      "activity-1.6.1.module": "536ab6630c9abbd61d527788af0ae76a8500db6536252512cac3b529d84d2e3a"
+    }
+  },
+  {
+    "group": "androidx.activity",
+    "name": "activity",
     "version": "1.8.1",
     "artifacts": {
       "activity-1.8.1.aar": "66bc2c13bd91fb8ea09e445b21f784d3e5d3a9ec9b180cd07e0e9208c2f939c6",
@@ -42,6 +51,15 @@
     "artifacts": {
       "activity-ktx-1.5.1.aar": "fd69a5ccb99244cb7c5224580a58e23238d10ed4086199a33e9bfc31c4e4834f",
       "activity-ktx-1.5.1.module": "890eb6f3aa3d119236b4c96ec6b1beb647c296a4d99ca7e4a500a164a95ca2cb"
+    }
+  },
+  {
+    "group": "androidx.activity",
+    "name": "activity-ktx",
+    "version": "1.6.1",
+    "artifacts": {
+      "activity-ktx-1.6.1.aar": "0561745b3ddce53db491221b2b0cd3a44cadfb091b85e7831fd8be344f117d6e",
+      "activity-ktx-1.6.1.module": "eb2f3862d2073c395a5037fb3284de6073b7824df27c7ac934502d6a5ecfcdfa"
     }
   },
   {
@@ -82,6 +100,7 @@
     "name": "annotation",
     "version": "1.2.0",
     "artifacts": {
+      "annotation-1.2.0.jar": "9029262bddce116e6d02be499e4afdba21f24c239087b76b3b57d7e98b490a36",
       "annotation-1.2.0.module": "2efcab81ef91b211bacd206eaacd995a51f633a2e96b57a8fc00144c5f9c56b3"
     }
   },
@@ -303,6 +322,7 @@
     "name": "collection",
     "version": "1.0.0",
     "artifacts": {
+      "collection-1.0.0.jar": "9c8d117b5c2bc120a1cdfeb857e05b495b16c36013570372a708f7827e3ac9f9",
       "collection-1.0.0.pom": "a7913a5275ad68e555d2612ebe8c14c367b153e14ca48a1872a64899020e54ef"
     }
   },
@@ -511,6 +531,15 @@
   {
     "group": "androidx.databinding",
     "name": "databinding-common",
+    "version": "7.3.1",
+    "artifacts": {
+      "databinding-common-7.3.1.jar": "6b4a121c5d274d34e0386aa019848a2e946ebd98e4a5f693b1df68a771a031be",
+      "databinding-common-7.3.1.pom": "e9a130fb835c7a5db3ff6fd785983dd4a176c531b90c6d33f4b21d6a12d1cb64"
+    }
+  },
+  {
+    "group": "androidx.databinding",
+    "name": "databinding-common",
     "version": "7.4.2",
     "artifacts": {
       "databinding-common-7.4.2.jar": "9fa21e2030273ee3cb8c4701c341af8cf9359791a3b45b2bc0be07870c03b1c8",
@@ -533,6 +562,15 @@
     "artifacts": {
       "databinding-common-8.1.0.jar": "66cab82639dac0f6c2433464c093b074d608c4bb887ec38a9b8bc4ac98126732",
       "databinding-common-8.1.0.pom": "b7a841102d0da4773fa20bdbc5a610dc079adbec7cddc11edc9244fc86cd2faf"
+    }
+  },
+  {
+    "group": "androidx.databinding",
+    "name": "databinding-common",
+    "version": "8.2.2",
+    "artifacts": {
+      "databinding-common-8.2.2.jar": "66cab82639dac0f6c2433464c093b074d608c4bb887ec38a9b8bc4ac98126732",
+      "databinding-common-8.2.2.pom": "2da5789c0fe9bc993580ea046722b8e98082be035fa21d9c027af87925d45053"
     }
   },
   {
@@ -573,6 +611,15 @@
   },
   {
     "group": "androidx.databinding",
+    "name": "databinding-common",
+    "version": "8.7.0",
+    "artifacts": {
+      "databinding-common-8.7.0.jar": "66cab82639dac0f6c2433464c093b074d608c4bb887ec38a9b8bc4ac98126732",
+      "databinding-common-8.7.0.pom": "7ad4e6c0624c3b4781598616405304ba994e3fbecafec88a4a3a7b9fb886dda3"
+    }
+  },
+  {
+    "group": "androidx.databinding",
     "name": "databinding-compiler-common",
     "version": "4.1.0",
     "artifacts": {
@@ -587,6 +634,15 @@
     "artifacts": {
       "databinding-compiler-common-7.3.0.jar": "11b86c7101e437b15567a005def747022d01543d81d620e18856df27c8274048",
       "databinding-compiler-common-7.3.0.pom": "4f8ee822b0b57507baede9c726ed5080588fb9b744f5c80d4c55dd68b686bdbc"
+    }
+  },
+  {
+    "group": "androidx.databinding",
+    "name": "databinding-compiler-common",
+    "version": "7.3.1",
+    "artifacts": {
+      "databinding-compiler-common-7.3.1.jar": "a8f10f6422fa45ddda2b082ff3bcefada66b99a2698bafaa36b02e9f85dc1b3c",
+      "databinding-compiler-common-7.3.1.pom": "ef554a1ba1f23baa3c106e8ab42b49b35bdd37c69dea0bda42e16a797ec665e2"
     }
   },
   {
@@ -614,6 +670,15 @@
     "artifacts": {
       "databinding-compiler-common-8.1.0.jar": "f0c2138f13aa2dd72b8e89f379cd2b638ec59206d5aaf07c155613dbac83f519",
       "databinding-compiler-common-8.1.0.pom": "4dd59be823bdfa7215253765999bdfda1bb62b7b3b2212b009b0020d05accc5b"
+    }
+  },
+  {
+    "group": "androidx.databinding",
+    "name": "databinding-compiler-common",
+    "version": "8.2.2",
+    "artifacts": {
+      "databinding-compiler-common-8.2.2.jar": "27d84c34d027f60155142b89ae045dab5f9c1d7213164d85eb70c842c1ea9879",
+      "databinding-compiler-common-8.2.2.pom": "87c4c7336a239cf9b27c50b808382045bfc0b5d0556fa6ffe52add0edd3072a8"
     }
   },
   {
@@ -650,6 +715,15 @@
     "artifacts": {
       "databinding-compiler-common-8.6.1.jar": "f61b78591752694b960d5fe8f97fde49a2fb3911647ffabd6d7d569237fc7362",
       "databinding-compiler-common-8.6.1.pom": "d0aa43befdcd2937459394022746b0d25d07ab94b89e388cc5de758e36d9b31b"
+    }
+  },
+  {
+    "group": "androidx.databinding",
+    "name": "databinding-compiler-common",
+    "version": "8.7.0",
+    "artifacts": {
+      "databinding-compiler-common-8.7.0.jar": "f4ccc0eafca4a47be5bf910209b986ac0921b6b5b52caa1bf4aa52900d244edd",
+      "databinding-compiler-common-8.7.0.pom": "cd251f8aaa819526f94694d14577fc5433a818d03b14b180d9574eefc7182b4c"
     }
   },
   {
@@ -767,6 +841,15 @@
     "artifacts": {
       "documentfile-1.0.0.aar": "865a061ef2fad16522f8433536b8d47208c46ff7c7745197dfa1eeb481869487",
       "documentfile-1.0.0.pom": "013288a9317a552706ce625fb24493e8223288529223ec578cf855a5ae9c16e5"
+    }
+  },
+  {
+    "group": "androidx.documentfile",
+    "name": "documentfile",
+    "version": "1.0.1",
+    "artifacts": {
+      "documentfile-1.0.1.aar": "9c53d24ce55e7836b44e5a85b3f6fa006fdf8742d4a1a80d8d432deea66108d1",
+      "documentfile-1.0.1.pom": "7a11bf7829b9bcad5caf98b957f8ec15662ec5dab07ba2433331f7c476c6baac"
     }
   },
   {
@@ -1617,6 +1700,15 @@
   {
     "group": "com.android",
     "name": "signflinger",
+    "version": "7.3.1",
+    "artifacts": {
+      "signflinger-7.3.1.jar": "4232e4c3c87a06690b7e2a4958fb7495fcb75eea39f65eb6573377d852d57a63",
+      "signflinger-7.3.1.pom": "9ee94579398d1f1281772ae67e4d35a5ce9c86fc001b8c97e3bc82f442a42660"
+    }
+  },
+  {
+    "group": "com.android",
+    "name": "signflinger",
     "version": "7.4.2",
     "artifacts": {
       "signflinger-7.4.2.jar": "1f25f3f9c5d706fd7bc133a45bf35511093197d540635a613d1aae11260e314a",
@@ -1639,6 +1731,15 @@
     "artifacts": {
       "signflinger-8.1.0.jar": "c1dca2c683634ee1a294298f9c7179578af6a86e080bdc40f961915bc5c8142f",
       "signflinger-8.1.0.pom": "58c2de0589de328433761da00d893acdd6a236d6fca1c8407db6d812255ae7be"
+    }
+  },
+  {
+    "group": "com.android",
+    "name": "signflinger",
+    "version": "8.2.2",
+    "artifacts": {
+      "signflinger-8.2.2.jar": "c1dca2c683634ee1a294298f9c7179578af6a86e080bdc40f961915bc5c8142f",
+      "signflinger-8.2.2.pom": "4516cbeeea22a97da44a58b43be765b46a2143698b1e6904bab1e0e9964818d2"
     }
   },
   {
@@ -1679,6 +1780,15 @@
   },
   {
     "group": "com.android",
+    "name": "signflinger",
+    "version": "8.7.0",
+    "artifacts": {
+      "signflinger-8.7.0.jar": "c1dca2c683634ee1a294298f9c7179578af6a86e080bdc40f961915bc5c8142f",
+      "signflinger-8.7.0.pom": "de76686bedf5d56b0d2e04adc7b204b6162a52b530360de4947634b9a4d67c60"
+    }
+  },
+  {
+    "group": "com.android",
     "name": "zipflinger",
     "version": "4.1.0",
     "artifacts": {
@@ -1693,6 +1803,15 @@
     "artifacts": {
       "zipflinger-7.3.0.jar": "accf407c70267cf7eb583ed5aaa1358c2d8fdbdf9c77675010118af6b55c0d5c",
       "zipflinger-7.3.0.pom": "96db81d49e5728a8e589a2403144ebf3ffa9100a58bd4b87064fa6ba2c47444a"
+    }
+  },
+  {
+    "group": "com.android",
+    "name": "zipflinger",
+    "version": "7.3.1",
+    "artifacts": {
+      "zipflinger-7.3.1.jar": "accf407c70267cf7eb583ed5aaa1358c2d8fdbdf9c77675010118af6b55c0d5c",
+      "zipflinger-7.3.1.pom": "62fb407709c32a72509052e0c1ffd82a712af27ba2e20a3d256a576be632fd26"
     }
   },
   {
@@ -1720,6 +1839,15 @@
     "artifacts": {
       "zipflinger-8.1.0.jar": "56589abf965af58ea1d31c15d676fe0d62b9db92983fbdfe8e72c983ea577dbb",
       "zipflinger-8.1.0.pom": "c2c48ed2d17fde401ea4e1283366e0731e5076a6ac90043f60054b9135c213ea"
+    }
+  },
+  {
+    "group": "com.android",
+    "name": "zipflinger",
+    "version": "8.2.2",
+    "artifacts": {
+      "zipflinger-8.2.2.jar": "81dd485618a509a3235929b9eb13091d884452661de6ce5a45cc38b1c555421c",
+      "zipflinger-8.2.2.pom": "4bfc88161c7ac3a387273ffc76a8249d51abad6692f9f07c1a524e72a952af1a"
     }
   },
   {
@@ -1759,6 +1887,15 @@
     }
   },
   {
+    "group": "com.android",
+    "name": "zipflinger",
+    "version": "8.7.0",
+    "artifacts": {
+      "zipflinger-8.7.0.jar": "81dd485618a509a3235929b9eb13091d884452661de6ce5a45cc38b1c555421c",
+      "zipflinger-8.7.0.pom": "9f9c3c486ca9ba74f808154558b73945757bf8c12165ce8346f496cf38e87c9d"
+    }
+  },
+  {
     "group": "com.android.application",
     "name": "com.android.application.gradle.plugin",
     "version": "8.6.1",
@@ -1787,6 +1924,15 @@
   {
     "group": "com.android.databinding",
     "name": "baseLibrary",
+    "version": "7.3.1",
+    "artifacts": {
+      "baseLibrary-7.3.1.jar": "7ff63bd34cae029e479fca52751cc67ae23e00f2a4c71c30203968f33704aa96",
+      "baseLibrary-7.3.1.pom": "7826539155a46211fff378d9aa9b6f50932e628b12c51592f959862777fa70fd"
+    }
+  },
+  {
+    "group": "com.android.databinding",
+    "name": "baseLibrary",
     "version": "7.4.2",
     "artifacts": {
       "baseLibrary-7.4.2.jar": "530b2113317ff4d0f69ffdfb49387ba4b86aac169e1c77dff943405b79adcf8b",
@@ -1809,6 +1955,15 @@
     "artifacts": {
       "baseLibrary-8.1.0.jar": "794113709dab21b06c262b3795e73cb708fbacae61715f34361e1af6237a1870",
       "baseLibrary-8.1.0.pom": "8dd0be1c1c39d501d357eff52eadd6f0b80191d156500380613e02b6ac316746"
+    }
+  },
+  {
+    "group": "com.android.databinding",
+    "name": "baseLibrary",
+    "version": "8.2.2",
+    "artifacts": {
+      "baseLibrary-8.2.2.jar": "794113709dab21b06c262b3795e73cb708fbacae61715f34361e1af6237a1870",
+      "baseLibrary-8.2.2.pom": "4f2b1b5b7a94d5ff04cbef0b1bad3696e5ed4e719d0a0b408cf6812493bc0187"
     }
   },
   {
@@ -1848,6 +2003,15 @@
     }
   },
   {
+    "group": "com.android.databinding",
+    "name": "baseLibrary",
+    "version": "8.7.0",
+    "artifacts": {
+      "baseLibrary-8.7.0.jar": "794113709dab21b06c262b3795e73cb708fbacae61715f34361e1af6237a1870",
+      "baseLibrary-8.7.0.pom": "b29b9c863ad59ef788fd017e52cc530b9f71114dd25c11f0aefc1ec037530b9c"
+    }
+  },
+  {
     "group": "com.android.tools",
     "name": "annotations",
     "version": "27.1.0",
@@ -1863,6 +2027,15 @@
     "artifacts": {
       "annotations-30.3.0.jar": "77e5196bcafc283c5e987f0944f049eee0e68b532ebeb530d855f6f196db4f2a",
       "annotations-30.3.0.pom": "3c2d7c0fe29b84407c19d7f3bdb925c2689bf9db6899d2317ea4fd6847637570"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "annotations",
+    "version": "30.3.1",
+    "artifacts": {
+      "annotations-30.3.1.jar": "77e5196bcafc283c5e987f0944f049eee0e68b532ebeb530d855f6f196db4f2a",
+      "annotations-30.3.1.pom": "4307abfc5293c3116003160611cd15ce195ebcd9144ead3d0d57f901e7a05f37"
     }
   },
   {
@@ -1890,6 +2063,15 @@
     "artifacts": {
       "annotations-31.1.0.jar": "ee3bfd9cdb5012bdb61520f8654a785577e9bb337e5939c5c6149a446684ee16",
       "annotations-31.1.0.pom": "b508a56b8838bfe8125d78d2a9c5ecd8179fda769da7d757484d4d42dbe281dc"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "annotations",
+    "version": "31.2.2",
+    "artifacts": {
+      "annotations-31.2.2.jar": "ee3bfd9cdb5012bdb61520f8654a785577e9bb337e5939c5c6149a446684ee16",
+      "annotations-31.2.2.pom": "20c436a001453b365a06ea42d7f06d2163f8ab68297b7b31d0da5e21b90d1bbc"
     }
   },
   {
@@ -1930,6 +2112,15 @@
   },
   {
     "group": "com.android.tools",
+    "name": "annotations",
+    "version": "31.7.0",
+    "artifacts": {
+      "annotations-31.7.0.jar": "b25995fa7b220d35fbb8e325df071f8291691bfbaff9734c98e38f45ec2a73ee",
+      "annotations-31.7.0.pom": "8518f36df1ccd1b2458c64611a55cabbdce00a2e5cc8be4fbd573a6562bba542"
+    }
+  },
+  {
+    "group": "com.android.tools",
     "name": "common",
     "version": "27.1.0",
     "artifacts": {
@@ -1944,6 +2135,15 @@
     "artifacts": {
       "common-30.3.0.jar": "e2960f28e3fbdd6b947c8121acc40e03ec932632333c0ce4683ce84588a6468b",
       "common-30.3.0.pom": "b2d650a0ed96958447a9019a593d7416f79359fa4af1305cf1fbff19eb8b3b57"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "common",
+    "version": "30.3.1",
+    "artifacts": {
+      "common-30.3.1.jar": "559f1484222d8947ecf4d18538295be6d12ff2b74dc22c3c85922c7ba33678e9",
+      "common-30.3.1.pom": "ed356f798a698e5320ea8616108313df7ded97723c07a315d77287fc25cc9b1b"
     }
   },
   {
@@ -1971,6 +2171,15 @@
     "artifacts": {
       "common-31.1.0.jar": "18429dd4f4eef4f382f81c5970776f825c13da2fc34c6cd42e69b016c4fcf072",
       "common-31.1.0.pom": "4a8508c73e79f35bb3a0868d67684f445c62184cf5c1f33dc528a2b275717771"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "common",
+    "version": "31.2.2",
+    "artifacts": {
+      "common-31.2.2.jar": "e9bf1fc3930bb511b29584915c5e6a6a729d451ba3ac25ef396528d482796416",
+      "common-31.2.2.pom": "e5bf927d5ffffc55043a37e9f922d2ff8972ec6a79f1aa48e08acd74c3ff8c4b"
     }
   },
   {
@@ -2011,6 +2220,15 @@
   },
   {
     "group": "com.android.tools",
+    "name": "common",
+    "version": "31.7.0",
+    "artifacts": {
+      "common-31.7.0.jar": "2877bbff38b2cbd18c4fa73400a84addb60adee695af94b984cf35dc2665e3b5",
+      "common-31.7.0.pom": "23773a38097291db47e657a04cc874d16d146b1e9e23928285a19b264cbe16d9"
+    }
+  },
+  {
+    "group": "com.android.tools",
     "name": "dvlib",
     "version": "27.1.0",
     "artifacts": {
@@ -2025,6 +2243,15 @@
     "artifacts": {
       "dvlib-30.3.0.jar": "d4b141bd617afaf292dbd7c4f48b6b3a0b4244ded12b0e241e7bdf755db1597c",
       "dvlib-30.3.0.pom": "346de7aeb06530e573a2fa42e3c212daa9360c12c5bcc667efff7e899c1c62b9"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "dvlib",
+    "version": "30.3.1",
+    "artifacts": {
+      "dvlib-30.3.1.jar": "d4b141bd617afaf292dbd7c4f48b6b3a0b4244ded12b0e241e7bdf755db1597c",
+      "dvlib-30.3.1.pom": "2d2068fff0fa955065e22fcb3f4915ea2a53026d644e9cd3383f121f167d7d80"
     }
   },
   {
@@ -2052,6 +2279,15 @@
     "artifacts": {
       "dvlib-31.1.0.jar": "f6e31a2b7da1b62a401e5e3f0304426faa119dcfd1651f8f67a9a4c254d59faf",
       "dvlib-31.1.0.pom": "6b521b0e1e8ac3e3c6037d806031564d592f5dcb9d289e6c1d59c2acc7dd0d80"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "dvlib",
+    "version": "31.2.2",
+    "artifacts": {
+      "dvlib-31.2.2.jar": "0cb57c126ed95657ae1e0974af092b401a52b76d5683f7ccbe1f8f21af06794e",
+      "dvlib-31.2.2.pom": "1be65d00df197630989be473bd72f2763b2edf08d0826ae0fc88600b55bec1d1"
     }
   },
   {
@@ -2092,6 +2328,15 @@
   },
   {
     "group": "com.android.tools",
+    "name": "dvlib",
+    "version": "31.7.0",
+    "artifacts": {
+      "dvlib-31.7.0.jar": "8fd3495a2ebb50b1aacb1b4362dc4a471b87462c1eaec43691bb56f895e9c636",
+      "dvlib-31.7.0.pom": "efb60dd883ce77d14666af8240314b84cb8dfcff21f43d331b8449fe394c1218"
+    }
+  },
+  {
+    "group": "com.android.tools",
     "name": "play-sdk-proto",
     "version": "31.6.1",
     "artifacts": {
@@ -2120,6 +2365,15 @@
   {
     "group": "com.android.tools",
     "name": "repository",
+    "version": "30.3.1",
+    "artifacts": {
+      "repository-30.3.1.jar": "a3bd11b434ccde5df90de77fd853361d99c150778cce5638d1ce25f820b9e243",
+      "repository-30.3.1.pom": "ec4d6dc6d8cff33b141ddc68f1a8e4bf13b6d716c6ee5312422d02b9686196f9"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "repository",
     "version": "30.4.2",
     "artifacts": {
       "repository-30.4.2.jar": "6c39549d1887a2c7e08b73d66c0c4f103657b06471760fb65858c943756cc940",
@@ -2142,6 +2396,15 @@
     "artifacts": {
       "repository-31.1.0.jar": "8fe8e9d6bcebe92dd4eee3e8f8e122b521f03a8f49e28f6a814b46e3822e4aaa",
       "repository-31.1.0.pom": "facd13074e2378daa45a8cae4878d94ff7a8434b2e54ffe1c11eab6ba4fbc4cf"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "repository",
+    "version": "31.2.2",
+    "artifacts": {
+      "repository-31.2.2.jar": "0f1778a98a79fb6f3a8fa5116b7f16092960bf49509802656c1117c75cc7875c",
+      "repository-31.2.2.pom": "121302361f76a18bf0c78b2c5d3a18b6eff3bd86465a6f69e383c049a36da8e9"
     }
   },
   {
@@ -2182,6 +2445,15 @@
   },
   {
     "group": "com.android.tools",
+    "name": "repository",
+    "version": "31.7.0",
+    "artifacts": {
+      "repository-31.7.0.jar": "169c2e7a77aa30978879dbf8b30436671165872fcbdfdda6c735aaddb6710340",
+      "repository-31.7.0.pom": "805fc1a91a8cd9a5b631b0e62877d9c01f31ff83f4e07ced6f0b834206c8a09f"
+    }
+  },
+  {
+    "group": "com.android.tools",
     "name": "sdk-common",
     "version": "27.1.0",
     "artifacts": {
@@ -2196,6 +2468,15 @@
     "artifacts": {
       "sdk-common-30.3.0.jar": "fbe6b7dfb30b38ab1d17c5c6b660a8446ac2023fb0cfca3231126facedac2b7c",
       "sdk-common-30.3.0.pom": "0bcd87735db51f812ee4d7d6c3b038baf2137bccc58338efdbde7b32ea1aaf26"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "sdk-common",
+    "version": "30.3.1",
+    "artifacts": {
+      "sdk-common-30.3.1.jar": "fbe6b7dfb30b38ab1d17c5c6b660a8446ac2023fb0cfca3231126facedac2b7c",
+      "sdk-common-30.3.1.pom": "ba06c761aa257cbe9821941f9a2db7dcea81d32e3c67339fce1caa47d996ac4d"
     }
   },
   {
@@ -2223,6 +2504,15 @@
     "artifacts": {
       "sdk-common-31.1.0.jar": "47a63f3c957cc7a108000f945fdcff935148d5c213cb5887472cc091599a44c3",
       "sdk-common-31.1.0.pom": "59855b8bb2698a399a6ec6101dc8084fa77e22aba6f608d307899f664ead7068"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "sdk-common",
+    "version": "31.2.2",
+    "artifacts": {
+      "sdk-common-31.2.2.jar": "621026e12772dd44ad5cbd5808f91fe5af0f3bc976cd9b2b3cfad9236848637d",
+      "sdk-common-31.2.2.pom": "9cc455668dadb0b8475bc963a68b939e1766055a1e2aca57ff892e2bbdfee4d2"
     }
   },
   {
@@ -2263,6 +2553,15 @@
   },
   {
     "group": "com.android.tools",
+    "name": "sdk-common",
+    "version": "31.7.0",
+    "artifacts": {
+      "sdk-common-31.7.0.jar": "4fa44a7d9675df13da614dee512df90ad3e4308d0addb32ead99f57ce58f675f",
+      "sdk-common-31.7.0.pom": "5d672fc342f6a6b51632806aebf7957653f538368fdc30312c60c5d8b09287ec"
+    }
+  },
+  {
+    "group": "com.android.tools",
     "name": "sdklib",
     "version": "27.1.0",
     "artifacts": {
@@ -2277,6 +2576,15 @@
     "artifacts": {
       "sdklib-30.3.0.jar": "57e147e5c3add5bfa1c53eb81aa24edbe2056fbd2210a00c9a71409ae498356b",
       "sdklib-30.3.0.pom": "2d293bb18a79b356b84d0f4ef1422ed4ccedf082c4ae33437d7f1ffc892e4422"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "sdklib",
+    "version": "30.3.1",
+    "artifacts": {
+      "sdklib-30.3.1.jar": "57e147e5c3add5bfa1c53eb81aa24edbe2056fbd2210a00c9a71409ae498356b",
+      "sdklib-30.3.1.pom": "3d432a52cfc29068f8dc606c2cf4a7620ae2eec2132991d78a1fb0d184884499"
     }
   },
   {
@@ -2304,6 +2612,15 @@
     "artifacts": {
       "sdklib-31.1.0.jar": "9b344f6587e890bd0d4b68667c8fb652be12227fbe4c21cd8824d292e4ed6ddb",
       "sdklib-31.1.0.pom": "7a012da4de740f248458276d9831e541d765465f730fb52b46f0b58894547bdc"
+    }
+  },
+  {
+    "group": "com.android.tools",
+    "name": "sdklib",
+    "version": "31.2.2",
+    "artifacts": {
+      "sdklib-31.2.2.jar": "4fc6f2d46f9790c9f9b58573e6f5f9d51d20694149ba015ced720106eb666aa2",
+      "sdklib-31.2.2.pom": "57ca1626c54f922434f85edea448f62fcb67f32ad0394d9e97a602c0d65b2c65"
     }
   },
   {
@@ -2343,6 +2660,15 @@
     }
   },
   {
+    "group": "com.android.tools",
+    "name": "sdklib",
+    "version": "31.7.0",
+    "artifacts": {
+      "sdklib-31.7.0.jar": "0a3f7097a4a00b384046b783b7053a59ec0bd92256ab84baa6bd807aa02858b3",
+      "sdklib-31.7.0.pom": "b58c113ceb362eef08e4724e497cfad6fe66f48ca36d9136eb9a11b3614559a3"
+    }
+  },
+  {
     "group": "com.android.tools.analytics-library",
     "name": "crash",
     "version": "27.1.0",
@@ -2358,6 +2684,15 @@
     "artifacts": {
       "crash-30.3.0.jar": "c904484c4180ef376a7f0cec5d7a57b6c785f199f15b76b2f5a2a85a0de81d20",
       "crash-30.3.0.pom": "b9e9255c1ab2c12496bc6a407ad2a96006e25fb536a1c36f6fde9752b30ea3e6"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
+    "name": "crash",
+    "version": "30.3.1",
+    "artifacts": {
+      "crash-30.3.1.jar": "c904484c4180ef376a7f0cec5d7a57b6c785f199f15b76b2f5a2a85a0de81d20",
+      "crash-30.3.1.pom": "79aadd5b369a571342283c2d1e425fcce8cc6477461934d61f8ec329c21313db"
     }
   },
   {
@@ -2385,6 +2720,15 @@
     "artifacts": {
       "crash-31.1.0.jar": "cc5f028ac4fd037d57c0bb0cdc84ca37671852ea2370216b5ce6f45479f03261",
       "crash-31.1.0.pom": "a6e1bab826f1d093fd6740562e8ed45bceee718234f094b4da9eae4b83343b01"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
+    "name": "crash",
+    "version": "31.2.2",
+    "artifacts": {
+      "crash-31.2.2.jar": "d5be79bfa90311d39dd767516539afa122f9d40bc1e4bd8fc76e07b8151379f3",
+      "crash-31.2.2.pom": "867b1859c36ef5f2b31247035439a6a84bd0dc99c62b14d2080533bb6d76986c"
     }
   },
   {
@@ -2425,6 +2769,15 @@
   },
   {
     "group": "com.android.tools.analytics-library",
+    "name": "crash",
+    "version": "31.7.0",
+    "artifacts": {
+      "crash-31.7.0.jar": "cca97ac29a1329bd310a3e832b6e57f46227e501aa529c00a63df217c5d7df41",
+      "crash-31.7.0.pom": "ea0b0ac54c21c8f60e3a0223d81ba90835dd99db2934c869eab988b5f6c23d90"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
     "name": "protos",
     "version": "27.1.0",
     "artifacts": {
@@ -2439,6 +2792,15 @@
     "artifacts": {
       "protos-30.3.0.jar": "6695fe4be8c58274efbf0fa0ab9e465ceaf4f21792970d68d37591287ee7bed1",
       "protos-30.3.0.pom": "fe4285e5e43999b8a133796f6b0f49ed28bac1881f756583c48c0320207d7074"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
+    "name": "protos",
+    "version": "30.3.1",
+    "artifacts": {
+      "protos-30.3.1.jar": "6695fe4be8c58274efbf0fa0ab9e465ceaf4f21792970d68d37591287ee7bed1",
+      "protos-30.3.1.pom": "a168d79e94ca778c6e792718e20e33343fb7cd25b4a1b4d2aa188870d068a769"
     }
   },
   {
@@ -2466,6 +2828,15 @@
     "artifacts": {
       "protos-31.1.0.jar": "c1731e7dd1c07a10a0b11a62fff27448bfa260f7b534276bc9dbad857fbd76fd",
       "protos-31.1.0.pom": "dbdfc4c4fcc060e7ce552c3855f7102cfc79df06843358bb49d7fadd5663e29a"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
+    "name": "protos",
+    "version": "31.2.2",
+    "artifacts": {
+      "protos-31.2.2.jar": "022021c7063f2964ccf47a117583a45d5f0fc3b8d595d6877af7f81509b22317",
+      "protos-31.2.2.pom": "a169f4757f5b6bfede119c37d0af8addd6b82d81c9b3f28ba39b078d2f9ca64c"
     }
   },
   {
@@ -2506,6 +2877,15 @@
   },
   {
     "group": "com.android.tools.analytics-library",
+    "name": "protos",
+    "version": "31.7.0",
+    "artifacts": {
+      "protos-31.7.0.jar": "692cf981395fe171a2f229ff70cc6cc1ddf9e2261b28eadda2269d66e5509786",
+      "protos-31.7.0.pom": "e9615dbdbd21b10381fb95c155eb6ccb8a87ca611901681217d6349bd9f9e914"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
     "name": "shared",
     "version": "27.1.0",
     "artifacts": {
@@ -2520,6 +2900,15 @@
     "artifacts": {
       "shared-30.3.0.jar": "4a7ee8aad5796e058a2f414993424155172689ac332cd1a999db861949e2e1de",
       "shared-30.3.0.pom": "a7fd71ed4ae1012e270d8fa8beeb35b486b256c3f6163a1b741dbd14af11cd9d"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
+    "name": "shared",
+    "version": "30.3.1",
+    "artifacts": {
+      "shared-30.3.1.jar": "4a7ee8aad5796e058a2f414993424155172689ac332cd1a999db861949e2e1de",
+      "shared-30.3.1.pom": "c90311670f113b881712908fbca10317cd6738df948d313db8f9af3298461c31"
     }
   },
   {
@@ -2547,6 +2936,15 @@
     "artifacts": {
       "shared-31.1.0.jar": "1c0059475ddac544e9f8f43ae018092dbb446c86970e2b5fe1e65931c780d42a",
       "shared-31.1.0.pom": "07f50bc1015de2892e8d00872d22d53bc51b6454544c0642a8d4a2e6373ac319"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
+    "name": "shared",
+    "version": "31.2.2",
+    "artifacts": {
+      "shared-31.2.2.jar": "7bd455bda29e1528cda4153332b708ed2d0066dce68f60a51be11f529fabdd77",
+      "shared-31.2.2.pom": "b27561639f1b690f084423c706a8804cb81f50d6910fcd8ea59e5818efd53f36"
     }
   },
   {
@@ -2587,6 +2985,15 @@
   },
   {
     "group": "com.android.tools.analytics-library",
+    "name": "shared",
+    "version": "31.7.0",
+    "artifacts": {
+      "shared-31.7.0.jar": "cad7bb8f96a047a5ef7a13b1c8303414229e9d507209646ec3b63a64861e1ce1",
+      "shared-31.7.0.pom": "0622d2bce4e630166bf12813e83854394171faf27593afd2da4be9c2d90910bf"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
     "name": "tracker",
     "version": "27.1.0",
     "artifacts": {
@@ -2601,6 +3008,15 @@
     "artifacts": {
       "tracker-30.3.0.jar": "ec43dbc6cf1e93f5999262b483cb6ec93b372010c06c3800c50d9fca903dd1c2",
       "tracker-30.3.0.pom": "18a8184db799cb09e84e3b3c9a7e80230d7c5b6a29c2ba6d5fb607938dff8c68"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
+    "name": "tracker",
+    "version": "30.3.1",
+    "artifacts": {
+      "tracker-30.3.1.jar": "ec43dbc6cf1e93f5999262b483cb6ec93b372010c06c3800c50d9fca903dd1c2",
+      "tracker-30.3.1.pom": "57488ee6b33d1a6bd76edbfb465b94fa32212a628bca08362aecb612ebf0cf61"
     }
   },
   {
@@ -2628,6 +3044,15 @@
     "artifacts": {
       "tracker-31.1.0.jar": "02cc932f48012d8feae1d09f949697c6e2154e821d6d4649e1e39dc911c46977",
       "tracker-31.1.0.pom": "b5a0413db72d30148859a65f12e6ce8dde275bfeb25d90c89c1dd1b72b7764ad"
+    }
+  },
+  {
+    "group": "com.android.tools.analytics-library",
+    "name": "tracker",
+    "version": "31.2.2",
+    "artifacts": {
+      "tracker-31.2.2.jar": "30ca5340a5601f972dbb382ebd29402d9cfb9c6d8ed3c49469f85ad7bbf2f338",
+      "tracker-31.2.2.pom": "4a88174116ee4f3309dec8d3eaeaf56b3fceabbf6231f4448eab2dda68cb5fc0"
     }
   },
   {
@@ -2667,6 +3092,15 @@
     }
   },
   {
+    "group": "com.android.tools.analytics-library",
+    "name": "tracker",
+    "version": "31.7.0",
+    "artifacts": {
+      "tracker-31.7.0.jar": "e1f954973a4733f76027a5f96fa45472dc3cc22d27b1dc93f3fe6a46a75681be",
+      "tracker-31.7.0.pom": "76faeb448ed76e96305e557cec2c0cb2414ff995c24c5e0a69cb61b032487ace"
+    }
+  },
+  {
     "group": "com.android.tools.build",
     "name": "aapt2",
     "version": "8.6.1-11315950",
@@ -2696,6 +3130,15 @@
   {
     "group": "com.android.tools.build",
     "name": "aapt2-proto",
+    "version": "7.3.1-8691043",
+    "artifacts": {
+      "aapt2-proto-7.3.1-8691043.jar": "d5e2f3e1e1eb06224b6875f5e513c72a65182342745718160caf191d46a96664",
+      "aapt2-proto-7.3.1-8691043.module": "5c7a1bb618a92ef59c3d60cf80498f16460a6bf2feaafc4ae847d3fb6c59edac"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "aapt2-proto",
     "version": "7.4.2-8841542",
     "artifacts": {
       "aapt2-proto-7.4.2-8841542.jar": "f0b1120092467da103b99e54ba608580809ffca29cebbf89d6458db544dbf253",
@@ -2718,6 +3161,15 @@
     "artifacts": {
       "aapt2-proto-8.1.0-10154469.jar": "6d8d14b91285cc7c1b73460f413bb3f80672dc34dc506ed578fba1f6dde8661e",
       "aapt2-proto-8.1.0-10154469.module": "fd72696795dc762c9f6e3698acfa22bfc6c75a862659bba2adb783e6b9138006"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "aapt2-proto",
+    "version": "8.2.2-10154469",
+    "artifacts": {
+      "aapt2-proto-8.2.2-10154469.jar": "28b26066abd7fad3b0871477d2a6a67f86cda525e23d4e816209b966a98dae2c",
+      "aapt2-proto-8.2.2-10154469.module": "950abd7c55608609ecd7a9ac94bcc759421e59dcb2265de27e6fd1e730c5a1f3"
     }
   },
   {
@@ -2758,6 +3210,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "aapt2-proto",
+    "version": "8.7.0-12006047",
+    "artifacts": {
+      "aapt2-proto-8.7.0-12006047.jar": "fe17ba3348a29f8c41922ccaff0cf54ef4407c3e77407a9f87c1e555a1734c90",
+      "aapt2-proto-8.7.0-12006047.module": "778c6de4039daf21900792aafcfa0de637482437e2cb10381488656a2b669749"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "aaptcompiler",
     "version": "4.1.0",
     "artifacts": {
@@ -2772,6 +3233,15 @@
     "artifacts": {
       "aaptcompiler-7.3.0.jar": "62a2eca00f22ad008019a3b79af6e2dc04870c47e361ef345c3821fa4ec0024e",
       "aaptcompiler-7.3.0.module": "7d3ca04441d0c6bc694d2f641b9d071809d41a7593777c48f3cbca634d1367e7"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "aaptcompiler",
+    "version": "7.3.1",
+    "artifacts": {
+      "aaptcompiler-7.3.1.jar": "2ce0937dfe28bcbe3e0c20ca0303fb5fa2873f0b2d1875d77509af1fbee50698",
+      "aaptcompiler-7.3.1.module": "deca172074a27feedac6231c1ed7de970b5910f55891fc928cbfc6566461872f"
     }
   },
   {
@@ -2799,6 +3269,15 @@
     "artifacts": {
       "aaptcompiler-8.1.0.jar": "5de36b2081e635c2dfe93e62f9861a6f527878fdb5cb4c464e872cca4df06250",
       "aaptcompiler-8.1.0.module": "19c9f8a4f359a58b2e60192f1dff2f1a8d8dc97adb03a8d04f3031cb39856c3a"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "aaptcompiler",
+    "version": "8.2.2",
+    "artifacts": {
+      "aaptcompiler-8.2.2.jar": "fabfa7a01fc0337611bef5e4d8c622c4b59be8ea231c1943919e1ff4e41e71d4",
+      "aaptcompiler-8.2.2.module": "1d368e886f5416e2f99cadf0ee0b1c58f5c8c2a26b46e87b42ca02eef2f0cac7"
     }
   },
   {
@@ -2839,6 +3318,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "aaptcompiler",
+    "version": "8.7.0",
+    "artifacts": {
+      "aaptcompiler-8.7.0.jar": "ea4a886009444435f7a19fcaede1eaf180e8d85145f7c52a4ba87cbc356c563a",
+      "aaptcompiler-8.7.0.module": "defe216fab68536902ff684f1d5ba982959754da08d2960198c835cdf9eb4695"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "apksig",
     "version": "4.1.0",
     "artifacts": {
@@ -2853,6 +3341,15 @@
     "artifacts": {
       "apksig-7.3.0.jar": "6d6a13a51ac3806c11af5f0967092055e35a67df6a74bff1544d9f5518c5ad55",
       "apksig-7.3.0.pom": "7f5345c6de0cf29602e0397ea5262277d5e17dd1b66f9b860c02ad283af416ae"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "apksig",
+    "version": "7.3.1",
+    "artifacts": {
+      "apksig-7.3.1.jar": "6d6a13a51ac3806c11af5f0967092055e35a67df6a74bff1544d9f5518c5ad55",
+      "apksig-7.3.1.pom": "7d326b9c1d978e5a29e453fec3686dcf95721cb13ce6c036e24814f9d64960a5"
     }
   },
   {
@@ -2880,6 +3377,15 @@
     "artifacts": {
       "apksig-8.1.0.jar": "468ee1852fa12461c6629608fe47be70e50f60be7c4744bb7f62ca48e85c0a6c",
       "apksig-8.1.0.pom": "d3836d03c51e1bdc5493efd5e4497aea039db92fa8a9c61eed0f3c0f49426750"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "apksig",
+    "version": "8.2.2",
+    "artifacts": {
+      "apksig-8.2.2.jar": "468ee1852fa12461c6629608fe47be70e50f60be7c4744bb7f62ca48e85c0a6c",
+      "apksig-8.2.2.pom": "f59aa499966f83272a03317131eec82b630aaa9170276a576a182862e9c3f41b"
     }
   },
   {
@@ -2920,6 +3426,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "apksig",
+    "version": "8.7.0",
+    "artifacts": {
+      "apksig-8.7.0.jar": "c070ed1394629d74641aa0906f60b2ffa1ee77e6366a1f93437f59717b1aeb89",
+      "apksig-8.7.0.pom": "1e84e836f04a7e4b239be8273ffaf6ddedbc2d8213912899dd79dfa6f2543132"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "apkzlib",
     "version": "4.1.0",
     "artifacts": {
@@ -2934,6 +3449,15 @@
     "artifacts": {
       "apkzlib-7.3.0.jar": "415c5d5adff68b0ebd700e27c04c150683e65d5731d47fdb018eae391f70768c",
       "apkzlib-7.3.0.pom": "748ded253e7f10aeeba455bd40cbb076d593daa0bb70b15ba8d059cc4e66c001"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "apkzlib",
+    "version": "7.3.1",
+    "artifacts": {
+      "apkzlib-7.3.1.jar": "415c5d5adff68b0ebd700e27c04c150683e65d5731d47fdb018eae391f70768c",
+      "apkzlib-7.3.1.pom": "c38b874b5766782b8c55c90d1b8f0ace6f081d90e292e62fcd9453bd62d8e904"
     }
   },
   {
@@ -2961,6 +3485,15 @@
     "artifacts": {
       "apkzlib-8.1.0.jar": "ec6cdd0645c9923c733d38a0a68c1b47919a822f138d56dc99ba9c78c361fa00",
       "apkzlib-8.1.0.pom": "4f4040ec0edf74c7fe13003e62c5ae9957f58beedc33df2240b71d0f1f220dbe"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "apkzlib",
+    "version": "8.2.2",
+    "artifacts": {
+      "apkzlib-8.2.2.jar": "1c1a67d6f4f186427ac166ebaa0dd867f595d5144fc925252b05ffb9d1a156b7",
+      "apkzlib-8.2.2.pom": "f4f6e6cfb34f87a58c6ac773717e159849284858e56724aaec52e1b7be34500b"
     }
   },
   {
@@ -3001,6 +3534,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "apkzlib",
+    "version": "8.7.0",
+    "artifacts": {
+      "apkzlib-8.7.0.jar": "1c1a67d6f4f186427ac166ebaa0dd867f595d5144fc925252b05ffb9d1a156b7",
+      "apkzlib-8.7.0.pom": "61e22c6e19d444126cb44d3dff3938d2ca9788419ed4879265919ae998ff657e"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "builder",
     "version": "4.1.0",
     "artifacts": {
@@ -3015,6 +3557,15 @@
     "artifacts": {
       "builder-7.3.0.jar": "526e8913ef6bb14a2d6f8a6f5a0e925dc88924956a0b0f6ca1f30a98a2862909",
       "builder-7.3.0.module": "d3d930446e4d3cce2bef180b771e6cb09460a428d7ac7aee346a8bf4277eb958"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "builder",
+    "version": "7.3.1",
+    "artifacts": {
+      "builder-7.3.1.jar": "53e55562cb42ff174c49077618ed8f3857b0a9a5e3d4055fdfecb287f65ae4f8",
+      "builder-7.3.1.module": "513bbe21cae8da0ba9fe3f46a671bfa36eb683f20016a9fd3657e4da0bacdb86"
     }
   },
   {
@@ -3042,6 +3593,15 @@
     "artifacts": {
       "builder-8.1.0.jar": "be41a2a8b1056729c3d4bf4c79cc9c0f344c77932bfdb31961d96ce70bd187da",
       "builder-8.1.0.module": "5b8de94b653a88f9fe91c8e654e66ec618a8adba7068022de598085be8e67f0f"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "builder",
+    "version": "8.2.2",
+    "artifacts": {
+      "builder-8.2.2.jar": "904d118e1b1d88992518bc6329bb2f596016641f5b1d97c9bd93f787ab864c21",
+      "builder-8.2.2.module": "8d839fa4227cf5699a9901c99955b9c7dfa7476414b1b77024dadbd034478508"
     }
   },
   {
@@ -3082,6 +3642,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "builder",
+    "version": "8.7.0",
+    "artifacts": {
+      "builder-8.7.0.jar": "89b5beb3396a8b4529bccc653b321a9cd968e25245be3b1c320189759abb6edf",
+      "builder-8.7.0.module": "bfd66c13382c4beb4a30722d4f58fef8e1cd43775c013f32ca0b3b92626f316f"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "builder-model",
     "version": "4.1.0",
     "artifacts": {
@@ -3096,6 +3665,15 @@
     "artifacts": {
       "builder-model-7.3.0.jar": "9074ac62ec2e8d6b74d9192fc2f7bfb65b20556be3dd212d0924d31177fe06e0",
       "builder-model-7.3.0.module": "7b915f9909ff1fe8b5469f617b69c2c4b478c74fe97cfe94e83b799b972b41df"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "builder-model",
+    "version": "7.3.1",
+    "artifacts": {
+      "builder-model-7.3.1.jar": "9737e0b1873180027f58e9902b2fc832e0ce22d36dd9d78fc93a5ca32b6ca5b1",
+      "builder-model-7.3.1.module": "18739a001a4cbefd79d226bee3d43db70d30b10fac743912c7b89ec53839fefd"
     }
   },
   {
@@ -3123,6 +3701,15 @@
     "artifacts": {
       "builder-model-8.1.0.jar": "efe9220a2334d9bafe655dd895a007b2c403f509ae2be037c60ab4f47cc398f1",
       "builder-model-8.1.0.module": "e10891390a314ce811c634980ccb4d35d2ba4e81c64be6a11a402d3763013a5f"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "builder-model",
+    "version": "8.2.2",
+    "artifacts": {
+      "builder-model-8.2.2.jar": "4a10c9f4ed6fbb576339f8ca7c77867923c7566ef5a2b122f43f3586e5964b4e",
+      "builder-model-8.2.2.module": "d5144c80fe9e1e47a8392ef395ab4f3356501ede33b2fe559b82272843876fd0"
     }
   },
   {
@@ -3163,6 +3750,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "builder-model",
+    "version": "8.7.0",
+    "artifacts": {
+      "builder-model-8.7.0.jar": "a96dc78cf39b4e569de90e8150b5efa66642d25908caf2890c603cc647a16c78",
+      "builder-model-8.7.0.module": "f458c9c98443cee472f1b2154b9c0e67aaaa0580cd1bb3ae08cc34677377a947"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "builder-test-api",
     "version": "4.1.0",
     "artifacts": {
@@ -3177,6 +3773,15 @@
     "artifacts": {
       "builder-test-api-7.3.0.jar": "7d45d533b0185151a72c7b0c0eb4fbf1ff9b4b055688955de5bbf2ebf692d908",
       "builder-test-api-7.3.0.module": "a6ff8f5baa679effdbd04f1d204c270622f7f914cfeca052a60ccfb5deafafea"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "builder-test-api",
+    "version": "7.3.1",
+    "artifacts": {
+      "builder-test-api-7.3.1.jar": "d52cc269826c8f29da811687e68a01d99e7ea07227749f5ee0df08799b218f26",
+      "builder-test-api-7.3.1.module": "66c680c6b70ed7004d755482166b4b1c011054714e81bb8ffc86d4ef4957a42e"
     }
   },
   {
@@ -3204,6 +3809,15 @@
     "artifacts": {
       "builder-test-api-8.1.0.jar": "e1474815e603a4f4b7d9e086c481775d3d7837c8254a0831a8cbee8a5d11ac8a",
       "builder-test-api-8.1.0.module": "5655ff7edadc61daf9cf898f77f7ab0105e8c034722a2be66edee86871ba8e40"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "builder-test-api",
+    "version": "8.2.2",
+    "artifacts": {
+      "builder-test-api-8.2.2.jar": "3b260a18b7d71cd2e2783f4eb4a620fceee34100e919ced4645e6807f6103bdb",
+      "builder-test-api-8.2.2.module": "9923a598c6e1c7c86e90fb9da9c43e8b9c7037f2328b09d60a07a70b63d56ade"
     }
   },
   {
@@ -3240,6 +3854,15 @@
     "artifacts": {
       "builder-test-api-8.6.1.jar": "8e80a157d368adf01629f5a306c78fed1fb1dcceee61c45795ae207d91bdab4c",
       "builder-test-api-8.6.1.module": "742bcac6b559d1b5ee9f3c62366b44257a050cc77f39252b875efaf73c30f64b"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "builder-test-api",
+    "version": "8.7.0",
+    "artifacts": {
+      "builder-test-api-8.7.0.jar": "c32506113d10a5196b5e3f869802722c8f228c123086c04852f866cdf78c050d",
+      "builder-test-api-8.7.0.module": "273f0115511454a06698f1d2ea1d0777cab2ee00649da49e370341fae4a74af6"
     }
   },
   {
@@ -3281,6 +3904,15 @@
   {
     "group": "com.android.tools.build",
     "name": "bundletool",
+    "version": "1.15.2",
+    "artifacts": {
+      "bundletool-1.15.2.jar": "2034ae754f0ad6f544ab1f203b5df71e5d27f6113e5509a3185f7c2241005b2b",
+      "bundletool-1.15.2.pom": "2c8ce004926ebd9f67a291c0ce1f01132bf5fcaa7eb093ca2881572d053c0c24"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "bundletool",
     "version": "1.15.6",
     "artifacts": {
       "bundletool-1.15.6.jar": "f66992e537adb12ffa6d181cdc536d564b1c4b4b4c5972b4891706c6533a4641",
@@ -3294,6 +3926,15 @@
     "artifacts": {
       "bundletool-1.16.0.jar": "1ea2bf5274bbac7a3bb5618521d2fa11fb04e900e33a8a646029ec6332fc08c8",
       "bundletool-1.16.0.pom": "f2e8aad4455a42372462d5e18a26973d67571179a6757f3825f227e91af2f2db"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "bundletool",
+    "version": "1.17.1",
+    "artifacts": {
+      "bundletool-1.17.1.jar": "392fd3b099bd82b116c8772ab8fc4139984a91108a643f8dfc9ee29648818ad8",
+      "bundletool-1.17.1.pom": "7cdd337644d523fe60cfb632410c6b7fb7d982eec53270ddbedff1c26333545d"
     }
   },
   {
@@ -3326,6 +3967,15 @@
   {
     "group": "com.android.tools.build",
     "name": "gradle",
+    "version": "7.3.1",
+    "artifacts": {
+      "gradle-7.3.1.jar": "93e03174bf18f41554b7ee767c9080937a5efe5015ec9bdf8cc97550d427f7a5",
+      "gradle-7.3.1.module": "581d11ecc4fbb34142b5e8c07ad30c561a4a38cdc3e3cbe1580eb0ee48c7233e"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "gradle",
     "version": "7.4.2",
     "artifacts": {
       "gradle-7.4.2.jar": "d426478af963bd2276feb840fc97b8590edb1392670f587e838fd63f829fbd24",
@@ -3348,6 +3998,15 @@
     "artifacts": {
       "gradle-8.1.0.jar": "bee5ca8b8255096decc397372c104e4a2a2d7c690d712e10181609ed85cd1cb2",
       "gradle-8.1.0.module": "763dc2345d186f73afe3b8bea2d7a651f22516f4915075fdd8d3877f397579ce"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "gradle",
+    "version": "8.2.2",
+    "artifacts": {
+      "gradle-8.2.2.jar": "ca50f47cd13d347de7c89ecb2bd06487b03a88687c46c2b776bc0a9323958955",
+      "gradle-8.2.2.module": "28e928b7ae2f959cbe31210c33b76860a159dc37689d86226e0da65a370a221f"
     }
   },
   {
@@ -3388,6 +4047,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "gradle",
+    "version": "8.7.0",
+    "artifacts": {
+      "gradle-8.7.0.jar": "1f56b870c409b61e79883aa4027a22c48cafc0cacd004f4def3f2dea1882faa5",
+      "gradle-8.7.0.module": "8d0c836b0863bbd37a47dd7098917a437230c263685ea77f4b8bc599a9fa1354"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "gradle-api",
     "version": "4.1.0",
     "artifacts": {
@@ -3402,6 +4070,15 @@
     "artifacts": {
       "gradle-api-7.3.0.jar": "5b6d06ff7aaab3149244418b5e2ea3a3325f54dfa42c981b18bdbb4fd5b49d84",
       "gradle-api-7.3.0.module": "e5fe402312da263e01ffc41175bc629cb7d6c880696df2e36bf2db73b1200c07"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "gradle-api",
+    "version": "7.3.1",
+    "artifacts": {
+      "gradle-api-7.3.1.jar": "5a661315d1b7addcabfa981caa5ddac0c59b043580ad18886724df162a0a643f",
+      "gradle-api-7.3.1.module": "16a88da35c0caf2263b388893b8cc82aa36462a7c4c678a1a6eda26888a5322a"
     }
   },
   {
@@ -3429,6 +4106,15 @@
     "artifacts": {
       "gradle-api-8.1.0.jar": "01cb192f3ab8d5ef0ed1e42d1d03b068a1f5317983e64f0682dccbcff76ec16f",
       "gradle-api-8.1.0.module": "d3c0779a7b91f1a931228d8f7e86219f3be6fa12fb9bf7bee4f60968b2b25730"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "gradle-api",
+    "version": "8.2.2",
+    "artifacts": {
+      "gradle-api-8.2.2.jar": "15d1fb5e892d0bf03f371271cf67bae95db8e89082d12a8b58165d49f4288643",
+      "gradle-api-8.2.2.module": "04c16c0a5b8e92943a4ea0b72417517ba8f6747b87e11782ce262b120a51b8ce"
     }
   },
   {
@@ -3469,6 +4155,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "gradle-api",
+    "version": "8.7.0",
+    "artifacts": {
+      "gradle-api-8.7.0.jar": "09e441732c94c811b9f685d840edee4a986ee7b322e10abb6f0abdfd6c7c3382",
+      "gradle-api-8.7.0.module": "2d6df358428c87ab5e2562292044f8fccb8e9393663d447b6f2956cb317a19c0"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "gradle-settings-api",
     "version": "7.4.2",
     "artifacts": {
@@ -3492,6 +4187,15 @@
     "artifacts": {
       "gradle-settings-api-8.1.0.jar": "5751e038e07eb33f3e51da0a0e6691d806106cdb4f10930dcd7e81304c7c847f",
       "gradle-settings-api-8.1.0.module": "c4a017f363aacbd199b23c9c9c482d41570bbcd83b678b4d567f8ea2a100e5d2"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "gradle-settings-api",
+    "version": "8.2.2",
+    "artifacts": {
+      "gradle-settings-api-8.2.2.jar": "2089473c8d4d480a90674120c08fa49188d589a28386bdf888a493bee2253fac",
+      "gradle-settings-api-8.2.2.module": "8268bb80772c5ca489c59109194de42870633474487d2dd7a10ffac48fa93d55"
     }
   },
   {
@@ -3532,6 +4236,15 @@
   },
   {
     "group": "com.android.tools.build",
+    "name": "gradle-settings-api",
+    "version": "8.7.0",
+    "artifacts": {
+      "gradle-settings-api-8.7.0.jar": "7ddfc77332dee3585243152238ff00ac47b1707a419c0f1448453a0498fb6836",
+      "gradle-settings-api-8.7.0.module": "52880868464ece10df7d3c636c2f7b4571f258e458f1a9473bc59db3d92d00c7"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
     "name": "manifest-merger",
     "version": "27.1.0",
     "artifacts": {
@@ -3546,6 +4259,15 @@
     "artifacts": {
       "manifest-merger-30.3.0.jar": "704ed10b9cbdf3e57acfd19a9de2548ef19d367bf8c26cac1307814d3572cd6f",
       "manifest-merger-30.3.0.module": "8bdca275ecea4011d172da88b14c25c140445da130706e880d568a4fe4ae41e0"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "manifest-merger",
+    "version": "30.3.1",
+    "artifacts": {
+      "manifest-merger-30.3.1.jar": "534ac50d45d1bbc80f4122c7fa221402442835029ef05ec056f4edf2776c8c9f",
+      "manifest-merger-30.3.1.module": "50e135d2cc3a916e78d87b7b9f1fa97a8b1da7e462c4792716aff6ff716d364c"
     }
   },
   {
@@ -3573,6 +4295,15 @@
     "artifacts": {
       "manifest-merger-31.1.0.jar": "80ecad8096efbd50778ccb3aa848e16aa092fde2e68d213cebca2b83d2399dbb",
       "manifest-merger-31.1.0.module": "15d4c068e62a53a53a4c139ef3af8417f332384ee0648e0da5ed74563ca53055"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "manifest-merger",
+    "version": "31.2.2",
+    "artifacts": {
+      "manifest-merger-31.2.2.jar": "cf4109b22c159d56b45ad382d550df4fd03694b8b1ddd1378ef1a09ea378a4c0",
+      "manifest-merger-31.2.2.module": "8d6e7c33a8fbf9a36e87f7c36ff7a06e456270fa9feeffa2f905f2a5c7434fcb"
     }
   },
   {
@@ -3609,6 +4340,15 @@
     "artifacts": {
       "manifest-merger-31.6.1.jar": "aa963d4af45ab031c570783ce9286d2111eeb0b8c3bdf44e48ca90714cccb754",
       "manifest-merger-31.6.1.module": "5ab814c5c62ae80a601e938b53139c10f14a89c30a5563c50ac452787371b0f6"
+    }
+  },
+  {
+    "group": "com.android.tools.build",
+    "name": "manifest-merger",
+    "version": "31.7.0",
+    "artifacts": {
+      "manifest-merger-31.7.0.jar": "ab92276434e5a61e86c590e7b19f2de161778fa275fc08a8eec84081e2703bb3",
+      "manifest-merger-31.7.0.module": "12e8030d8b5334eb5a4ac3d0c10f50f48f5f7b4f8542966599dfa45f8b6c53d7"
     }
   },
   {
@@ -3677,6 +4417,15 @@
   {
     "group": "com.android.tools.ddms",
     "name": "ddmlib",
+    "version": "30.3.1",
+    "artifacts": {
+      "ddmlib-30.3.1.jar": "58c4db5a94a5f8c933409335f6657a92ff9c87488a271b260315fbd020c07fe0",
+      "ddmlib-30.3.1.pom": "8e30ecb86a8d8d1a76657a6f27ef45eda4efeb25121cfc3576320ae88f365027"
+    }
+  },
+  {
+    "group": "com.android.tools.ddms",
+    "name": "ddmlib",
     "version": "30.4.2",
     "artifacts": {
       "ddmlib-30.4.2.jar": "7157fafd4932de9e78737972cbd55eade7ba15e85fe3f522ca939af74b5cc489",
@@ -3699,6 +4448,15 @@
     "artifacts": {
       "ddmlib-31.1.0.jar": "8c2fb144e61ca79aab8edc7c3ffe2c2b74bc6b23cb0cac6c8b7e066b5151e8ed",
       "ddmlib-31.1.0.pom": "3bdf3ad59340619b9a1e6cba85e90f53653927403d368ecb6d620887f9cef7ae"
+    }
+  },
+  {
+    "group": "com.android.tools.ddms",
+    "name": "ddmlib",
+    "version": "31.2.2",
+    "artifacts": {
+      "ddmlib-31.2.2.jar": "5fc1f70b3b0b8069f25e3a229f4aada495e592ca5fe3fb88b02563b47c674c8e",
+      "ddmlib-31.2.2.pom": "59bdff7e87eea968cd78546b98ae5a41688de9eca46e152583c7862613884955"
     }
   },
   {
@@ -3735,6 +4493,15 @@
     "artifacts": {
       "ddmlib-31.6.1.jar": "c571c0224fe3e7e6607196d95cc3142fdc19f013e8f1510f68c7b4a686c53809",
       "ddmlib-31.6.1.pom": "36118a34844ef3353bc078a4a3f47088423428ad6ad1e8cd4ad01557a29ae8e9"
+    }
+  },
+  {
+    "group": "com.android.tools.ddms",
+    "name": "ddmlib",
+    "version": "31.7.0",
+    "artifacts": {
+      "ddmlib-31.7.0.jar": "0d7ef53823f6a21b807f398f0d039a5dde184b58c5589625626ca4aa3d6108ed",
+      "ddmlib-31.7.0.pom": "c45e49892e1d33162ebbc3f1d45a57ac03b533db092351c80a11171ac7a60b7b"
     }
   },
   {
@@ -3794,6 +4561,15 @@
   {
     "group": "com.android.tools.layoutlib",
     "name": "layoutlib-api",
+    "version": "30.3.1",
+    "artifacts": {
+      "layoutlib-api-30.3.1.jar": "7ffb2c13ac92e2d2d454c617ec537ad3b8868a987118c4d3c62018125d656707",
+      "layoutlib-api-30.3.1.pom": "0d1f4b4ef2fd286ea893ded13e369744ffce78231a9e8451ee5ecbf8319dc82b"
+    }
+  },
+  {
+    "group": "com.android.tools.layoutlib",
+    "name": "layoutlib-api",
     "version": "30.4.2",
     "artifacts": {
       "layoutlib-api-30.4.2.jar": "6b668eb1875462d558d5130061321b504385a69c4c1303036da4793768ed592b",
@@ -3816,6 +4592,15 @@
     "artifacts": {
       "layoutlib-api-31.1.0.jar": "2b8b35a2125b9e11c450bcdb5774aa698b199b4026ae49f28b07c1c2325b5868",
       "layoutlib-api-31.1.0.pom": "c3380b69d0e3901191b230c854cd12dcbe0b320c3493ff2b19f177af62eba308"
+    }
+  },
+  {
+    "group": "com.android.tools.layoutlib",
+    "name": "layoutlib-api",
+    "version": "31.2.2",
+    "artifacts": {
+      "layoutlib-api-31.2.2.jar": "2b136521ad932f1a9c700a251a9ff5b6ebd4640423da68ce43ba4c7f7602c225",
+      "layoutlib-api-31.2.2.pom": "3e442c0dae271162d42df72946a581135527d58abb4e2538652ee3f27810c60c"
     }
   },
   {
@@ -3852,6 +4637,15 @@
     "artifacts": {
       "layoutlib-api-31.6.1.jar": "98bae36ff051e114dd4eef5effa80fbe5e552944f4233ce892160da2cd9eeaed",
       "layoutlib-api-31.6.1.pom": "ecd4315386803ba9d43b67b8fa6c92f049044501e045d32f4260d93f9c9a6a30"
+    }
+  },
+  {
+    "group": "com.android.tools.layoutlib",
+    "name": "layoutlib-api",
+    "version": "31.7.0",
+    "artifacts": {
+      "layoutlib-api-31.7.0.jar": "98bae36ff051e114dd4eef5effa80fbe5e552944f4233ce892160da2cd9eeaed",
+      "layoutlib-api-31.7.0.pom": "39ce8a8dac6787055dd7293d0eec46c06828275a5c3020e807868199fb9ed92c"
     }
   },
   {
@@ -3920,6 +4714,15 @@
   {
     "group": "com.android.tools.lint",
     "name": "lint-model",
+    "version": "30.3.1",
+    "artifacts": {
+      "lint-model-30.3.1.jar": "4b6fc00a29c8dc716fb3a53b200af711318d2a8db5fa6c3d874b6d6d65e44541",
+      "lint-model-30.3.1.pom": "0bfaf35b7d570aa981155eaebf1ddc9035d93bed88b95913799f5aa9908b0ea6"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
+    "name": "lint-model",
     "version": "30.4.2",
     "artifacts": {
       "lint-model-30.4.2.jar": "315a24f47cc7b98d58c582e5e1bb490673301ecdf6b906d7170284c39f462c1b",
@@ -3942,6 +4745,15 @@
     "artifacts": {
       "lint-model-31.1.0.jar": "a37eb5447a242fc3c8ef54e2fa625be4324fcc7807076ddc80db6a08081d31d6",
       "lint-model-31.1.0.pom": "0eddf6e6d8c82e51becc8541c38bba31b7a2c0a3c93542963161cdd3f88a3dba"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
+    "name": "lint-model",
+    "version": "31.2.2",
+    "artifacts": {
+      "lint-model-31.2.2.jar": "3c96acb35de3194359f8fd4d8b5ed129da3588f32a1f010d54496f8db93253c1",
+      "lint-model-31.2.2.pom": "044d54d48792e503e47ccd9ad84eb1ae413eddc78050861dac939fda00b0abb0"
     }
   },
   {
@@ -3982,11 +4794,29 @@
   },
   {
     "group": "com.android.tools.lint",
+    "name": "lint-model",
+    "version": "31.7.0",
+    "artifacts": {
+      "lint-model-31.7.0.jar": "9f4c087a199174521d1bc7b8ff05ff1484f770f4518b7fd9f6dae6c261882dbd",
+      "lint-model-31.7.0.pom": "6ce2afe0bd9e56890a64c9ce97cc66d5782405ce1fe6554b7f62ca7ae48c978d"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
     "name": "lint-typedef-remover",
     "version": "30.3.0",
     "artifacts": {
       "lint-typedef-remover-30.3.0.jar": "0275a7633d55972fe46e3395819b9014cf04e2035be89e4a6eba6ac9559351ff",
       "lint-typedef-remover-30.3.0.pom": "0af466b2b93b4da33886b4c14aa3023d92add562ebc019d9eb153d8d95fd12ce"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
+    "name": "lint-typedef-remover",
+    "version": "30.3.1",
+    "artifacts": {
+      "lint-typedef-remover-30.3.1.jar": "0275a7633d55972fe46e3395819b9014cf04e2035be89e4a6eba6ac9559351ff",
+      "lint-typedef-remover-30.3.1.pom": "8d6892d7d7d9cf73026edacd954047f997d18206b728e96fb28e6af1f5bdaff3"
     }
   },
   {
@@ -4014,6 +4844,15 @@
     "artifacts": {
       "lint-typedef-remover-31.1.0.jar": "5b4f485215ca4d86ef2319fc398b5f2251e62f5446bc5fd0e00653648ddde318",
       "lint-typedef-remover-31.1.0.pom": "48d0625d887768005f87d234215976342fb2dec3f412e3339c0b042192514777"
+    }
+  },
+  {
+    "group": "com.android.tools.lint",
+    "name": "lint-typedef-remover",
+    "version": "31.2.2",
+    "artifacts": {
+      "lint-typedef-remover-31.2.2.jar": "5b4f485215ca4d86ef2319fc398b5f2251e62f5446bc5fd0e00653648ddde318",
+      "lint-typedef-remover-31.2.2.pom": "68e440847dfa6968a6702de75d0f0670c255f5585deb871ad44a27698cf99eb1"
     }
   },
   {
@@ -4053,6 +4892,15 @@
     }
   },
   {
+    "group": "com.android.tools.lint",
+    "name": "lint-typedef-remover",
+    "version": "31.7.0",
+    "artifacts": {
+      "lint-typedef-remover-31.7.0.jar": "5b4f485215ca4d86ef2319fc398b5f2251e62f5446bc5fd0e00653648ddde318",
+      "lint-typedef-remover-31.7.0.pom": "242966a17e0f497ecf7f0f196f30dd1ebcf5e2fe021ef4e2e3b42d145e77aead"
+    }
+  },
+  {
     "group": "com.android.tools.utp",
     "name": "android-device-provider-ddmlib",
     "version": "31.6.1",
@@ -4068,6 +4916,15 @@
     "artifacts": {
       "android-device-provider-ddmlib-proto-30.3.0.jar": "ea7615ea6db7602e937a4583fc6818162b108fb3cad6fe615a8f5ba82cd28dad",
       "android-device-provider-ddmlib-proto-30.3.0.pom": "345b2093dd409f5393efa8103495466e009209c354325390267982a9afe54cf3"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-device-provider-ddmlib-proto",
+    "version": "30.3.1",
+    "artifacts": {
+      "android-device-provider-ddmlib-proto-30.3.1.jar": "ea7615ea6db7602e937a4583fc6818162b108fb3cad6fe615a8f5ba82cd28dad",
+      "android-device-provider-ddmlib-proto-30.3.1.pom": "edc220fbfb7fddfea08e1d517ea24785704e310c414a4e6f1d8ba1a18abdd6d5"
     }
   },
   {
@@ -4095,6 +4952,15 @@
     "artifacts": {
       "android-device-provider-ddmlib-proto-31.1.0.jar": "1a288dfd22f5baa036bffdfdd3ac7504664b94c86dbf6be36630e5587c22e8fe",
       "android-device-provider-ddmlib-proto-31.1.0.pom": "53a340fb0c5b37d27e7d242767e572e8113f6b2a1556558a1e7ba19117fbc870"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-device-provider-ddmlib-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-device-provider-ddmlib-proto-31.2.2.jar": "1a288dfd22f5baa036bffdfdd3ac7504664b94c86dbf6be36630e5587c22e8fe",
+      "android-device-provider-ddmlib-proto-31.2.2.pom": "91e9cba200b15ac630d9cffac7bbe9323280d9e08600e99f29aa040cba918d97"
     }
   },
   {
@@ -4135,6 +5001,15 @@
   },
   {
     "group": "com.android.tools.utp",
+    "name": "android-device-provider-ddmlib-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-device-provider-ddmlib-proto-31.7.0.jar": "da9f3f3dae26544c90668549584765d5854a87c425d2cfe577cd34d3600ea097",
+      "android-device-provider-ddmlib-proto-31.7.0.pom": "8cee880f2a77d2d62247706d8d47fce5bb885c2933d61479f87dd3b8529c5d39"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
     "name": "android-device-provider-gradle",
     "version": "31.6.1",
     "artifacts": {
@@ -4149,6 +5024,15 @@
     "artifacts": {
       "android-device-provider-gradle-proto-30.3.0.jar": "a71cb4625a39cb8ce04bc0833aefefb95638f9c7029f664da6ab9f91be3b9cd9",
       "android-device-provider-gradle-proto-30.3.0.pom": "3a2e8d5df9d3c8f8236f4d796e2e8314dbd916bdf31203ecbabf220036c2a5ad"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-device-provider-gradle-proto",
+    "version": "30.3.1",
+    "artifacts": {
+      "android-device-provider-gradle-proto-30.3.1.jar": "a71cb4625a39cb8ce04bc0833aefefb95638f9c7029f664da6ab9f91be3b9cd9",
+      "android-device-provider-gradle-proto-30.3.1.pom": "8e8fc9dab6a2b03d6530fca490fd8f28163b9a1d3b1421853a41dd20b6daa771"
     }
   },
   {
@@ -4176,6 +5060,15 @@
     "artifacts": {
       "android-device-provider-gradle-proto-31.1.0.jar": "10f9b620a8403fd6a9c9e9c635c63a7975337b1deb5c375b79a6960eb5af88d4",
       "android-device-provider-gradle-proto-31.1.0.pom": "37d9a1951110de901b48e8ac741a6665bab8103ad1cd55e1c38e96ca0f91dbb2"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-device-provider-gradle-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-device-provider-gradle-proto-31.2.2.jar": "10f9b620a8403fd6a9c9e9c635c63a7975337b1deb5c375b79a6960eb5af88d4",
+      "android-device-provider-gradle-proto-31.2.2.pom": "1247abd19a24b50c5825a9d72f1620f777123dfe8883ff2b7de4797762b1c212"
     }
   },
   {
@@ -4216,6 +5109,24 @@
   },
   {
     "group": "com.android.tools.utp",
+    "name": "android-device-provider-gradle-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-device-provider-gradle-proto-31.7.0.jar": "ad2342bb1d6f95563400a322493ea1c229cb93df3944f1261b7399f718494049",
+      "android-device-provider-gradle-proto-31.7.0.pom": "2baa931d4747055ff6ae9f80773ff3aa1c42fba0fadba1a1a61e17f6b401f6b4"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-device-provider-profile-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-device-provider-profile-proto-31.7.0.jar": "10d100ced5d083714c1c68bbbb10bb375e8546f92ab0e4219c0e4a5ff298115e",
+      "android-device-provider-profile-proto-31.7.0.pom": "ff58609abc657d958014504cfdeea41b7277c0d23ab0eb508a47eedee30f6796"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
     "name": "android-test-plugin-host-additional-test-output",
     "version": "31.6.1",
     "artifacts": {
@@ -4230,6 +5141,15 @@
     "artifacts": {
       "android-test-plugin-host-additional-test-output-proto-30.3.0.jar": "31c5a0b3a1323970eaacd771727ec13863b6dbe60079e0c0d029816b6413766d",
       "android-test-plugin-host-additional-test-output-proto-30.3.0.pom": "f656bf2523416e5d20d7128c0f298acf7702dbba164d187a226b851e2c57961a"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-additional-test-output-proto",
+    "version": "30.3.1",
+    "artifacts": {
+      "android-test-plugin-host-additional-test-output-proto-30.3.1.jar": "31c5a0b3a1323970eaacd771727ec13863b6dbe60079e0c0d029816b6413766d",
+      "android-test-plugin-host-additional-test-output-proto-30.3.1.pom": "df571cc9b52785309ee0d7810114dbab334c9a7fd4ddcb7fa2b96f30b99907a0"
     }
   },
   {
@@ -4257,6 +5177,15 @@
     "artifacts": {
       "android-test-plugin-host-additional-test-output-proto-31.1.0.jar": "08d12e55fa91ab83dd1b757cdbca3d746809b0a50268f75cf52194f46a2c6673",
       "android-test-plugin-host-additional-test-output-proto-31.1.0.pom": "fb785fa6624456bd5523cb06fce6c8c4c1849ccb871b503f7ca2e6396dbcfb09"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-additional-test-output-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-test-plugin-host-additional-test-output-proto-31.2.2.jar": "08d12e55fa91ab83dd1b757cdbca3d746809b0a50268f75cf52194f46a2c6673",
+      "android-test-plugin-host-additional-test-output-proto-31.2.2.pom": "1559c5ddd31dcdf551a9c6062dd2a1f8a08883e4f0cf38d19c9a9e5ffb7786c4"
     }
   },
   {
@@ -4297,6 +5226,15 @@
   },
   {
     "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-additional-test-output-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-test-plugin-host-additional-test-output-proto-31.7.0.jar": "38450694de6328c2c4cba696f9c04ecdd5ce6952355f68c3a22f9541d1d6546f",
+      "android-test-plugin-host-additional-test-output-proto-31.7.0.pom": "fb2b8756614d908678414ee96c6fb0a6155355277cbe239e099a2066167189d1"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
     "name": "android-test-plugin-host-apk-installer",
     "version": "31.6.1",
     "artifacts": {
@@ -4311,6 +5249,15 @@
     "artifacts": {
       "android-test-plugin-host-apk-installer-proto-31.1.0.jar": "abd2aac816a81e2af7705f3edff3de22bcd806212a1d158f432a39b06ae544e4",
       "android-test-plugin-host-apk-installer-proto-31.1.0.pom": "2744d7a9ac7676c8518be944fc3cb60c78b9d111923d32cfa79ec807464f51ad"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-apk-installer-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-test-plugin-host-apk-installer-proto-31.2.2.jar": "abd2aac816a81e2af7705f3edff3de22bcd806212a1d158f432a39b06ae544e4",
+      "android-test-plugin-host-apk-installer-proto-31.2.2.pom": "2f743dca5f39e68b6f3b77784d651ac3e2c6d1f94a8f109cba5e7ca90cd28e82"
     }
   },
   {
@@ -4351,6 +5298,15 @@
   },
   {
     "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-apk-installer-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-test-plugin-host-apk-installer-proto-31.7.0.jar": "543eb6c8d72b2ed7451f8e939d5d80890566f14bc26b7df9c8347506b258d7ae",
+      "android-test-plugin-host-apk-installer-proto-31.7.0.pom": "dd28430b6e882f5cd8546e15de9b8c8c0ce4c2854b83cc4b0313828fff58688c"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
     "name": "android-test-plugin-host-coverage",
     "version": "31.6.1",
     "artifacts": {
@@ -4365,6 +5321,15 @@
     "artifacts": {
       "android-test-plugin-host-coverage-proto-30.3.0.jar": "18958a29190be8c685e5ae5b25d994280f3d8e019b3cfd921f0b492efd18893b",
       "android-test-plugin-host-coverage-proto-30.3.0.pom": "77e4a01da12c48d7f8e6cdb6e1463642a94df396c7637041fbb0f03a1f962f19"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-coverage-proto",
+    "version": "30.3.1",
+    "artifacts": {
+      "android-test-plugin-host-coverage-proto-30.3.1.jar": "18958a29190be8c685e5ae5b25d994280f3d8e019b3cfd921f0b492efd18893b",
+      "android-test-plugin-host-coverage-proto-30.3.1.pom": "5e4e15b21f90c75839bc33217bb56aeab59590a1ba6449f8a78d2a3b58d0b6ef"
     }
   },
   {
@@ -4392,6 +5357,15 @@
     "artifacts": {
       "android-test-plugin-host-coverage-proto-31.1.0.jar": "9ebc9c6279a32a453c90cf6b732b3a3f88a80498e746400850f2c66ea7933580",
       "android-test-plugin-host-coverage-proto-31.1.0.pom": "63c014e9a429315d2caff2f702e15069b6711e38c4a9fa9a96eb054278e9e664"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-coverage-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-test-plugin-host-coverage-proto-31.2.2.jar": "9ebc9c6279a32a453c90cf6b732b3a3f88a80498e746400850f2c66ea7933580",
+      "android-test-plugin-host-coverage-proto-31.2.2.pom": "5f03be0acfcc15ef85710bd625f67c13bba7103fd57b38bb2e37cf0c12d9eeeb"
     }
   },
   {
@@ -4428,6 +5402,15 @@
     "artifacts": {
       "android-test-plugin-host-coverage-proto-31.6.1.jar": "efb4d7014aaa7355246a07c2e437a2231fb252540ff1bce6872c88dc8da89d12",
       "android-test-plugin-host-coverage-proto-31.6.1.pom": "a2bc70b161bc1b307772ba925ce32544a47539fde04a709b32088560abe9bed6"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-coverage-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-test-plugin-host-coverage-proto-31.7.0.jar": "efb4d7014aaa7355246a07c2e437a2231fb252540ff1bce6872c88dc8da89d12",
+      "android-test-plugin-host-coverage-proto-31.7.0.pom": "2abfbd2f52e4a0bc561b3636f4952667bcd2b1e68d5b74b8f9e7039e8802cc7e"
     }
   },
   {
@@ -4469,6 +5452,15 @@
   {
     "group": "com.android.tools.utp",
     "name": "android-test-plugin-host-emulator-control-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-test-plugin-host-emulator-control-proto-31.2.2.jar": "435438bc84016ec5d28c34c9d017b01365f37949168cffc81126d43757c53ca4",
+      "android-test-plugin-host-emulator-control-proto-31.2.2.pom": "dc5395f035e58e99c06f481e19c34be8b3f58a472914c38f719c7dd241f783e1"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-emulator-control-proto",
     "version": "31.3.1",
     "artifacts": {
       "android-test-plugin-host-emulator-control-proto-31.3.1.jar": "aedec5ec4627d898cccdf42d8038db20eba4495753c53d1b0b378734491caf5f",
@@ -4504,6 +5496,15 @@
   },
   {
     "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-emulator-control-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-test-plugin-host-emulator-control-proto-31.7.0.jar": "aedec5ec4627d898cccdf42d8038db20eba4495753c53d1b0b378734491caf5f",
+      "android-test-plugin-host-emulator-control-proto-31.7.0.pom": "0a5572253f79d38de61226bd6f4ff68afe6427f200cc3b1d7eb1df97c23b8c84"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
     "name": "android-test-plugin-host-logcat",
     "version": "31.6.1",
     "artifacts": {
@@ -4527,6 +5528,15 @@
     "artifacts": {
       "android-test-plugin-host-logcat-proto-31.1.0.jar": "d31ca97afbfcd71a54749d265da11a424b122cf1cfbedbff2cb3d7362c579d3b",
       "android-test-plugin-host-logcat-proto-31.1.0.pom": "c9cef28fe447302b1d6629a074bbc7f352e9eb42191106006e8c96b4bda41a6a"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-logcat-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-test-plugin-host-logcat-proto-31.2.2.jar": "d31ca97afbfcd71a54749d265da11a424b122cf1cfbedbff2cb3d7362c579d3b",
+      "android-test-plugin-host-logcat-proto-31.2.2.pom": "d288d88c49c9bf65804e8e8fe3030ebedf3361e35da4ca2a225b779ac2252e4e"
     }
   },
   {
@@ -4567,6 +5577,15 @@
   },
   {
     "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-logcat-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-test-plugin-host-logcat-proto-31.7.0.jar": "9129024bd8e38353bca3eb26dfd8e3628e058d57d6e9d8451ffc35f016751e63",
+      "android-test-plugin-host-logcat-proto-31.7.0.pom": "98483df35e5eb88acef4c08796add100723e1e04d5f1ba688d1734ef7fe2f0b2"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
     "name": "android-test-plugin-host-retention",
     "version": "31.6.1",
     "artifacts": {
@@ -4581,6 +5600,15 @@
     "artifacts": {
       "android-test-plugin-host-retention-proto-30.3.0.jar": "c34f57d6f48971ee71b61ea6f17956934cc2de31dd83c84ae7bfec681e1f99d4",
       "android-test-plugin-host-retention-proto-30.3.0.pom": "cb6e9aa05cecac38543aec0ea9a00426a3712aadac3847ebcb0a15fed8d5f88f"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-retention-proto",
+    "version": "30.3.1",
+    "artifacts": {
+      "android-test-plugin-host-retention-proto-30.3.1.jar": "c34f57d6f48971ee71b61ea6f17956934cc2de31dd83c84ae7bfec681e1f99d4",
+      "android-test-plugin-host-retention-proto-30.3.1.pom": "044126fb9ec4df035652e30f0c5fa91be4eee97de5e6484eb19e323872d9a946"
     }
   },
   {
@@ -4608,6 +5636,15 @@
     "artifacts": {
       "android-test-plugin-host-retention-proto-31.1.0.jar": "4d1c3faaff5a38b29426f082e8e8c3f8b85a902086b90d18f706754ad93de04d",
       "android-test-plugin-host-retention-proto-31.1.0.pom": "1d2de745ac8f9b3285bbbcb9aaf8e4694135b7fdf3b6cb302fc0582674ced8cb"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-retention-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-test-plugin-host-retention-proto-31.2.2.jar": "4d1c3faaff5a38b29426f082e8e8c3f8b85a902086b90d18f706754ad93de04d",
+      "android-test-plugin-host-retention-proto-31.2.2.pom": "533dda00c5d799bcd1b6df36255f4948970e820685dd007e4d9c6ea119d9eb4f"
     }
   },
   {
@@ -4648,6 +5685,15 @@
   },
   {
     "group": "com.android.tools.utp",
+    "name": "android-test-plugin-host-retention-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-test-plugin-host-retention-proto-31.7.0.jar": "3db8ed38ef49b694caea466ae22e3b36cedc9557b3589d0e07c0cdd83294591c",
+      "android-test-plugin-host-retention-proto-31.7.0.pom": "0b41e450aed42f317a92228e872d7382ba7cffa6d511e5f11f1dbc6901afdc92"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
     "name": "android-test-plugin-result-listener-gradle",
     "version": "31.6.1",
     "artifacts": {
@@ -4662,6 +5708,15 @@
     "artifacts": {
       "android-test-plugin-result-listener-gradle-proto-30.3.0.jar": "38d6b8fb2ca578c86aedb66b170ec61bff1e74eef238349702fdd5dabb1a73d8",
       "android-test-plugin-result-listener-gradle-proto-30.3.0.pom": "34f58b2f9bf18015930810b025c1a4445fffba7a9d2657a089445cdecc8e88ac"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-result-listener-gradle-proto",
+    "version": "30.3.1",
+    "artifacts": {
+      "android-test-plugin-result-listener-gradle-proto-30.3.1.jar": "38d6b8fb2ca578c86aedb66b170ec61bff1e74eef238349702fdd5dabb1a73d8",
+      "android-test-plugin-result-listener-gradle-proto-30.3.1.pom": "f18bc1662a2fb8f95011818e7b9cc05399971d924d20791c5c898fcb903ce64f"
     }
   },
   {
@@ -4689,6 +5744,15 @@
     "artifacts": {
       "android-test-plugin-result-listener-gradle-proto-31.1.0.jar": "b1e49ff23fa357f8702aef1632b04405224a3846f4fe76654c76ef9bd7b5a601",
       "android-test-plugin-result-listener-gradle-proto-31.1.0.pom": "fc89a9aeea918123ae3ef79cbebeebc892529dd7630df43fa3eb6e3937509d4d"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-result-listener-gradle-proto",
+    "version": "31.2.2",
+    "artifacts": {
+      "android-test-plugin-result-listener-gradle-proto-31.2.2.jar": "b1e49ff23fa357f8702aef1632b04405224a3846f4fe76654c76ef9bd7b5a601",
+      "android-test-plugin-result-listener-gradle-proto-31.2.2.pom": "0a1897daf23e6b445d17486dd4d80be6bb4cf448ecb7fabe1ece3d106c222ce1"
     }
   },
   {
@@ -4725,6 +5789,15 @@
     "artifacts": {
       "android-test-plugin-result-listener-gradle-proto-31.6.1.jar": "cbdf71bca60e14c30e7b2cf4b90f0f0a3e8c138f7cadd874b0d9c0ae082e0274",
       "android-test-plugin-result-listener-gradle-proto-31.6.1.pom": "8f51735afee2f720d2ef4642187a29a47eeedae4ee355c92fd7dd1f4ae76eab4"
+    }
+  },
+  {
+    "group": "com.android.tools.utp",
+    "name": "android-test-plugin-result-listener-gradle-proto",
+    "version": "31.7.0",
+    "artifacts": {
+      "android-test-plugin-result-listener-gradle-proto-31.7.0.jar": "cbdf71bca60e14c30e7b2cf4b90f0f0a3e8c138f7cadd874b0d9c0ae082e0274",
+      "android-test-plugin-result-listener-gradle-proto-31.7.0.pom": "b9876bbf24d7b79dd8eefbc497cfa40b52d1f3d2f0f41fc2e1896d3041edb17e"
     }
   },
   {
@@ -4852,6 +5925,15 @@
   {
     "group": "com.google.code.gson",
     "name": "gson",
+    "version": "2.10",
+    "artifacts": {
+      "gson-2.10.jar": "0cdd163ce3598a20fc04eee71b140b24f6f2a3b35f0a499dbbdd9852e83fbfaf",
+      "gson-2.10.pom": "ac69d9f254260caeab3998eaad60f355599c25121e195156bfdffc8a355fc6bd"
+    }
+  },
+  {
+    "group": "com.google.code.gson",
+    "name": "gson",
     "version": "2.10.1",
     "artifacts": {
       "gson-2.10.1.jar": "4241c14a7727c34feea6507ec801318a3d4a90f070e4525681079fb94ee4c593",
@@ -4883,6 +5965,14 @@
     "artifacts": {
       "gson-2.8.9.jar": "d3999291855de495c94c743761b8ab5176cfeabe281a5ab0d8e8d45326fd703e",
       "gson-2.8.9.pom": "afded6e6a690fbf3ad4ae65ada397f0a90a5f630b303d1b741b9c97926fdd4de"
+    }
+  },
+  {
+    "group": "com.google.code.gson",
+    "name": "gson-parent",
+    "version": "2.10",
+    "artifacts": {
+      "gson-parent-2.10.pom": "fb53ac0b06c19116ca61ac344b4dfe8a7c29cc4f81b353ce889493a5039004fb"
     }
   },
   {
@@ -7471,10 +8561,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-android-extensions",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-android-extensions-1.8.22.jar": "6e6c0506c1de0288d634306f5b7fb8b4c2858b27cd75beb4ca2ad7f99c8e98c3",
+      "kotlin-android-extensions-1.8.22.pom": "f2a06f9f7e3950bca3e7805d93877f34ad930e7aaa4fa328fc55fe294d441889"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-android-extensions",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-android-extensions-1.9.0.jar": "20675bbb2a7b6982a7144518a518b9a8965f90ae89b8c9878898012244a1ea33",
       "kotlin-android-extensions-1.9.0.pom": "58e1c883726e91469520357de6ed17c3f9929c8e08b1174a27a3ad6ec0ebcd52"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-android-extensions",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-android-extensions-1.9.22.jar": "1e5e881642a99ddb8f6d13e6995a08c192bc384187396663d8447c081d87e24f",
+      "kotlin-android-extensions-1.9.22.pom": "944b7cfb33e0a6fb684559048f028cb96326c932a245d5cb02143bcd2c031159"
     }
   },
   {
@@ -7511,6 +8619,15 @@
     "artifacts": {
       "kotlin-annotation-processing-gradle-1.7.22.jar": "782a1df09fb59c25599c80b264b20aec836957254ba3abcfc4f7484c2e556707",
       "kotlin-annotation-processing-gradle-1.7.22.pom": "fb827f5448ede93c55948a57161708cb76eec35c55a3df34f8cc48ddb39d83ed"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-annotation-processing-gradle",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-annotation-processing-gradle-1.8.22.jar": "92101d8e097c97ee5c1ae9e2906caee02919aa64aee68325b4c068c9f99783cd",
+      "kotlin-annotation-processing-gradle-1.8.22.pom": "af0c7af5177fd5dff68d1ce401bd7d3cefbed0905c32a6f043bbe6c28f481878"
     }
   },
   {
@@ -7579,6 +8696,15 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-build-tools-api",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-build-tools-api-1.9.22.jar": "dd49cb7e28f4f3382f5250cfb05c864fd5f0a96d3265bb293c77b30adcc93ff6",
+      "kotlin-build-tools-api-1.9.22.pom": "0c564bbb87dc5ecdf6434d396eea1bf3ce976abf0881808dd166fa49b04649fb"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-build-tools-api",
     "version": "2.0.21",
     "artifacts": {
       "kotlin-build-tools-api-2.0.21.jar": "8fca2b4af6c4cf24565d9a7f64c3178489518d049e106981db6718ef22cae18e",
@@ -7633,10 +8759,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-compiler-embeddable",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-compiler-embeddable-1.8.22.jar": "baf550c2f53ebfe7c053dd14e776f0dee18dd26555ea6a045a8decf73ccd5df8",
+      "kotlin-compiler-embeddable-1.8.22.pom": "d4a55735944a850c98f4b20ecde96f63599e6552d7762ed9a6669305191edca0"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-compiler-embeddable",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-compiler-embeddable-1.9.0.jar": "953b50691d74dd219ff3f6644670c3e549d87cdfc0a6154f1602a6a0a5dfe373",
       "kotlin-compiler-embeddable-1.9.0.pom": "ee3c871cedfd6ccf40d044944096e28655de2f9345d844feec63cca9c5e4b7cc"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-compiler-embeddable",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-compiler-embeddable-1.9.22.jar": "2bfeadee59ab1988c336dbd6e65d991f766ae1dd8683f2a6ded5faa0279f0ca0",
+      "kotlin-compiler-embeddable-1.9.22.pom": "b3da34bb6f4296acf3a0f443466f0506c6c99da5cd9624d6e0b745b2228784eb"
     }
   },
   {
@@ -7678,10 +8822,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-compiler-runner",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-compiler-runner-1.8.22.jar": "55beb0e10a0dc558e9cd98b5f4a93eb782f7256e0949717f566cd9ab4fdcc39a",
+      "kotlin-compiler-runner-1.8.22.pom": "97faabf00494570f03ab785a0f6bfa13be0d35c0769109ca988d40238958ad46"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-compiler-runner",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-compiler-runner-1.9.0.jar": "05b5a55d4949161a714fcdfc64a5f04d87a364c9bbdc8641b3bb7a5557e43eaa",
       "kotlin-compiler-runner-1.9.0.pom": "18837d065567b67e5bcf2e304d85a6e2b6d2443cf8127f4076734a4e8df2a361"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-compiler-runner",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-compiler-runner-1.9.22.jar": "73ec75bb99ebffa8b24a24a3b853f3f66096bc46a9351af0dac93debb69c15eb",
+      "kotlin-compiler-runner-1.9.22.pom": "a4ee8a67c1d6f253838c0027280bcb8050ac0dcdccad974896138a69a017eb01"
     }
   },
   {
@@ -7732,10 +8894,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-daemon-client",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-daemon-client-1.8.22.jar": "ceb1a04b93fafb8b5f14cf8185a014fee8d7a362b33ad8794fb157dfa8c808cc",
+      "kotlin-daemon-client-1.8.22.pom": "128170ada25ef69da41c5978c083aac3b472328f87ee3f37955880a4721d9b88"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-daemon-client",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-daemon-client-1.9.0.jar": "5a8c977e7dc7f0de2d91ae58bdadc20415def4cf5d493e5a183f96c597990320",
       "kotlin-daemon-client-1.9.0.pom": "b2fe74741823ccce89317096920dcb9ce5c16b8eb46798d39fd8e67703c589d7"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-daemon-client",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-daemon-client-1.9.22.jar": "5d73e1815b1167e4afe208f00b2a75c080bc5a810786caadb8e14787593a93b9",
+      "kotlin-daemon-client-1.9.22.pom": "62c44a659da55db6fb125e2929b98d504a30e1f4af814e08e4921426aa524f8a"
     }
   },
   {
@@ -7786,10 +8966,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-daemon-embeddable",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-daemon-embeddable-1.8.22.jar": "567e5c902cb0302dc8444fbf1f8fc0e0f76a95077ce607943ec503270ee4470d",
+      "kotlin-daemon-embeddable-1.8.22.pom": "d1feb887703cb0cedddb827173eda97396784f2bcbf927ba31909c0dcac5153e"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-daemon-embeddable",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-daemon-embeddable-1.9.0.jar": "943182a137ecd40e629058da52db336cee9b666f80996b655842f20a6373df9a",
       "kotlin-daemon-embeddable-1.9.0.pom": "38e32cbb91857a7206cbfddc38dd4ee0be665f40a0115ff6d4d177e3c7f892af"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-daemon-embeddable",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-daemon-embeddable-1.9.22.jar": "92a57813171447d534461fa13fe37dc8cd3b7f86d83e9b1f7bb1b0be30541f8b",
+      "kotlin-daemon-embeddable-1.9.22.pom": "f6ea3dcf6bfb3a0d0698447c48a6bcf08d8eaacf83fc95fe9d4181a5e5e3c2b1"
     }
   },
   {
@@ -7831,10 +9029,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-gradle-plugin",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-1.8.22-gradle76.jar": "a745e1b85c964de9bd397d291f7984dc8dd4129e5a4714da08c7ee19a49e5073",
+      "kotlin-gradle-plugin-1.8.22.module": "69784dbdfb67b085cc8e39bb8d8cabec29c8b5bd28a2f78bde49d80ed7cdfbbc"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-gradle-plugin-1.9.0-gradle81.jar": "d943a0e27b4746e01f83405a49f526a22f471b1db1d4639d6fce26d711effbfe",
       "kotlin-gradle-plugin-1.9.0.module": "fe639645ed8fbdc5bc12de7cf25468a4db31e763ba79adbaa206a14de60fd314"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-1.9.22-gradle82.jar": "d4e718dd5f30c6ba932d93ccfc5b3015e9dd3e44143a052b877028f1fae542dc",
+      "kotlin-gradle-plugin-1.9.22.module": "a4f46ac0cabd8d5cdb689d2d37d19d58584f708bf9f64ffe4e980a2ff7534bb5"
     }
   },
   {
@@ -7858,10 +9074,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-gradle-plugin-annotations",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-annotations-1.8.22.jar": "25d0feb7a8ae9cf6f7b59660b815d1c75914e8450f22795f9f08c71d3c52a939",
+      "kotlin-gradle-plugin-annotations-1.8.22.pom": "68c4273bf76d61b528be2a1489e165c15574cec696cf06215080e641737dece4"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-annotations",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-gradle-plugin-annotations-1.9.0.jar": "2a265b35bc7c55821426e91b6a3cd4f4b91638a0bc7c87dfcfe4e05f7e884738",
       "kotlin-gradle-plugin-annotations-1.9.0.pom": "aa35ee5a9d1da59315f769c7fedb2c8700560f53c5680ba92b0b27881a4a4271"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-annotations",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-annotations-1.9.22.jar": "967683cb98d9910145607fbf5b456295b43f0aaf93b1bba7bf6992e731cb24ec",
+      "kotlin-gradle-plugin-annotations-1.9.22.pom": "63ba68afe078ff70f708f9e979c693c45bfe89041f79641b0b81f6b4a126eebb"
     }
   },
   {
@@ -7914,11 +9148,30 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-gradle-plugin-api",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-api-1.8.22-gradle76.jar": "80da5cb5d438e668a6bee193bc177e980c6c3aeb264473e946a4b412094cdf22",
+      "kotlin-gradle-plugin-api-1.8.22.jar": "80da5cb5d438e668a6bee193bc177e980c6c3aeb264473e946a4b412094cdf22",
+      "kotlin-gradle-plugin-api-1.8.22.module": "4e2d63ff977ef7758463f5d41757da334227fb37cd2a72ca53d901bc1a252448"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-api",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-gradle-plugin-api-1.9.0-gradle81.jar": "0216ecb0c780f95e3b101a0e95cfc367f2ef56b06f2deaaaa9925a0f117c20d9",
       "kotlin-gradle-plugin-api-1.9.0.jar": "0216ecb0c780f95e3b101a0e95cfc367f2ef56b06f2deaaaa9925a0f117c20d9",
       "kotlin-gradle-plugin-api-1.9.0.module": "1aed565a28d91342ac5a4ba146c2856a5ebbc639285c529552179fafc7614ddb"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-api",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-api-1.9.22.jar": "ecff67546065c60e095fb93b3f88b9b92ed1edc37e3febbc6f9ed35422fa412b",
+      "kotlin-gradle-plugin-api-1.9.22.module": "1f4489c5304f9a512a5687ffcc0aaf0930afc9d72051d3a905fac0700362fb7b"
     }
   },
   {
@@ -7960,10 +9213,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-gradle-plugin-idea",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-idea-1.8.22.jar": "503049a1dfc2830a2347dd1bf298d2727e99d2e9673b15c2884e208553dd6adb",
+      "kotlin-gradle-plugin-idea-1.8.22.module": "96cf783d42fa6e38fb189a502d454e09bac6544872fba987413ec34f28c5b2cc"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-idea",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-gradle-plugin-idea-1.9.0.jar": "0bb26ccee372afb9b584f2857e87cc2f3f532b62a4f7fa457558f3afc3abe995",
       "kotlin-gradle-plugin-idea-1.9.0.module": "a5583cd9b0b4012e955ad9619fb9017b5b1aa2c251b0596daf5334904c5ca65b"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-idea",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-idea-1.9.22.jar": "8d1af87632d95148f122a9fa0ae2903c19ee6fab7d01e017f76e0d2c9a022c20",
+      "kotlin-gradle-plugin-idea-1.9.22.module": "cfe2c26e330f68032c003fa524c031e5a60fce8d899fff2e42314128beb4402b"
     }
   },
   {
@@ -7996,10 +9267,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-gradle-plugin-idea-proto",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-idea-proto-1.8.22.jar": "f05f53a118b4f7dadf746c6a2611da68de6e79f65623fe5ca9f3930e2ac8d5a0",
+      "kotlin-gradle-plugin-idea-proto-1.8.22.pom": "ff6122960f56ff406094afe104981ff1a8696b2c6b930b2a3e5ae8413ac58844"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-idea-proto",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-gradle-plugin-idea-proto-1.9.0.jar": "e78998ea22bcd5f56d13982ccc124c9c7337bd150754cbdc8af2a148d76c9700",
       "kotlin-gradle-plugin-idea-proto-1.9.0.pom": "41e12568538a3a340704c970c3a4f60ff5801ffdce425ca68ca2c0b472217250"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-idea-proto",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-idea-proto-1.9.22.jar": "f5d82ee61966a2d98adfae19f24d6173022c15404896cdf236340035ee68c0f5",
+      "kotlin-gradle-plugin-idea-proto-1.9.22.pom": "86e32ca82927da880a1cf343a40ecc2098075e6fd72273b34d50dfa544f3463b"
     }
   },
   {
@@ -8050,10 +9339,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-gradle-plugin-model",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-model-1.8.22.jar": "771d4ac928f422e43cf7ec067bbea337a0d2edf146389b65dda65df6d2d6e54a",
+      "kotlin-gradle-plugin-model-1.8.22.module": "c07798953f1bfdc9d652695c40e7a3e05929c7803b58ad869eee86ea3127c960"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-model",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-gradle-plugin-model-1.9.0.jar": "ff05aab688b34a7992a7e35f9dc4dec25843f13a9e970aefe56dd3e122a08415",
       "kotlin-gradle-plugin-model-1.9.0.module": "66f4b914470cf346e05d03f8a2d59e9c746fa6edcf64c712f176a0881aac3e49"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugin-model",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-gradle-plugin-model-1.9.22.jar": "5108fad5be149825ece3a00103c3c21cf1afe954bb64b870789572939d7538cb",
+      "kotlin-gradle-plugin-model-1.9.22.module": "2ff3013df2ba7a9b5e8b004e8481750c8d0fa953ad007a196d85d263671dbeae"
     }
   },
   {
@@ -8077,10 +9384,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-gradle-plugins-bom",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-gradle-plugins-bom-1.8.22.module": "8e001fff06ce705dc33931cc061f7e98bb6ae40ae2e4c90fa990d0d91c0b5f1c",
+      "kotlin-gradle-plugins-bom-1.8.22.pom": "9b3be3a14d1d23dc115a9d9074ba63777fc4ef28b6d5ff31d5c4c284675f9124"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugins-bom",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-gradle-plugins-bom-1.9.0.module": "fd2b9f69b82e43cb509f0841b18bf3c5df7dab5f1e0bea034fc0b2a599d6e296",
       "kotlin-gradle-plugins-bom-1.9.0.pom": "5d39ad9030dfd33b0bac29f7500009ce628762e94fe61f01177ae134bdb80fa1"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-gradle-plugins-bom",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-gradle-plugins-bom-1.9.22.module": "423e34d61d220b1a0ddc1814086a8ceab4dad9e77902b0ce8cb4721bbf3dc6ed",
+      "kotlin-gradle-plugins-bom-1.9.22.pom": "75adbf5c78ce247c22baf3628d0b3ff1cf7ed7d37d601eba7304d77ab75bdd9f"
     }
   },
   {
@@ -8131,10 +9456,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-klib-commonizer-api",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-klib-commonizer-api-1.8.22.jar": "1745cb0a3c1f71ab4e499677b3b1cc4bf94e684e0b112ace865b4e5fc5fac31f",
+      "kotlin-klib-commonizer-api-1.8.22.pom": "80b8ff11fdb630485b85080a3483212225445c1a34e458e634fab6a1bf416f3c"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-klib-commonizer-api",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-klib-commonizer-api-1.9.0.jar": "85de2e972b0bb6f4528c1f748f43c48663145fc8539eca96c13d1bc0da3f935d",
       "kotlin-klib-commonizer-api-1.9.0.pom": "844f92088ff48f8bfae25621e324adc3577908cf650f4fdb2569610b8faf6b3e"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-klib-commonizer-api",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-klib-commonizer-api-1.9.22.jar": "8c2f65429c182e2e4a2e09cb910e62b96db6eed285594b8f81af823b7e5944e2",
+      "kotlin-klib-commonizer-api-1.9.22.pom": "10cac970d300a3489c33f0b304156ff032d95959be5aaac3b880282ad58622fe"
     }
   },
   {
@@ -8194,10 +9537,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-native-utils",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-native-utils-1.8.22.jar": "12588fb18b8f301c7de37e5432016d57e398f8be3a023c69a9beaca7851f0ace",
+      "kotlin-native-utils-1.8.22.pom": "99fa60a142dd9d4842952d3d5cc94271177e1fe24936745de2ddbd5e93541ebd"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-native-utils",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-native-utils-1.9.0.jar": "0f4805f774bfb5c1b6d145dfe60d3d20b1aee000896ce8ecf3eeff84ce44023b",
       "kotlin-native-utils-1.9.0.pom": "29acf2def926bdedd9eb204ec774e786adc4934106a9294900af351556e7e76a"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-native-utils",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-native-utils-1.9.22.jar": "786c127dd5535db2c39ae597cd0b0cad9e914b83e236f1db0251235cc9c652ac",
+      "kotlin-native-utils-1.9.22.pom": "11c514c05eea3ae9e8e16ab49796f111df43c7348231e35faf4c428cc4f743ea"
     }
   },
   {
@@ -8257,10 +9618,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-project-model",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-project-model-1.8.22.jar": "880db2d50fa635c2d1e0eef48867c638fb8dd0a8e60f281e211a369cc2c35cf7",
+      "kotlin-project-model-1.8.22.pom": "6265685accbe44d9ef7e4a512c72029a7ccc2ba18027a8e1f27a7ab83f6d5e92"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-project-model",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-project-model-1.9.0.jar": "ae0936e9b4c6921f03ef779361cacbbb75ed2b2210479f92f65f1cbac86e340c",
       "kotlin-project-model-1.9.0.pom": "eac1c64c600c60027b8e68dfad3a203c415b9fa224581d68cfa5e773e8566b78"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-project-model",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-project-model-1.9.22.jar": "cc11d5c0b1909c5b0a08fd25ef0e754ffd2bf56caef665fb785122235e542a18",
+      "kotlin-project-model-1.9.22.pom": "eb9f4a16781bfc00ccec8030fbe5ee228e6f2b2771c50c267b3218feb0065b40"
     }
   },
   {
@@ -8306,6 +9685,15 @@
     "artifacts": {
       "kotlin-reflect-1.8.20-RC2.jar": "688de34ee30a0bcffd9fccdefa0f4c28af158bcf639d221502c3ea7c38e6a0a0",
       "kotlin-reflect-1.8.20-RC2.pom": "7df1a5d890c819c6b683e8330aaed8656171c4a09b8e361af1888b89efc87d1c"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-reflect",
+    "version": "1.9.0",
+    "artifacts": {
+      "kotlin-reflect-1.9.0.jar": "2070159be514ea8ea3ce2c8b1ee7993e6ff60a93565a299f200629aa7df7f581",
+      "kotlin-reflect-1.9.0.pom": "8571565676d189720471306cee9a55d916c080382f35a6da68193ac7b12f4cdb"
     }
   },
   {
@@ -8374,10 +9762,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-scripting-common",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-scripting-common-1.8.22.jar": "fb48f7b286f8fca180a1ad2c906f66150de3958d6e03b93b05efc3cbfd6ae03e",
+      "kotlin-scripting-common-1.8.22.pom": "3681620593f76455d6f94e0e6b3b02a88c095fe3e7002571a81f80a808fd4105"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-scripting-common",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-scripting-common-1.9.0.jar": "285c41c0eeed59a0e7dcb188b89f8154147fbcbbd535471cf69896ccda273f84",
       "kotlin-scripting-common-1.9.0.pom": "0bf306e4f45eeb1ac3024e299d4c9b70be09ece9ac00e70b2ff98b3ed400f307"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-scripting-common",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-scripting-common-1.9.22.jar": "fa500cbf034943ef8126f3d3dc65af09ff99dfffe44c5099b4fc2ed5bf2f5dc7",
+      "kotlin-scripting-common-1.9.22.pom": "44e51123b0c27e6fd933fc266b4d0daf0f0684a62aed9fe6842e8da33f2a2b3f"
     }
   },
   {
@@ -8419,10 +9825,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-scripting-compiler-embeddable",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-scripting-compiler-embeddable-1.8.22.jar": "0bec7d99cd3511c7ee755b07ca96d3bbc748ebb504e0eea29c5b5518c4819834",
+      "kotlin-scripting-compiler-embeddable-1.8.22.pom": "1507e3e8158768cc0c97799364920b5428ef3c94a279c803017e33dc57473b78"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-scripting-compiler-embeddable",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-scripting-compiler-embeddable-1.9.0.jar": "469dd12068958a97afce1188a0144554cded67de5a1aa0bf5ca53039f29d8b36",
       "kotlin-scripting-compiler-embeddable-1.9.0.pom": "509e62914c30bd3e3719c0e02e4e437fcbf19116b8a2e65848f6d46c54ec5c9e"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-scripting-compiler-embeddable",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-scripting-compiler-embeddable-1.9.22.jar": "223fec84830234499cd4c7a23ea1c92eba127c41b35d9bb1d4b61d24155aeb35",
+      "kotlin-scripting-compiler-embeddable-1.9.22.pom": "c1608f3fbcb2a9f7523ead33599c2eadce4c812161a9e066b9f4b005af7b431c"
     }
   },
   {
@@ -8464,10 +9888,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-scripting-compiler-impl-embeddable",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-scripting-compiler-impl-embeddable-1.8.22.jar": "035798d1ccb4e890f352b465d2851368983615caf7e8adba6482393182754ed3",
+      "kotlin-scripting-compiler-impl-embeddable-1.8.22.pom": "23c531d9ac0006f400570668ba998fc2e1ccc8b459b84594bb0f171bdd2ff062"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-scripting-compiler-impl-embeddable",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-scripting-compiler-impl-embeddable-1.9.0.jar": "65c5256e2c8fbdda426c03286e6a268267d712ef95ec2d39c95292957378b04d",
       "kotlin-scripting-compiler-impl-embeddable-1.9.0.pom": "cda629f0a81ba9c00a33de5027f0f8ffbf9f0b8e44e41970347766bb858b4e63"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-scripting-compiler-impl-embeddable",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-scripting-compiler-impl-embeddable-1.9.22.jar": "38991816a287ff76241f1a77e7f1116481d4e93a3db63259a657dde20e6d0f65",
+      "kotlin-scripting-compiler-impl-embeddable-1.9.22.pom": "82671c33a957b2e2a820d66a692c2fce63e3bf047f1cb25e6fb0391c5ddcf2e7"
     }
   },
   {
@@ -8509,10 +9951,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-scripting-jvm",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-scripting-jvm-1.8.22.jar": "7997ff683bb1df4b6171675e99b5784aead14955b3f6a5e5335873c2553ad3ab",
+      "kotlin-scripting-jvm-1.8.22.pom": "a205dea57415dabaeacff1008f37aab980cff3eb37cce2236bbacc61a5d659c3"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-scripting-jvm",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-scripting-jvm-1.9.0.jar": "669dd2bc60418e075153fd8ad8d965be569eb65c2f308388cb1103b9df135159",
       "kotlin-scripting-jvm-1.9.0.pom": "6268f80558d35fda9246bba779329692b94d5895965507cbe8a848912c50e72a"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-scripting-jvm",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-scripting-jvm-1.9.22.jar": "8d127d76fcfa0517c36c1ea0e228ece03d5a4682642a01f6479a6bbdc7312a29",
+      "kotlin-scripting-jvm-1.9.22.pom": "701252ea1ba8ff87fc33476a61e3d5c6d9d2dda41baa98994dd6980ee13fbc6d"
     }
   },
   {
@@ -8969,10 +10429,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-tooling-core",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-tooling-core-1.8.22.jar": "7a412677e73a59588cdad4cb9c7f8e3bb70bae5db66933b4b3f3ece0071b4cad",
+      "kotlin-tooling-core-1.8.22.pom": "472dc255f97dbacdbe76b7041500fe68705195218b28965d48205b9f07e28654"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-tooling-core",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-tooling-core-1.9.0.jar": "e539a22428b9cac67f75b2d61f2b6e2a718350d7bb31823c7dca8907f90999ae",
       "kotlin-tooling-core-1.9.0.pom": "2926c3fc214959701c8f160d8ddc869f7b3fa452afde8dd175c8e7c2bbc70522"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-tooling-core",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-tooling-core-1.9.22.jar": "8938eb97e36320daa3e6fb2a60fd2a05b232ff4a557173c5019f045b8832d9f4",
+      "kotlin-tooling-core-1.9.22.pom": "14fc7f35c635e5fcd1bea537ab4fa44312e843252d5333519e36b125ea089b21"
     }
   },
   {
@@ -9041,10 +10519,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-util-io",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-util-io-1.8.22.jar": "dd407563c845acce101aca25ae9a1e278355cae88bd49524b8e362390a0c81fd",
+      "kotlin-util-io-1.8.22.pom": "3aa85b80b86c349494e9ff659b80c9b9d52b51d9cf21026affe8580c9d2b15ee"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-util-io",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-util-io-1.9.0.jar": "81d36dc6de3f0beaf04c397a06b568213ba373abcef53972b7b82f617d5af70b",
       "kotlin-util-io-1.9.0.pom": "05405afb19f7b606c52abea1689aa2d5ec3da902fee2d7a857694339e4a04094"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-util-io",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-util-io-1.9.22.jar": "f6d7a58491a378b083ad1bead488a485e11d160b31e76c18c1ad520f1d28f46b",
+      "kotlin-util-io-1.9.22.pom": "64fd6a20d6ec04013bb6d75627f6580bb73641d948909d5c1664e2e773106dee"
     }
   },
   {
@@ -9095,10 +10591,28 @@
   {
     "group": "org.jetbrains.kotlin",
     "name": "kotlin-util-klib",
+    "version": "1.8.22",
+    "artifacts": {
+      "kotlin-util-klib-1.8.22.jar": "342b636ff27601e1c6389b16bd83c53c99501821c2ec3c2ec82999b5664862bf",
+      "kotlin-util-klib-1.8.22.pom": "5cb2601f0b639e17ed323637faaaf78585772a2383a43957c23655019a06fc00"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-util-klib",
     "version": "1.9.0",
     "artifacts": {
       "kotlin-util-klib-1.9.0.jar": "c2dc6bf36d3369b773755ab8937b97e539a4d45d3815bef19bedfa154b12d313",
       "kotlin-util-klib-1.9.0.pom": "69c64719a0e04636f6c21319fe518a0b5822784bbae8fed85e651fbfa6f8a45b"
+    }
+  },
+  {
+    "group": "org.jetbrains.kotlin",
+    "name": "kotlin-util-klib",
+    "version": "1.9.22",
+    "artifacts": {
+      "kotlin-util-klib-1.9.22.jar": "a679ee2f510f3ab92691818de5eb5b0902e86d88c97674e7db44dc4f2252c5f9",
+      "kotlin-util-klib-1.9.22.pom": "0dea7dfff0a2b74088ac997043cbc240835d2bff59b39fcc8b0cac6ea3eb3697"
     }
   },
   {

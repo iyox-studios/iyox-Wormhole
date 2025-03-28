@@ -3,7 +3,7 @@ description: Mobile Client for the magic-wormhole protocol
 homepage: https://github.com/iyox-studios/iyox-Wormhole/
 publish_to: 'none'
 
-version: 0.1.13+40
+version: 0.2.0+41
 
 environment:
   flutter: ">=3.27.0"
@@ -11,6 +11,7 @@ environment:
 
 dependencies:
   animations: ^2.0.11
+  archive: ^4.0.5
   device_info_plus: ^11.3.0
   dynamic_color: ^1.7.0
   file_picker: ^9.0.2
@@ -27,14 +28,23 @@ dependencies:
   logger: ^2.5.0
   path_provider: ^2.1.5
   permission_handler: ^10.4.5
+  pick_or_save: #^2.2.4
+    git: 
+      url: https://github.com/EwuUwe/pick_or_save
+      rev: bc5f7147a65f5a9878cf3c3ae77d37e1b963e0d1
   qr_code_scanner_plus: ^2.0.10+1
   qr_flutter: ^4.1.0
+  receive_sharing_intent: #^1.8.1
+    git: 
+      url: https://github.com/KasemJaffer/receive_sharing_intent
+      rev: 2cea396843cd3ab1b5ec4334be4233864637874e
   rust_lib_iyox_wormhole:
     path: rust_builder
 
   shared_preferences: ^2.5.2
   slang: ^4.5.0
   slang_flutter: ^4.5.0
+  uri_content: ^3.0.0
   vibration: ^3.1.3
 
 dev_dependencies:

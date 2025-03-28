@@ -101,6 +101,7 @@ class _TranslationsPagesSendDe extends TranslationsPagesSendEn {
 	@override String get abort_transfer_message => 'Möchten Sie die laufende Dateiübertragung abbrechen?';
 	@override String get abort_transfer_yes => 'Abbrechen';
 	@override String get abort_transfer_no => 'Weiter';
+	@override String get zip_failed => 'Beim Erstellen des ZIP-Archivs ist ein Fehler aufgetreten';
 }
 
 // Path: pages.receive
@@ -134,6 +135,7 @@ extension on TranslationsDe {
 			case 'pages.send.abort_transfer_message': return 'Möchten Sie die laufende Dateiübertragung abbrechen?';
 			case 'pages.send.abort_transfer_yes': return 'Abbrechen';
 			case 'pages.send.abort_transfer_no': return 'Weiter';
+			case 'pages.send.zip_failed': return 'Beim Erstellen des ZIP-Archivs ist ein Fehler aufgetreten';
 			case 'pages.receive.code_input_hint': return 'Code eingeben';
 			case 'pages.receive.receive_button': return 'Datei erhalten';
 			default: return null;

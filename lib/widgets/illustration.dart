@@ -19,7 +19,6 @@ class Illustration extends StatelessWidget {
       SvgAssetLoader(
         assetPath,
         colorMapper: IllustrationColorMapper(
-            //baseColor: Theme.of(context).colorScheme.brightness == Brightness.dark ? Color(0xff181a1b) : Colors.white,
             baseColor: Theme.of(context).colorScheme.surfaceBright,
             secondaryColor: Theme.of(context).colorScheme.surfaceContainerHigh,
             accentColor: Theme.of(context).colorScheme.tertiary,

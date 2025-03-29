@@ -1,4 +1,7 @@
-#!/usr/bin/env just --justfile
+#!/usr/bin/env -S just --justfile
+
+default:
+  @just --list
 
 clean:
     flutter clean
@@ -12,4 +15,4 @@ pubspecJSON:
 	cat pubspec.lock | yq . > pubspec.lock.json
 
 buildrunner mode:
-	flutter pub run build_runner {{mode}}
+	flutter pub run build_runner {{mode}} -d

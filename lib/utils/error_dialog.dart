@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 
-Future<void> showErrorDialog({required BuildContext context, String? errorMessage}) async {
+Future<void> showErrorDialog(
+    {required BuildContext context, String? errorMessage}) async {
   await showDialog<void>(
     context: context,
     builder: (ctx) {

@@ -13,9 +13,9 @@ import 'strings.g.dart';
 class TranslationsDe extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	TranslationsDe({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
+	TranslationsDe({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = TranslationMetadata(
+		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.de,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
@@ -33,6 +33,9 @@ class TranslationsDe extends Translations {
 	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
 	late final TranslationsDe _root = this; // ignore: unused_field
+
+	@override 
+	TranslationsDe $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsDe(meta: meta ?? this.$meta);
 
 	// Translations
 	@override late final _TranslationsCommonDe common = _TranslationsCommonDe._(_root);
@@ -61,6 +64,7 @@ class _TranslationsPagesDe extends TranslationsPagesEn {
 	// Translations
 	@override late final _TranslationsPagesSendDe send = _TranslationsPagesSendDe._(_root);
 	@override late final _TranslationsPagesReceiveDe receive = _TranslationsPagesReceiveDe._(_root);
+	@override late final _TranslationsPagesSettingsDe settings = _TranslationsPagesSettingsDe._(_root);
 }
 
 // Path: common.page_titles
@@ -115,6 +119,32 @@ class _TranslationsPagesReceiveDe extends TranslationsPagesReceiveEn {
 	@override String get receive_button => 'Datei erhalten';
 }
 
+// Path: pages.settings
+class _TranslationsPagesSettingsDe extends TranslationsPagesSettingsEn {
+	_TranslationsPagesSettingsDe._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get general_header => 'Allgemein';
+	@override String get appearance_header => 'Erscheinungsbild';
+	@override String get connection_header => 'Verbindung';
+	@override String get language_label => 'Sprache';
+	@override String get language_system => 'Systemstandard';
+	@override String get theme_label => 'Design';
+	@override String get theme_system => 'System';
+	@override String get theme_light => 'Hell';
+	@override String get theme_dark => 'Dunkel';
+	@override String get dynamic_color_label => 'Dynamische Farben';
+	@override String get dynamic_color_subtitle => 'Systemfarben verwenden (Android 12+)';
+	@override String get rendezvous_url_label => 'Rendezvous Server URL';
+	@override String get transmit_url_label => 'Transit Server URL';
+	@override String get code_length_label => 'Code-Länge';
+	@override String get accent_color_label => 'Akzentfarbe';
+	@override String get reset_to_default => 'Auf Standard zurücksetzen';
+	@override String get app_version_label => 'App-Version';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on TranslationsDe {
@@ -138,6 +168,23 @@ extension on TranslationsDe {
 			case 'pages.send.zip_failed': return 'Beim Erstellen des ZIP-Archivs ist ein Fehler aufgetreten';
 			case 'pages.receive.code_input_hint': return 'Code eingeben';
 			case 'pages.receive.receive_button': return 'Datei erhalten';
+			case 'pages.settings.general_header': return 'Allgemein';
+			case 'pages.settings.appearance_header': return 'Erscheinungsbild';
+			case 'pages.settings.connection_header': return 'Verbindung';
+			case 'pages.settings.language_label': return 'Sprache';
+			case 'pages.settings.language_system': return 'Systemstandard';
+			case 'pages.settings.theme_label': return 'Design';
+			case 'pages.settings.theme_system': return 'System';
+			case 'pages.settings.theme_light': return 'Hell';
+			case 'pages.settings.theme_dark': return 'Dunkel';
+			case 'pages.settings.dynamic_color_label': return 'Dynamische Farben';
+			case 'pages.settings.dynamic_color_subtitle': return 'Systemfarben verwenden (Android 12+)';
+			case 'pages.settings.rendezvous_url_label': return 'Rendezvous Server URL';
+			case 'pages.settings.transmit_url_label': return 'Transit Server URL';
+			case 'pages.settings.code_length_label': return 'Code-Länge';
+			case 'pages.settings.accent_color_label': return 'Akzentfarbe';
+			case 'pages.settings.reset_to_default': return 'Auf Standard zurücksetzen';
+			case 'pages.settings.app_version_label': return 'App-Version';
 			default: return null;
 		}
 	}

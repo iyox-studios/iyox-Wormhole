@@ -69,12 +69,15 @@ class _SendPageState extends State<SendPage> {
   }
 
   void _onSendButtonClick() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (result != null) {
       if (mounted) {
-        final files =
-            result.files.where((element) => element.path != null).map((e) => e.path!).toList();
+        final files = result.files
+            .where((element) => element.path != null)
+            .map((e) => e.path!)
+            .toList();
 
         context.go('/send/sending', extra: {'files': files, 'isFolder': false});
       }

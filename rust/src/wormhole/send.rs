@@ -2,7 +2,7 @@ use std::{collections::HashMap, rc::Rc};
 
 use async_std::fs::remove_file;
 use magic_wormhole::{
-    transfer::{self, TransferError}, transit, uri::WormholeTransferUri, MailboxConnection, Wormhole
+    transfer::{self, TransferError}, transit, MailboxConnection, Wormhole
 };
 
 use crate::{api::{ErrorType, Events, ServerConfig, TUpdate, Value}, frb_generated::StreamSink};
@@ -137,11 +137,3 @@ async fn send(
     .await?;
     Ok(())
 }
-
-/*
-#[flutter_rust_bridge::frb(init)]
-pub fn init_app() {
-    // Default utilities - feel free to customize
-    flutter_rust_bridge::setup_default_user_utils();
-}
-*/

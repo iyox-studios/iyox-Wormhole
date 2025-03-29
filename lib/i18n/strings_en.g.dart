@@ -17,9 +17,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
+	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = TranslationMetadata(
+		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.en,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
@@ -35,6 +35,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final Translations _root = this; // ignore: unused_field
+
+	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
 	late final TranslationsCommonEn common = TranslationsCommonEn.internal(_root);
@@ -63,6 +65,7 @@ class TranslationsPagesEn {
 	// Translations
 	late final TranslationsPagesSendEn send = TranslationsPagesSendEn.internal(_root);
 	late final TranslationsPagesReceiveEn receive = TranslationsPagesReceiveEn.internal(_root);
+	late final TranslationsPagesSettingsEn settings = TranslationsPagesSettingsEn.internal(_root);
 }
 
 // Path: common.page_titles
@@ -117,6 +120,32 @@ class TranslationsPagesReceiveEn {
 	String get receive_button => 'Receive File';
 }
 
+// Path: pages.settings
+class TranslationsPagesSettingsEn {
+	TranslationsPagesSettingsEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get general_header => 'General';
+	String get appearance_header => 'Appearance';
+	String get connection_header => 'Connection';
+	String get language_label => 'Language';
+	String get language_system => 'System Default';
+	String get theme_label => 'Theme';
+	String get theme_system => 'System';
+	String get theme_light => 'Light';
+	String get theme_dark => 'Dark';
+	String get dynamic_color_label => 'Dynamic Colors';
+	String get dynamic_color_subtitle => 'Use system colors (Android 12+)';
+	String get rendezvous_url_label => 'Rendezvous Server URL';
+	String get transmit_url_label => 'Transit Server URL';
+	String get code_length_label => 'Code Length';
+	String get accent_color_label => 'Accent Color';
+	String get reset_to_default => 'Reset to default';
+	String get app_version_label => 'App Version';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Translations {
@@ -140,6 +169,23 @@ extension on Translations {
 			case 'pages.send.zip_failed': return 'An error occurred while creating the ZIP archive';
 			case 'pages.receive.code_input_hint': return 'Enter Code';
 			case 'pages.receive.receive_button': return 'Receive File';
+			case 'pages.settings.general_header': return 'General';
+			case 'pages.settings.appearance_header': return 'Appearance';
+			case 'pages.settings.connection_header': return 'Connection';
+			case 'pages.settings.language_label': return 'Language';
+			case 'pages.settings.language_system': return 'System Default';
+			case 'pages.settings.theme_label': return 'Theme';
+			case 'pages.settings.theme_system': return 'System';
+			case 'pages.settings.theme_light': return 'Light';
+			case 'pages.settings.theme_dark': return 'Dark';
+			case 'pages.settings.dynamic_color_label': return 'Dynamic Colors';
+			case 'pages.settings.dynamic_color_subtitle': return 'Use system colors (Android 12+)';
+			case 'pages.settings.rendezvous_url_label': return 'Rendezvous Server URL';
+			case 'pages.settings.transmit_url_label': return 'Transit Server URL';
+			case 'pages.settings.code_length_label': return 'Code Length';
+			case 'pages.settings.accent_color_label': return 'Accent Color';
+			case 'pages.settings.reset_to_default': return 'Reset to default';
+			case 'pages.settings.app_version_label': return 'App Version';
 			default: return null;
 		}
 	}

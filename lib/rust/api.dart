@@ -24,17 +24,6 @@ Stream<TUpdate> sendFiles(
         codeLength: codeLength,
         serverConfig: serverConfig);
 
-Stream<TUpdate> sendFolder(
-        {required String folderPath,
-        required String name,
-        required int codeLength,
-        required ServerConfig serverConfig}) =>
-    RustLib.instance.api.crateApiSendFolder(
-        folderPath: folderPath,
-        name: name,
-        codeLength: codeLength,
-        serverConfig: serverConfig);
-
 Stream<TUpdate> requestFile(
         {required String code,
         required String storageFolder,

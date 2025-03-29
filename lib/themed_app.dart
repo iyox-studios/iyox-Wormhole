@@ -5,7 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 import 'package:iyox_wormhole/utils/device_info.dart';
-import 'package:iyox_wormhole/utils/logger.dart';
+import 'package:iyox_wormhole/utils/shared_prefs.dart';
 
 class ThemedApp extends StatefulWidget {
   const ThemedApp({
@@ -23,13 +23,13 @@ class ThemedApp extends StatefulWidget {
 
   static bool get isFullscreen => _isFullscreen.value;
 
-  static void setFullscreen(bool value, {required bool updateSystem}) {
+  static Future<void> setFullscreen(bool value,
+      {required bool updateSystem}) async {
     _isFullscreen.value = value;
     if (!updateSystem) return;
-    getLogger().f('TODO Fullscreen');
 
-    /*SystemChrome.setEnabledSystemUIMode(
-        value ? SystemUiMode.immersive : SystemUiMode.edgeToEdge);*/
+    await SystemChrome.setEnabledSystemUIMode(
+        value ? SystemUiMode.immersive : SystemUiMode.edgeToEdge);
   }
 
   static void addFullscreenListener(void Function() listener) {
@@ -46,6 +46,7 @@ class ThemedApp extends StatefulWidget {
 
 class _ThemedAppState extends State<ThemedApp> {
   final DeviceInfo deviceInfo = DeviceInfo();
+  final SharedPrefs _prefs = SharedPrefs();
 
   static const _pageTransitionsTheme = PageTransitionsTheme(
     builders: {
@@ -56,49 +57,46 @@ class _ThemedAppState extends State<ThemedApp> {
   @override
   void initState() {
     super.initState();
-    //Prefs.appTheme.addListener(onChanged);
-    //Prefs.platform.addListener(onChanged);
-    //Prefs.accentColor.addListener(onChanged);
-    //Prefs.hyperlegibleFont.addListener(onChanged);
+    _prefs.themeModeNotifier.addListener(_onSettingsChanged);
+    _prefs.dynamicColorNotifier.addListener(_onSettingsChanged);
+    _prefs.accentColorNotifier.addListener(_onSettingsChanged);
 
-    //windowManager.addListener(this);
     SystemChrome.setSystemUIChangeCallback(_onFullscreenChange);
-
-    super.initState();
   }
 
-  void onChanged() {
+  void _onSettingsChanged() {
     setState(() {});
   }
 
   Future<void> _onFullscreenChange(bool systemOverlaysAreVisible) async {
-    ThemedApp.setFullscreen(!systemOverlaysAreVisible, updateSystem: false);
+    await ThemedApp.setFullscreen(!systemOverlaysAreVisible,
+        updateSystem: false);
   }
 
   @override
   Widget build(BuildContext context) {
+    final themeMode = _prefs.themeModeNotifier.value;
+    final useDynamicColor = _prefs.dynamicColorNotifier.value;
+    final accentColor = _prefs.accentColorNotifier.value;
+
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-        final useSystemColors = true; // settings.design.dynamicColors.value;
-        final themeMode = ThemeMode.system; // settings
-        final customAccent = widget.defaultSwatch; // settings
+        final Color seedColor = accentColor;
 
-        // final Color seedColor;
         ColorScheme lightScheme;
         ColorScheme darkScheme;
 
-        if (useSystemColors && deviceInfo.supportsDynamicColor) {
-          lightScheme = lightDynamic ??
-              ColorScheme.fromSeed(
-                  seedColor: customAccent, brightness: Brightness.light);
-          darkScheme = darkDynamic ??
-              ColorScheme.fromSeed(
-                  seedColor: customAccent, brightness: Brightness.dark);
+        if (useDynamicColor &&
+            deviceInfo.supportsDynamicColor &&
+            lightDynamic != null &&
+            darkDynamic != null) {
+          lightScheme = lightDynamic;
+          darkScheme = darkDynamic;
         } else {
           lightScheme = ColorScheme.fromSeed(
-              seedColor: customAccent, brightness: Brightness.light);
+              seedColor: seedColor, brightness: Brightness.light);
           darkScheme = ColorScheme.fromSeed(
-              seedColor: customAccent, brightness: Brightness.dark);
+              seedColor: seedColor, brightness: Brightness.dark);
         }
 
         final bool isDarkMode;
@@ -123,7 +121,6 @@ class _ThemedAppState extends State<ThemedApp> {
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: lightScheme,
-            //scaffoldBackgroundColor: lightScheme.surface,
             platform: TargetPlatform.android,
             pageTransitionsTheme: _pageTransitionsTheme,
             snackBarTheme: SnackBarThemeData(
@@ -138,7 +135,6 @@ class _ThemedAppState extends State<ThemedApp> {
           darkTheme: ThemeData(
             useMaterial3: true,
             colorScheme: darkScheme,
-            //scaffoldBackgroundColor: darkScheme.surface,
             platform: TargetPlatform.android,
             pageTransitionsTheme: _pageTransitionsTheme,
             splashFactory: InkSparkle.splashFactory,
@@ -158,10 +154,9 @@ class _ThemedAppState extends State<ThemedApp> {
 
   @override
   void dispose() {
-    //Prefs.appTheme.removeListener(onChanged);
-    //Prefs.platform.removeListener(onChanged);
-    //Prefs.accentColor.removeListener(onChanged);
-    //Prefs.hyperlegibleFont.removeListener(onChanged);
+    _prefs.themeModeNotifier.removeListener(_onSettingsChanged);
+    _prefs.dynamicColorNotifier.removeListener(_onSettingsChanged);
+    _prefs.accentColorNotifier.removeListener(_onSettingsChanged);
 
     SystemChrome.setSystemUIChangeCallback(null);
 

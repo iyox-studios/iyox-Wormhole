@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 import 'package:iyox_wormhole/rust/api.dart';
 import 'package:iyox_wormhole/rust/wormhole/types/events.dart';
+import 'package:iyox_wormhole/utils/shared_prefs.dart';
 import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -19,6 +20,7 @@ class _ReceivingPageState extends State<ReceivingPage> {
   int receivedBytes = 0;
   bool transferring = false;
   bool downloadStarted = false;
+  final _prefs = SharedPrefs();
 
   @override
   void initState() {
@@ -34,13 +36,15 @@ class _ReceivingPageState extends State<ReceivingPage> {
       return;
     }
 
+    final serverConfig = ServerConfig(
+      rendezvousUrl: _prefs.rendezvousUrl,
+      transitUrl: _prefs.transitUrl,
+    );
+
     final stream = requestFile(
         code: widget.code,
         storageFolder: downloadPath.path,
-        serverConfig: ServerConfig(
-          rendezvousUrl: defaultRendezvousUrl(),
-          transitUrl: defaultTransitUrl(),
-        ));
+        serverConfig: serverConfig);
 
     setState(() {
       transferring = true;
@@ -89,8 +93,6 @@ class _ReceivingPageState extends State<ReceivingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final t = Translations.of(context);
-
     return Scaffold(
       body: Center(
         child: Column(

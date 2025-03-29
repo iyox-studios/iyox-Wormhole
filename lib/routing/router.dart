@@ -35,12 +35,15 @@ final goRouter = GoRouter(
                 GoRoute(
                   path: '/sending',
                   builder: (context, state) {
-                    final extra = state.extra as Map<String, dynamic>;
-                    List<String> files = extra['files'] as List<String>;
-                    bool isFolder = extra['isFolder'] as bool;
+                    final extra = state.extra as Map<String, dynamic>? ?? {};
+                    List<String> files = extra['files'] as List<String>? ?? [];
+                    bool isFolder = extra['isFolder'] as bool? ?? false;
+                    bool launchedByIntent =
+                        extra['launchedByIntent'] as bool? ?? false;
                     return SendingPage(
                       files: files,
                       isFolder: isFolder,
+                      launchedByIntent: launchedByIntent,
                     );
                   },
                 ),

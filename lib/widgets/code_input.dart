@@ -42,13 +42,15 @@ class _CodeInputState extends State<CodeInput> {
     }
 
     final suggestion = wordlist.firstWhere(
-      (word) => word.toLowerCase().startsWith(text.split('-').last.toLowerCase()),
+      (word) =>
+          word.toLowerCase().startsWith(text.split('-').last.toLowerCase()),
       orElse: () => '',
     );
 
     if (suggestion.isNotEmpty && suggestion != text) {
       final textPainter = TextPainter(
-        text: TextSpan(text: text, style: Theme.of(context).textTheme.bodyLarge),
+        text:
+            TextSpan(text: text, style: Theme.of(context).textTheme.bodyLarge),
         textDirection: TextDirection.ltr,
       )..layout();
       setState(() {
@@ -74,7 +76,8 @@ class _CodeInputState extends State<CodeInput> {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.bodyLarge ?? const TextStyle();
+    final textStyle =
+        Theme.of(context).textTheme.bodyLarge ?? const TextStyle();
 
     return Stack(
       children: [
@@ -103,7 +106,7 @@ class _CodeInputState extends State<CodeInput> {
           ),
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => _acceptSuggestion(),
-          onTap: ()=>widget.onTap(),
+          onTap: () => widget.onTap(),
         ),
         if (_suggestion.isNotEmpty)
           Positioned(

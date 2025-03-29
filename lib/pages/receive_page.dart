@@ -19,7 +19,8 @@ class ReceivePage extends StatefulWidget {
   State<ReceivePage> createState() => _ReceivePageState();
 }
 
-class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStateMixin {
+class _ReceivePageState extends State<ReceivePage>
+    with SingleTickerProviderStateMixin {
   final GlobalKey _qrKey = GlobalKey(debugLabel: 'QR');
   final GlobalKey<ShakeWidgetState> _shakeKey = GlobalKey<ShakeWidgetState>();
   late AnimationController _animationController;
@@ -44,9 +45,9 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
       curve: Curves.easeInOut,
     );
 
-    _textController.addListener(()=>setState(() {
-      _textInput = _textController.text;
-    }));
+    _textController.addListener(() => setState(() {
+          _textInput = _textController.text;
+        }));
   }
 
   @override
@@ -80,7 +81,7 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
     await _animationController.forward();
   }
 
-  Future<void> _deactivateQRView () async {
+  Future<void> _deactivateQRView() async {
     await _animationController.reverse();
     setState(() => _qrActive = false);
     _qrController = null;
@@ -98,8 +99,6 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final t = Translations.of(context);
-
     return Scaffold(
       appBar: CustomAppBar(
         title: t.common.page_titles.receive,
@@ -110,8 +109,9 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
           builder: (context, constraints) {
             const bottomSectionHeight = 150.0;
             final availableHeight = constraints.maxHeight - bottomSectionHeight;
-            final squareSize =
-                availableHeight < constraints.maxWidth ? availableHeight : constraints.maxWidth;
+            final squareSize = availableHeight < constraints.maxWidth
+                ? availableHeight
+                : constraints.maxWidth;
 
             return Column(
               children: [
@@ -145,10 +145,13 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
                                     ),
                                     onTap: _toggleQRView,
                                     child: Padding(
-                                      padding: EdgeInsets.all(min(squareSize/4, 65.0)),
+                                      padding: EdgeInsets.all(
+                                          min(squareSize / 4, 65.0)),
                                       child: Icon(
                                         Icons.qr_code_scanner,
-                                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimaryContainer,
                                         size: 37,
                                       ),
                                     ),
@@ -167,11 +170,11 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
                   children: [
                     CodeInput(
                       controller: _textController,
-                      onTap: () async =>{_deactivateQRView()},
+                      onTap: () async => {_deactivateQRView()},
                     ),
                     SizedBox.fromSize(size: Size.fromHeight(20)),
                     LargeIconButton(
-                      onPressed:  _textInput.isNotEmpty ? requestFile : null,
+                      onPressed: _textInput.isNotEmpty ? requestFile : null,
                       label: Text(t.pages.receive.receive_button),
                       icon: Icons.sim_card_download_outlined,
                     ),
@@ -217,7 +220,7 @@ class _ReceivePageState extends State<ReceivePage> with SingleTickerProviderStat
   void requestFile() {
     if (mounted) {
       context.go('/receive/receiving', extra: {
-        'code': _textInput
+        'code': _textInput,
       });
 
       _textController.clear();

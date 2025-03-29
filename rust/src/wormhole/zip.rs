@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fs::{self, metadata, File}, io::{Read, Write}, path::{Path, PathBuf}, rc::Rc};
+use std::{collections::HashMap, fs::{self, metadata, File}, io::{Read, Write}, path::PathBuf, rc::Rc};
 
 use zip::{write::SimpleFileOptions, ZipWriter};
 

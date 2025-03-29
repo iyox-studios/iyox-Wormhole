@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
 class QrReader extends StatelessWidget {
-  const QrReader({super.key, required this.qrKey, required this.onQRViewCreated});
+  const QrReader(
+      {super.key, required this.qrKey, required this.onQRViewCreated});
 
   final Key qrKey;
   final QRViewCreatedCallback onQRViewCreated;
@@ -20,10 +21,8 @@ class QrReader extends StatelessWidget {
               borderRadius: 35,
               borderWidth: 10,
               cutOutSize: constraints.maxWidth,
-              overlayColor:
-              Theme.of(context).colorScheme.surface,
-              borderColor: Theme.of(context).colorScheme.onTertiaryContainer
-          ),
+              overlayColor: Theme.of(context).colorScheme.surface,
+              borderColor: Theme.of(context).colorScheme.onTertiaryContainer),
           key: qrKey,
           onQRViewCreated: onQRViewCreated,
         ),

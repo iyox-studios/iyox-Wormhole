@@ -73,7 +73,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.8.0';
 
   @override
-  int get rustContentHash => -1701693782;
+  int get rustContentHash => 1217042098;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -99,12 +99,6 @@ abstract class RustLibApi extends BaseApi {
 
   Stream<TUpdate> crateApiSendFiles(
       {required List<String> filePaths,
-      required String name,
-      required int codeLength,
-      required ServerConfig serverConfig});
-
-  Stream<TUpdate> crateApiSendFolder(
-      {required String folderPath,
       required String name,
       required int codeLength,
       required ServerConfig serverConfig});
@@ -274,46 +268,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         debugName: 'send_files',
         argNames: [
           'filePaths',
-          'name',
-          'codeLength',
-          'serverConfig',
-          'actions'
-        ],
-      );
-
-  @override
-  Stream<TUpdate> crateApiSendFolder(
-      {required String folderPath,
-      required String name,
-      required int codeLength,
-      required ServerConfig serverConfig}) {
-    final actions = RustStreamSink<TUpdate>();
-    unawaited(handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(folderPath, serializer);
-        sse_encode_String(name, serializer);
-        sse_encode_u_8(codeLength, serializer);
-        sse_encode_box_autoadd_server_config(serverConfig, serializer);
-        sse_encode_StreamSink_t_update_Sse(actions, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 7, port: port_);
-      },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiSendFolderConstMeta,
-      argValues: [folderPath, name, codeLength, serverConfig, actions],
-      apiImpl: this,
-    )));
-    return actions.stream;
-  }
-
-  TaskConstMeta get kCrateApiSendFolderConstMeta => const TaskConstMeta(
-        debugName: 'send_folder',
-        argNames: [
-          'folderPath',
           'name',
           'codeLength',
           'serverConfig',

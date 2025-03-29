@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
@@ -9,16 +10,19 @@ import 'package:iyox_wormhole/rust/wormhole/types/t_update.dart';
 import 'package:iyox_wormhole/rust/wormhole/types/value.dart';
 import 'package:iyox_wormhole/utils/error_dialog.dart';
 import 'package:iyox_wormhole/utils/logger.dart';
+import 'package:iyox_wormhole/utils/shared_prefs.dart';
 import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:iyox_wormhole/utils/zip.dart';
 import 'package:pick_or_save/pick_or_save.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class SendingPage extends StatefulWidget {
-  const SendingPage({super.key, required this.files, required this.isFolder});
+  const SendingPage(
+      {super.key, required this.files, required this.isFolder, required this.launchedByIntent});
 
   final List<String> files;
   final bool isFolder;
+  final bool launchedByIntent;
 
   @override
   State<SendingPage> createState() => _SendingPageState();
@@ -26,10 +30,12 @@ class SendingPage extends StatefulWidget {
 
 class _SendingPageState extends State<SendingPage> {
   final log = getLogger();
+  final _prefs = SharedPrefs();
 
   String codeText = '';
   double? shareProgress;
   int? totalShareSize;
+  String? zipFilePath;
 
   @override
   void initState() {
@@ -66,6 +72,7 @@ class _SendingPageState extends State<SendingPage> {
 
         zipStream.listen((e) async {
           if (e.zipFilePath != null) {
+            zipFilePath = e.zipFilePath;
             startTransfer([e.zipFilePath!]);
           }
         });
@@ -81,16 +88,18 @@ class _SendingPageState extends State<SendingPage> {
   }
 
   void startTransfer(List<String> files) {
+    final codeLength = _prefs.codeLength;
+    final serverConfig = ServerConfig(
+      rendezvousUrl: _prefs.rendezvousUrl,
+      transitUrl: _prefs.transitUrl,
+    );
+
     Stream<TUpdate> stream = sendFiles(
       name: files.first.split('/').last,
       filePaths: files,
-      codeLength: 3, //await Settings.getWordLength(),
-      serverConfig: ServerConfig(
-        rendezvousUrl: defaultRendezvousUrl(),
-        transitUrl: defaultTransitUrl(),
-      ),
+      codeLength: codeLength,
+      serverConfig: serverConfig,
     );
-    //await _getServerConfig());
 
     stream.listen((e) async {
       switch (e.event) {
@@ -115,10 +124,10 @@ class _SendingPageState extends State<SendingPage> {
           });
           break;
         case Events.finished:
-          /*if (widget.causedByIntent) {
+          if (widget.launchedByIntent) {
             SystemNavigator.pop();
             return;
-          }*/
+          }
           if (mounted) {
             Navigator.of(context).pop();
           }
@@ -180,11 +189,10 @@ class _SendingPageState extends State<SendingPage> {
   void dispose() {
     super.dispose();
 
-    if (widget.isFolder) {
-      for (final file in widget.files) {
-        log.i('Deleting file $file');
-        File(file).delete();
-      }
+    FilePicker.platform.clearTemporaryFiles();
+
+    if(zipFilePath != null) {
+      File(zipFilePath!).delete();
     }
   }
 
@@ -199,7 +207,11 @@ class _SendingPageState extends State<SendingPage> {
           }
           final bool shouldPop = await _showBackDialog() ?? false;
           if (context.mounted && shouldPop) {
-            Navigator.pop(context);
+            if (widget.launchedByIntent) {
+              await SystemNavigator.pop();
+            } else {
+              Navigator.pop(context);
+            }
           }
         },
         child: Center(
@@ -217,50 +229,51 @@ class _SendingPageState extends State<SendingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Card(
-                          child: Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: QrImageView(
-                                    data: 'wormhole-transfer:$codeText',
-                                    backgroundColor: Colors.white),
-                              ))),
-                      SizedBox.fromSize(
-                        size: Size.fromHeight(10),
-                      ),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(26),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: QrImageView(
+                                data: 'wormhole-transfer:$codeText', backgroundColor: Colors.white),
+                          ),
                         ),
+                      ),
+                      SizedBox.fromSize(size: Size.fromHeight(10)),
+                      Card(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(26),
-                          onTap: () {
-                            Clipboard.setData(ClipboardData(text: codeText));
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                              content: Text('Copied code to clipboard'),
-                            ));
-                          },
+                          onTap: _copyCode,
                           child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
-                              child: Text(
-                                codeText,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    height: 1.6,
-                                    fontSize:
-                                        Theme.of(context).textTheme.titleMedium!.fontSize! + 1.5,
-                                    fontWeight:
-                                        Theme.of(context).textTheme.titleMedium?.fontWeight),
-                              )),
+                              padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
+                              child: Row(mainAxisSize: MainAxisSize.min, children: [
+                                Text(codeText,
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(fontSize: 17)),
+                                IconButton(
+                                  onPressed: _copyCode,
+                                  icon: const Icon(Icons.copy),
+                                ),
+                              ])),
                         ),
                       ),
-                      //const Gap(10),
-                      //IconButton(onPressed: () => {_refreshCode()}, icon: const Icon(Icons.refresh))
+                      //SizedBox.fromSize(size: Size.fromHeight(10)),
+                      //IconButton(onPressed: () => {}, icon: const Icon(Icons.refresh))
                     ],
                   ),
                 ),
         ),
       ),
     );
+  }
+
+  void _copyCode() {
+    Clipboard.setData(ClipboardData(text: codeText));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Copied code to clipboard'),
+    ));
   }
 }

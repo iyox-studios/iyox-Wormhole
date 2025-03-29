@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:go_router/go_router.dart';
 import 'package:iyox_wormhole/i18n/strings.g.dart';
 import 'package:iyox_wormhole/routing/router.dart';
 import 'package:iyox_wormhole/rust/api.dart';
@@ -74,11 +73,16 @@ class _AppState extends State<App> {
   void setupSharingIntent() {
     if (Platform.isAndroid || Platform.isIOS) {
       // for files opened while the app is closed
-      unawaited(ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> files) {
-        if(files.isNotEmpty) {
+      unawaited(ReceiveSharingIntent.instance
+          .getInitialMedia()
+          .then((List<SharedMediaFile> files) {
+        if (files.isNotEmpty) {
           if (mounted) {
-            goRouter.go('/send/sending',
-                extra: {'files': files.map((file) => file.path).toList(), 'isFolder': false});
+            goRouter.go('/send/sending', extra: {
+              'files': files.map((file) => file.path).toList(),
+              'isFolder': false,
+              'launchedByIntent': true
+            });
           }
         }
 
@@ -87,11 +91,15 @@ class _AppState extends State<App> {
 
       // for files opened while the app is open
       final stream = ReceiveSharingIntent.instance.getMediaStream();
-      _intentDataStreamSubscription = stream.listen((List<SharedMediaFile> files) {
-        if(files.isNotEmpty) {
+      _intentDataStreamSubscription =
+          stream.listen((List<SharedMediaFile> files) {
+        if (files.isNotEmpty) {
           if (mounted) {
-            goRouter.go('/send/sending',
-                extra: {'files': files.map((file) => file.path).toList(), 'isFolder': false});
+            goRouter.go('/send/sending', extra: {
+              'files': files.map((file) => file.path).toList(),
+              'isFolder': false,
+              'launchedByIntent': true
+            });
           }
         }
       });

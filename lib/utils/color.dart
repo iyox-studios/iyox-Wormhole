@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-Color themeAwareTint(Color color, Brightness brightness, [double amount = 0.1]) {
+Color themeAwareTint(Color color, Brightness brightness,
+    [double amount = 0.1]) {
   assert(amount >= 0 && amount <= 1);
   final hsl = HSLColor.fromColor(color);
 

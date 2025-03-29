@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class ShakeWidget extends StatefulWidget {
   final Widget child;
 
@@ -17,15 +18,15 @@ class ShakeWidgetState extends State<ShakeWidget>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 350),
+      duration: const Duration(milliseconds: 330),
       vsync: this,
     );
 
     _animation = TweenSequence([
-      TweenSequenceItem(tween: Tween(begin: -8.0, end: 8.0), weight: 1),
-      TweenSequenceItem(tween: Tween(begin: 8.0, end: -8.0), weight: 1),
-      TweenSequenceItem(tween: Tween(begin: -8.0, end: 8.0), weight: 1),
-      TweenSequenceItem(tween: Tween(begin: 8.0, end: 0.0), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: -7.5, end: 7.5), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: 7.5, end: -7.5), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: -7.5, end: 7.5), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: 7.5, end: 0.0), weight: 1),
     ]).animate(_controller);
   }
 

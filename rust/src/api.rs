@@ -14,7 +14,6 @@ pub use crate::wormhole::types::error_types::ErrorType;
 pub use crate::wormhole::types::events::Events;
 pub use crate::wormhole::types::t_update::TUpdate;
 pub use crate::wormhole::types::value::Value;
-use crate::wormhole::zip::list_dir;
 
 pub struct ServerConfig {
     pub rendezvous_url: String,
@@ -91,6 +90,7 @@ pub fn send_files(
     }
 }
 
+/* Zipping a folder currently needs to by handled by dart
 pub fn send_folder(
     folder_path: String,
     name: String,
@@ -128,6 +128,7 @@ pub fn send_folder(
         .await;
     });
 }
+*/
 
 pub fn request_file(
     code: String,

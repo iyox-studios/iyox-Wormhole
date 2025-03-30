@@ -21,7 +21,7 @@ pub async fn send_files(
     let temp_file = match create_zip_file(files, temp_file_path, actions.clone()) {
         Ok(v) => v,
         Err(e) => {
-            actions.add(TUpdate::new(
+            let _ = actions.add(TUpdate::new(
                 Events::Error,
                 Value::ErrorValue(ErrorType::ZipFileError, e.to_string()),
             ));
@@ -49,12 +49,12 @@ pub async fn send_file(
     actions: Rc<StreamSink<TUpdate>>,
 ) {
     // push event that we are in connection state
-    actions.add(TUpdate::new(Events::Connecting, Value::Int(0)));
+    let _ = actions.add(TUpdate::new(Events::Connecting, Value::Int(0)));
 
     let relay_hints = match gen_relay_hints(&server_config) {
         Ok(v) => v,
         Err(_) => {
-            actions.add(TUpdate::new(
+            let _ = actions.add(TUpdate::new(
                 Events::Error,
                 Value::Error(ErrorType::ConnectionError),
             ));
@@ -67,7 +67,7 @@ pub async fn send_file(
     {
         Ok(v) => v,
         Err(e) => {
-            actions.add(TUpdate::new(
+            let _ = actions.add(TUpdate::new(
                 Events::Error,
                 Value::ErrorValue(ErrorType::ConnectionError, e.to_string()),
             ));
@@ -76,12 +76,12 @@ pub async fn send_file(
     };
 
     let code = mailbox_connection.code();
-    actions.add(TUpdate::new(Events::Code, Value::String(code.to_string())));
+    let _ = actions.add(TUpdate::new(Events::Code, Value::String(code.to_string())));
 
     let wormhole = match Wormhole::connect(mailbox_connection).await {
         Ok(v) => v,
         Err(e) => {
-            actions.add(TUpdate::new(
+            let _ = actions.add(TUpdate::new(
                 Events::Error,
                 Value::ErrorValue(ErrorType::TransferConnectionError, e.to_string()),
             ));
@@ -101,7 +101,7 @@ pub async fn send_file(
     {
         Ok(_) => (),
         Err(e) => {
-            actions.add(TUpdate::new(
+            let _ = actions.add(TUpdate::new(
                 Events::Error,
                 Value::ErrorValue(ErrorType::TransferError, e.to_string()),
             ));
@@ -109,7 +109,7 @@ pub async fn send_file(
         }
     };
 
-    actions.add(TUpdate::new(Events::Finished, Value::String(file_name)));
+    let _ = actions.add(TUpdate::new(Events::Finished, Value::String(file_name)));
 }
 
 async fn send(

@@ -5,8 +5,10 @@ import 'package:iyox_wormhole/rust/api.dart';
 import 'package:iyox_wormhole/utils/device_info.dart';
 import 'package:iyox_wormhole/utils/shared_prefs.dart';
 import 'package:iyox_wormhole/widgets/app_bar.dart';
+import 'package:iyox_wormhole/widgets/settings/language_setting_tile.dart';
 import 'package:iyox_wormhole/widgets/settings/settings_header.dart';
 import 'package:iyox_wormhole/widgets/settings/slider_setting.dart';
+import 'package:iyox_wormhole/widgets/settings/theme_setting_tile.dart';
 import 'package:iyox_wormhole/widgets/settings/url_setting_field.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -97,95 +99,28 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return Scaffold(
       appBar: CustomAppBar(
         title: t.common.page_titles.settings,
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         children: [
           SettingsHeader(t.pages.settings.appearance_header),
 
-          // (TODO: Refactor to _ChoiceSettingTile)
-          ValueListenableBuilder<String?>(
-            valueListenable: _prefs.languageNotifier,
-            builder: (context, currentLangCode, child) {
-              return ListTile(
-                leading: const Icon(Icons.language),
-                title: Text(t.pages.settings.language_label),
-                trailing: DropdownButton<String?>(
-                  value: currentLangCode,
-                  items: [
-                    DropdownMenuItem<String?>(
-                      value: null,
-                      child: Text(t.pages.settings.language_system),
-                    ),
-                    ...AppLocale.values.map((locale) {
-                      return DropdownMenuItem<String?>(
-                        value: locale.languageCode,
-                        child: Text(locale.languageCode.toUpperCase()),
-                      );
-                    }),
-                  ],
-                  onChanged: (String? newValue) async {
-                    _prefs.language = newValue;
-                    if (newValue != null) {
-                      await LocaleSettings.setLocale(
-                          AppLocaleUtils.parse(newValue));
-                    } else {
-                      await LocaleSettings.useDeviceLocale();
-                    }
-                  },
-                ),
-              );
-            },
-          ),
+          const LanguageSettingTile(),
 
-          // (TODO: Refactor to _ChoiceSettingTile)
-          ValueListenableBuilder<ThemeMode>(
-            valueListenable: _prefs.themeModeNotifier,
-            builder: (context, currentMode, child) {
-              return ListTile(
-                leading: const Icon(Icons.brightness_6),
-                title: Text(t.pages.settings.theme_label),
-                trailing: DropdownButton<ThemeMode>(
-                  value: currentMode,
-                  items: [
-                    DropdownMenuItem(
-                      value: ThemeMode.system,
-                      child: Text(t.pages.settings.theme_system),
-                    ),
-                    DropdownMenuItem(
-                      value: ThemeMode.light,
-                      child: Text(t.pages.settings.theme_light),
-                    ),
-                    DropdownMenuItem(
-                      value: ThemeMode.dark,
-                      child: Text(t.pages.settings.theme_dark),
-                    ),
-                  ],
-                  onChanged: (ThemeMode? newValue) {
-                    if (newValue != null) {
-                      _prefs.themeMode = newValue;
-                    }
-                  },
-                ),
-              );
-            },
-          ),
+          const ThemeSettingTile(),
 
-          // (TODO: Refactor)
           ValueListenableBuilder<bool>(
             valueListenable: _prefs.dynamicColorNotifier,
             builder: (context, isDynamic, child) {
-              final bool supportsDynamicColor =
-                  _deviceInfo.supportsDynamicColor;
-              final bool dynamicColorEffectivelyEnabled =
-                  isDynamic && supportsDynamicColor;
+              final bool supportsDynamicColor = _deviceInfo.supportsDynamicColor;
+              final bool dynamicColorEffectivelyEnabled = isDynamic && supportsDynamicColor;
 
               return Column(
                 children: [
-                  // TODO: Use _SwitchSettingTile
                   SwitchListTile(
                     secondary: const Icon(Icons.color_lens_outlined),
                     title: Text(t.pages.settings.dynamic_color_label),
@@ -198,7 +133,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         : null,
                   ),
                   if (!dynamicColorEffectivelyEnabled)
-                    // TODO: Use _AccentColorSettingTile
                     ValueListenableBuilder<Color>(
                       valueListenable: _prefs.accentColorNotifier,
                       builder: (context, currentColor, child) {

@@ -32,7 +32,9 @@ class _ReceivingPageState extends State<ReceivingPage> {
     final downloadPath = await getDownloadsDirectory();
 
     if (downloadPath == null) {
-      Navigator.of(context).pop();
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
       return;
     }
 
@@ -41,10 +43,7 @@ class _ReceivingPageState extends State<ReceivingPage> {
       transitUrl: _prefs.transitUrl,
     );
 
-    final stream = requestFile(
-        code: widget.code,
-        storageFolder: downloadPath.path,
-        serverConfig: serverConfig);
+    final stream = requestFile(code: widget.code, storageFolder: downloadPath.path, serverConfig: serverConfig);
 
     setState(() {
       transferring = true;

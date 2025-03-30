@@ -54,6 +54,7 @@ class TranslationsCommonEn {
 	late final TranslationsCommonNavbarEn navbar = TranslationsCommonNavbarEn.internal(_root);
 	String get generic_error => 'Something went wrong';
 	String get generic_acknowledge => 'Ok';
+	String get cancel => 'Cancel';
 }
 
 // Path: pages
@@ -159,6 +160,7 @@ extension on Translations {
 			case 'common.navbar.settings': return 'Settings';
 			case 'common.generic_error': return 'Something went wrong';
 			case 'common.generic_acknowledge': return 'Ok';
+			case 'common.cancel': return 'Cancel';
 			case 'pages.send.send_file': return 'Send file';
 			case 'pages.send.send_folder': return 'Send folder';
 			case 'pages.send.permission_denied': return 'Permission required to send folders';

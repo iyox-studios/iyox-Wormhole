@@ -9,6 +9,7 @@ common:
     settings: 'Settings'
   generic_error: 'Something went wrong'
   generic_acknowledge: 'Ok'
+  cancel: 'Cancel'
 
 pages:
   send:

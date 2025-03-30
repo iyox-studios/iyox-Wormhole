@@ -45,7 +45,7 @@ pub fn send_files(
 
     match file_paths.len().cmp(&1) {
         Ordering::Less => {
-            actions.add(TUpdate::new(
+            let _ = actions.add(TUpdate::new(
                 Events::Error,
                 Value::Error(ErrorType::InvalidFilename),
                 // todo proper error message

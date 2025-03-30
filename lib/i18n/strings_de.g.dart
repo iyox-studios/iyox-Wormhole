@@ -53,6 +53,7 @@ class _TranslationsCommonDe extends TranslationsCommonEn {
 	@override late final _TranslationsCommonNavbarDe navbar = _TranslationsCommonNavbarDe._(_root);
 	@override String get generic_error => 'Etwas ist schiefgelaufen';
 	@override String get generic_acknowledge => 'Ok';
+	@override String get cancel => 'Abbrechen';
 }
 
 // Path: pages
@@ -158,6 +159,7 @@ extension on TranslationsDe {
 			case 'common.navbar.settings': return 'Einstellungen';
 			case 'common.generic_error': return 'Etwas ist schiefgelaufen';
 			case 'common.generic_acknowledge': return 'Ok';
+			case 'common.cancel': return 'Abbrechen';
 			case 'pages.send.send_file': return 'Datei Senden';
 			case 'pages.send.send_folder': return 'Ordner Senden';
 			case 'pages.send.permission_denied': return 'Berechtigung benötigt, um Ordner zu senden';

@@ -1,5 +1,3 @@
-iyox Wormhole presents a streamlined approach to file sharing, emphasizing security and transparency. Leveraging the magic-wormhole protocol, it facilitates effortless transfer of files, irrespective of size or format, while ensuring end-to-end encryption for data security.
+Iyox Wormhole is a simple and secure file-sharing app based on the Magic Wormhole protocol. It allows you to send and receive files of any size using a short passcode or QR code. End-to-end encryption ensures that only the intended recipient can access the files, protecting your privacy. No account or setup is needed—just generate a code, share it, and transfer your files securely.
 
-The app simplifies sharing through QR codes or passphrases, eliminating complexities associated with conventional methods like email attachments. With a focus on user privacy, iyox Wormhole employs robust encryption protocols, guaranteeing that only intended recipients can access shared files.
-
-iyox Wormhole is designed to meet the needs of diverse users, offering a reliable, user-friendly solution for secure file sharing. Whether for personal or professional use, it ensures data integrity and confidentiality, setting a new standard in file transfer apps.
+Iyox Wormhole is open-source, making it transparent and available for contributions. Whether you're sharing documents, photos, or other files, it provides a fast and reliable way to do so securely.

@@ -1,0 +1,3 @@
+Iyox Wormhole ist eine einfache und sichere Dateiübertragungs-App, die auf dem Magic-Wormhole-Protokoll basiert. Dateien jeder Größe können mit einem kurzen Code oder QR-Code gesendet und empfangen werden. Durch Ende-zu-Ende-Verschlüsselung bleiben die Dateien privat und nur für den vorgesehenen Empfänger zugänglich. Es ist keine Registrierung oder Einrichtung erforderlich – einfach einen Code generieren, teilen und Dateien sicher übertragen.
+
+Iyox Wormhole ist Open Source, sodass der Quellcode einsehbar und weiterentwickelbar ist. Ob Dokumente, Fotos oder andere Dateien – Iyox Wormhole bietet eine schnelle und zuverlässige Möglichkeit, Daten sicher zu teilen.

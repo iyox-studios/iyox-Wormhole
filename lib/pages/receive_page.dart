@@ -1,10 +1,17 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:iyox_wormhole/gen/ffi.dart';
-import 'package:iyox_wormhole/pages/qr_code_scanner_page.dart';
-import 'package:iyox_wormhole/utils/paths.dart';
-import 'package:iyox_wormhole/utils/type_helpers.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iyox_wormhole/i18n/strings.g.dart';
+import 'package:iyox_wormhole/widgets/app_bar.dart';
+import 'package:iyox_wormhole/widgets/code_input.dart';
+import 'package:iyox_wormhole/widgets/large_icon_button.dart';
+import 'package:iyox_wormhole/widgets/qr_reader.dart';
+import 'package:iyox_wormhole/widgets/shake_widget.dart';
+import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
+import 'package:vibration/vibration.dart';
 
 class ReceivePage extends StatefulWidget {
   const ReceivePage({super.key});
@@ -13,178 +20,292 @@ class ReceivePage extends StatefulWidget {
   State<ReceivePage> createState() => _ReceivePageState();
 }
 
-class _ReceivePageState extends State<ReceivePage> {
-  String code = '';
-  int totalReceiveBytes = 0;
-  int receivedBytes = 0;
-  bool transferring = false;
-  bool downloadStarted = false;
+class _ReceivePageState extends State<ReceivePage>
+    with SingleTickerProviderStateMixin {
+  final GlobalKey _qrKey = GlobalKey(debugLabel: 'QR');
+  final GlobalKey<ShakeWidgetState> _shakeKey = GlobalKey<ShakeWidgetState>();
+  late AnimationController _animationController;
+  late Animation<double> _opacityAnimation;
+  QRViewController? _qrController;
+  final TextEditingController _textController = TextEditingController();
+  StreamSubscription<Barcode>? _qrScanSubscription;
 
-  final TextEditingController _controller = TextEditingController();
+  bool _qrActive = false;
+  String _lastScannedCode = '';
+  String _textInput = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 70),
+    );
+    _opacityAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+
+    _textController.addListener(() => setState(() {
+          _textInput = _textController.text;
+        }));
+  }
+
   @override
   void dispose() {
-    _controller.dispose();
+    _animationController.dispose();
+    _textController.dispose();
+    _qrScanSubscription?.cancel();
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    GoRouter.of(context).routeInformationProvider.addListener(() {
+      setState(() => _qrActive = false);
+      _qrController = null;
+    });
+  }
+
+  void _toggleQRView() async {
+    if (!_qrActive) {
+      await _activateQRView();
+    } else {
+      await _deactivateQRView();
+    }
+  }
+
+  Future<void> _activateQRView() async {
+    WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+    setState(() => _qrActive = true);
+    await _animationController.forward();
+  }
+
+  Future<void> _deactivateQRView() async {
+    await _animationController.reverse();
+    setState(() => _qrActive = false);
+    _qrController = null;
+  }
+
+  @override
+  Future<void> reassemble() async {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      await _qrController?.pauseCamera();
+    } else if (Platform.isIOS) {
+      await _qrController?.resumeCamera();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Padding(
-          padding: EdgeInsets.fromLTRB(20, 120, 0, 20),
-          child: Text("Receive Files", style: TextStyle(fontSize: 37)),
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: t.common.page_titles.receive,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            const bottomSectionHeight = 150.0;
+            final availableHeight = constraints.maxHeight - bottomSectionHeight;
+            final squareSize = availableHeight < constraints.maxWidth
+                ? availableHeight
+                : constraints.maxWidth;
+
+            return Column(
+              children: [
+                _QrDisplaySection(
+                  availableHeight: availableHeight,
+                  squareSize: squareSize,
+                  qrActive: _qrActive,
+                  opacityAnimation: _opacityAnimation,
+                  onBuildQRView: _buildQRView,
+                  onToggleQRView: _toggleQRView,
+                ),
+                _CodeInputSection(
+                  textController: _textController,
+                  textInput: _textInput,
+                  onDeactivateQRView: _deactivateQRView,
+                  onRequestFile: requestFile,
+                ),
+              ],
+            );
+          },
         ),
-        Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.symmetric(horizontal: 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Flexible(
-                    child: TextField(
-                      controller: _controller,
-                      enabled: !transferring,
-                      decoration: const InputDecoration(
-                        border:
-                            OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(18))),
-                        floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        label: Text('Code'),
+      ),
+    );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    _qrController = controller;
+    _qrScanSubscription?.cancel();
+    _qrScanSubscription = controller.scannedDataStream.listen((scanData) async {
+      final code = scanData.code ?? '';
+      if (code == '') return;
+
+      if (!code.startsWith('wormhole-transfer:') && _lastScannedCode != code) {
+        _shakeKey.currentState?.shake();
+        if (await Vibration.hasCustomVibrationsSupport()) {
+          await Vibration.vibrate(pattern: [0, 10, 10, 10], amplitude: 40);
+        } else {
+          await Vibration.vibrate(duration: 10, amplitude: 40);
+          await Future<void>.delayed(const Duration(milliseconds: 10));
+          await Vibration.vibrate(duration: 10, amplitude: 40);
+        }
+      }
+
+      _lastScannedCode = code;
+
+      if (code.startsWith('wormhole-transfer:')) {
+        if (mounted) {
+          context.go('/receive/receiving',
+              extra: {'code': code.substring('wormhole-transfer:'.length)});
+          await _deactivateQRView();
+        }
+        await Vibration.vibrate(duration: 10, amplitude: 30);
+      }
+    });
+  }
+
+  void requestFile() {
+    if (mounted) {
+      context.go('/receive/receiving', extra: {
+        'code': _textInput,
+      });
+
+      _textController.clear();
+    }
+  }
+
+  Widget _buildQRView() {
+    return ShakeWidget(
+      key: _shakeKey,
+      child: Stack(
+        children: [
+          QrReader(qrKey: _qrKey, onQRViewCreated: _onQRViewCreated),
+          Positioned(
+            top: 40,
+            right: 20,
+            child: IconButton(
+              icon: const Icon(Icons.close, size: 32),
+              color: Colors.white,
+              onPressed: _toggleQRView,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QrDisplaySection extends StatelessWidget {
+  final double availableHeight;
+  final double squareSize;
+  final bool qrActive;
+  final Animation<double> opacityAnimation;
+  final Widget Function() onBuildQRView;
+  final VoidCallback onToggleQRView;
+
+  const _QrDisplaySection({
+    required this.availableHeight,
+    required this.squareSize,
+    required this.qrActive,
+    required this.opacityAnimation,
+    required this.onBuildQRView,
+    required this.onToggleQRView,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: availableHeight,
+      child: Center(
+        child: SizedBox(
+          width: squareSize,
+          height: squareSize,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Stack(
+              children: [
+                if (qrActive)
+                  ScaleTransition(
+                    scale: opacityAnimation,
+                    child: onBuildQRView(),
+                  ),
+                Center(
+                  child: AnimatedScale(
+                    scale: qrActive ? 0 : 1,
+                    duration: const Duration(milliseconds: 70),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                      autocorrect: false,
-                      onChanged: (value) => setState(
-                        () => code = value,
+                      elevation: 0,
+                      child: InkWell(
+                        customBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        onTap: onToggleQRView,
+                        child: Padding(
+                          padding: EdgeInsets.all(min(squareSize / 4, 65.0)),
+                          child: Icon(
+                            Icons.qr_code_scanner,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
+                            size: 37,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  IconButton(
-                      onPressed: !transferring ? _onQrButtonClicked : null,
-                      icon: const Icon(Icons.qr_code)),
-                ],
-              ),
-            ],
-          ),
-        ),
-        Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 30),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 100),
-            transitionBuilder: (child, animation) => ScaleTransition(
-              scale: animation,
-              child: child,
+                ),
+              ],
             ),
-            child: !transferring
-                ? FilledButton.icon(
-                    onPressed: _onReceiveButtonClick,
-                    style: buttonStyle,
-                    label: const Text('Receive File'),
-                    icon: const Icon(Icons.sim_card_download_outlined),
-                  )
-                : LinearProgressIndicator(
-                    value: downloadStarted ? receivedBytes / totalReceiveBytes : null,
-                    minHeight: 13,
-                    borderRadius: BorderRadius.circular(18),
-                  ),
           ),
         ),
-      ],
-    ));
-  }
-
-  static final ButtonStyle buttonStyle = ButtonStyle(
-    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(200),
       ),
-    ),
-    fixedSize: WidgetStateProperty.all<Size>(const Size(180, 60)),
-  );
-
-  void _onQrButtonClicked() async {
-    final result = await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const QRScannerPage()));
-
-    if (!mounted) return;
-
-    if (result != null) {
-      setState(() {
-        code = result;
-      });
-    }
-
-    _onReceiveButtonClick();
+    );
   }
+}
 
-  Future<ServerConfig> _getServerConfig() async {
-    final rendezvousUrl = await api.defaultRendezvousUrl();
-    final transitUrl = await api.defaultTransitUrl();
-    final serverConfig = ServerConfig(rendezvousUrl: rendezvousUrl, transitUrl: transitUrl);
-    return serverConfig;
-  }
+class _CodeInputSection extends StatelessWidget {
+  final TextEditingController textController;
+  final String textInput;
+  final Future<void> Function() onDeactivateQRView;
+  final VoidCallback onRequestFile;
 
-  void _onReceiveButtonClick() async {
-    //if (!isCodeValid(text) || !mounted) {
-    //return;
-    //}
+  const _CodeInputSection({
+    required this.textController,
+    required this.textInput,
+    required this.onDeactivateQRView,
+    required this.onRequestFile,
+  });
 
-    if (code.isEmpty) {
-      return;
-    }
-
-    final downloadPath = await getDownloadPath() ?? '';
-
-    debugPrint('code: $code');
-    final stream = api.requestFile(
-        passphrase: code, storageFolder: downloadPath, serverConfig: await _getServerConfig());
-
-    setState(() {
-      transferring = true;
-      downloadStarted = false;
-    });
-
-    stream.listen((e) {
-      debugPrint(e.event.toString());
-      switch (e.event) {
-        case Events.StartTransfer:
-          setState(() {
-            downloadStarted = true;
-          });
-        case Events.Finished:
-          setState(() {
-            transferring = false;
-          });
-          break;
-
-        case Events.Sent:
-          setState(() {
-            receivedBytes = e.getValue();
-          });
-          break;
-        case Events.Total:
-          setState(() {
-            totalReceiveBytes = e.getValue();
-          });
-          break;
-
-        case Events.Error:
-          debugPrint('Error: ${e.getValue()}');
-
-          setState(() {
-            transferring = false;
-          });
-        case Events.ConnectionType:
-          //connectionType = (e.value as Value_ConnectionType).field0;
-          //connectionTypeName = (e.value as Value_ConnectionType).field1;
-          break;
-        default:
-          break;
-      }
-    });
+  @override
+  Widget build(BuildContext context) {
+    final t = Translations.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CodeInput(
+            controller: textController,
+            onTap: onDeactivateQRView,
+          ),
+          const SizedBox(height: 20),
+          LargeIconButton(
+            onPressed: textInput.isNotEmpty ? onRequestFile : null,
+            label: Text(t.pages.receive.receive_button),
+            icon: Icons.sim_card_download_outlined,
+          ),
+        ],
+      ),
+    );
   }
 }

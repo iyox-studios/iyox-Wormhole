@@ -4,11 +4,11 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   dynamic_color
-  file_selector_linux
+  uri_content
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
-  flutter_zxing
+  rust_lib_iyox_wormhole
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

@@ -5,10 +5,12 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
-.direnv
+.swiftpm/
+migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -27,12 +29,9 @@
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-.packages
 .pub-cache/
 .pub/
 /build/
-
-# Web related
 
 # Symbolication related
 app.*.symbols
@@ -44,10 +43,14 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-native/target
-jniLibs
 
-
-fastlane/google-play-secret.json
-fastlane/report.xml
+# Nix
+.direnv
 result
+
+
+# Rust
+target/
+
+*.jks
+google-play-secret.json

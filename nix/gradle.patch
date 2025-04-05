@@ -1,0 +1,13 @@
+--- a/android/settings.gradle
++++ b/android/settings.gradle
+@@ -10,9 +10,7 @@
+     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+ 
+     repositories {
+-        google()
+-        mavenCentral()
+-        gradlePluginPortal()
++        maven { url = nixMavenRepo }
+     }
+ }
+ 

@@ -1,4 +1,3 @@
-diff --git a/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy b/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
 --- a/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
 +++ b/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
 @@ -76,9 +76,15 @@

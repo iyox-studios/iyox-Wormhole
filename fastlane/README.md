@@ -21,15 +21,15 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane android deploy
 ```
 
-Deploy a new version to the Google Play
+Deploy a new version to the Google Play Store
 
-### android elevate
+### android upload_meta
 
 ```sh
-[bundle exec] fastlane android elevate
+[bundle exec] fastlane android upload_meta
 ```
 
-elevate apk to aplpha track
+
 
 ----
 

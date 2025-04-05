@@ -1,4 +1,4 @@
-import '../../gen/bridge_definitions.dart';
+import 'package:iyox_wormhole/rust/wormhole/types/t_update.dart';
 
 extension GetValue<T> on TUpdate {
   T getValue() {

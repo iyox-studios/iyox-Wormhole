@@ -23,7 +23,8 @@ class ThemedApp extends StatefulWidget {
 
   static bool get isFullscreen => _isFullscreen.value;
 
-  static Future<void> setFullscreen(bool value, {required bool updateSystem}) async {
+  static Future<void> setFullscreen(bool value,
+      {required bool updateSystem}) async {
     _isFullscreen.value = value;
     if (!updateSystem) return;
 
@@ -68,7 +69,8 @@ class _ThemedAppState extends State<ThemedApp> {
   }
 
   Future<void> _onFullscreenChange(bool systemOverlaysAreVisible) async {
-    await ThemedApp.setFullscreen(!systemOverlaysAreVisible, updateSystem: false);
+    await ThemedApp.setFullscreen(!systemOverlaysAreVisible,
+        updateSystem: false);
   }
 
   @override
@@ -91,13 +93,16 @@ class _ThemedAppState extends State<ThemedApp> {
           lightScheme = lightDynamic;
           darkScheme = darkDynamic;
         } else {
-          lightScheme = ColorScheme.fromSeed(seedColor: seedColor, brightness: Brightness.light);
-          darkScheme = ColorScheme.fromSeed(seedColor: seedColor, brightness: Brightness.dark);
+          lightScheme = ColorScheme.fromSeed(
+              seedColor: seedColor, brightness: Brightness.light);
+          darkScheme = ColorScheme.fromSeed(
+              seedColor: seedColor, brightness: Brightness.dark);
         }
 
         final bool isDarkMode;
         if (themeMode == ThemeMode.system) {
-          isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+          isDarkMode =
+              MediaQuery.of(context).platformBrightness == Brightness.dark;
         } else {
           isDarkMode = themeMode == ThemeMode.dark;
         }
@@ -123,7 +128,8 @@ class _ThemedAppState extends State<ThemedApp> {
               actionTextColor: lightScheme.inversePrimary,
               behavior: SnackBarBehavior.floating,
               elevation: 1,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(9)),
             ),
           ),
           darkTheme: ThemeData(
@@ -137,7 +143,8 @@ class _ThemedAppState extends State<ThemedApp> {
               actionTextColor: darkScheme.inversePrimary,
               behavior: SnackBarBehavior.floating,
               elevation: 1,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(9)),
             ),
           ),
         );

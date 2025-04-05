@@ -53,7 +53,9 @@ Future<void> main() async {
   // Set initial locale from saved preferences or device settings
   final prefs = SharedPrefs();
   final savedLocale = prefs.language;
-  if (savedLocale != null && AppLocaleUtils.supportedLocales.any((l) => l.languageCode == savedLocale)) {
+  if (savedLocale != null &&
+      AppLocaleUtils.supportedLocales
+          .any((l) => l.languageCode == savedLocale)) {
     await LocaleSettings.setLocale(AppLocaleUtils.parse(savedLocale));
   } else {
     await LocaleSettings.useDeviceLocale();
@@ -81,11 +83,16 @@ class _AppState extends State<App> {
   void setupSharingIntent() {
     if (Platform.isAndroid || Platform.isIOS) {
       // for files opened while the app is closed
-      unawaited(ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> files) {
+      unawaited(ReceiveSharingIntent.instance
+          .getInitialMedia()
+          .then((List<SharedMediaFile> files) {
         if (files.isNotEmpty) {
           if (mounted) {
-            goRouter.go('/send/sending',
-                extra: {'files': files.map((file) => file.path).toList(), 'isFolder': false, 'launchedByIntent': true});
+            goRouter.go('/send/sending', extra: {
+              'files': files.map((file) => file.path).toList(),
+              'isFolder': false,
+              'launchedByIntent': true
+            });
           }
         }
 
@@ -94,11 +101,15 @@ class _AppState extends State<App> {
 
       // for files opened while the app is open
       final stream = ReceiveSharingIntent.instance.getMediaStream();
-      _intentDataStreamSubscription = stream.listen((List<SharedMediaFile> files) {
+      _intentDataStreamSubscription =
+          stream.listen((List<SharedMediaFile> files) {
         if (files.isNotEmpty) {
           if (mounted) {
-            goRouter.go('/send/sending',
-                extra: {'files': files.map((file) => file.path).toList(), 'isFolder': false, 'launchedByIntent': true});
+            goRouter.go('/send/sending', extra: {
+              'files': files.map((file) => file.path).toList(),
+              'isFolder': false,
+              'launchedByIntent': true
+            });
           }
         }
       });

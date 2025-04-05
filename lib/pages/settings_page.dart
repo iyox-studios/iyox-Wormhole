@@ -55,34 +55,8 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (context) {
         return AlertDialog(
           title: Text(t.pages.settings.accent_color_label),
-          content: SingleChildScrollView(
-            child: BlockPicker(
-              pickerColor: _prefs.accentColor,
-              onColorChanged: (color) {
-                _prefs.accentColor = color;
-              },
-              availableColors: const [
-                Colors.red,
-                Colors.pink,
-                Colors.purple,
-                Colors.deepPurple,
-                Colors.indigo,
-                Colors.blue,
-                Colors.lightBlue,
-                Colors.cyan,
-                Colors.teal,
-                Colors.green,
-                Colors.lightGreen,
-                Colors.lime,
-                Colors.yellow,
-                Colors.amber,
-                Colors.orange,
-                Colors.deepOrange,
-                Colors.brown,
-                Colors.grey,
-                Colors.blueGrey,
-              ],
-            ),
+          content: _ColorPickerDialogContent(
+            prefs: _prefs,
           ),
           actions: <Widget>[
             TextButton(
@@ -107,87 +81,173 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         children: [
-          SettingsHeader(t.pages.settings.appearance_header),
-
-          const LanguageSettingTile(),
-
-          const ThemeSettingTile(),
-
-          ValueListenableBuilder<bool>(
-            valueListenable: _prefs.dynamicColorNotifier,
-            builder: (context, isDynamic, child) {
-              final bool supportsDynamicColor = _deviceInfo.supportsDynamicColor;
-              final bool dynamicColorEffectivelyEnabled = isDynamic && supportsDynamicColor;
-
-              return Column(
-                children: [
-                  SwitchListTile(
-                    secondary: const Icon(Icons.color_lens_outlined),
-                    title: Text(t.pages.settings.dynamic_color_label),
-                    subtitle: Text(t.pages.settings.dynamic_color_subtitle),
-                    value: dynamicColorEffectivelyEnabled,
-                    onChanged: supportsDynamicColor
-                        ? (bool value) {
-                            _prefs.dynamicColor = value;
-                          }
-                        : null,
-                  ),
-                  if (!dynamicColorEffectivelyEnabled)
-                    ValueListenableBuilder<Color>(
-                      valueListenable: _prefs.accentColorNotifier,
-                      builder: (context, currentColor, child) {
-                        return ListTile(
-                          leading: const Icon(Icons.palette_outlined),
-                          title: Text(t.pages.settings.accent_color_label),
-                          trailing: CircleAvatar(
-                            backgroundColor: currentColor,
-                            radius: 14,
-                          ),
-                          onTap: _showColorPickerDialog,
-                        );
-                      },
-                    ),
-                ],
-              );
-            },
+          _AppearanceSettingsSection(
+            prefs: _prefs,
+            deviceInfo: _deviceInfo,
+            onShowColorPicker: _showColorPickerDialog,
           ),
-
-          SettingsHeader(t.pages.settings.connection_header),
-
-          UrlSettingField(
-            label: t.pages.settings.rendezvous_url_label,
-            icon: Icons.public,
-            initialValue: _prefs.rendezvousUrl,
-            defaultValue: _defaultRendezvousUrl,
-            onSave: (value) => _prefs.rendezvousUrl = value,
-            resetTooltip: t.pages.settings.reset_to_default,
+          _ConnectionSettingsSection(
+            prefs: _prefs,
+            defaultRendezvousUrl: _defaultRendezvousUrl,
+            defaultTransmitUrl: _defaultTransmitUrl,
           ),
-
-          UrlSettingField(
-            label: t.pages.settings.transmit_url_label,
-            icon: Icons.cloud_upload_outlined,
-            initialValue: _prefs.transitUrl,
-            defaultValue: _defaultTransmitUrl,
-            onSave: (value) => _prefs.transitUrl = value,
-            resetTooltip: t.pages.settings.reset_to_default,
-          ),
-
-          SliderSetting(
-            label: t.pages.settings.code_length_label,
-            icon: Icons.pin_outlined,
-            min: 2.0,
-            max: 8.0,
-            divisions: 6,
-            initialValue: _prefs.codeLength,
-            onSave: (value) => _prefs.codeLength = value,
-          ),
-
           const Divider(),
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: Text(t.pages.settings.app_version_label),
             subtitle: Text(_packageInfo.version),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AppearanceSettingsSection extends StatelessWidget {
+  final SharedPrefs prefs;
+  final DeviceInfo deviceInfo;
+  final VoidCallback onShowColorPicker;
+
+  const _AppearanceSettingsSection({
+    required this.prefs,
+    required this.deviceInfo,
+    required this.onShowColorPicker,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Translations.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SettingsHeader(t.pages.settings.appearance_header),
+        const LanguageSettingTile(),
+        const ThemeSettingTile(),
+        ValueListenableBuilder<bool>(
+          valueListenable: prefs.dynamicColorNotifier,
+          builder: (context, isDynamic, child) {
+            final bool supportsDynamicColor = deviceInfo.supportsDynamicColor;
+            final bool dynamicColorEffectivelyEnabled =
+                isDynamic && supportsDynamicColor;
+
+            return Column(
+              children: [
+                SwitchListTile(
+                  secondary: const Icon(Icons.color_lens_outlined),
+                  title: Text(t.pages.settings.dynamic_color_label),
+                  subtitle: Text(t.pages.settings.dynamic_color_subtitle),
+                  value: dynamicColorEffectivelyEnabled,
+                  onChanged: supportsDynamicColor
+                      ? (bool value) {
+                          prefs.dynamicColor = value;
+                        }
+                      : null,
+                ),
+                if (!dynamicColorEffectivelyEnabled)
+                  ValueListenableBuilder<Color>(
+                    valueListenable: prefs.accentColorNotifier,
+                    builder: (context, currentColor, child) {
+                      return ListTile(
+                        leading: const Icon(Icons.palette_outlined),
+                        title: Text(t.pages.settings.accent_color_label),
+                        trailing: CircleAvatar(
+                          backgroundColor: currentColor,
+                          radius: 14,
+                        ),
+                        onTap: onShowColorPicker,
+                      );
+                    },
+                  ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class _ConnectionSettingsSection extends StatelessWidget {
+  final SharedPrefs prefs;
+  final String defaultRendezvousUrl;
+  final String defaultTransmitUrl;
+
+  const _ConnectionSettingsSection({
+    required this.prefs,
+    required this.defaultRendezvousUrl,
+    required this.defaultTransmitUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Translations.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SettingsHeader(t.pages.settings.connection_header),
+        UrlSettingField(
+          label: t.pages.settings.rendezvous_url_label,
+          icon: Icons.public,
+          initialValue: prefs.rendezvousUrl,
+          defaultValue: defaultRendezvousUrl,
+          onSave: (value) => prefs.rendezvousUrl = value,
+          resetTooltip: t.pages.settings.reset_to_default,
+        ),
+        UrlSettingField(
+          label: t.pages.settings.transmit_url_label,
+          icon: Icons.cloud_upload_outlined,
+          initialValue: prefs.transitUrl,
+          defaultValue: defaultTransmitUrl,
+          onSave: (value) => prefs.transitUrl = value,
+          resetTooltip: t.pages.settings.reset_to_default,
+        ),
+        SliderSetting(
+          label: t.pages.settings.code_length_label,
+          icon: Icons.pin_outlined,
+          min: 2.0,
+          max: 8.0,
+          divisions: 6,
+          initialValue: prefs.codeLength,
+          onSave: (value) => prefs.codeLength = value,
+        ),
+      ],
+    );
+  }
+}
+
+class _ColorPickerDialogContent extends StatelessWidget {
+  final SharedPrefs prefs;
+
+  const _ColorPickerDialogContent({required this.prefs});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: BlockPicker(
+        pickerColor: prefs.accentColor,
+        onColorChanged: (color) {
+          prefs.accentColor = color;
+        },
+        availableColors: const [
+          Colors.red,
+          Colors.pink,
+          Colors.purple,
+          Colors.deepPurple,
+          Colors.indigo,
+          Colors.blue,
+          Colors.lightBlue,
+          Colors.cyan,
+          Colors.teal,
+          Colors.green,
+          Colors.lightGreen,
+          Colors.lime,
+          Colors.yellow,
+          Colors.amber,
+          Colors.orange,
+          Colors.deepOrange,
+          Colors.brown,
+          Colors.grey,
+          Colors.blueGrey,
         ],
       ),
     );

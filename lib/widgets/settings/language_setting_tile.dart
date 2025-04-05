@@ -23,12 +23,14 @@ class _LanguageSettingTileState extends State<LanguageSettingTile> {
     }
   }
 
-  Future<void> _showLanguageDialog(BuildContext context, String? currentLangCode) async {
+  Future<void> _showLanguageDialog(
+      BuildContext context, String? currentLangCode) async {
     final t = Translations.of(context);
     final languageOptions = [
       RadioOption(value: null, title: t.pages.settings.language_system),
-      ...AppLocale.values.map((locale) =>
-          RadioOption(value: locale.languageCode, title: getNativeLocalName(locale.languageCode)))
+      ...AppLocale.values.map((locale) => RadioOption(
+          value: locale.languageCode,
+          title: getNativeLocalName(locale.languageCode)))
     ];
 
     await showDialog<void>(
@@ -70,6 +72,7 @@ class _LanguageSettingTileState extends State<LanguageSettingTile> {
   }
 
   String getNativeLocalName(String localeCode) {
-    return LocaleNamesLocalizationsDelegate.nativeLocaleNames[localeCode] ?? localeCode;
+    return LocaleNamesLocalizationsDelegate.nativeLocaleNames[localeCode] ??
+        localeCode;
   }
 }

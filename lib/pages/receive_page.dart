@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
@@ -27,6 +28,7 @@ class _ReceivePageState extends State<ReceivePage>
   late Animation<double> _opacityAnimation;
   QRViewController? _qrController;
   final TextEditingController _textController = TextEditingController();
+  StreamSubscription<Barcode>? _qrScanSubscription;
 
   bool _qrActive = false;
   String _lastScannedCode = '';
@@ -54,6 +56,7 @@ class _ReceivePageState extends State<ReceivePage>
   void dispose() {
     _animationController.dispose();
     _textController.dispose();
+    _qrScanSubscription?.cancel();
     super.dispose();
   }
 
@@ -115,70 +118,19 @@ class _ReceivePageState extends State<ReceivePage>
 
             return Column(
               children: [
-                SizedBox(
-                  height: availableHeight,
-                  child: Center(
-                    child: SizedBox(
-                      width: squareSize,
-                      height: squareSize,
-                      child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Stack(
-                          children: [
-                            if (_qrActive)
-                              ScaleTransition(
-                                scale: _opacityAnimation,
-                                child: _buildQRView(),
-                              ),
-                            Center(
-                              child: AnimatedScale(
-                                scale: _qrActive ? 0 : 1,
-                                duration: const Duration(milliseconds: 70),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  elevation: 0,
-                                  child: InkWell(
-                                    customBorder: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    onTap: _toggleQRView,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(
-                                          min(squareSize / 4, 65.0)),
-                                      child: Icon(
-                                        Icons.qr_code_scanner,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimaryContainer,
-                                        size: 37,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                _QrDisplaySection(
+                  availableHeight: availableHeight,
+                  squareSize: squareSize,
+                  qrActive: _qrActive,
+                  opacityAnimation: _opacityAnimation,
+                  onBuildQRView: _buildQRView,
+                  onToggleQRView: _toggleQRView,
                 ),
-                SizedBox.fromSize(size: Size.fromHeight(10)),
-                Column(
-                  children: [
-                    CodeInput(
-                      controller: _textController,
-                      onTap: () async => {_deactivateQRView()},
-                    ),
-                    SizedBox.fromSize(size: Size.fromHeight(20)),
-                    LargeIconButton(
-                      onPressed: _textInput.isNotEmpty ? requestFile : null,
-                      label: Text(t.pages.receive.receive_button),
-                      icon: Icons.sim_card_download_outlined,
-                    ),
-                  ],
+                _CodeInputSection(
+                  textController: _textController,
+                  textInput: _textInput,
+                  onDeactivateQRView: _deactivateQRView,
+                  onRequestFile: requestFile,
                 ),
               ],
             );
@@ -190,7 +142,8 @@ class _ReceivePageState extends State<ReceivePage>
 
   void _onQRViewCreated(QRViewController controller) {
     _qrController = controller;
-    controller.scannedDataStream.listen((scanData) async {
+    _qrScanSubscription?.cancel();
+    _qrScanSubscription = controller.scannedDataStream.listen((scanData) async {
       final code = scanData.code ?? '';
       if (code == '') return;
 
@@ -211,6 +164,7 @@ class _ReceivePageState extends State<ReceivePage>
         if (mounted) {
           context.go('/receive/receiving',
               extra: {'code': code.substring('wormhole-transfer:'.length)});
+          await _deactivateQRView();
         }
         await Vibration.vibrate(duration: 10, amplitude: 30);
       }
@@ -241,6 +195,114 @@ class _ReceivePageState extends State<ReceivePage>
               color: Colors.white,
               onPressed: _toggleQRView,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QrDisplaySection extends StatelessWidget {
+  final double availableHeight;
+  final double squareSize;
+  final bool qrActive;
+  final Animation<double> opacityAnimation;
+  final Widget Function() onBuildQRView;
+  final VoidCallback onToggleQRView;
+
+  const _QrDisplaySection({
+    required this.availableHeight,
+    required this.squareSize,
+    required this.qrActive,
+    required this.opacityAnimation,
+    required this.onBuildQRView,
+    required this.onToggleQRView,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: availableHeight,
+      child: Center(
+        child: SizedBox(
+          width: squareSize,
+          height: squareSize,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Stack(
+              children: [
+                if (qrActive)
+                  ScaleTransition(
+                    scale: opacityAnimation,
+                    child: onBuildQRView(),
+                  ),
+                Center(
+                  child: AnimatedScale(
+                    scale: qrActive ? 0 : 1,
+                    duration: const Duration(milliseconds: 70),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      elevation: 0,
+                      child: InkWell(
+                        customBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        onTap: onToggleQRView,
+                        child: Padding(
+                          padding: EdgeInsets.all(min(squareSize / 4, 65.0)),
+                          child: Icon(
+                            Icons.qr_code_scanner,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
+                            size: 37,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CodeInputSection extends StatelessWidget {
+  final TextEditingController textController;
+  final String textInput;
+  final Future<void> Function() onDeactivateQRView;
+  final VoidCallback onRequestFile;
+
+  const _CodeInputSection({
+    required this.textController,
+    required this.textInput,
+    required this.onDeactivateQRView,
+    required this.onRequestFile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Translations.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CodeInput(
+            controller: textController,
+            onTap: onDeactivateQRView,
+          ),
+          const SizedBox(height: 20),
+          LargeIconButton(
+            onPressed: textInput.isNotEmpty ? onRequestFile : null,
+            label: Text(t.pages.receive.receive_button),
+            icon: Icons.sim_card_download_outlined,
           ),
         ],
       ),

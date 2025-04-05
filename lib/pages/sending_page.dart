@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +18,19 @@ import 'package:iyox_wormhole/utils/zip.dart';
 import 'package:pick_or_save/pick_or_save.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+String formatBytes(int bytes, int decimals) {
+  if (bytes <= 0) return '0 B';
+  const suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  var i = (log(bytes) / log(1024)).floor();
+  return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+}
+
 class SendingPage extends StatefulWidget {
   const SendingPage(
-      {super.key, required this.files, required this.isFolder, required this.launchedByIntent});
+      {super.key,
+      required this.files,
+      required this.isFolder,
+      required this.launchedByIntent});
 
   final List<String> files;
   final bool isFolder;
@@ -31,11 +43,18 @@ class SendingPage extends StatefulWidget {
 class _SendingPageState extends State<SendingPage> {
   final log = getLogger();
   final _prefs = SharedPrefs();
+  StreamSubscription<TUpdate>? _transferSubscription;
+  StreamSubscription<ZipProgress>? _zipSubscription;
 
   String codeText = '';
   double? shareProgress;
   int? totalShareSize;
+  String humanReadableTotalSize = '';
   String? zipFilePath;
+  bool isZipping = false;
+  double zipProgress = 0.0;
+  String connectionTypeInfo = '';
+  String statusMessage = '';
 
   @override
   void initState() {
@@ -50,9 +69,18 @@ class _SendingPageState extends State<SendingPage> {
       return;
     }
 
+    setState(() {
+      statusMessage = t.pages.send.status_initializing;
+    });
+
     if (widget.isFolder) {
       final folderPath = widget.files.last;
-      List<DocumentFile>? documentFiles = await PickOrSave().directoryDocumentsPicker(
+      setState(() {
+        isZipping = true;
+        statusMessage = t.pages.send.status_zipping;
+      });
+      List<DocumentFile>? documentFiles =
+          await PickOrSave().directoryDocumentsPicker(
         params: DirectoryDocumentsPickerParams(
           directoryUri: folderPath,
           recurseDirectories: true,
@@ -70,19 +98,43 @@ class _SendingPageState extends State<SendingPage> {
       try {
         final zipStream = zipFolder(folderPath, documentFiles);
 
-        zipStream.listen((e) async {
+        _zipSubscription = zipStream.listen((e) async {
+          setState(() {
+            if (e.totalFiles > 0) {
+              zipProgress =
+                  e.processedFiles.toDouble() / e.totalFiles.toDouble();
+            } else {
+              zipProgress = 0.0;
+            }
+
+            if (zipProgress < 1.0) {
+              statusMessage = t.pages.send.status_zipping_progress(
+                  progress: '${(zipProgress * 100).toStringAsFixed(0)}%');
+            }
+          });
           if (e.zipFilePath != null) {
             zipFilePath = e.zipFilePath;
+            setState(() {
+              isZipping = false;
+              statusMessage = t.pages.send.status_starting_transfer;
+            });
             startTransfer([e.zipFilePath!]);
           }
         });
       } catch (e) {
         if (mounted) {
+          setState(() {
+            isZipping = false;
+          });
           Navigator.of(context).pop();
-          await showErrorDialog(context: context, errorMessage: t.pages.send.zip_failed);
+          await showErrorDialog(
+              context: context, errorMessage: t.pages.send.zip_failed);
         }
       }
     } else {
+      setState(() {
+        statusMessage = t.pages.send.status_starting_transfer;
+      });
       startTransfer(widget.files);
     }
   }
@@ -101,26 +153,37 @@ class _SendingPageState extends State<SendingPage> {
       serverConfig: serverConfig,
     );
 
-    stream.listen((e) async {
+    _transferSubscription = stream.listen((e) async {
+      final t = Translations.of(context);
       switch (e.event) {
         case Events.code:
           setState(() {
             codeText = e.getValue().toString();
+            statusMessage = t.pages.send.status_waiting;
           });
           break;
         case Events.total:
           setState(() {
-            totalShareSize = e.getValue() as int;
+            final total = e.getValue();
+            totalShareSize = total is int ? total : 0;
+            humanReadableTotalSize = formatBytes(totalShareSize ?? 0, 2);
           });
           break;
         case Events.startTransfer:
           setState(() {
             codeText = '';
             shareProgress = 0;
+            statusMessage = t.pages.send.status_transferring;
           });
+          break;
         case Events.sent:
           setState(() {
-            shareProgress = (e.getValue() as int) / totalShareSize!.toDouble();
+            final sent = e.getValue();
+            if (totalShareSize != null && totalShareSize! > 0 && sent is int) {
+              shareProgress = sent / totalShareSize!.toDouble();
+            } else {
+              shareProgress = 0.0;
+            }
           });
           break;
         case Events.finished:
@@ -150,6 +213,16 @@ class _SendingPageState extends State<SendingPage> {
             Navigator.of(context).pop();
             await showErrorDialog(context: context, errorMessage: errorMessage);
           }
+          break;
+        case Events.connectionType:
+          if (e.value is Value_ConnectionType) {
+            final connectionType = e.value as Value_ConnectionType;
+            setState(() {
+              connectionTypeInfo =
+                  t.pages.send.connection_info(type: connectionType.field1);
+            });
+          }
+          break;
         default:
           log.w('Unknown event: ${e.event.toString()}');
       }
@@ -166,14 +239,16 @@ class _SendingPageState extends State<SendingPage> {
           content: Text(t.pages.send.abort_transfer_message),
           actions: <Widget>[
             TextButton(
-              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
+              style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge),
               child: Text(t.pages.send.abort_transfer_no),
               onPressed: () {
                 Navigator.pop(context, false);
               },
             ),
             TextButton(
-              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
+              style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge),
               child: Text(t.pages.send.abort_transfer_yes),
               onPressed: () {
                 Navigator.pop(context, true);
@@ -187,17 +262,20 @@ class _SendingPageState extends State<SendingPage> {
 
   @override
   void dispose() {
+    _transferSubscription?.cancel();
+    _zipSubscription?.cancel();
     super.dispose();
 
     FilePicker.platform.clearTemporaryFiles();
 
-    if(zipFilePath != null) {
+    if (zipFilePath != null) {
       File(zipFilePath!).delete();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return Scaffold(
       body: PopScope(
         canPop: false,
@@ -215,65 +293,186 @@ class _SendingPageState extends State<SendingPage> {
           }
         },
         child: Center(
-          child: codeText == ''
-              ? Padding(
-                  padding: const EdgeInsets.all(14),
-                  child: LinearProgressIndicator(
-                    value: shareProgress,
-                    minHeight: 10,
-                    borderRadius: BorderRadius.circular(18),
-                  ))
-              : Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: QrImageView(
-                                data: 'wormhole-transfer:$codeText', backgroundColor: Colors.white),
-                          ),
-                        ),
-                      ),
-                      SizedBox.fromSize(size: Size.fromHeight(10)),
-                      Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(26),
-                          onTap: _copyCode,
-                          child: Padding(
-                              padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
-                              child: Row(mainAxisSize: MainAxisSize.min, children: [
-                                Text(codeText,
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium
-                                        ?.copyWith(fontSize: 17)),
-                                IconButton(
-                                  onPressed: _copyCode,
-                                  icon: const Icon(Icons.copy),
-                                ),
-                              ])),
-                        ),
-                      ),
-                      //SizedBox.fromSize(size: Size.fromHeight(10)),
-                      //IconButton(onPressed: () => {}, icon: const Icon(Icons.refresh))
-                    ],
-                  ),
-                ),
+          child: isZipping
+              ? _ZippingIndicator(
+                  zipProgress: zipProgress,
+                  statusMessage: statusMessage,
+                )
+              : codeText == ''
+                  ? _TransferProgressIndicator(
+                      shareProgress: shareProgress,
+                      totalSize: humanReadableTotalSize,
+                      connectionInfo: connectionTypeInfo,
+                      statusMessage: statusMessage,
+                    )
+                  : _CodeDisplay(
+                      codeText: codeText,
+                      onCopyCode: _copyCode,
+                      totalSize: humanReadableTotalSize,
+                      connectionInfo: connectionTypeInfo,
+                      statusMessage: statusMessage,
+                    ),
         ),
       ),
     );
   }
 
   void _copyCode() {
+    final t = Translations.of(context);
     Clipboard.setData(ClipboardData(text: codeText));
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Copied code to clipboard'),
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(t.pages.send.clipboard_copied),
     ));
+  }
+}
+
+class _ZippingIndicator extends StatelessWidget {
+  const _ZippingIndicator({
+    required this.zipProgress,
+    required this.statusMessage,
+  });
+
+  final double zipProgress;
+  final String statusMessage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          LinearProgressIndicator(
+            value: zipProgress > 0
+                ? zipProgress
+                : null, // Indeterminate if progress is 0
+            minHeight: 10,
+            borderRadius: BorderRadius.circular(18),
+          ),
+          const SizedBox(height: 15),
+          Text(statusMessage,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center),
+        ],
+      ),
+    );
+  }
+}
+
+class _TransferProgressIndicator extends StatelessWidget {
+  final double? shareProgress;
+  final String totalSize;
+  final String connectionInfo;
+  final String statusMessage;
+
+  const _TransferProgressIndicator({
+    this.shareProgress,
+    required this.totalSize,
+    required this.connectionInfo,
+    required this.statusMessage,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(totalSize,
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center),
+          const SizedBox(height: 15),
+          LinearProgressIndicator(
+            value: shareProgress,
+            minHeight: 10,
+            borderRadius: BorderRadius.circular(18),
+          ),
+          const SizedBox(height: 15),
+          Text(statusMessage,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center),
+          if (connectionInfo.isNotEmpty) ...[
+            const SizedBox(height: 5),
+            Text(connectionInfo,
+                style: Theme.of(context).textTheme.bodySmall,
+                textAlign: TextAlign.center),
+          ]
+        ],
+      ),
+    );
+  }
+}
+
+class _CodeDisplay extends StatelessWidget {
+  final String codeText;
+  final VoidCallback onCopyCode;
+  final String totalSize;
+  final String connectionInfo;
+  final String statusMessage;
+
+  const _CodeDisplay({
+    required this.codeText,
+    required this.onCopyCode,
+    required this.totalSize,
+    required this.connectionInfo,
+    required this.statusMessage,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: QrImageView(
+                    data: 'wormhole-transfer:$codeText',
+                    backgroundColor: Colors.white),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(26),
+              onTap: onCopyCode,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  Text(
+                    codeText,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontSize: 17),
+                  ),
+                  IconButton(
+                    onPressed: onCopyCode,
+                    icon: const Icon(Icons.copy),
+                  ),
+                ]),
+              ),
+            ),
+          ),
+          const SizedBox(height: 5),
+          Text(totalSize,
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center),
+          const SizedBox(height: 15),
+          Text(statusMessage,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center),
+        ],
+      ),
+    );
   }
 }

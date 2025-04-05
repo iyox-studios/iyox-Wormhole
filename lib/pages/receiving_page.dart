@@ -9,6 +9,7 @@ import 'package:iyox_wormhole/rust/wormhole/types/t_update.dart';
 import 'package:iyox_wormhole/rust/wormhole/types/value.dart';
 import 'package:iyox_wormhole/utils/error_dialog.dart';
 import 'package:iyox_wormhole/utils/logger.dart';
+import 'package:iyox_wormhole/utils/paths.dart';
 import 'package:iyox_wormhole/utils/shared_prefs.dart';
 import 'package:iyox_wormhole/utils/type_helpers.dart';
 import 'package:path_provider/path_provider.dart';
@@ -49,7 +50,7 @@ class _ReceivingPageState extends State<ReceivingPage> {
   }
 
   void startReceiving() async {
-    final downloadPath = await getDownloadsDirectory();
+    final downloadPath = await getDownloadPath();
 
     if (downloadPath == null) {
       if (mounted) {
@@ -68,10 +69,7 @@ class _ReceivingPageState extends State<ReceivingPage> {
       transitUrl: _prefs.transitUrl,
     );
 
-    final stream = requestFile(
-        code: widget.code,
-        storageFolder: downloadPath.path,
-        serverConfig: serverConfig);
+    final stream = requestFile(code: widget.code, storageFolder: downloadPath, serverConfig: serverConfig);
 
     setState(() {
       transferring = true;
@@ -96,8 +94,7 @@ class _ReceivingPageState extends State<ReceivingPage> {
             transferring = false;
             isFinished = true;
             fileName = extractedName;
-            statusMessage = t.pages.receive.status_finished(
-                name: extractedName.isNotEmpty ? extractedName : 'Unknown');
+            statusMessage = t.pages.receive.status_finished(name: extractedName.isNotEmpty ? extractedName : 'Unknown');
           });
           break;
 
@@ -116,8 +113,7 @@ class _ReceivingPageState extends State<ReceivingPage> {
 
         case Events.error:
           debugPrint('Error: ${e.getValue()}');
-          final errorMessage =
-              e.getValue()?.toString() ?? t.common.generic_error;
+          final errorMessage = e.getValue()?.toString() ?? t.common.generic_error;
 
           if (mounted) {
             Navigator.of(context).pop();
@@ -150,31 +146,21 @@ class _ReceivingPageState extends State<ReceivingPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (fileName.isNotEmpty)
-                Text(fileName,
-                    style: Theme.of(context).textTheme.titleMedium,
-                    textAlign: TextAlign.center),
+                Text(fileName, style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center),
               if (humanReadableTotalSize.isNotEmpty)
-                Text(humanReadableTotalSize,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    textAlign: TextAlign.center),
+                Text(humanReadableTotalSize, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
               const SizedBox(height: 15),
               if (!isFinished)
                 LinearProgressIndicator(
-                  value: downloadStarted && totalReceiveBytes > 0
-                      ? receivedBytes / totalReceiveBytes
-                      : null,
+                  value: downloadStarted && totalReceiveBytes > 0 ? receivedBytes / totalReceiveBytes : null,
                   minHeight: 10,
                   borderRadius: BorderRadius.circular(18),
                 ),
               const SizedBox(height: 15),
-              Text(statusMessage,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center),
+              Text(statusMessage, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
               if (connectionTypeInfo.isNotEmpty && !isFinished) ...[
                 const SizedBox(height: 5),
-                Text(connectionTypeInfo,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    textAlign: TextAlign.center),
+                Text(connectionTypeInfo, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
               ],
               if (isFinished) ...[
                 const SizedBox(height: 20),

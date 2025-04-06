@@ -26,11 +26,7 @@ String formatBytes(int bytes, int decimals) {
 }
 
 class SendingPage extends StatefulWidget {
-  const SendingPage(
-      {super.key,
-      required this.files,
-      required this.isFolder,
-      required this.launchedByIntent});
+  const SendingPage({super.key, required this.files, required this.isFolder, required this.launchedByIntent});
 
   final List<String> files;
   final bool isFolder;
@@ -79,8 +75,7 @@ class _SendingPageState extends State<SendingPage> {
         isZipping = true;
         statusMessage = t.pages.send.status_zipping;
       });
-      List<DocumentFile>? documentFiles =
-          await PickOrSave().directoryDocumentsPicker(
+      List<DocumentFile>? documentFiles = await PickOrSave().directoryDocumentsPicker(
         params: DirectoryDocumentsPickerParams(
           directoryUri: folderPath,
           recurseDirectories: true,
@@ -101,15 +96,14 @@ class _SendingPageState extends State<SendingPage> {
         _zipSubscription = zipStream.listen((e) async {
           setState(() {
             if (e.totalFiles > 0) {
-              zipProgress =
-                  e.processedFiles.toDouble() / e.totalFiles.toDouble();
+              zipProgress = e.processedFiles.toDouble() / e.totalFiles.toDouble();
             } else {
               zipProgress = 0.0;
             }
 
             if (zipProgress < 1.0) {
-              statusMessage = t.pages.send.status_zipping_progress(
-                  progress: '${(zipProgress * 100).toStringAsFixed(0)}%');
+              statusMessage =
+                  t.pages.send.status_zipping_progress(progress: '${(zipProgress * 100).toStringAsFixed(0)}%');
             }
           });
           if (e.zipFilePath != null) {
@@ -127,8 +121,7 @@ class _SendingPageState extends State<SendingPage> {
             isZipping = false;
           });
           Navigator.of(context).pop();
-          await showErrorDialog(
-              context: context, errorMessage: t.pages.send.zip_failed);
+          await showErrorDialog(context: context, errorMessage: t.pages.send.zip_failed);
         }
       }
     } else {
@@ -218,8 +211,7 @@ class _SendingPageState extends State<SendingPage> {
           if (e.value is Value_ConnectionType) {
             final connectionType = e.value as Value_ConnectionType;
             setState(() {
-              connectionTypeInfo =
-                  t.pages.send.connection_info(type: connectionType.field1);
+              connectionTypeInfo = t.pages.send.connection_info(type: connectionType.field1);
             });
           }
           break;
@@ -239,16 +231,14 @@ class _SendingPageState extends State<SendingPage> {
           content: Text(t.pages.send.abort_transfer_message),
           actions: <Widget>[
             TextButton(
-              style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge),
+              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
               child: Text(t.pages.send.abort_transfer_no),
               onPressed: () {
                 Navigator.pop(context, false);
               },
             ),
             TextButton(
-              style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge),
+              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
               child: Text(t.pages.send.abort_transfer_yes),
               onPressed: () {
                 Navigator.pop(context, true);
@@ -343,16 +333,12 @@ class _ZippingIndicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           LinearProgressIndicator(
-            value: zipProgress > 0
-                ? zipProgress
-                : null, // Indeterminate if progress is 0
+            value: zipProgress > 0 ? zipProgress : null, // Indeterminate if progress is 0
             minHeight: 10,
             borderRadius: BorderRadius.circular(18),
           ),
           const SizedBox(height: 15),
-          Text(statusMessage,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center),
+          Text(statusMessage, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
         ],
       ),
     );
@@ -379,9 +365,7 @@ class _TransferProgressIndicator extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(totalSize,
-              style: Theme.of(context).textTheme.bodySmall,
-              textAlign: TextAlign.center),
+          Text(totalSize, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
           const SizedBox(height: 15),
           LinearProgressIndicator(
             value: shareProgress,
@@ -389,14 +373,10 @@ class _TransferProgressIndicator extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
           ),
           const SizedBox(height: 15),
-          Text(statusMessage,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center),
+          Text(statusMessage, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
           if (connectionInfo.isNotEmpty) ...[
             const SizedBox(height: 5),
-            Text(connectionInfo,
-                style: Theme.of(context).textTheme.bodySmall,
-                textAlign: TextAlign.center),
+            Text(connectionInfo, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
           ]
         ],
       ),
@@ -431,29 +411,27 @@ class _CodeDisplay extends StatelessWidget {
               padding: const EdgeInsets.all(15),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: QrImageView(
-                    data: 'wormhole-transfer:$codeText',
-                    backgroundColor: Colors.white),
+                child: QrImageView(data: 'wormhole-transfer:$codeText', backgroundColor: Colors.white),
               ),
             ),
           ),
           const SizedBox(height: 10),
           Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
             child: InkWell(
               borderRadius: BorderRadius.circular(26),
               onTap: onCopyCode,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  Text(
-                    codeText,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(fontSize: 17),
+                  Flexible(
+                    child: Text(
+                      codeText,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17),
+                      overflow: TextOverflow.visible,
+                      softWrap: true,
+                    ),
                   ),
                   IconButton(
                     onPressed: onCopyCode,
@@ -464,13 +442,9 @@ class _CodeDisplay extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 5),
-          Text(totalSize,
-              style: Theme.of(context).textTheme.bodySmall,
-              textAlign: TextAlign.center),
+          Text(totalSize, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
           const SizedBox(height: 15),
-          Text(statusMessage,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center),
+          Text(statusMessage, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
         ],
       ),
     );

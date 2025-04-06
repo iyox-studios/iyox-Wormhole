@@ -13,7 +13,7 @@ magic-wormhole = "0.7.5"
 futures = "0.3.31"
 async-std = "1.13.0"
 url = { version = "2.5.4", features = ["serde"] }
-zip = { version = "2.2.3", default-features = false, features = ["deflate"] }
+zip = { version = "2.6.1", default-features = false, features = ["deflate"] }
 macros = { path = "macros", version = "1" }
 fastrand = "2.3.0"
 tracing = "0.1.41"

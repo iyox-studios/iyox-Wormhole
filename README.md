@@ -1,5 +1,5 @@
 <div align="center">
-    <img width="200" height="200" style="display: block; border-radius: 9999px;" src="https://raw.githubusercontent.com/iyox-Studios/iyox-Wormhole/main/icon/Icon.png">
+    <img width="200" height="200" style="display: block; border-radius: 9999px;" src="https://raw.githubusercontent.com/iyox-Studios/iyox-Wormhole/main/assets/icon/icon.png">
 </div>
 
 ---

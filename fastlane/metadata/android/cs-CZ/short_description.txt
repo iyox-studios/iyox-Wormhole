@@ -1,0 +1,1 @@
+Bezpečné open-source sdílení souborů protokolem Magic Wormhole.

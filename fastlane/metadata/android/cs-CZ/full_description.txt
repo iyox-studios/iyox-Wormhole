@@ -1,0 +1,3 @@
+Iyox Wormhole je jednoduchá a bezpečná aplikace pro sdílení souborů postavená na protokolu Magic Wormhole. Umožňuje odesílat a přijímat soubory libovolné velikosti pomocí krátkého hesla nebo QR kódu. End-to-end šifrování zajišťuje, že k souborům má přístup pouze zamýšlený příjemce – vaše soukromí tak zůstává chráněno. Není potřeba žádný účet ani složité nastavování – stačí vygenerovat kód, nasdílet ho a soubory můžete bezpečně přenést.
+
+Iyox Wormhole je transparentní open-source projekt, který vítá příspěvky komunity. Ať už sdílíte dokumenty, fotografie nebo jiné soubory, iyox Wormhole nabízí rychlý a spolehlivý způsob, jak je bezpečně doručit.

@@ -1,18 +1,7 @@
 allprojects {
-    if(project.hasProperty("nixMavenRepo")) {
-        repositories {
-            maven { url = nixMavenRepo }
-        }
-        buildscript {
-            repositories {
-                maven { url = nixMavenRepo }
-            }
-        }
-    } else {
-        repositories {
-            google()
-            mavenCentral()
-        }
+    repositories {
+        google()
+        mavenCentral()
     }
 }
 

@@ -41,8 +41,6 @@
           cmakeVersions = ["3.22.1"];
         };
         androidSdk = androidComposition.androidsdk;
-        pubspecLock = pkgs.lib.importJSON ./pubspec.lock.json;
-        version = import ./nix/get-version.nix {inherit pkgs;};
 
         gradle = pkgs.callPackage (pkgs.gradleGen {
           version = "8.8";
@@ -54,7 +52,7 @@
         rustLib = rustToolchain.override {
           extensions = ["rust-src"];
         };
-      in rec {
+      in {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           config = {
@@ -62,22 +60,11 @@
             allowUnfree = true;
           };
           overlays = [
-            (final: prev: {
-              flutter = prev.flutter.wrapFlutter (prev.flutter.unwrapped.override {
-                patches =
-                  prev.flutter.unwrapped.patches
-                  ++ [
-                    ./nix/flutter.patch
-                    ./nix/flutter2.patch
-                    ./nix/flutter3.patch
-                  ];
-              });
-            })
             (import rust-overlay)
           ];
         };
         devShells.default = with pkgs;
-          mkShell rec {
+          mkShell {
             ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
             ANDROID_NDK_ROOT = "${androidSdk}/libexec/android-sdk/ndk-bundle";
             FLUTTER_SDK = "${pkgs.flutter}";
@@ -100,27 +87,7 @@
             ];
           };
 
-        packages = {
-          android = pkgs.callPackage ./nix/android.nix {
-            inherit androidSdk pubspecLock gradle rustToolchain ndkVersion naersk;
-            pname = "iyox-wormhole";
-            version = version.versionName;
-            versionCode = version.versionCode;
-          };
-          update-locks = pkgs.callPackage ./nix/update-locks.nix {
-            inherit gradle;
-          };
-          update-verification-metdata = pkgs.callPackage ./nix/update-verification-metadata {
-            inherit gradle;
-          };
-        };
         formatter = pkgs.alejandra;
-
-        checks = let
-          packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
-          devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
-        in
-          packages // devShells;
       };
     };
 }

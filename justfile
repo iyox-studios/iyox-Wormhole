@@ -13,3 +13,12 @@ lint:
 
 buildrunner mode:
 	flutter pub run build_runner {{mode}} -d
+
+codegen:
+    flutter_rust_bridge_codegen generate
+
+build-apk: codegen
+    flutter build apk --split-per-abi --release
+
+build-aab: codegen
+    flutter build aab

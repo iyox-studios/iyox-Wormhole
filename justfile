@@ -17,8 +17,8 @@ buildrunner mode:
 codegen:
     flutter_rust_bridge_codegen generate
 
-build-apk: codegen
+build-apk:
     flutter build apk --split-per-abi --release
 
-build-aab: codegen
+build-aab:
     flutter build aab

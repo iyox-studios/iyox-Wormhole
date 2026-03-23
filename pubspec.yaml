@@ -1,5 +1,5 @@
 name: iyox_wormhole
-version: 0.2.7+500
+version: 0.2.8+501
 homepage: https://github.com/iyox-studios/iyox-Wormhole/
 publish_to: none
 environment:

@@ -64,4 +64,4 @@ English | [简体中文](/README_ZH.md)
 
 ## License
 
-iyox Wormhole is licensed under the [GPL License](LICENSE).
+iyox Wormhole is licensed under the **[GPL v3.0 only](https://spdx.org/licenses/GPL-3.0-only.html)**.
